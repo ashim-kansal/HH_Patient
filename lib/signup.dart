@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class SignUpPage extends StatefulWidget {
-  static const String RouteName = '/login';
+  static const String RouteName = '/signup';
 
   SignUpPage({Key key, this.title}) : super(key: key);
 
@@ -17,25 +17,30 @@ class _SignupPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
-      body: Container(
-          margin: EdgeInsets.fromLTRB(20, 60, 20, 20),
-          color: Colors.white,
-          child: Column(
-            children: [
-              Material(
+      backgroundColor: Colors.white,
+      body: ListView(
+        children: [
+         Container(
+            margin: EdgeInsets.fromLTRB(20, 60, 20, 20),
+            color: Colors.white,
+            child: Material(
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                 child: Container(
                   color: Colors.white,
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  child: Container(
-                    color: Colors.white,
+                  child: Form(
+                    key: _formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Row(children: [
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
-                            child: Icon(
-                              Icons.android,
+                            child: Image.asset(
+                              'assets/images/ic_appicon_blue.png',
+                              height: 62,
+                              width: 104,
                             ),
                           )
                         ]),
@@ -43,7 +48,7 @@ class _SignupPageState extends State<SignUpPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                             child: Text(
-                              'Welcome Back',
+                              'Lets get started!',
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Color(0xff5c5c5c),
@@ -55,63 +60,62 @@ class _SignupPageState extends State<SignUpPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
                             child: Text(
-                              'Login into your existing account',
+                              'Sign up for an account to unlock all features.',
                               style: TextStyle(color: Color(0xff8d8d8d)),
                             ),
                           )
                         ]),
-                        Form(
-                          key: _formKey,
-                          child: Column(children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
-                              child: HHEditText(
-                                hint: "Enter Email Id",
-                                obscureText: false,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                              child: HHEditText(
-                                  hint: "Enter Password", obscureText: true),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                              child: HHButton(title: "Login", type: 2),
-                            ),
-                          ]),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          child: HHEditText(
+                            hint: "First Name",
+                            obscureText: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          child: HHEditText(
+                            hint: "Last Name",
+                            obscureText: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          child: HHEditText(
+                            hint: "Email Address",
+                            obscureText: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                          child: HHEditText(
+                              hint: "Create Password", obscureText: true),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          child: HHEditText(
+                            hint: "Enter Your Location",
+                            obscureText: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                          child: HHButton(title: "Sign Up", type: 2),
                         ),
                       ],
                     ),
                   ),
                 ),
-                elevation: 8.0,
-                shadowColor: Colors.black38,
-                borderRadius: BorderRadius.circular(8.0),
-                borderOnForeground: true,
               ),
-              InkWell(
-                onTap: () {
-                  print('abcd');
-                },
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: Text('Forgot Password',
-                      style: TextStyle(color: Colors.blue)),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    border: Border.all(color: Colors.blueAccent),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child: Text('Do you have an account Sign up'),
-              )
-            ],
-          )),
-      backgroundColor: Colors.white,
+              elevation: 8.0,
+              shadowColor: Colors.black38,
+              borderRadius: BorderRadius.circular(8.0),
+              borderOnForeground: true,
+            ),
+          ),
+
+        ],
+      ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

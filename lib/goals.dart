@@ -34,17 +34,17 @@ class MyGoalsState extends State<MyGoals> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(30.0),
-                        child: FlutterLogo(textColor: Colors.amber,),
+                          child:Image.asset('assets/images/goal_1.png')
                       ),
 
                       Container(
                         padding: EdgeInsets.all(40.0),
-                        child: FlutterLogo(textColor: Colors.blue,),
+                        child: Image.asset('assets/images/goal_2.png'),
                       ),
 
                       Container(
                         padding: EdgeInsets.all(50.0),
-                        child: FlutterLogo(textColor: Colors.black,),
+                        child: Image.asset('assets/images/goal_3.png'),
                       )
                     ],
                   ),
@@ -61,6 +61,7 @@ class MyGoalsState extends State<MyGoals> {
 
                         padding: EdgeInsets.all(20.0),
                         child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
 
                             HHButton(title: name, type: 2, onClick: (){

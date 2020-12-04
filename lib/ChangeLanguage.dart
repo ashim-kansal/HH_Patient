@@ -35,12 +35,18 @@ class SelectLanguageState extends State<StatefulWidget> {
                         children: [
                           Flexible(
                             child: Center(
-                            child: Text("aaaaa"),
+                                child:Image.asset('assets/images/ic_appicon_blue.png', height: 180,width: 150,)
                       ),
                             flex: 4,
                           ),
                           Flexible(
                             child: Material(
+                              child:Container(
+                                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
                               child: DropdownButton<String>(
                                 value: dropdownValue,
                                 icon: Icon(Icons.arrow_drop_down),
@@ -60,6 +66,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                                   );
                                 }).toList(),
                               ),
+                              )
                             ),
                             flex: 1,
                           )
@@ -71,7 +78,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                     child: Container(
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-                          child: HHButton(title: "Get Started", type: 1, onClick: (){
+                          child: HHButton(title: "Get Started", type: 2, onClick: (){
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
 

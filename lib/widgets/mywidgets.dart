@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class HHButton extends StatelessWidget{
   var title = "";
   var type = 1;
-  void Function() param2;
   final VoidCallback onClick;
 
   HHButton({@required this.title, @required this.type, this.onClick});
@@ -18,7 +17,7 @@ class HHButton extends StatelessWidget{
       padding:
       EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
-      color: type ==1 ? Color(0xffff8a73):Color(0xff777CEA),
+      color: type ==1 ? Theme.of(context).primaryColor:Theme.of(context).accentColor,
       onPressed: () {
         onClick();
       },

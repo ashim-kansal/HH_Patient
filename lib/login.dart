@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/forgotpasswrd.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/widgets/planwidget.dart';
 
 class LoginPage extends StatefulWidget {
   static const String RouteName = '/login';
@@ -27,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
+
       body: Container(
           margin: EdgeInsets.fromLTRB(20, 60, 20, 20),
           color: Colors.white,
@@ -36,17 +40,20 @@ class _LoginPageState extends State<LoginPage> {
                 child: Container(
                   color: Colors.white,
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  child: Container(
-                    color: Colors.white,
+                  child: Container(decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(30.0),
+                        topLeft: Radius.circular(30.0),
+                      ),
+                      color: Colors.white),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Row(children: [
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
-                            child: Icon(
-                              Icons.android,
-                            ),
+                            child: Image.asset('assets/images/ic_appicon_blue.png', height: 62, width: 104,),
+
                           )
                         ]),
                         Row(children: [
@@ -112,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
-                  print('abcd');
+                  Navigator.pushNamed(context, ForgotPasswordPage.RouteName);
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),

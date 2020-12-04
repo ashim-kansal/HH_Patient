@@ -27,7 +27,8 @@ class SplashState extends State<Splash>{
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        child:FlutterLogo()
+        child:Image.asset('assets/images/ic_appicon_blue.png')
+
     );
   }
 }
