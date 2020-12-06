@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class HHButton extends StatelessWidget{
   var title = "";
   var type = 1;
+  var fsize=14;
   final VoidCallback onClick;
 
   HHButton({@required this.title, @required this.type, this.onClick});
@@ -17,13 +18,14 @@ class HHButton extends StatelessWidget{
       padding:
       EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
-      color: type ==1 ? Theme.of(context).primaryColor:Theme.of(context).accentColor,
+      color: type ==1 ? Theme.of(context).primaryColor:Color(0xffff8a73),
+      // color: type ==1 ? Theme.of(context).primaryColor:Theme.of(context).accentColor,
       onPressed: () {
         onClick();
       },
       child: Text(
         title,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white, fontSize: 16),
         textAlign: TextAlign.center,
       ),
     );
