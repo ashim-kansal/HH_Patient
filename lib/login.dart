@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/myplan.dart';
+import 'package:flutter_app/screens/assessment.dart';
+import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
 
@@ -103,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
                               child: HHButton(title: "Login", type: 2, onClick: (){
-
+                                Navigator.pushNamed(context, MyAssessmentPage.RouteName);
                               },),
                             ),
                           ]),
