@@ -50,7 +50,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                                 ),
                                 SizedBox(height: 10,),
                                 Container(
-                                  padding:  const EdgeInsets.only(left: 10.0,right: 10.0),
+                                  padding:  const EdgeInsets.only(left: 20.0,right: 10.0),
                                   width: 230.0,
                                   // padding: EdgeInsets.fromLTRB(80, 0, 80, 0),
                                   decoration: BoxDecoration(
@@ -64,7 +64,8 @@ class SelectLanguageState extends State<StatefulWidget> {
                                     isExpanded: true,
                                   value: dropdownValue,
                                   icon: Icon(Icons.arrow_drop_down),
-                                  iconSize: 24,
+                                  iconEnabledColor: Color(0xffC5C4C4),
+                                  iconSize: 38,
                                   elevation: 16,
                                   style: TextStyle(color: Color(0xff707070)),
                                   onChanged: (String newValue) {
@@ -92,6 +93,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                 Flexible(
                     flex: 1,
                     child: Container(
+                        width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
                           child: HHButton(title: "Get Started", 

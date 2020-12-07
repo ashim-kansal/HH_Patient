@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/myplan.dart';
+import 'package:flutter_app/screens/assessment.dart';
+import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
 
@@ -32,16 +36,25 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
 
       body: Container(
-          margin: EdgeInsets.fromLTRB(20, 60, 20, 20),
+          margin: EdgeInsets.fromLTRB(20, 80, 20, 20),
           color: Colors.white,
           child: Column(
             children: [
+              SizedBox(
+                height: 50,
+              ),
               Material(
+                child: ClipPath(
+                  clipper: ShapeBorderClipper(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
                 child: Container(
+              
                   color: Colors.white,
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 40),
                   child: Container(decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: 
+                      BorderRadius.only(
                         topRight: Radius.circular(30.0),
                         topLeft: Radius.circular(30.0),
                       ),
@@ -60,9 +73,9 @@ class _LoginPageState extends State<LoginPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                             child: Text(
-                              'Welcome Back',
+                              'Welcome back',
                               style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 22,
                                   color: Color(0xff5c5c5c),
                                   fontWeight: FontWeight.bold),
                             ),
@@ -73,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
                             child: Text(
                               'Login into your existing account',
-                              style: TextStyle(color: Color(0xff8d8d8d)),
+                              style: TextStyle(color: Color(0xff8d8d8d), fontSize: 15),
                             ),
                           )
                         ]),
@@ -93,17 +106,18 @@ class _LoginPageState extends State<LoginPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
                               child: HHEditText(
-                                  hint: "Enter Password",
+                                hint: "Enter Password",
                                 obscureText: true,
                                 controller: passwordController,
                                 error: widget.error,
                                 errorText: 'Please enter a valid password',
+                                showeye: true
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                              child: HHButton(title: "Login", type: 2, onClick: (){
-
+                              child: HHButton(title: "Login", type: 3, onClick: (){
+                                Navigator.pushNamed(context, MyAssessmentPage.RouteName);
                               },),
                             ),
                           ]),
@@ -111,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+                ),
                 ),
                 elevation: 8.0,
                 shadowColor: Colors.black38,
@@ -123,18 +138,63 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: Text('Forgot Password',
-                      style: TextStyle(color: Colors.blue)),
+                  child: Text('Forgot Password?',
+                      style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF)),
+
                 ),
               ),
+
+              SizedBox(height: 25),
+  
+              Container(
+                child: Center(
+                  child : Row(
+                  children: <Widget>[
+                    
+                    Checkbox( 
+                      checkColor: Colors.greenAccent,  
+                      activeColor: Colors.red,  
+                      value: false,  
+                      onChanged: (bool value) {  
+                       
+                      },  
+                    ),
+                    Flexible(
+                      child: Center(child: 
+                        RichText(
+                          text: TextSpan(
+                            text: 'By continuing, you agree to our ',
+                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
+                            children: <TextSpan>[
+                              TextSpan(text: 'Terms of Service ', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                              TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14)),
+                              TextSpan(text: 'Privacy Policy', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                            ],
+                          ),
+                        )
+                      ,) ),
+                  ]
+                ),
+                ),
+              ),
+             
+
               Container(
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    border: Border.all(color: Colors.blueAccent),
+                    border: Border.all(color: HH_Colors.borderGrey),
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child: Text('Do you have an account Sign up'),
+                child:  RichText(
+                          text: TextSpan(
+                            text: 'Do you have an account ',
+                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
+                            children: <TextSpan>[
+                              TextSpan(text: 'Sign Up', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                            ],
+                          ),
+                        )
               )
             ],
           )),
