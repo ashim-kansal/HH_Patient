@@ -7,8 +7,10 @@ import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/screens/assessment.dart';
+import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
-import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/splash.dart';
@@ -42,6 +44,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => BookSessionPage());
     case MyAssessmentPage.RouteName:
       return MaterialPageRoute(builder: (context) => MyAssessmentPage());
+    case SessionPage.RouteName:
+      return MaterialPageRoute(builder: (context) => SessionPage());
+    case AssessmentFormPage.RouteName:
+      final ScreenArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }
