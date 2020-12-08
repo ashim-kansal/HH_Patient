@@ -133,7 +133,7 @@ class MyGoalsState extends State<MyGoals> {
                               alignment: Alignment.bottomCenter,
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                                child: HHButton(title: name, type: 3, onClick: (){
+                                child: HHButton(title: name, type: 3, isEnable: true, onClick: (){
                                   setState(() {
                                     if(count ==1){
                                       name = "Next";

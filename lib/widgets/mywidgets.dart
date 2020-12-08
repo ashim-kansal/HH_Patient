@@ -6,26 +6,70 @@ class HHButton extends StatelessWidget {
   var type = 1;
   var fsize = 16;
   final VoidCallback onClick;
+  bool isEnable = false;
 
-  HHButton({@required this.title, @required this.type, this.onClick, this.fsize});
+  HHButton({@required this.title, @required this.type, this.onClick, this.isEnable});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      textColor: Colors.white,
       minWidth: MediaQuery.of(context).size.width,
       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
+      // color: isEnable ? HH_Colors.,
+      // color: type == 1
+      //     ? Theme.of(context).primaryColor
+      //     : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
+      
       color: type == 1
-          ? Theme.of(context).primaryColor
-          : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
+          ? (isEnable?Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
+          : isEnable?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
       onPressed: () {
         onClick();
       },
       child: Text(
         title,
-        style: TextStyle(color: Colors.white, fontSize: 16),
+        style: TextStyle(color: isEnable?Colors.white:HH_Colors.color_949494),
         textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class HHHomeButton extends StatelessWidget {
+  var title = "";
+  var type = 1;
+  final VoidCallback onClick;
+
+  HHHomeButton({@required this.title, @required this.type, this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      padding: EdgeInsets.only(left: 20),
+      color: HH_Colors.accentColor,
+      onPressed: (){
+        onClick();
+      },
+
+      focusColor: HH_Colors.accentColor,
+      // width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(color: Colors.white, fontSize: 18),
+            textAlign: TextAlign.start,
+          ),
+          Container(
+            color: HH_Colors.light_accentcolor,
+            padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+            child: Center(
+              child: Icon(Icons.arrow_forward_ios_rounded, color: Colors.white,),
+            ),
+          )
+        ],
       ),
     );
   }

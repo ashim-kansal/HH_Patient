@@ -1,137 +1,85 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/widgets/sessionWidgets.dart';
 
-class Dashboard extends StatefulWidget {
+class HomePage extends StatefulWidget {
   static const String RouteName = '/home';
+  final assessments = ['abc', 'def', 'ghi' ];
+
 
   @override
-  State<StatefulWidget> createState() => DashboardState();
+  State<StatefulWidget> createState() => HomePageState();
 }
 
-class DashboardState extends State<Dashboard> {
+class HomePageState extends State<HomePage> {
+  
   @override
-  Widget build(BuildContext context) =>
+  void initState() {
+    super.initState();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+        child:       Column(
+      children: [
+        Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(20, 40,20,40),
+            child: Column(
+              children: [
+                HHHomeButton(title: 'Drinking Diary', type: 2),
+                SizedBox(height: 15),
+                HHHomeButton(title: 'Daily Journaling', type: 2),
+                SizedBox(height: 15),
+                HHHomeButton(title: 'My Session', type: 2, onClick: (){
+                  Navigator.pushNamed(context, SessionPage.RouteName);
+                },),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 30,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Upcoming Sessions', style: TextStyle(fontSize: 22, color: HH_Colors.grey_3d3d3d),),
+            Text('View All', style: TextStyle(color: HH_Colors.accentColor, fontSize: 15, ),),
+            Container()
+          ],
+        ),
+        SizedBox(height: 15,),
+        Container(
+          height: 150.0,
+          margin: EdgeInsets.only(bottom: 20),
+          child:        ListView.separated(
 
-      Scaffold(
-        appBar: AppBar(
-          title: Text('Dashboard', style: TextStyle(color: Colors.white)),
-          centerTitle: true,
-          iconTheme: IconThemeData(
-            color: Colors.white, //change your color here
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          elevation: 0,
-          // bottom: TabBar(
-          //   tabs: [
-          //     Tab(icon: Image.asset('assets/images/ic_chats')),
-          //
-          //   ],
-          // ),
-        ),
-        drawer: Container(
-          width: 260,
-          padding: EdgeInsets.all(20),
-          color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                  alignment: Alignment.topRight,
-                  padding: EdgeInsets.only(top: 20),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Image.asset(
-                      'assets/images/ic_close.png',
-                      height: 20,
-                      width: 20,
-                    ),
-                  )),
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/ic_avatar.png',
-                      height: 50,
-                      width: 50,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Hi John Doe", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.accentColor),),
-                        Text("john.doe@yahoo.com", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              HHDrawerItem(
-                  title: "My Chats", icon: 'assets/images/ic_chat.png'),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: "My Programs", icon: 'assets/images/ic_prgrams.png'),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: "Settings", icon: 'assets/images/ic_settings.png'),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: "Support", icon: 'assets/images/ic_support.png'),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: "Give Us Feedback"),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: "FAQ's"),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: "More Information", icon: 'assets/images/ic_info.png'),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: "About Us"),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: "Terms & Conditions"),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: "Privacy Policy"),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: "Log Out", icon: 'assets/images/ic_logout.png'),
-            ],
-          ),
-        ),
-        body: Container(),
-      );
+            scrollDirection: Axis.horizontal,
+            itemCount: widget.assessments.length,
+            itemBuilder: (context, index) {
+              return SessionCard(name: widget.assessments[index], completed: index%2 == 0, onClick: (){
+                // Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments(
+                //     widget.assessments[index],index%2 == 0
+                // ));
+              },);
+
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 20,width: 20,);
+            },
+          )
+          ,
+        )
+      ],
+    )
+    );
+  }
 }
