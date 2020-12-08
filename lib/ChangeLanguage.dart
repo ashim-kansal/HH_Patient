@@ -45,7 +45,9 @@ class SelectLanguageState extends State<StatefulWidget> {
                               child: Column(children: [
                                 Text(
                                   "Select Language",
-                                  style: TextStyle(color: Color(0xff949494), fontSize: 16),
+                                  style: TextStyle(color: Color(0xff949494), fontSize: 16,
+                                    fontFamily:"ProximaNova"
+                                    ),
                                   textAlign: TextAlign.center,
                                 ),
                                 SizedBox(height: 10,),
@@ -61,13 +63,13 @@ class SelectLanguageState extends State<StatefulWidget> {
                                 child: DropdownButtonHideUnderline(
                                   
                                   child: DropdownButton<String>(
-                                    isExpanded: true,
+                                  isExpanded: true,
                                   value: dropdownValue,
                                   icon: Icon(Icons.arrow_drop_down),
                                   iconEnabledColor: Color(0xffC5C4C4),
                                   iconSize: 38,
                                   elevation: 16,
-                                  style: TextStyle(color: Color(0xff707070)),
+                                  style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
                                   onChanged: (String newValue) {
                                     setState(() {
                                       dropdownValue = newValue;
@@ -96,14 +98,11 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-<<<<<<< HEAD
                           child: HHButton(title: "Get Started", 
                           type: 2, 
+                          // textSize: 22,
                           isEnable: true,
                           onClick: (){
-=======
-                          child: HHButton(title: "Get Started", type: 2, isEnable: true, onClick: (){
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),

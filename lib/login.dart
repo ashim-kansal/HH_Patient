@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
@@ -116,11 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-<<<<<<< HEAD
-                              child: HHButton(title: "Login", type: 2, isEnable: true, onClick: (){
-=======
-                              child: HHButton(title: "Login", type: 2, isEnable: true,onClick: (){
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
+                              child: HHButton(title: "Login", type: 4, isEnable: true,onClick: (){
                                 Navigator.pushNamed(context, Dashboard.RouteName);
                               },),
                             ),
@@ -195,7 +193,12 @@ class _LoginPageState extends State<LoginPage> {
                             text: 'Do you have an account ',
                             style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
                             children: <TextSpan>[
-                              TextSpan(text: 'Sign Up', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                              TextSpan(text: 'Sign Up', 
+                                style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () => {
+                                    Navigator.pushNamed(context, SignUpPage.RouteName)
+                                  }),
                             ],
                           ),
                         )

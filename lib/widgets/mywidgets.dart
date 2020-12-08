@@ -4,11 +4,11 @@ import 'package:flutter_app/utils/colors.dart';
 class HHButton extends StatelessWidget {
   var title = "";
   var type = 1;
-  var fsize = 16;
+  var textSize = 22;
   final VoidCallback onClick;
   bool isEnable = true;
 
-  HHButton({@required this.title, @required this.type, this.onClick, this.isEnable});
+  HHButton({@required this.title, @required this.type, this.onClick, this.isEnable, this.textSize});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,14 @@ class HHButton extends StatelessWidget {
       
       color: type == 1
           ? (isEnable?Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
-          : isEnable?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
+          : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
       onPressed: () {
         onClick();
       },
       child: Text(
         title,
-        style: TextStyle(color: isEnable?Colors.white:HH_Colors.color_949494),
+        style: TextStyle(color: isEnable?Colors.white:HH_Colors.color_949494, 
+        fontSize: 18, fontWeight: FontWeight.w400, fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),
     );
@@ -199,21 +200,13 @@ class HHEditTextState extends State<HHEditText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-<<<<<<< HEAD
-      obscureText: widget.obscureText,
-      controller: controller,
-      
-      decoration: InputDecoration(
-          hintStyle: TextStyle(color: HH_Colors.placeHolderColor),
-          errorText: widget.error ? widget.errorText : null,
-=======
       obscureText: widget.obscureText != null && widget.error ? true : false,
       controller: controller ==null? null :controller,
       minLines: widget.minLines,
       maxLines: widget.minLines,
       decoration: InputDecoration(
+          hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
           errorText: widget.error != null && widget.error ? widget.errorText : null,
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
           errorStyle: TextStyle(color: Color(0xffff8a73)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),

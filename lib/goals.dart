@@ -65,7 +65,6 @@ class MyGoalsState extends State<MyGoals> {
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-<<<<<<< HEAD
                             SizedBox(
                               height: 10,
                             ),
@@ -73,13 +72,13 @@ class MyGoalsState extends State<MyGoals> {
                             count == 1 ? 
                             Text(
                               "Choose your goal",
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none),
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ) : count == 2 ?  Text(
                               "Video Session",
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none),
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ) : Text(
                               "Daily Journaling",
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none),
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ),
                             SizedBox(
                               height: 5,
@@ -87,13 +86,13 @@ class MyGoalsState extends State<MyGoals> {
                             count == 1 ? 
                             Text(
                               "Daily drinking diary to track your progress",
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ) : count == 2 ?  Text(
                               "Join your therapist directly from your phone",
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ) : Text(
                               "To help you understand your triggers",
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none),
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ),
                             SizedBox(
                               height: 30,
@@ -134,7 +133,7 @@ class MyGoalsState extends State<MyGoals> {
                               alignment: Alignment.bottomCenter,
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                                child: HHButton(title: name, type: 3, isEnable: true, onClick: (){
+                                child: HHButton(title: name, type: 4, isEnable: true, onClick: (){
                                   setState(() {
                                     if(count ==1){
                                       name = "Next";
@@ -146,21 +145,6 @@ class MyGoalsState extends State<MyGoals> {
                                     count = count+1;
                                   });
                                 pagerController.jumpTo(count.toDouble());
-=======
-
-                            HHButton(title: name, type: 2, isEnable: true,onClick: (){
-                              setState(() {
-                                if(count ==1){
-                                  name = "Next";
-                                }else if(count ==2){
-                                  name = "Done";
-                                }else{
-                                  Navigator.pushNamed(context, LoginPage.RouteName);
-                                }
-                                count = count+1;
-                              });
-                              pagerController.jumpTo(count.toDouble());
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                             })
                               ,)
                              

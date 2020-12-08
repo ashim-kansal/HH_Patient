@@ -42,6 +42,15 @@ flutter:
   assets:
     - assets/images/
 
+  fonts:
+    - family: ProximaNova
+      fonts:
+        - asset: fonts/ProximaNova-Regular.otf
+        - asset: fonts/ProximaNovaSemibold.otf
+        - asset: fonts/ProximaNovaThin.otf
+          style: italic
+        # uses-material-design: true
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
