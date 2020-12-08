@@ -56,7 +56,6 @@ class HomePageState extends State<HomePage> {
           children: [
             Text('Upcoming Sessions', style: TextStyle(fontSize: 22, color: HH_Colors.grey_3d3d3d),),
             Text('View All', style: TextStyle(color: HH_Colors.accentColor, fontSize: 15, ),),
-            Container()
           ],
         ),
         SizedBox(height: 15,),
