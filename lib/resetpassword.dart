@@ -108,6 +108,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                   padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
                                   child: HHButton(
                                     title: "Proceed",
+                                    isEnable: true,
                                     type: 2,
                                     onClick: () {
                                       Navigator.pushNamed(context, SignUpPage.RouteName);

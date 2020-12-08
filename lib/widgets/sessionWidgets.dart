@@ -184,26 +184,45 @@ class UpcomingSessionItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Container(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
               child:
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('AMS Therapy',textAlign:TextAlign.start, style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text('22 Nov, 2020, 1:30 PM',textAlign:TextAlign.start, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                        ],
-                      )
+                      Row(children: [
+                        Text('AMS Therapy', textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
+                      ]),
+                      Row(children: [
+                        Text('22 Nov, 2020, 1:30 PM', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                      ]),
                     ],
                   ),
+                  // Column(
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //         Container(child:
+                  //         Text('AMS Therapy',textAlign:TextAlign.start, style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
+                  //             )
+                  //      ,
+                  //     Row(
+                  //       children: [
+                  //         Text('22 Nov, 2020, 1:30 PM',textAlign:TextAlign.start, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                  //       ],
+                  //     )
+                  //   ],
+                  // ),
+                  completed?
+                      Row(
+                        children: [
+                          Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
+                          Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
+
+                        ],
+                      )
+                      :
                   Row(
                     children: [
                       ButtonTheme(

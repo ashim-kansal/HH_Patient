@@ -13,4 +13,6 @@ class HH_Colors{
   static const light_accentcolor = Color(0xff9EA2F6);
   static const color_F2EEEE = Color(0xffF2EEEE);
   static const color_949494 = Color(0xff949494);
+  static const color_17AB35 = Color(0xff17AB35);
+  static const color_D9D9D9 = Color(0xffD9D9D9);
 }

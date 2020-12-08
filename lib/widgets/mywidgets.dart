@@ -6,7 +6,7 @@ class HHButton extends StatelessWidget {
   var title = "";
   var type = 1;
   final VoidCallback onClick;
-  bool isEnable = false;
+  bool isEnable = true;
 
   HHButton({@required this.title, @required this.type, this.onClick, this.isEnable});
 
@@ -136,12 +136,26 @@ class HHDrawerItem2 extends StatelessWidget {
   }
 }
 
+class HHTextView extends StatelessWidget{
+  var title;
+  double size;
+  var color;
+
+
+
+  HHTextView({@required this.title,@required this.size,@required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(title, style: TextStyle(color: color, fontSize: size));
+  }
+}
+
 
 class HHEditText extends StatefulWidget {
   final String hint;
   final String text = "";
-  var minLength = 8;
-  var maxLength = 8;
+  var minLines = 1;
   var error = false;
   var errorText = "";
   var obscureText = false;
@@ -151,14 +165,15 @@ class HHEditText extends StatefulWidget {
   HHEditText(
       {Key key,
       this.hint,
-      this.minLength,
-      this.maxLength,
+      this.minLines,
       this.error,
       this.errorText,
       this.obscureText,
       this.inputType,
       this.controller})
       : super(key: key);
+
+
 
   @override
   HHEditTextState createState() => HHEditTextState();
@@ -170,18 +185,27 @@ class HHEditTextState extends State<HHEditText> {
   void Function() param2;
 
   @override
+  void initState(){
+    if(widget.minLines == null)
+      widget.minLines = 1;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: widget.obscureText,
-      controller: controller,
+      obscureText: widget.obscureText != null && widget.error ? true : false,
+      controller: controller ==null? null :controller,
+      minLines: widget.minLines,
+      maxLines: widget.minLines,
       decoration: InputDecoration(
-          errorText: widget.error ? widget.errorText : null,
+          errorText: widget.error != null && widget.error ? widget.errorText : null,
           errorStyle: TextStyle(color: Color(0xffff8a73)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),
               borderSide: BorderSide(color: Color(0xffff8a73))),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: widget.hint,
+          hintText: widget.hint == null? "": widget.hint,
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder()),
     );

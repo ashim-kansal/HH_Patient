@@ -46,35 +46,26 @@ class SessionPageState extends State<SessionPage>{
           SizedBox(height: 20,),
 
           Expanded(
-            child: ListView.separated(itemBuilder: (context, index){
-              return UpcomingSessionItem(name: 'abc', role: '', onClick: (){},);
-            },
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-                itemCount: 5),
+            child: getUpcomingList()
           )
 
 
-          // ListView.separated(
-          //   itemCount: 5,
-          //   itemBuilder: (context, index) {
-          //     return Container(child: Text('aa'),);
-          // //     return UpcomingSessionItem(name: '', completed: index%2 == 0, onClick: (){
-          // //       // Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments(
-          // //       //     widget.assessments[index],index%2 == 0
-          // //       // ));
-          // //     },);
-          // //
-          //   },
-          //   separatorBuilder: (context, index) {
-          //     return Divider();
-          //   },
-          // )
-
         ],
       ),
-    ));
+    ),
+        showFloatingButton: true,
+    );
+  }
+
+  Widget getUpcomingList(){
+    return ListView.separated(itemBuilder: (context, index){
+      return UpcomingSessionItem(name: 'abc', role: '', onClick: (){}, completed: !isSwitched,);
+    },
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
+        itemCount: isSwitched? 5: 2);
+
   }
 
 }

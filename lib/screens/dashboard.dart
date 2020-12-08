@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/assessment.dart';
+import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -23,7 +24,7 @@ class DashboardState extends State<Dashboard> {
     listScreens = [
       HomePage(),
       MyAssessmentPage(),
-      MyAssessmentPage(),
+      TherapistPage(),
       TherapistOptionsPage()
     ];
   }
@@ -83,7 +84,10 @@ class DashboardState extends State<Dashboard> {
                 ),
               ),
               HHDrawerItem(
-                  title: "My Chats", icon: 'assets/images/ic_chat.png'),
+                  title: "My Chats", icon: 'assets/images/ic_chat.png', onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, ChatListPage.RouteName);
+              },),
               Container(
                 color: HH_Colors.grey,
                 height: 1,

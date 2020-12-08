@@ -4,8 +4,9 @@ class MyWidget extends StatelessWidget{
 
   var title;
   Widget child;
+  bool showFloatingButton = false;
 
-  MyWidget({Key key, @required this.title, @required this.child});
+  MyWidget({Key key, @required this.title, @required this.child, this.showFloatingButton});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,13 @@ class MyWidget extends StatelessWidget{
 
               // backgroundColor: Colors.white,
               // This trailing comma makes auto-formatting nicer for build methods.
-            )));
+            )),
+        floatingActionButton: new Visibility(
+          visible: showFloatingButton==null? false:true,
+          child: new FloatingActionButton(child: new Icon(Icons.add),
+          ),
+    ),
+    );
 
   }
 }

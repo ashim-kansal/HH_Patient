@@ -9,7 +9,9 @@ import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
@@ -46,6 +48,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MyAssessmentPage());
     case SessionPage.RouteName:
       return MaterialPageRoute(builder: (context) => SessionPage());
+    case ChatListPage.RouteName:
+      return MaterialPageRoute(builder: (context) => ChatListPage());
+    case JournalPage.RouteName:
+      return MaterialPageRoute(builder: (context) => JournalPage());
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));

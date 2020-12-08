@@ -64,7 +64,7 @@ class MyGoalsState extends State<MyGoals> {
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
 
-                            HHButton(title: name, type: 2, onClick: (){
+                            HHButton(title: name, type: 2, isEnable: true,onClick: (){
                               setState(() {
                                 if(count ==1){
                                   name = "Next";
