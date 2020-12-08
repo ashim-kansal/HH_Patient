@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -38,7 +39,9 @@ class HomePageState extends State<HomePage> {
               children: [
                 HHHomeButton(title: 'Drinking Diary', type: 2),
                 SizedBox(height: 15),
-                HHHomeButton(title: 'Daily Journaling', type: 2),
+                HHHomeButton(title: 'Daily Journaling', type: 2, onClick: (){
+                  Navigator.pushNamed(context, JournalPage.RouteName);
+                },),
                 SizedBox(height: 15),
                 HHHomeButton(title: 'My Session', type: 2, onClick: (){
                   Navigator.pushNamed(context, SessionPage.RouteName);

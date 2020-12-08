@@ -61,7 +61,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
               },
             )),
             SizedBox(height: 10,),
-            widget.enable? HHButton(title: 'Submit', type: 2, onClick: () {
+            widget.enable? HHButton(title: 'Submit', type: 2,isEnable: true, onClick: () {
 
             }): Container(),
           ],

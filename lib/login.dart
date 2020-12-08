@@ -116,7 +116,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+<<<<<<< HEAD
                               child: HHButton(title: "Login", type: 2, isEnable: true, onClick: (){
+=======
+                              child: HHButton(title: "Login", type: 2, isEnable: true,onClick: (){
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                                 Navigator.pushNamed(context, Dashboard.RouteName);
                               },),
                             ),

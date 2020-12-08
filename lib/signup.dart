@@ -100,7 +100,11 @@ class _SignupPageState extends State<SignUpPage> {
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+<<<<<<< HEAD
                           child: HHButton(title: "Sign Up", type: 2, isEnable: true,),
+=======
+                          child: HHButton(title: "Sign Up", type: 2,isEnable: true,),
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                         ),
                       ],
                     ),

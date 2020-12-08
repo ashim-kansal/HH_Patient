@@ -96,10 +96,14 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
+<<<<<<< HEAD
                           child: HHButton(title: "Get Started", 
                           type: 2, 
                           isEnable: true,
                           onClick: (){
+=======
+                          child: HHButton(title: "Get Started", type: 2, isEnable: true, onClick: (){
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),

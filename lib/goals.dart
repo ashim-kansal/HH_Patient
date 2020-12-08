@@ -65,6 +65,7 @@ class MyGoalsState extends State<MyGoals> {
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+<<<<<<< HEAD
                             SizedBox(
                               height: 10,
                             ),
@@ -145,6 +146,21 @@ class MyGoalsState extends State<MyGoals> {
                                     count = count+1;
                                   });
                                 pagerController.jumpTo(count.toDouble());
+=======
+
+                            HHButton(title: name, type: 2, isEnable: true,onClick: (){
+                              setState(() {
+                                if(count ==1){
+                                  name = "Next";
+                                }else if(count ==2){
+                                  name = "Done";
+                                }else{
+                                  Navigator.pushNamed(context, LoginPage.RouteName);
+                                }
+                                count = count+1;
+                              });
+                              pagerController.jumpTo(count.toDouble());
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                             })
                               ,)
                              
