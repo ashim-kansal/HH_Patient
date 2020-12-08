@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/resetpassword.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class OtpPage extends StatefulWidget {
@@ -142,7 +143,7 @@ class _OtpState extends State<OtpPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Forgot Password', style: TextStyle(color: Colors.white)),
+          title: Text('OTP Verification', style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -220,7 +221,12 @@ class _OtpState extends State<OtpPage> {
                                 children: [
                                   Text('Resend code in: 00:48'),
                                   RaisedButton(
-                                      child: Icon(Icons.android),
+                                      
+                                      child: Icon(Icons.arrow_right_alt_rounded,
+                                        color: HH_Colors.color_white,
+                                        size: 28,
+                                      ),
+                                    
                                       onPressed: (){
                                         Navigator.pushNamed(context, ResetPasswordPage.RouteName);
                                       },

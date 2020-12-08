@@ -25,9 +25,28 @@ class SplashState extends State<Splash>{
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        child:Image.asset('assets/images/ic_appicon_blue.png')
+    return 
+      Container(
+        color: Color(0xff777CEA),
+        child: 
+        // Column(children: [
+          Flexible(
+            // child: Container(
+              child: Image.asset('assets/images/ic_appicon_white.png', 
+                height: 100,
+                width: 150,
+                fit: BoxFit.none,
+                cacheHeight: 100,
+                cacheWidth: 150,
+                ),
+                
+            ),
+            
+          // )
+          
+        // ],)
+       
+        
 
     );
   }

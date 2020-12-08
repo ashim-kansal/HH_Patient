@@ -90,7 +90,8 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                     controller: passwordController,
                                     error: widget.error,
                                     errorText:
-                                    'Please enter a valid email address',
+                                    'Please enter a new password',
+                                    showeye: true
                                   ),
                                 ),
                                 Padding(
@@ -101,14 +102,20 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                     controller: cpasswordController,
                                     error: widget.error,
                                     errorText:
-                                    'Please enter a valid email address',
+                                    'Please enter a valid confirm password',
+                                    showeye: true
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
                                   child: HHButton(
+<<<<<<< HEAD
+                                    isEnable: true,
+                                    title: "Reset",
+=======
                                     title: "Proceed",
                                     isEnable: true,
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                                     type: 2,
                                     onClick: () {
                                       Navigator.pushNamed(context, SignUpPage.RouteName);

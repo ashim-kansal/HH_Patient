@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 
@@ -34,12 +35,13 @@ class MyGoalsState extends State<MyGoals> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(30.0),
-                          child:Image.asset('assets/images/goal_1.png')
+                          child:Image.asset('assets/images/goal_2.png', 
+                          )
                       ),
 
                       Container(
                         padding: EdgeInsets.all(40.0),
-                        child: Image.asset('assets/images/goal_2.png'),
+                        child: Image.asset('assets/images/goal_1.png'),
                       ),
 
                       Container(
@@ -63,6 +65,88 @@ class MyGoalsState extends State<MyGoals> {
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+<<<<<<< HEAD
+                            SizedBox(
+                              height: 10,
+                            ),
+                            
+                            count == 1 ? 
+                            Text(
+                              "Choose your goal",
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none),
+                            ) : count == 2 ?  Text(
+                              "Video Session",
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none),
+                            ) : Text(
+                              "Daily Journaling",
+                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            count == 1 ? 
+                            Text(
+                              "Daily drinking diary to track your progress",
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none),
+                            ) : count == 2 ?  Text(
+                              "Join your therapist directly from your phone",
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none),
+                            ) : Text(
+                              "To help you understand your triggers",
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Center(child: Container(
+                                  height: 10,
+                                  width: 25,
+                                  margin: EdgeInsets.only(right: 10.0),
+                                  decoration: BoxDecoration(
+                                  color: count == 1 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                                )),
+                                
+                                Container(
+                                  height: 10,
+                                  width: 25,
+                                  margin: EdgeInsets.only(right: 10.0),
+                                  decoration: BoxDecoration(
+                                  color: count == 2 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                                ),
+                                Container(
+                                  height: 10,
+                                  width: 25,
+                                  decoration: BoxDecoration(
+                                  color: count == 3 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
+                                  borderRadius: BorderRadius.circular(10.0)),
+                                ),
+                            ]),
+                             SizedBox(
+                              height: 100,
+                            ),
+                            
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                                child: HHButton(title: name, type: 3, isEnable: true, onClick: (){
+                                  setState(() {
+                                    if(count ==1){
+                                      name = "Next";
+                                    }else if(count ==2){
+                                      name = "Done";
+                                    }else{
+                                      Navigator.pushNamed(context, LoginPage.RouteName);
+                                    }
+                                    count = count+1;
+                                  });
+                                pagerController.jumpTo(count.toDouble());
+=======
 
                             HHButton(title: name, type: 2, isEnable: true,onClick: (){
                               setState(() {
@@ -76,7 +160,12 @@ class MyGoalsState extends State<MyGoals> {
                                 count = count+1;
                               });
                               pagerController.jumpTo(count.toDouble());
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                             })
+                              ,)
+                             
+                            )
+                            
                           ],
                         ))),
               ],

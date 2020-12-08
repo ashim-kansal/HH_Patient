@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
 
 class HHButton extends StatelessWidget {
   var title = "";
   var type = 1;
+  var fsize = 16;
   final VoidCallback onClick;
   bool isEnable = true;
 
@@ -17,6 +17,10 @@ class HHButton extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
       // color: isEnable ? HH_Colors.,
+      // color: type == 1
+      //     ? Theme.of(context).primaryColor
+      //     : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
+      
       color: type == 1
           ? (isEnable?Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
           : isEnable?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
@@ -159,6 +163,7 @@ class HHEditText extends StatefulWidget {
   var error = false;
   var errorText = "";
   var obscureText = false;
+  var showeye = false;
   var controller = null;
   var inputType = TextInputType.text;
 
@@ -170,7 +175,7 @@ class HHEditText extends StatefulWidget {
       this.errorText,
       this.obscureText,
       this.inputType,
-      this.controller})
+      this.controller, this.showeye})
       : super(key: key);
 
 
@@ -194,12 +199,21 @@ class HHEditTextState extends State<HHEditText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+<<<<<<< HEAD
+      obscureText: widget.obscureText,
+      controller: controller,
+      
+      decoration: InputDecoration(
+          hintStyle: TextStyle(color: HH_Colors.placeHolderColor),
+          errorText: widget.error ? widget.errorText : null,
+=======
       obscureText: widget.obscureText != null && widget.error ? true : false,
       controller: controller ==null? null :controller,
       minLines: widget.minLines,
       maxLines: widget.minLines,
       decoration: InputDecoration(
           errorText: widget.error != null && widget.error ? widget.errorText : null,
+>>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
           errorStyle: TextStyle(color: Color(0xffff8a73)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),
@@ -207,7 +221,12 @@ class HHEditTextState extends State<HHEditText> {
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: widget.hint == null? "": widget.hint,
           errorBorder: errorOutlineInputBorder(),
-          border: normalOutlineInputBorder()),
+          border: normalOutlineInputBorder(),
+          suffixIcon: widget.showeye == true ? const Icon(
+            Icons.remove_red_eye,
+            size: 20,
+            color: Color(0xffCBCBCB),
+          ): null),
     );
   }
 }
@@ -229,14 +248,14 @@ class UndefinedView extends StatelessWidget {
 
 OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-    borderSide: BorderSide(color: Colors.grey),
+    // borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    borderSide: BorderSide(color: HH_Colors.borderGrey),
   );
 }
 
 OutlineInputBorder errorOutlineInputBorder() {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+    // borderRadius: BorderRadius.all(Radius.circular(10.0)),
     borderSide: BorderSide(color: Color(0xffff8a73)),
   );
 }
