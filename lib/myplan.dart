@@ -54,7 +54,6 @@ class MyPlansState extends State<MyPlans> {
                         PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 0, onClick: (){},),
                         PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 1, onClick: (){}),
                         PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 2, onClick: (){}),
-
                       ],
                     ))
               ],
