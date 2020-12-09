@@ -68,9 +68,7 @@ class HomePageState extends State<HomePage> {
             itemCount: widget.assessments.length,
             itemBuilder: (context, index) {
               return SessionCard(name: widget.assessments[index], completed: index%2 == 0, onClick: (){
-                // Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments(
-                //     widget.assessments[index],index%2 == 0
-                // ));
+                Navigator.pushNamed(context, SessionPage.RouteName);
               },);
 
             },

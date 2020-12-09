@@ -207,7 +207,7 @@ class _CreateAccountState extends State<CreateAccountPage> {
                                       title: "Save & Continue",
                                       type: 4,
                                       onClick: () {
-                                        Navigator.pushNamed(context, MyPlans.RouteName);
+                                        Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
                                       },
                                     ),
                                   ),

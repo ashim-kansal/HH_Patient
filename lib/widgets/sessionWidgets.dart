@@ -17,64 +17,69 @@ class SessionCard extends StatelessWidget {
         child: Card(
         elevation: 5,
             color: HH_Colors.color_F2EEEE,
-
             shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        child: Container(
-          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-          child:Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('22 Nov, 2020, 1:30 PM', style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                  Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-                ],
+        child: InkWell(
+          onTap: (){
+            onClick();
+          },
+          child:  Container(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child:Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('22 Nov, 2020, 1:30 PM', style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                    Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
+                  ],
 
-              ),
-              SizedBox(height: 10,),
-              Row(
-                children: [Text('Group therapy to Patient 1' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
-              ]),
-              Row(
-                children: [Text('Dr. Ian Newton' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
-              ]),
-              Row(
-                children: [
-                  ButtonTheme(
-                    height: 35,
-                    minWidth: 35,
-                    child: RaisedButton(
-                      color: Colors.white,
-                      child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
-                      onPressed: (){
-                        // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-                      },
-                      shape: CircleBorder(),
+                ),
+                SizedBox(height: 10,),
+                Row(
+                    children: [Text('Group therapy to Patient 1' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
+                    ]),
+                Row(
+                    children: [Text('Dr. Ian Newton' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
+                    ]),
+                Row(
+                  children: [
+                    ButtonTheme(
+                      height: 35,
+                      minWidth: 35,
+                      child: RaisedButton(
+                        color: Colors.white,
+                        child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
+                        onPressed: (){
+                          // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                        },
+                        shape: CircleBorder(),
 
+                      ),
                     ),
-                  ),
 
-                  ButtonTheme(
-                    height: 35,
-                    minWidth: 35,
-                    child: RaisedButton(
+                    ButtonTheme(
+                        height: 35,
+                        minWidth: 35,
+                        child: RaisedButton(
 
-                      color: Colors.white,
-                      child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                      onPressed: (){
-                        // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-                      },
-                      shape: CircleBorder()
-                    )),
+                            color: Colors.white,
+                            child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                            onPressed: (){
+                              // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                            },
+                            shape: CircleBorder()
+                        )),
 
-                ],
-              )
+                  ],
+                )
 
-            ],
+              ],
+            ),
           ),
-        )));
+        )
+        ));
   }
 }
 

@@ -208,6 +208,7 @@ class DashboardState extends State<Dashboard> {
           color: Theme.of(context).accentColor,
             child: Container(
               padding: EdgeInsets.all(20),
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(30.0),

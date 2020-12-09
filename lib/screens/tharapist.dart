@@ -121,31 +121,24 @@ class TherapistlOverlay extends ModalRoute<Widget> {
 class TherapistOptionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body:         SingleChildScrollView(
+    return Container(
+      color: Colors.white,
+      child:         ListView(
         padding: EdgeInsets.all(40),
-        child:
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+        children:[
+          Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
+            Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
+          },) ),
+          SizedBox(height: 50,),
+          Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
+            Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
 
-            Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
-              Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
-            },) ),
-            SizedBox(height: 50,),
-        Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
-          Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
-
-        }),),
-            SizedBox(height: 50,),
+          }),),
+          SizedBox(height: 50,),
           Center(child: TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
 
           }),),
-          ],
-        ),)),
+    ]),
 
     );
   }

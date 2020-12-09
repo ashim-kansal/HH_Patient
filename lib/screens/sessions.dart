@@ -30,12 +30,12 @@ class SessionPageState extends State<SessionPage>{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(child: HHButton(title: 'Upcoming Sessions', type: 2, isEnable: isSwitched, onClick: (){
+              Flexible(child: HHButton(title: 'Upcoming Sessions', type: 3, isEnable: isSwitched, onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });
               },), flex: 1,),
-              Flexible(child: HHButton(title: 'Completed Sessions', type: 2, isEnable: !isSwitched,onClick: (){
+              Flexible(child: HHButton(title: 'Completed Sessions', type: 3, isEnable: !isSwitched,onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });

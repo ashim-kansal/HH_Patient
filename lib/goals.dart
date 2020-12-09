@@ -135,9 +135,9 @@ class MyGoalsState extends State<MyGoals> {
                                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                                 child: HHButton(title: name, type: 4, isEnable: true, onClick: (){
                                   setState(() {
-                                    if(count ==1){
+                                    if(count ==0){
                                       name = "Next";
-                                    }else if(count ==2){
+                                    }else if(count ==1){
                                       name = "Done";
                                     }else{
                                       Navigator.pop(context);

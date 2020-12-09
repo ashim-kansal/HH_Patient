@@ -5,21 +5,20 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
 
-class CurrentPlansPage extends StatefulWidget{
-  static const String RouteName = '/current_plan';
+class QuestionairePage extends StatefulWidget{
+  static const String RouteName = '/questionaire';
 
   @override
-  State<StatefulWidget> createState() => CurrentPlansPageState();
+  State<StatefulWidget> createState() => QuestionairePageState();
 
 }
 
-class CurrentPlansPageState extends State<CurrentPlansPage>{
+class QuestionairePageState extends State<QuestionairePage>{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'Heal@heal', child:
+    return MyWidget(title: 'Questionaire', child:
     Container(
-      height: MediaQuery.of(context).size.height,
       child: ListView(
         shrinkWrap: true,
 
@@ -33,7 +32,18 @@ class CurrentPlansPageState extends State<CurrentPlansPage>{
           ),
           SizedBox(height: 10),
           Container(padding: EdgeInsets.only(left: 10),alignment: Alignment.topCenter,
-              child: PlanWidget(title: HHString.hh, program_type: HHString.hh, desc: HHString.desc, price: 0, onClick: (){},),
+            child: Expanded(
+              child: ListView(
+                children: [
+                  Text('abcd'),
+                  Text('abcd'),
+                  Text('abcd'),
+                  Text('abcd'),
+                  Text('abcd'),
+                ],
+              )
+            )
+            ,
           ),
           SizedBox(height: 10),
           HHButton(title: 'Upgrade Now', type: 1, isEnable: true,onClick: (){

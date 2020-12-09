@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                     shape: BoxShape.rectangle,
                     border: Border.all(color: HH_Colors.borderGrey),
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child:  RichText(
+                child:  RichText(textAlign: TextAlign.center,
                           text: TextSpan(
                             text: 'Do you have an account ',
                             style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
