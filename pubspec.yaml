@@ -38,10 +38,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
 
   assets:
     - assets/images/
-
+    
   fonts:
     - family: ProximaNova
       fonts:
@@ -49,13 +53,8 @@ flutter:
         - asset: fonts/ProximaNovaSemibold.otf
         - asset: fonts/ProximaNovaThin.otf
           style: italic
-        # uses-material-design: true
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
-
+ 
   # To add assets to your application, add an assets section, like this:
 #   assets:
 #     - assets/images/
