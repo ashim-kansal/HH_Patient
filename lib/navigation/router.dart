@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
+import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/myplan.dart';
@@ -52,6 +53,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ChatListPage());
     case JournalPage.RouteName:
       return MaterialPageRoute(builder: (context) => JournalPage());
+    case CreateAccountPage.RouteName:
+      return MaterialPageRoute(builder: (context) => CreateAccountPage());
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));

@@ -242,7 +242,8 @@ class UndefinedView extends StatelessWidget {
 OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
     // borderRadius: BorderRadius.all(Radius.circular(10.0)),
-    borderSide: BorderSide(color: HH_Colors.borderGrey),
+    borderSide: BorderSide(color: HH_Colors.borderGrey, width: 0.2),
+    
   );
 }
 

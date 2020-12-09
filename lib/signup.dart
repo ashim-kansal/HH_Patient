@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -39,7 +40,7 @@ class _SignupPageState extends State<SignUpPage> {
 
               child: Container(
                 color: Colors.white,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
                 child: Container(
                   color: Colors.white,
                   // child: Form(
@@ -49,7 +50,7 @@ class _SignupPageState extends State<SignUpPage> {
                       children: <Widget>[
                         Row(children: [
                           Padding(
-                            padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
+                            padding: EdgeInsets.fromLTRB(20, 15, 20, 20),
                             child: Image.asset(
                               'assets/images/ic_appicon_blue.png',
                               height: 62,
@@ -134,9 +135,9 @@ class _SignupPageState extends State<SignUpPage> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                              padding: EdgeInsets.fromLTRB(15, 0, 5, 10),
                               child: HHButton(title: "Sign Up", type: 4, isEnable: true,onClick: (){
-                                Navigator.pushNamed(context, Dashboard.RouteName);
+                                Navigator.pushNamed(context, CreateAccountPage.RouteName);
                               },),
                             ),
                           ]),
