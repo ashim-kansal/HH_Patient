@@ -196,17 +196,22 @@ class _CreateAccountState extends State<CreateAccountPage> {
                                   //   'Please select a country',
                                   // ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
-                                  child: HHButton(
-                                    isEnable: true,
-                                    title: "Save & Continue",
-                                    type: 4,
-                                    onClick: () {
-                                      Navigator.pushNamed(context, SignUpPage.RouteName);
-                                    },
+
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
+                                    child: HHButton(
+                                      isEnable: true,
+                                      title: "Save & Continue",
+                                      type: 4,
+                                      onClick: () {
+                                        Navigator.pushNamed(context, SignUpPage.RouteName);
+                                      },
+                                    ),
                                   ),
-                                ),
+                                )
+                                
                               ]),
                             ),
                           ],
