@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -200,13 +201,13 @@ class _CreateAccountState extends State<CreateAccountPage> {
                                 Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
+                                    padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                                     child: HHButton(
                                       isEnable: true,
                                       title: "Save & Continue",
                                       type: 4,
                                       onClick: () {
-                                        Navigator.pushNamed(context, SignUpPage.RouteName);
+                                        Navigator.pushNamed(context, MyPlans.RouteName);
                                       },
                                     ),
                                   ),
