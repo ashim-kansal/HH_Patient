@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/myplan.dart';
+import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
+import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/library.dart';
+import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -16,15 +21,22 @@ class Dashboard extends StatefulWidget {
 
 class DashboardState extends State<Dashboard> {
   var tabIndex = 0;
+  String title = 'Dashboard';
 
   List<Widget> listScreens;
+  List<String> listNames = [
+    'Dashboard',
+    'Library',
+    'My Assessment',
+    ''
+  ];
   @override
   void initState() {
     super.initState();
     listScreens = [
       HomePage(),
+      LibraryPage(),
       MyAssessmentPage(),
-      TherapistPage(),
       TherapistOptionsPage()
     ];
   }
@@ -33,7 +45,7 @@ class DashboardState extends State<Dashboard> {
 
       Scaffold(
         appBar: AppBar(
-          title: Text('Dashboard', style: TextStyle(color: Colors.white)),
+          title: Text(title, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -93,7 +105,10 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "My Programs", icon: 'assets/images/ic_prgrams.png'),
+                  title: "My Programs", icon: 'assets/images/ic_prgrams.png', onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, CurrentPlansPage.RouteName);
+              }),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
@@ -126,17 +141,26 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "About Us"),
+              HHDrawerItem2(title: "About Us", onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('About Us',false ));
+              },),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Terms & Conditions"),
+              HHDrawerItem2(title: "Terms & Conditions", onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('Terms & Conditions',false ));
+              }),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Privacy Policy"),
+              HHDrawerItem2(title: "Privacy Policy", onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('Privacy Policy',false ));
+              }),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
@@ -155,22 +179,26 @@ class DashboardState extends State<Dashboard> {
             onTap: (int index) {
               setState(() {
                 tabIndex = index;
+                title = listNames[tabIndex];
               });
             },
+            type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 20, width: 20,),
                 title: Text('Home'),
-              ),
+
+  ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/images/ic_library.png', height: 20, width: 20,),
+                icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 20, width: 20,),
                 title: Text('Library'),
+
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 20, width: 20,),
                 title: Text('Assessment'),
               ),BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
+                icon: Image.asset(tabIndex == 3?'assets/images/ic_therapists_select.png':'assets/images/ic_therapists.png' , height: 20, width: 20,),
                 title: Text('Therapists'),
               ),
             ]

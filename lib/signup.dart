@@ -3,6 +3,7 @@ import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/myplan.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String RouteName = '/signup';

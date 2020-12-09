@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/goals.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class SelectLanguage extends StatefulWidget {
@@ -15,9 +16,10 @@ class SelectLanguageState extends State<StatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Container(
+    return Scaffold(
+        body: Container(
             color: Color(0xfff2eeee),
+
             child: Column(
               children: [
                 Flexible(
@@ -59,9 +61,9 @@ class SelectLanguageState extends State<StatefulWidget> {
                                       shape: BoxShape.rectangle,
                                       border: Border.all(color: Color(0xffE9E7E7)),
                                       borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                                
+
                                 child: DropdownButtonHideUnderline(
-                                  
+
                                   child: DropdownButton<String>(
                                   isExpanded: true,
                                   value: dropdownValue,
@@ -82,10 +84,10 @@ class SelectLanguageState extends State<StatefulWidget> {
                                       child: Text(value),
                                     );
                                   }).toList(),
-                                ),) 
+                                ),)
                                 )
                               ],)
-                              
+
                             ),
                             flex: 1,
                           )
@@ -100,7 +102,6 @@ class SelectLanguageState extends State<StatefulWidget> {
                         child: Center(
                           child: HHButton(title: "Get Started", 
                           type: 2, 
-                          // textSize: 22,
                           isEnable: true,
                           onClick: (){
                             Navigator.pop(context);
@@ -108,6 +109,8 @@ class SelectLanguageState extends State<StatefulWidget> {
                           }),
                         ))),
               ],
-            )));
+            )
+        )
+    );
   }
 }

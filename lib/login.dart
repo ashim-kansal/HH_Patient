@@ -37,13 +37,14 @@ class _LoginPageState extends State<LoginPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
 
-      body: Container(
-          margin: EdgeInsets.fromLTRB(20, 80, 20, 20),
+      body:
+      Container(
+          margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
           color: Colors.white,
-          child: Column(
+          child: ListView(
             children: [
               SizedBox(
-                height: 50,
+                height: 9,
               ),
               Material(
                 child: ClipPath(
@@ -51,11 +52,11 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
                 child: Container(
-              
+
                   color: Colors.white,
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 40),
                   child: Container(decoration: BoxDecoration(
-                      borderRadius: 
+                      borderRadius:
                       BorderRadius.only(
                         topRight: Radius.circular(30.0),
                         topLeft: Radius.circular(30.0),
@@ -79,7 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                               style: TextStyle(
                                   fontSize: 22,
                                   color: Color(0xff5c5c5c),
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold, 
+                                  fontFamily: "ProximaNova"),
                             ),
                           )
                         ]),
@@ -88,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
                             child: Text(
                               'Login into your existing account',
-                              style: TextStyle(color: Color(0xff8d8d8d), fontSize: 15),
+                              style: TextStyle(color: Color(0xff8d8d8d), fontSize: 15, fontFamily: "ProximaNova"),
                             ),
                           )
                         ]),
@@ -136,41 +138,43 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.pushNamed(context, ForgotPasswordPage.RouteName);
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: Text('Forgot Password?',
-                      style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF)),
+                  child: Text('Forgot Password?', textAlign: TextAlign.center,
+
+                      style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontFamily: "ProximaNova")),
 
                 ),
               ),
 
-              SizedBox(height: 25),
-  
+              SizedBox(height: 15),
+
               Container(
                 child: Center(
                   child : Row(
                   children: <Widget>[
-                    
-                    Checkbox( 
-                      checkColor: Colors.greenAccent,  
-                      activeColor: Colors.red,  
-                      value: false,  
-                      onChanged: (bool value) {  
-                       
-                      },  
+
+                    Checkbox(
+                      checkColor: Colors.greenAccent,
+                      activeColor: Colors.red,
+                      value: false,
+                      onChanged: (bool value) {
+
+                      },
                     ),
                     Flexible(
-                      child: Center(child: 
+                      child: Center(child:
                         RichText(
                           text: TextSpan(
                             text: 'By continuing, you agree to our ',
-                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
+                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                             children: <TextSpan>[
-                              TextSpan(text: 'Terms of Service ', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
-                              TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14)),
-                              TextSpan(text: 'Privacy Policy', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                              TextSpan(text: 'Terms of Service ', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                              TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14, fontFamily: "ProximaNova")),
+                              TextSpan(text: 'Privacy Policy', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
                             ],
                           ),
                         )
@@ -179,7 +183,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 ),
               ),
-             
 
               Container(
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
@@ -191,10 +194,10 @@ class _LoginPageState extends State<LoginPage> {
                 child:  RichText(
                           text: TextSpan(
                             text: 'Do you have an account ',
-                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
+                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                             children: <TextSpan>[
                               TextSpan(text: 'Sign Up', 
-                                style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14),
+                                style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () => {
                                     Navigator.pushNamed(context, SignUpPage.RouteName)

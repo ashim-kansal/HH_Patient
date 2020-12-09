@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyWidget extends StatelessWidget{
 
-  var title;
+  var title= "";
   Widget child;
   bool showFloatingButton = false;
 
@@ -38,7 +38,7 @@ class MyWidget extends StatelessWidget{
               // This trailing comma makes auto-formatting nicer for build methods.
             )),
         floatingActionButton: new Visibility(
-          visible: showFloatingButton==null? false:true,
+          visible: (showFloatingButton==null || !showFloatingButton )? false:true,
           child: new FloatingActionButton(child: new Icon(Icons.add),
           ),
     ),

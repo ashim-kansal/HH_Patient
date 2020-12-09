@@ -7,12 +7,14 @@ import 'package:flutter_app/login.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
+import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/journal.dart';
+import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
@@ -38,11 +40,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
     case MyPlans.RouteName:
-      return MaterialPageRoute(builder: (context) => MyPlans());
+      final MyPlansArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => MyPlans(isUpdate: args.isUpdate?true:false,));
+    case CurrentPlansPage.RouteName:
+      return MaterialPageRoute(builder: (context) => CurrentPlansPage());
     case Dashboard.RouteName:
       return MaterialPageRoute(builder: (context) => Dashboard());
     case TherapistPage.RouteName:
-      return MaterialPageRoute(builder: (context) => TherapistPage());
+      final ScreenArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => TherapistPage(title: args.title,));
     case BookSessionPage.RouteName:
       return MaterialPageRoute(builder: (context) => BookSessionPage());
     case MyAssessmentPage.RouteName:
@@ -58,6 +64,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));
+    case AboutUs.RouteName:
+      final ScreenArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => AboutUs(title: args.title));
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }

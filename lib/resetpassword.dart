@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -113,7 +114,8 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                     title: "Reset",
                                     type: 2,
                                     onClick: () {
-                                      Navigator.pushNamed(context, SignUpPage.RouteName);
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(context, LoginPage.RouteName);
                                     },
                                   ),
                                 ),

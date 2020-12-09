@@ -9,6 +9,7 @@ class HH_Colors{
   static const grey_35444D =  Color(0xFF35444D);
   static const grey_3d3d3d =  Color(0xFF3D3D3D);
   static const primaryColor= Color(0xffff8a73);
+  static const color_CBCEFC= Color(0xffCBCEFC);
   static const accentColor = Color(0xff777CEA);
   static const purpleColor = Color(0xff777CEA);
   static const grey_EBEBEB = Color(0xffEBEBEB);
@@ -19,7 +20,9 @@ class HH_Colors{
   static const light_accentcolor = Color(0xff9EA2F6);
   static const color_F2EEEE = Color(0xffF2EEEE);
   static const color_949494 = Color(0xff949494);
+  static const color_white = Color(0xffFFFFFF);
   static const color_17AB35 = Color(0xff17AB35);
   static const color_D9D9D9 = Color(0xffD9D9D9);
-  static const color_white = Color(0xffFFFFFF);
+  static const color_9ca031 = Color(0xff9ca0e1);
+  static const color_EDEDF8 = Color(0xffEDEDF8);
 }

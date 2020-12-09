@@ -126,7 +126,7 @@ class MyGoalsState extends State<MyGoals> {
                                 ),
                             ]),
                              SizedBox(
-                              height: 100,
+                              height: 90,
                             ),
                             
                             Align(
@@ -140,6 +140,7 @@ class MyGoalsState extends State<MyGoals> {
                                     }else if(count ==2){
                                       name = "Done";
                                     }else{
+                                      Navigator.pop(context);
                                       Navigator.pushNamed(context, LoginPage.RouteName);
                                     }
                                     count = count+1;
@@ -156,3 +157,4 @@ class MyGoalsState extends State<MyGoals> {
             )));
   }
 }
+
