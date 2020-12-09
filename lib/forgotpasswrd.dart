@@ -65,7 +65,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                               child: Image.asset('assets/images/ic_lock.png', height: 118,width: 75,),
                             ),
                             Padding(

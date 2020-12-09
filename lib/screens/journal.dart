@@ -23,12 +23,12 @@ class JournalPageState extends State<JournalPage>{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(child: HHButton(title: 'New Journal', type: 3, isEnable: isSwitched, onClick: (){
+              Flexible(child: HHButton(title: 'New Journal', type: 3,textSize: 18, isEnable: isSwitched, onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });
               },), flex: 1,),
-              Flexible(child: HHButton(title: 'Old Journal', type: 3, isEnable: !isSwitched,onClick: (){
+              Flexible(child: HHButton(title: 'Old Journal', type: 3,textSize: 18, isEnable: !isSwitched,onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });

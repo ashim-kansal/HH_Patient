@@ -15,10 +15,17 @@ class MyGoals extends StatefulWidget {
 class MyGoalsState extends State<MyGoals> {
   String dropdownValue = 'English';
   String name = 'Get Started';
-  var count = 1;
-  var pagerController = PageController(
-    initialPage: 1,
-  );
+  int count = 0;
+  var pagerController;
+
+  @override
+  void initState() {
+    super.initState();
+    pagerController = PageController(
+      initialPage: count,
+    );
+  }
+
 
 
   @override
@@ -35,13 +42,13 @@ class MyGoalsState extends State<MyGoals> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(30.0),
-                          child:Image.asset('assets/images/goal_2.png', 
+                          child:Image.asset('assets/images/goal_1.png',
                           )
                       ),
 
                       Container(
                         padding: EdgeInsets.all(40.0),
-                        child: Image.asset('assets/images/goal_1.png'),
+                        child: Image.asset('assets/images/goal_2.png'),
                       ),
 
                       Container(
@@ -69,11 +76,11 @@ class MyGoalsState extends State<MyGoals> {
                               height: 10,
                             ),
                             
-                            count == 1 ? 
+                            count == 0 ?
                             Text(
                               "Choose your goal",
                               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
-                            ) : count == 2 ?  Text(
+                            ) : count == 1 ?  Text(
                               "Video Session",
                               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ) : Text(
@@ -83,11 +90,11 @@ class MyGoalsState extends State<MyGoals> {
                             SizedBox(
                               height: 5,
                             ),
-                            count == 1 ? 
+                            count == 0 ?
                             Text(
                               "Daily drinking diary to track your progress",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
-                            ) : count == 2 ?  Text(
+                            ) : count == 1 ?  Text(
                               "Join your therapist directly from your phone",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Color(0xff585858), decoration: TextDecoration.none, fontFamily: "ProximaNova"),
                             ) : Text(
@@ -105,7 +112,7 @@ class MyGoalsState extends State<MyGoals> {
                                   width: 25,
                                   margin: EdgeInsets.only(right: 10.0),
                                   decoration: BoxDecoration(
-                                  color: count == 1 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
+                                  color: count == 0 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
                                   borderRadius: BorderRadius.circular(10.0)),
                                 )),
                                 
@@ -114,14 +121,14 @@ class MyGoalsState extends State<MyGoals> {
                                   width: 25,
                                   margin: EdgeInsets.only(right: 10.0),
                                   decoration: BoxDecoration(
-                                  color: count == 2 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
+                                  color: count == 1 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
                                   borderRadius: BorderRadius.circular(10.0)),
                                 ),
                                 Container(
                                   height: 10,
                                   width: 25,
                                   decoration: BoxDecoration(
-                                  color: count == 3 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
+                                  color: count == 2 ? HH_Colors.purpleColor : HH_Colors.grey_EBEBEB,
                                   borderRadius: BorderRadius.circular(10.0)),
                                 ),
                             ]),
@@ -134,18 +141,10 @@ class MyGoalsState extends State<MyGoals> {
                               child: Container(
                                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                                 child: HHButton(title: name, type: 4, isEnable: true, onClick: (){
-                                  setState(() {
-                                    if(count ==0){
-                                      name = "Next";
-                                    }else if(count ==1){
-                                      name = "Done";
-                                    }else{
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(context, LoginPage.RouteName);
-                                    }
-                                    count = count+1;
-                                  });
-                                pagerController.jumpTo(count.toDouble());
+                                  // setState(() {
+                                    onClickNext(context);
+
+                                  // });
                             })
                               ,)
                              
@@ -155,6 +154,27 @@ class MyGoalsState extends State<MyGoals> {
                         ))),
               ],
             )));
+  }
+
+  void onClickNext(BuildContext context) {
+    setState(() {
+      if(count ==0){
+        name = "Next";
+      }else if(count ==1){
+        name = "Done";
+      }else{
+        naviagteToLogin(context);
+      }
+      count = count+1;
+      pagerController.animateToPage(count, duration: Duration(milliseconds: 1), curve: Curves.bounceIn);
+
+    });
+  }
+
+  void naviagteToLogin(BuildContext context) {
+    Navigator.pop(context);
+    Navigator.pushNamed(context, LoginPage.RouteName);
+
   }
 }
 

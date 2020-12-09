@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/checkbox_widget.dart';
+import 'package:flutter_app/widgets/inputquestion_widget.dart';
 
 class AssessmentCell extends StatelessWidget {
   var name = "";
@@ -105,7 +107,7 @@ class AssessmentQuestionCell extends StatelessWidget {
   }
 
   Widget getInputQuest() {
-    return Container();
+    return InputBoxQuestion(ques: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry?');
   }
 
   Widget getSingleChoiceQuest() {
@@ -113,7 +115,7 @@ class AssessmentQuestionCell extends StatelessWidget {
   }
 
   Widget getMultiChoiceQuest() {
-    return Container();
+    return CheckBoxQuestion(ques: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry?');
   }
 }
 
