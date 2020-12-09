@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -109,16 +110,12 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
                                   child: HHButton(
-<<<<<<< HEAD
                                     isEnable: true,
                                     title: "Reset",
-=======
-                                    title: "Proceed",
-                                    isEnable: true,
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
                                     type: 2,
                                     onClick: () {
-                                      Navigator.pushNamed(context, SignUpPage.RouteName);
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(context, LoginPage.RouteName);
                                     },
                                   ),
                                 ),

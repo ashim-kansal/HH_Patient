@@ -19,60 +19,51 @@ class AssessmentCell extends StatelessWidget {
         ),
         child: Container(
           padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(children: [
-                        SizedBox(
-                            width: 250,
-                            child: Text(name,
-                                textAlign: TextAlign.start,
-                                overflow: TextOverflow.clip,
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: HH_Colors.grey_585858)))
-                      ]),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        child: Container(
-                          width: 70,
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border: Border.all(color: HH_Colors.accentColor),
-                              borderRadius:
+                  Expanded(
+                    child: Text(name, maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.justify,
+                        style: TextStyle(
+                            fontSize: 18, color: HH_Colors.grey_585858)),
+                  ),
+                  SizedBox(width: 10,),
+                  InkWell(
+                    child: Container(
+                      width: 70,
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          border: Border.all(color: HH_Colors.accentColor),
+                          borderRadius:
                               BorderRadius.all(Radius.circular(12.0))),
-                          child: Text(
-                            completed ? 'Log Now' : 'View',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: HH_Colors.accentColor),
-                          ),
-                        ),
-                        onTap: () {
-                          onClick();
-                        },
-                      )
-                    ],
-                  ),
-                  Text(
-                    completed ? 'Submitted' : 'Pending',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: completed
-                            ? HH_Colors.green_3DDB8C
-                            : HH_Colors.primaryColor),
-                  ),
+                      child: Text(
+                        completed ? 'Log Now' : 'View',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: HH_Colors.accentColor),
+                      ),
+                    ),
+                    onTap: () {
+                      onClick();
+                    },
+                  )
                 ],
+              ),
+              Text(
+                completed ? 'Submitted' : 'Pending',
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                    fontSize: 15,
+                    color: completed
+                        ? HH_Colors.green_3DDB8C
+                        : HH_Colors.primaryColor),
               ),
             ],
           ),
@@ -86,10 +77,11 @@ class AssessmentQuestionCell extends StatelessWidget {
   var completed = false;
   final VoidCallback onClick;
 
-  AssessmentQuestionCell({@required this.title,
-    @required this.quesType,
-    this.completed,
-    this.onClick});
+  AssessmentQuestionCell(
+      {@required this.title,
+      @required this.quesType,
+      this.completed,
+      this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +93,12 @@ class AssessmentQuestionCell extends StatelessWidget {
           Text(title,
               textAlign: TextAlign.start,
               overflow: TextOverflow.clip,
-              style:
-              TextStyle(fontSize: 16, color: HH_Colors.grey_707070)),
-          quesType == 0 ? getInputQuest() : quesType == 1
-              ? getSingleChoiceQuest()
-              : getMultiChoiceQuest(),
+              style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070)),
+          quesType == 0
+              ? getInputQuest()
+              : quesType == 1
+                  ? getSingleChoiceQuest()
+                  : getMultiChoiceQuest(),
         ],
       ),
     );
@@ -125,13 +118,12 @@ class AssessmentQuestionCell extends StatelessWidget {
 }
 
 class MySingleChoiceQuesWidget extends StatefulWidget {
-
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
-  var options= ['Yes', 'No'];
+  var options = ['Yes', 'No'];
 
   Widget build(BuildContext context) {
     String _site = options[0];
@@ -144,25 +136,25 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
   getOptions(options, _site) {
     final children = <Widget>[];
     for (var i = 0; i < options.length; i++) {
-      children.add(getRadioOption(options[i], _site, (){}));
+      children.add(getRadioOption(options[i], _site, () {}));
     }
     return children;
   }
-  Widget getRadioOption(String title, String _site, String Function() param2){
+
+  Widget getRadioOption(String title, String _site, String Function() param2) {
     return Row(
       children: [
-    Radio(
-    value: title,
-    groupValue: _site,
-    onChanged: (String value) {
-
-    },
-    activeColor: HH_Colors.grey_707070,
-    ),
-        Text(title, style: TextStyle(fontSize: 16,color: HH_Colors.grey_707070),),
-
+        Radio(
+          value: title,
+          groupValue: _site,
+          onChanged: (String value) {},
+          activeColor: HH_Colors.grey_707070,
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
+        ),
       ],
     );
   }
-
 }

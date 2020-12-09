@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -29,6 +30,7 @@ class _SignupPageState extends State<SignUpPage> {
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                 child: Container(
                   color: Colors.white,
+                  // padding: EdgeInsets.all(15),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -66,45 +68,49 @@ class _SignupPageState extends State<SignUpPage> {
                           )
                         ]),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                           child: HHEditText(
                             hint: "First Name",
                             obscureText: false,
+                            error: false,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
                           child: HHEditText(
                             hint: "Last Name",
+                            error: false,
                             obscureText: false,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                           child: HHEditText(
                             hint: "Email Address",
+                            error: false,
                             obscureText: false,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                           child: HHEditText(
+                              error: false,
                               hint: "Create Password", obscureText: true),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                           child: HHEditText(
+                            error: false,
                             hint: "Enter Your Location",
                             obscureText: false,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-<<<<<<< HEAD
-                          child: HHButton(title: "Sign Up", type: 2, isEnable: true,),
-=======
-                          child: HHButton(title: "Sign Up", type: 2,isEnable: true,),
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
+                          child: HHButton(title: "Sign Up", type: 2, isEnable: true,onClick: (){
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
+                          },),
                         ),
                       ],
                     ),

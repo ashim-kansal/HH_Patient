@@ -8,7 +8,8 @@ class HHButton extends StatelessWidget {
   final VoidCallback onClick;
   bool isEnable = true;
 
-  HHButton({@required this.title, @required this.type, this.onClick, this.isEnable});
+  HHButton(
+      {@required this.title, @required this.type, this.onClick, this.isEnable});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +21,19 @@ class HHButton extends StatelessWidget {
       // color: type == 1
       //     ? Theme.of(context).primaryColor
       //     : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
-      
       color: type == 1
-          ? (isEnable?Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
-          : isEnable?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
+          ? (isEnable ? Theme.of(context).primaryColor : HH_Colors.color_F2EEEE)
+          : isEnable
+              ? Theme.of(context).accentColor
+              : HH_Colors.color_F2EEEE,
+
       onPressed: () {
         onClick();
       },
       child: Text(
         title,
-        style: TextStyle(color: isEnable?Colors.white:HH_Colors.color_949494),
+        style:
+            TextStyle(fontSize:18,color: isEnable ? Colors.white : HH_Colors.color_949494),
         textAlign: TextAlign.center,
       ),
     );
@@ -48,7 +52,7 @@ class HHHomeButton extends StatelessWidget {
     return RaisedButton(
       padding: EdgeInsets.only(left: 20),
       color: HH_Colors.accentColor,
-      onPressed: (){
+      onPressed: () {
         onClick();
       },
 
@@ -66,7 +70,10 @@ class HHHomeButton extends StatelessWidget {
             color: HH_Colors.light_accentcolor,
             padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
             child: Center(
-              child: Icon(Icons.arrow_forward_ios_rounded, color: Colors.white,),
+              child: Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+              ),
             ),
           )
         ],
@@ -124,37 +131,34 @@ class HHDrawerItem2 extends StatelessWidget {
           onClick();
         },
         child: Container(
-          padding: EdgeInsets.all(10),
-          child:Row(
+            padding: EdgeInsets.all(10),
+            child: Row(
               children: [
-                SizedBox(width: 40,),
+                SizedBox(
+                  width: 40,
+                ),
                 Text(
                   title,
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: HH_Colors.grey_707070, fontSize: 18),
+                  style: TextStyle(color: HH_Colors.grey_707070, fontSize: 18),
                 )
               ],
-          )
-        ));
+            )));
   }
 }
 
-class HHTextView extends StatelessWidget{
+class HHTextView extends StatelessWidget {
   var title;
   double size;
   var color;
 
-
-
-  HHTextView({@required this.title,@required this.size,@required this.color});
+  HHTextView({@required this.title, @required this.size, @required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Text(title, style: TextStyle(color: color, fontSize: size));
   }
 }
-
 
 class HHEditText extends StatefulWidget {
   final String hint;
@@ -175,10 +179,9 @@ class HHEditText extends StatefulWidget {
       this.errorText,
       this.obscureText,
       this.inputType,
-      this.controller, this.showeye})
+      this.controller,
+      this.showeye})
       : super(key: key);
-
-
 
   @override
   HHEditTextState createState() => HHEditTextState();
@@ -190,43 +193,37 @@ class HHEditTextState extends State<HHEditText> {
   void Function() param2;
 
   @override
-  void initState(){
-    if(widget.minLines == null)
-      widget.minLines = 1;
+  void initState() {
+    if (widget.minLines == null) widget.minLines = 1;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-<<<<<<< HEAD
-      obscureText: widget.obscureText,
-      controller: controller,
-      
-      decoration: InputDecoration(
-          hintStyle: TextStyle(color: HH_Colors.placeHolderColor),
-          errorText: widget.error ? widget.errorText : null,
-=======
       obscureText: widget.obscureText != null && widget.error ? true : false,
-      controller: controller ==null? null :controller,
+      controller: controller == null ? null : controller,
       minLines: widget.minLines,
       maxLines: widget.minLines,
       decoration: InputDecoration(
-          errorText: widget.error != null && widget.error ? widget.errorText : null,
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
+          hintStyle: TextStyle(color: HH_Colors.placeHolderColor),
+          errorText:
+              widget.error != null && widget.error ? widget.errorText : null,
           errorStyle: TextStyle(color: Color(0xffff8a73)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),
               borderSide: BorderSide(color: Color(0xffff8a73))),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: widget.hint == null? "": widget.hint,
+          hintText: widget.hint == null ? "" : widget.hint,
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder(),
-          suffixIcon: widget.showeye == true ? const Icon(
-            Icons.remove_red_eye,
-            size: 20,
-            color: Color(0xffCBCBCB),
-          ): null),
+          suffixIcon: widget.showeye == true
+              ? const Icon(
+                  Icons.remove_red_eye,
+                  size: 20,
+                  color: Color(0xffCBCBCB),
+                )
+              : null),
     );
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
-import 'package:flutter_app/widgets/ExpansionPanel.dart';
+import 'package:flutter_app/widgets/ExpansionTile.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/journalWidgets.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/widgets/sessionWidgets.dart';
 
 class JournalPage extends StatefulWidget{
   static const String RouteName = '/journal';
@@ -83,7 +82,14 @@ class JournalPageState extends State<JournalPage>{
 
   Widget getOldJournal(){
     return ListView.separated(itemBuilder: (context, index){
-      return Expansionspanel();
+      return  MyExpansionTile(title: Text('sbcd'),
+        headerBackgroundColor: HH_Colors.color_9ca031,
+      children: [
+        Text('sbcd   1'),
+        Text('sbcd   2'),
+        Text('sbcd   3'),
+        Text('sbcd   4'),
+      ],);
     },
         separatorBuilder: (context, index) {
           return Divider();

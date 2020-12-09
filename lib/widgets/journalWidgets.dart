@@ -74,35 +74,3 @@ class RadioGroupWidget extends State {
     );
   }
 }
-
-class OldJournalCell extends StatelessWidget{
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text('fff'),
-    );
-  }
-}
-
-
-class Expansionpanel extends StatefulWidget {
-  Expansionpaneltate createState() =>  Expansionpaneltate();
-}
-class NewItem {
-  bool isExpanded;
-  final String header;
-  final Widget body;
-  final Icon iconpic;
-  NewItem(this.isExpanded, this.header, this.body, this.iconpic);
-}
-class Expansionpaneltate extends State<Expansionpanel> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Expansionpanel(
-      );
-
-
-  }
-}

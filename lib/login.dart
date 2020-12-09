@@ -4,6 +4,7 @@ import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
@@ -35,13 +36,14 @@ class _LoginPageState extends State<LoginPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
 
-      body: Container(
-          margin: EdgeInsets.fromLTRB(20, 80, 20, 20),
+      body:
+      Container(
+          margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
           color: Colors.white,
-          child: Column(
+          child: ListView(
             children: [
               SizedBox(
-                height: 50,
+                height: 9,
               ),
               Material(
                 child: ClipPath(
@@ -49,11 +51,11 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
                 child: Container(
-              
+
                   color: Colors.white,
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 40),
                   child: Container(decoration: BoxDecoration(
-                      borderRadius: 
+                      borderRadius:
                       BorderRadius.only(
                         topRight: Radius.circular(30.0),
                         topLeft: Radius.circular(30.0),
@@ -116,11 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-<<<<<<< HEAD
                               child: HHButton(title: "Login", type: 2, isEnable: true, onClick: (){
-=======
-                              child: HHButton(title: "Login", type: 2, isEnable: true,onClick: (){
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
+                                Navigator.pop(context);
                                 Navigator.pushNamed(context, Dashboard.RouteName);
                               },),
                             ),
@@ -138,33 +137,35 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.pushNamed(context, ForgotPasswordPage.RouteName);
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: Text('Forgot Password?',
+                  child: Text('Forgot Password?',                  textAlign: TextAlign.center,
+
                       style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF)),
 
                 ),
               ),
 
-              SizedBox(height: 25),
-  
+              SizedBox(height: 15),
+
               Container(
                 child: Center(
                   child : Row(
                   children: <Widget>[
-                    
-                    Checkbox( 
-                      checkColor: Colors.greenAccent,  
-                      activeColor: Colors.red,  
-                      value: false,  
-                      onChanged: (bool value) {  
-                       
-                      },  
+
+                    Checkbox(
+                      checkColor: Colors.greenAccent,
+                      activeColor: Colors.red,
+                      value: false,
+                      onChanged: (bool value) {
+
+                      },
                     ),
                     Flexible(
-                      child: Center(child: 
+                      child: Center(child:
                         RichText(
                           text: TextSpan(
                             text: 'By continuing, you agree to our ',
@@ -181,24 +182,31 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 ),
               ),
-             
 
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    border: Border.all(color: HH_Colors.borderGrey),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child:  RichText(
-                          text: TextSpan(
-                            text: 'Do you have an account ',
-                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
-                            children: <TextSpan>[
-                              TextSpan(text: 'Sign Up', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
-                            ],
-                          ),
-                        )
+              InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, SignUpPage.RouteName);
+                },
+                child:               Container(
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        border: Border.all(color: HH_Colors.borderGrey),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                    child:  RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: 'Do you have an account ',
+                        style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Sign Up', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                        ],
+                      ),
+                    )
+                )
+                ,
               )
             ],
           )),

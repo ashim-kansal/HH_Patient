@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/goals.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class SelectLanguage extends StatefulWidget {
@@ -15,9 +16,10 @@ class SelectLanguageState extends State<StatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Container(
+    return Scaffold(
+        body: Container(
             color: Color(0xfff2eeee),
+
             child: Column(
               children: [
                 Flexible(
@@ -57,9 +59,9 @@ class SelectLanguageState extends State<StatefulWidget> {
                                       shape: BoxShape.rectangle,
                                       border: Border.all(color: Color(0xffE9E7E7)),
                                       borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                                
+
                                 child: DropdownButtonHideUnderline(
-                                  
+
                                   child: DropdownButton<String>(
                                     isExpanded: true,
                                   value: dropdownValue,
@@ -80,10 +82,10 @@ class SelectLanguageState extends State<StatefulWidget> {
                                       child: Text(value),
                                     );
                                   }).toList(),
-                                ),) 
+                                ),)
                                 )
                               ],)
-                              
+
                             ),
                             flex: 1,
                           )
@@ -96,19 +98,14 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-<<<<<<< HEAD
-                          child: HHButton(title: "Get Started", 
-                          type: 2, 
-                          isEnable: true,
-                          onClick: (){
-=======
-                          child: HHButton(title: "Get Started", type: 2, isEnable: true, onClick: (){
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
+                          child: HHButton(title: "Get Started", type: 1, isEnable: true, onClick: (){
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),
                         ))),
               ],
-            )));
+            )
+        )
+    );
   }
 }

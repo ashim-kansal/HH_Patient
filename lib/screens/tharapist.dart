@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/tharapist_cell.dart';
 
 class TherapistPage extends StatefulWidget {
@@ -26,45 +28,24 @@ class TherapistPage extends StatefulWidget {
 class _TherapistState extends State<TherapistPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Therapist', style: TextStyle(color: Colors.white)),
-          centerTitle: true,
-          iconTheme: IconThemeData(
-            color: Colors.white, //change your color here
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          elevation: 0,
+    return MyWidget( title: 'Therapists',
+            child: ListView.separated(
+        itemCount: widget.therapists.length,
+          itemBuilder: (context, index) {
+            return TharapistCell(
+              name: widget.therapists[index],
+              role: "Recovery Coach",
+              showBook: true,
+              onClick: () {
+                Navigator.pushNamed(context, BookSessionPage.RouteName);
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(color: HH_Colors.accentColor,);
+          },
         ),
-        body: Material(
-            color: Theme.of(context).accentColor,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
-                    topLeft: Radius.circular(30.0),
-                  ),
-                  color: Colors.white),
-              child: ListView.separated(
-                itemCount: widget.therapists.length,
-                itemBuilder: (context, index) {
-                  return TharapistCell(
-                    name: widget.therapists[index],
-                    role: "Recovery Coach",
-                    showBook: true,
-                    onClick: () {
-                      Navigator.pushNamed(context, BookSessionPage.RouteName);
-                    },
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider();
-                },
-              ),
-              // backgroundColor: Colors.white,
-              // This trailing comma makes auto-formatting nicer for build methods.
-            )));
+    );
   }
 }
 
@@ -142,19 +123,29 @@ class TherapistOptionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body:         Container(
+      body:         SingleChildScrollView(
         padding: EdgeInsets.all(40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+        child:
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 
-            TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png'),
+            Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
+              Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
+            },) ),
             SizedBox(height: 50,),
-            TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_therapist.png'),
+        Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
+          Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
+
+        }),),
             SizedBox(height: 50,),
-            TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_therapist.png'),
+          Center(child: TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
+
+          }),),
           ],
-        )),
+        ),)),
 
     );
   }
@@ -173,26 +164,35 @@ class TherapistOptionItem extends StatelessWidget {
     return Card(
       color: Colors.white,
       elevation: 10,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Container(
-        color: Colors.white,
-        padding: EdgeInsets.fromLTRB(50, 20, 50, 20),
-        child: Column(
-          children: [
-            Image.asset(
-              image,
-              height: 70,
-              width: 70,
-            ),
-            SizedBox(height: 12),
-            Text(
-              title,
-              style: TextStyle(fontSize: 20, color: HH_Colors.grey_3d3d3d),
-            ),
-          ],
+      child: InkWell(
+        child: Container(
+          width: MediaQuery.of(context).size.width/2.2,
+          height: MediaQuery.of(context).size.width/2.7,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            color: Colors.white,
+          ),
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Image.asset(
+                image,
+                height: 70,
+                width: 70,
+              ),
+              SizedBox(height: 12),
+              Text(
+                title,
+                style: TextStyle(fontSize: 20, color: HH_Colors.grey_3d3d3d),
+              ),
+            ],
+          ),
         ),
+        onTap: (){
+          onClick();
+        },
       ),
     );
   }

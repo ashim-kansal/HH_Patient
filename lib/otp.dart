@@ -228,6 +228,7 @@ class _OtpState extends State<OtpPage> {
                                       ),
                                     
                                       onPressed: (){
+                                        Navigator.pop(context);
                                         Navigator.pushNamed(context, ResetPasswordPage.RouteName);
                                       },
                                       shape: CircleBorder()

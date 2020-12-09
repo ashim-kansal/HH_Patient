@@ -96,8 +96,8 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                     title: "Proceed",
                                     isEnable: true,
                                     type: 2,
-                                      isEnable: true,
                                     onClick: () {
+                                      Navigator.pop(context);
                                       Navigator.pushNamed(context, OtpPage.RouteName);
                                     },
                                   ),

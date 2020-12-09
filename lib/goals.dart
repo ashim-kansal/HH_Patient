@@ -65,7 +65,6 @@ class MyGoalsState extends State<MyGoals> {
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-<<<<<<< HEAD
                             SizedBox(
                               height: 10,
                             ),
@@ -127,40 +126,28 @@ class MyGoalsState extends State<MyGoals> {
                                 ),
                             ]),
                              SizedBox(
-                              height: 100,
+                              height: 90,
                             ),
                             
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                                child: HHButton(title: name, type: 3, isEnable: true, onClick: (){
+                                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                child: HHButton(title: name, type: 2, isEnable: true, onClick: (){
                                   setState(() {
                                     if(count ==1){
                                       name = "Next";
                                     }else if(count ==2){
                                       name = "Done";
                                     }else{
+                                      Navigator.pop(context);
                                       Navigator.pushNamed(context, LoginPage.RouteName);
                                     }
                                     count = count+1;
                                   });
                                 pagerController.jumpTo(count.toDouble());
-=======
 
-                            HHButton(title: name, type: 2, isEnable: true,onClick: (){
-                              setState(() {
-                                if(count ==1){
-                                  name = "Next";
-                                }else if(count ==2){
-                                  name = "Done";
-                                }else{
-                                  Navigator.pushNamed(context, LoginPage.RouteName);
-                                }
-                                count = count+1;
-                              });
-                              pagerController.jumpTo(count.toDouble());
->>>>>>> fd2e5939107816206a070aed30ac7709bb382bc4
+
                             })
                               ,)
                              
@@ -172,3 +159,4 @@ class MyGoalsState extends State<MyGoals> {
             )));
   }
 }
+
