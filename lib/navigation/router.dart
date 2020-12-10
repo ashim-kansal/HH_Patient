@@ -11,13 +11,17 @@ import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/chat.dart';
+import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
+import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/splash.dart';
@@ -70,6 +74,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => CreateAccountPage());
     case EditProfilePage.RouteName:
       return MaterialPageRoute(builder: (context) => EditProfilePage());
+    case SettingsPage.RouteName:
+      return MaterialPageRoute(builder: (context) => SettingsPage());
+    case LanguagePage.RouteName:
+      return MaterialPageRoute(builder: (context) => LanguagePage());
+    case ChnagePasswordPage.RouteName:
+      return MaterialPageRoute(builder: (context) => ChnagePasswordPage());
+    case ChatPage.RouteName:
+      return MaterialPageRoute(builder: (context) => ChatPage());
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));

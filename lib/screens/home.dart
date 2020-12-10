@@ -63,7 +63,7 @@ class HomePageState extends State<HomePage> {
         ),
         SizedBox(height: 15,),
         Container(
-          height: 150.0,
+          height: 160.0,
           margin: EdgeInsets.only(bottom: 20),
           child:        ListView.separated(
 
