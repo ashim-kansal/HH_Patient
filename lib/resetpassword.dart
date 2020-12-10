@@ -10,7 +10,8 @@ class ResetPasswordPage extends StatefulWidget {
   ResetPasswordPage({Key key, this.title}) : super(key: key);
 
   final String title;
-  var error = false;
+  var pwderror = false;
+  var cpwderror = false;
 
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
@@ -25,6 +26,45 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     super.dispose();
     passwordController.dispose();
     cpasswordController.dispose();
+  }
+
+  void resetPwdHandler(){
+
+    String password = passwordController.text;
+    String cPassword = cpasswordController.text;
+
+    if(password.trim().length == 0 && cPassword.trim().length == 0){
+      setState(() {
+        widget.pwderror = true;
+        widget.cpwderror = true;
+      });
+      return;
+    }
+
+    if(password.trim().length == 0){
+      setState(() {
+        widget.pwderror = true;
+        widget.cpwderror = false;
+      });
+      return;
+    }
+
+    if(cPassword.trim().length == 0){
+      setState(() {
+        widget.pwderror = false;
+        widget.cpwderror = true;
+      });
+      return;
+    }
+
+     setState(() {
+        widget.pwderror = false;
+        widget.cpwderror = false;
+      });
+
+    Navigator.pop(context);
+    Navigator.pushNamed(context, LoginPage.RouteName);
+                                    
   }
 
   @override
@@ -89,7 +129,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                     hint: "Enter New Password",
                                     obscureText: true,
                                     controller: passwordController,
-                                    error: widget.error,
+                                    error: widget.pwderror,
                                     errorText:
                                     'Please enter a new password',
                                     showeye: true
@@ -101,7 +141,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                     hint: "Confirm Password",
                                     obscureText: true,
                                     controller: cpasswordController,
-                                    error: widget.error,
+                                    error: widget.cpwderror,
                                     errorText:
                                     'Please enter a valid confirm password',
                                     showeye: true
@@ -114,8 +154,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                     title: "Reset",
                                     type: 2,
                                     onClick: () {
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(context, LoginPage.RouteName);
+                                      resetPwdHandler();
                                     },
                                   ),
                                 ),

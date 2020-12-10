@@ -77,7 +77,6 @@ class _CreateAccountState extends State<CreateAccountPage> {
                                 textAlign: TextAlign.center,
                               ),
                             ),
-
                             Padding(
                               padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                               child: Container(

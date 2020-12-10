@@ -196,20 +196,21 @@ class _OtpState extends State<OtpPage> {
                                     Column(
                                         mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                         children: <Widget>[
                                           GridView.count(
-                                              crossAxisCount: 4,
-                                              // mainAxisSpacing: 10.0,
-                                              shrinkWrap: true,
-                                              primary: false,
-                                              scrollDirection: Axis.vertical,
-                                              children:
-                                                  List<Container>.generate(
-                                                      4,
-                                                      (int index) => Container(
-                                                          child: widgetList[
-                                                              index]))),
+                                            crossAxisCount: 4,
+                                            // mainAxisSpacing: 10.0,
+                                            shrinkWrap: true,
+                                            primary: false,
+                                            scrollDirection: Axis.vertical,
+                                            children:
+                                              List<Container>.generate(4,
+                                                (int index) => 
+                                                Container(
+                                                    child: widgetList[
+                                                        index]) 
+                                                        )),
                                         ])
                                   ],
                                 )),

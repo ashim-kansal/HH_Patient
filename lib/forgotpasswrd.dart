@@ -23,6 +23,25 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
     emailController.dispose();
   }
 
+  void forgotPasswordHandler(){
+
+    String email = emailController.text;
+
+    if(email.trim().length == 0){
+      setState(() {
+        widget.error = true;
+      });
+      return;
+    }
+
+    setState(() {
+      widget.error = false;
+    });
+
+    Navigator.pop(context);
+    Navigator.pushNamed(context, OtpPage.RouteName);
+  }
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -95,10 +114,9 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                   child: HHButton(
                                     title: "Proceed",
                                     isEnable: true,
-                                    type: 2,
+                                    type: 4,
                                     onClick: () {
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(context, OtpPage.RouteName);
+                                      forgotPasswordHandler();
                                     },
                                   ),
                                 ),

@@ -20,6 +20,7 @@ import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/screens/editProfile.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -61,6 +62,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => JournalPage());
     case CreateAccountPage.RouteName:
       return MaterialPageRoute(builder: (context) => CreateAccountPage());
+    case EditProfilePage.RouteName:
+      return MaterialPageRoute(builder: (context) => EditProfilePage());
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));

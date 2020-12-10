@@ -159,14 +159,16 @@ class HHTextView extends StatelessWidget {
 class HHEditText extends StatefulWidget {
   final String hint;
   final String text = "";
+  final TextEditingController controller;
   var minLines = 1;
   var error = false;
   var errorText = "";
   var obscureText = false;
   var showeye = false;
-  var controller = null;
+  // var controller = null;
   var inputType = TextInputType.text;
 
+  
   HHEditText(
       {Key key,
       this.hint,
@@ -184,7 +186,7 @@ class HHEditText extends StatefulWidget {
 }
 
 class HHEditTextState extends State<HHEditText> {
-  TextEditingController controller = TextEditingController();
+  // final TextEditingController controller = TextEditingController();
 
   void Function() param2;
 
@@ -198,7 +200,7 @@ class HHEditTextState extends State<HHEditText> {
   Widget build(BuildContext context) {
     return TextField(
       obscureText: widget.obscureText != null && widget.error ? true : false,
-      controller: controller == null ? null : controller,
+      controller: widget.controller,
       minLines: widget.minLines,
       maxLines: widget.minLines,
       decoration: InputDecoration(

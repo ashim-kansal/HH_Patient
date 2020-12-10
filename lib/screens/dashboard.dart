@@ -85,12 +85,14 @@ class DashboardState extends State<Dashboard> {
                       width: 8,
                     ),
                     Column(
+                    
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text("Hi John Doe", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.accentColor),),
                         Text("john.doe@yahoo.com", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
                       ],
+                      
                     )
                   ],
                 ),

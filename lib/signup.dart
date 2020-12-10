@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/creatAccount.dart';
-import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/myplan.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String RouteName = '/signup';
@@ -11,7 +10,14 @@ class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
 
   final String title;
-   var error = false;
+   var fnameError = false;
+   var lnameError = false;
+   var emailError = false;
+   var pwdError = false;
+   var numberError = false;
+   var locationError = false;
+   var stateError = false;
+   var countryError = false;
 
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -19,8 +25,41 @@ class SignUpPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignUpPage> {
 
+  TextEditingController fnameController = TextEditingController();
+  TextEditingController lnameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  String stateDropdown = 'Select State';
+  String countryDropdown = 'Select Country';
+
+  void signupHandler(){
+
+    String fname = fnameController.text;
+    String lname = lnameController.text;
+    String email = emailController.text;
+    String location = locationController.text;
+    String password = passwordController.text;
+    var number = phoneController.text;
+
+    if(fname.trim().length == 0 && lname.trim().length == 0 && email.trim().length == 0 && 
+    location.trim().length == 0 && password.trim().length == 0 && number.trim().length == 0){
+      
+      setState(() {
+        widget.fnameError = true;
+        widget.lnameError = true;
+        widget.emailError = true;
+        widget.pwdError = true;
+        widget.numberError = true;
+        widget.locationError = true;
+      });
+      
+      return;
+    }
+    Navigator.pushNamed(context, LoginPage.RouteName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +129,8 @@ class _SignupPageState extends State<SignUpPage> {
                                 hint: "First Name",
                                 obscureText: false,
                                 controller: emailController,
-                                error: widget.error,
-                                errorText: 'Please enter a your first name',
+                                error: widget.fnameError,
+                                errorText: 'Please enter your first name',
                               ),
                             ),
                             Padding(
@@ -100,8 +139,8 @@ class _SignupPageState extends State<SignUpPage> {
                                 hint: "Last Name",
                                 obscureText: false,
                                 controller: emailController,
-                                error: widget.error,
-                                errorText: 'Please enter a your last name',
+                                error: widget.lnameError,
+                                errorText: 'Please enter your last name',
                               ),
                             ),
                              Padding(
@@ -110,7 +149,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 hint: "Email Address",
                                 obscureText: false,
                                 controller: emailController,
-                                error: widget.error,
+                                error: widget.emailError,
                                 errorText: 'Please enter a valid email address',
                               ),
                             ),
@@ -120,25 +159,101 @@ class _SignupPageState extends State<SignUpPage> {
                                 hint: "Create Password",
                                 obscureText: true,
                                 controller: passwordController,
-                                error: widget.error,
+                                error: widget.pwdError,
                                 errorText: 'Please enter a valid password',
                                 showeye: true
                               ),
                             ),
-                             Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                              child: HHEditText(
+                                hint: "Phone Number",
+                                obscureText: false,
+                                controller: passwordController,
+                                error: widget.numberError,
+                                errorText:
+                                'Please enter a phone number',
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                               child: HHEditText(
                                 hint: "Enter Your Location",
                                 obscureText: false,
                                 controller: emailController,
-                                error: widget.error,
-                                errorText: 'Please enter a enter your location',
+                                error: widget.locationError,
+                                errorText: 'Please enter your location',
                               ),
                             ),
+
+                            Container(
+                              width: 290,
+                              // margin: EdgeInsets.only(top: 5),
+                              padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(color: Color(0xffE9E7E7)),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                              child: DropdownButtonHideUnderline(
+                                child: new DropdownButton<String>(
+                                value: stateDropdown,
+                                isExpanded: true,
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconEnabledColor: Color(0xffC5C4C4),
+                                iconSize: 38,
+                                elevation: 16,
+                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                items: <String>['Select State', 'Chandigarh', 'Haryana', 'Punjab'].map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    stateDropdown = newValue;
+                                  });
+                                },
+                              )) 
+                            
+                            ),
+                          Container(
+                            width: 290,
+                            margin: EdgeInsets.only(top: 10, bottom: 20),
+                            padding: const EdgeInsets.only(left: 20.0,right: 10.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border: Border.all(color: Color(0xffE9E7E7)),
+                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                            child: DropdownButtonHideUnderline (
+                              child: new DropdownButton<String>(
+                                isExpanded: true,
+                                value: countryDropdown,
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconEnabledColor: Color(0xffC5C4C4),
+                                iconSize: 38,
+                                elevation: 16,
+                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    countryDropdown = newValue;
+                                  });
+                                },
+                              ),
+                              )
+                            ),
+
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 5, 10),
                               child: HHButton(title: "Sign Up", type: 4, isEnable: true,onClick: (){
-                                Navigator.pushNamed(context, CreateAccountPage.RouteName);
+                                signupHandler();
                               },),
                             ),
                           ]),

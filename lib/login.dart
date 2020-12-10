@@ -1,14 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
-import 'package:flutter_app/myplan.dart';
-import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/dashboard.dart';
-import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/widgets/planwidget.dart';
 
 class LoginPage extends StatefulWidget {
   static const String RouteName = '/login';
@@ -16,22 +14,68 @@ class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
 
   final String title;
-  var error = false;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<StatefulWidget> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  var emailerror = false;
+  var pwderror = false;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  @override
-  void dispose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
+  // void dispose() {
+    
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
+
+  void loginHandler() {
+  
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    if(email.trim().length == 0 && password.trim().length == 0){
+      setState(() {
+        emailerror = true;
+        pwderror = true;
+      });
+      return;
+    }
+
+    if(email.trim().length == 0){
+      setState(() {
+        emailerror = true;
+        pwderror = false;
+      });
+      return;
+    }
+
+    if(password.trim().length == 0){
+      setState(() {
+        emailerror= false;
+        pwderror = true;
+      });
+      return;
+    }
+
+    setState(() {
+      emailerror = false;
+      pwderror = false;
+    });
+    Navigator.pushNamed(context, Dashboard.RouteName);
   }
+
+  // void checkIfValidate(email, password){
+  //   var flag = true;
+
+   
+  // }
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
@@ -99,11 +143,12 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(children: <Widget>[
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
-                              child: HHEditText(
+                              child: 
+                              HHEditText(
                                 hint: "Enter Email Id",
                                 obscureText: false,
                                 controller: emailController,
-                                error: widget.error,
+                                error: emailerror,
                                 errorText: 'Please enter a valid email address',
                               ),
                             ),
@@ -113,15 +158,17 @@ class _LoginPageState extends State<LoginPage> {
                                 hint: "Enter Password",
                                 obscureText: true,
                                 controller: passwordController,
-                                error: widget.error,
+                                error: pwderror,
                                 errorText: 'Please enter a valid password',
                                 showeye: true
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                              child: HHButton(title: "Login", type: 4, isEnable: true,onClick: (){
-                                Navigator.pushNamed(context, Dashboard.RouteName);
+                              child: HHButton(title: "Login", type: 4, isEnable: true, 
+                              onClick: (){
+                                loginHandler();
+                                // 
                               },),
                             ),
                           ]),
@@ -185,26 +232,29 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               Container(
+                width: 50,
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
                     border: Border.all(color: HH_Colors.borderGrey),
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                child:  RichText(
-                          text: TextSpan(
-                            text: 'Do you have an account ',
-                            style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
-                            children: <TextSpan>[
-                              TextSpan(text: 'Sign Up', 
-                                style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => {
-                                    Navigator.pushNamed(context, SignUpPage.RouteName)
-                                  }),
-                            ],
-                          ),
-                        )
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Do you have an account ',
+                      style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Sign Up', 
+                          style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => {
+                              Navigator.pushNamed(context, SignUpPage.RouteName)
+                            }),
+                      ],
+                    ),
+                  )
+                )
               )
             ],
           )),
