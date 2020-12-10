@@ -19,6 +19,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage>{
   Widget build(BuildContext context) {
     return MyWidget(title: 'Heal@heal', child:
     Container(
+      height: MediaQuery.of(context).size.height,
       child: ListView(
         shrinkWrap: true,
 

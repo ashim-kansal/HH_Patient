@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -37,7 +38,9 @@ class HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(20, 40,20,40),
             child: Column(
               children: [
-                HHHomeButton(title: 'Drinking Diary', type: 2),
+                HHHomeButton(title: 'Drinking Diary', type: 2, onClick: (){
+                  Navigator.pushNamed(context, DrinkingDiaryPage.RouteName);
+                },),
                 SizedBox(height: 15),
                 HHHomeButton(title: 'Daily Journaling', type: 2, onClick: (){
                   Navigator.pushNamed(context, JournalPage.RouteName);
@@ -68,9 +71,7 @@ class HomePageState extends State<HomePage> {
             itemCount: widget.assessments.length,
             itemBuilder: (context, index) {
               return SessionCard(name: widget.assessments[index], completed: index%2 == 0, onClick: (){
-                // Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments(
-                //     widget.assessments[index],index%2 == 0
-                // ));
+                Navigator.pushNamed(context, SessionPage.RouteName);
               },);
 
             },

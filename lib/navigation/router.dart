@@ -13,8 +13,10 @@ import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/myplan.dart';
+import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
@@ -40,11 +42,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => OtpPage());
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
+    case QuestionairePage.RouteName:
+      return MaterialPageRoute(builder: (context) => QuestionairePage());
     case MyPlans.RouteName:
       final MyPlansArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => MyPlans(isUpdate: args.isUpdate?true:false,));
     case CurrentPlansPage.RouteName:
       return MaterialPageRoute(builder: (context) => CurrentPlansPage());
+    case DrinkingDiaryPage.RouteName:
+      return MaterialPageRoute(builder: (context) => DrinkingDiaryPage());
     case Dashboard.RouteName:
       return MaterialPageRoute(builder: (context) => Dashboard());
     case TherapistPage.RouteName:

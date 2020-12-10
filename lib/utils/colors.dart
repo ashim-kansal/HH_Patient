@@ -11,6 +11,7 @@ class HH_Colors{
   static const primaryColor= Color(0xffff8a73);
   static const color_CBCEFC= Color(0xffCBCEFC);
   static const accentColor = Color(0xff777CEA);
+  static const color_FFECE8 = Color(0xffFFECE8);
   static const purpleColor = Color(0xff777CEA);
   static const grey_EBEBEB = Color(0xffEBEBEB);
   static const orange_FF8A73 = Color(0xffFF8A73);

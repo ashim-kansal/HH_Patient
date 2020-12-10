@@ -13,6 +13,7 @@ class HHButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+
       minWidth: MediaQuery.of(context).size.width,
       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
@@ -29,7 +30,7 @@ class HHButton extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(color: isEnable?Colors.white:HH_Colors.color_949494, 
-        fontSize: 18, fontWeight: FontWeight.w400, fontFamily: "ProximaNova"),
+        fontSize: textSize??22, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),
     );
@@ -239,6 +240,90 @@ class UndefinedView extends StatelessWidget {
     );
   }
 }
+
+class CalenderCell extends StatelessWidget{
+
+  var day;
+  var date;
+
+      CalenderCell({Key key, this.day, this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.all(5),
+      child: Column(
+        children: [
+          Text(day, style: TextStyle(fontSize: 12,color: HH_Colors.grey_585858, fontFamily: "ProximaNova"),),
+          Text(date, style: TextStyle(fontSize: 12, color: HH_Colors.grey_585858, fontFamily: "ProximaNova"),)
+        ],
+      ),
+    );
+  }
+}
+
+class DrinkingDiaryCell extends StatelessWidget{
+
+  var day;
+  var date;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+        padding: EdgeInsets.fromLTRB(10,5,10,5),
+      decoration: BoxDecoration(
+        border: Border.all(color: HH_Colors.borderGrey, width: 0.8),
+        borderRadius: BorderRadius.all(Radius.circular(5.0))
+
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Text('Mon', style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: HH_Colors.primaryColor, fontFamily: "ProximaNova"),),
+              SizedBox(width: 10,),
+              Container(
+                padding: EdgeInsets.fromLTRB(5,2 ,5, 2),
+                decoration: BoxDecoration(
+                    color: HH_Colors.color_FFECE8,
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.library_add_check_outlined, color: HH_Colors.color_949494,size: 15,),
+                    SizedBox(width: 10,),
+                    Text('2 units', style: TextStyle(color: HH_Colors.color_949494,fontSize: 14))
+                  ],
+                ),
+
+              ),
+
+            ],
+          ),
+          InkWell(
+            onTap: (){
+
+            },
+            child:           Row(
+              children: [
+                Icon(Icons.add_circle_outlined, color: HH_Colors.color_949494,),
+                SizedBox(width: 5,),
+                Text('Goal', style: TextStyle(fontSize: 14, color: HH_Colors.color_949494, fontFamily: "ProximaNova"),)
+              ],
+            )
+            ,
+          )
+
+        ],
+      ),
+    );
+  }
+}
+
+
 
 OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(

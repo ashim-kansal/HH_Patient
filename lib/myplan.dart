@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
@@ -64,7 +65,7 @@ class MyPlansState extends State<MyPlans> {
                           if(widget.isUpdate)
                             Navigator.pop(context);
                           else
-                            Navigator.pushNamed(context, Dashboard.RouteName);
+                            Navigator.pushNamed(context, QuestionairePage.RouteName);
 
                         },),
                         PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 1, onClick: (){}),
