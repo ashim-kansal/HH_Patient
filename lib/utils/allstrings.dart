@@ -11,5 +11,7 @@ class HHString{
   static const String settings = "Settings";
   static const String select_language = "Select Language";
   static const String change_password = "Change Password";
+  static const String sample_ques = "Lorem Ipsum is simply dummy text of the printing and typesetting industry?";
+
 
 }

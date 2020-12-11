@@ -29,7 +29,7 @@ class QuestionairePageState extends State<QuestionairePage>{
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            HHString.sample_ques,
             textAlign: TextAlign.center,
             style: TextStyle(color: HH_Colors.grey_707070, fontSize: 16),
           ),
@@ -37,19 +37,21 @@ class QuestionairePageState extends State<QuestionairePage>{
 Expanded(
               child: ListView(
                 children: [
-                  InputBoxQuestion(ques:'abcd'),
-                  InputBoxQuestion(ques:'abcd'),
-                  CheckBoxQuestion(ques: 'abcd'),
-                  // CheckBoxQuestion(ques: 'abcd'),
-                  MySingleChoiceQuesWidget(),
-                  MySingleChoiceQuesWidget(),
+                  LinearProgressIndicator( minHeight: 5,backgroundColor: HH_Colors.color_F2EEEE,
+                  valueColor: AlwaysStoppedAnimation(HH_Colors.primaryColor),),
+                  SizedBox(height: 5,),
+                  getQues(InputBoxQuestion(ques:HHString.sample_ques)),
+                  getQues(InputBoxQuestion(ques:HHString.sample_ques)),
+                  // getQues(CheckBoxQuestion(ques:HHString.sample_ques)),
+                  getQues(MySingleChoiceQuesWidget(ques:HHString.sample_ques)),
+                  getQues(MySingleChoiceQuesWidget(ques:HHString.sample_ques)),
                 ],
               )
             )
             ,
 
           SizedBox(height: 10),
-          HHButton(title: 'Upgrade Now', type: 1, isEnable: true,onClick: (){
+          HHButton(title: 'Submit & Proceed', type: 4, isEnable: true,onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, Dashboard.RouteName);
           },)
@@ -57,6 +59,12 @@ Expanded(
         ],
       ),
     )
+    );
+  }
+
+  Widget getQues(Widget child){
+    return Card(elevation: 2,
+      child: Padding(child: child, padding: EdgeInsets.all(5),),
     );
   }
 }

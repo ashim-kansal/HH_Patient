@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/checkbox_widget.dart';
 import 'package:flutter_app/widgets/inputquestion_widget.dart';
@@ -111,28 +112,85 @@ class AssessmentQuestionCell extends StatelessWidget {
   }
 
   Widget getSingleChoiceQuest() {
-    return MySingleChoiceQuesWidget();
+    return MySingleChoiceQuesWidget(ques: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry?');
   }
 
   Widget getMultiChoiceQuest() {
-    return CheckBoxQuestion(ques: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry?');
+    return CheckBoxQuestion(ques: HHString.sample_ques);
   }
 }
 
 class MySingleChoiceQuesWidget extends StatefulWidget {
+  var ques;
+
+  MySingleChoiceQuesWidget({@required this.ques});
+
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
   var options = ['Yes', 'No'];
+  int selectedRadio = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedRadio = 0;
+    widget.ques ?? "";
+  }
+  setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+    });
+  }
+
 
   Widget build(BuildContext context) {
-    String _site = options[0];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(children:[
+          Text('Q. ', style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
+    Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
+        ]),
+        ButtonBar(
+      alignment: MainAxisAlignment.start,
 
-    return Row(
-      children: getOptions(options, _site),
-    );
+      children: <Widget>[
+        Row(
+          children: [
+            Radio(
+              value: 1,
+              groupValue: selectedRadio,
+              activeColor: HH_Colors.accentColor,
+              onChanged: (val) {
+                print("Radio $val");
+                setSelectedRadio(val);
+              },
+            ),
+            Text('Yes')
+
+          ],
+        ),
+
+        Row(
+          children: [
+        Radio(
+          value: 2,
+          groupValue: selectedRadio,
+          activeColor: HH_Colors.accentColor,
+          onChanged: (val) {
+            print("Radio $val");
+            setSelectedRadio(val);
+          },
+        ),
+            Text('No')
+          ],
+        )
+      ],
+    )
+    ]);
   }
 
   getOptions(options, _site) {
