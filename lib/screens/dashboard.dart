@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
-import 'package:flutter_app/screens/chat.dart';
+import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/library.dart';
 import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -123,7 +124,10 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "Settings", icon: 'assets/images/ic_settings.png'),
+                  title: "Settings", icon: 'assets/images/ic_settings.png', onClick: (){
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, SettingsPage.RouteName);
+              },),
               Container(
                 color: HH_Colors.grey,
                 height: 1,

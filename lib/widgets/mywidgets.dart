@@ -22,14 +22,14 @@ class HHButton extends StatelessWidget {
       //     ? Theme.of(context).primaryColor
       //     : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
       color: type == 1
-          ? (isEnable?Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
-          : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
+          ? (isEnable??false ? Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
+          : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable??false ?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
       onPressed: () {
         onClick();
       },
       child: Text(
         title,
-        style: TextStyle(color: isEnable?Colors.white:HH_Colors.color_949494, 
+        style: TextStyle(color: isEnable??false ?Colors.white:HH_Colors.color_949494,
         fontSize: textSize??22, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),

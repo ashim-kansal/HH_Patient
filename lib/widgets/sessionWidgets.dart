@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/popup_window.dart';
 
 class SessionCard extends StatelessWidget {
   var name = "";
@@ -13,7 +14,7 @@ class SessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
+      width: 260,
         child: Card(
         elevation: 5,
             color: HH_Colors.color_F2EEEE,
@@ -32,7 +33,8 @@ class SessionCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('22 Nov, 2020, 1:30 PM', style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                    Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
+                    // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
+                    HHOptionButton()
                   ],
 
                 ),
@@ -50,7 +52,8 @@ class SessionCard extends StatelessWidget {
                       minWidth: 35,
                       child: RaisedButton(
                         color: Colors.white,
-                        child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
+                        child: Icon(Icons.chat
+                          , color: HH_Colors.primaryColor, size: 18,),
                         onPressed: (){
                           // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
                         },
