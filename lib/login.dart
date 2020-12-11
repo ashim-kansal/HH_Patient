@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   var emailerror = false;
   var pwderror = false;
+  var securepwd = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -33,6 +34,13 @@ class _LoginPageState extends State<LoginPage> {
   //   passwordController.dispose();
   //   super.dispose();
   // }
+
+  void showPwd(){
+    print("action");
+    setState(() {
+      securepwd = !securepwd;
+    });
+  }
 
   void loginHandler() {
   
@@ -146,7 +154,6 @@ class _LoginPageState extends State<LoginPage> {
                               child: 
                               HHEditText(
                                 hint: "Enter Email Id",
-                                obscureText: false,
                                 controller: emailController,
                                 error: emailerror,
                                 errorText: 'Please enter a valid email address',
@@ -154,13 +161,20 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                              child: HHEditText(
+                              child: 
+                              HHEditText(
                                 hint: "Enter Password",
-                                obscureText: true,
+                                obscureText: securepwd,
                                 controller: passwordController,
                                 error: pwderror,
                                 errorText: 'Please enter a valid password',
-                                showeye: true
+                                showeye: true,
+                                onClickEye: () {
+                                  print("Count was selected.");
+                                  setState(() {
+                                    securepwd = !securepwd;
+                                  });
+                                },
                               ),
                             ),
                             Padding(

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/library.dart';
 import 'package:flutter_app/screens/myplan.dart';
+import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -74,28 +74,35 @@ class DashboardState extends State<Dashboard> {
                   )),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/ic_avatar.png',
-                      height: 50,
-                      width: 50,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Column(
-                    
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Hi John Doe", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.accentColor),),
-                        Text("john.doe@yahoo.com", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
-                      ],
+                child: new GestureDetector(
+                  onTap: () => {
+                    Navigator.pop(context),
+                    Navigator.pushNamed(context, ProfilePage.RouteName)
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/ic_avatar.png',
+                        height: 50,
+                        width: 50,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Column(
                       
-                    )
-                  ],
-                ),
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text("Hi John Doe", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.accentColor),),
+                          Text("john.doe@yahoo.com", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
+                        ],
+                        
+                      )
+                    ],
+                  ),
+                )
+               
               ),
               HHDrawerItem(
                   title: "My Chats", icon: 'assets/images/ic_chat.png', onClick: (){

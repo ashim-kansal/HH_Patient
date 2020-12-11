@@ -23,6 +23,8 @@ import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/screens/editProfile.dart';
+import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/screens/review.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -70,6 +72,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => CreateAccountPage());
     case EditProfilePage.RouteName:
       return MaterialPageRoute(builder: (context) => EditProfilePage());
+    case ProfilePage.RouteName:
+      return MaterialPageRoute(builder: (context) => ProfilePage());
+    case ReviewPage.RouteName:
+      return MaterialPageRoute(builder: (context) => ReviewPage());
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));

@@ -157,10 +157,27 @@ class HHTextView extends StatelessWidget {
   }
 }
 
+class HHTextViewBoarder extends StatelessWidget {
+  var title;
+  double size;
+  var color;
+
+  HHTextViewBoarder({@required this.title, @required this.size, @required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(title, 
+    style: TextStyle(color: color, fontSize: size));
+  }
+}
+
 class HHEditText extends StatefulWidget {
   final String hint;
   final String text = "";
   final TextEditingController controller;
+
+  final VoidCallback onClickEye;
+  
   var minLines = 1;
   var error = false;
   var errorText = "";
@@ -179,6 +196,7 @@ class HHEditText extends StatefulWidget {
       this.obscureText,
       this.inputType,
       this.controller,
+      this.onClickEye,
       this.showeye})
       : super(key: key);
 
@@ -200,7 +218,8 @@ class HHEditTextState extends State<HHEditText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: widget.obscureText != null && widget.error ? true : false,
+      // obscureText: widget.obscureText != null && widget.error ? true : false,
+      obscureText: widget.obscureText != null ? true : false,
       controller: widget.controller,
       minLines: widget.minLines,
       maxLines: widget.minLines,
@@ -216,11 +235,17 @@ class HHEditTextState extends State<HHEditText> {
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder(),
           suffixIcon: widget.showeye == true
-              ? const Icon(
-                  Icons.remove_red_eye,
-                  size: 20,
-                  color: Color(0xffCBCBCB),
-                )
+              ? 
+              IconButton(
+                icon: Icon(Icons.remove_red_eye, size: 20, color: Color(0xffCBCBCB)),
+                onPressed: () => widget.onClickEye(),
+              )
+              // const Icon(
+                
+              //     Icons.remove_red_eye,
+              //     size: 20,
+              //     color: Color(0xffCBCBCB),
+              //   )
               : null),
     );
   }
