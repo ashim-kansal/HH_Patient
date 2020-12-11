@@ -55,6 +55,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MyPlans(isUpdate: args.isUpdate?true:false,));
     case CurrentPlansPage.RouteName:
       return MaterialPageRoute(builder: (context) => CurrentPlansPage());
+    case CancelPlansPage.RouteName:
+      return MaterialPageRoute(builder: (context) => CancelPlansPage());
     case DrinkingDiaryPage.RouteName:
       return MaterialPageRoute(builder: (context) => DrinkingDiaryPage());
     case Dashboard.RouteName:

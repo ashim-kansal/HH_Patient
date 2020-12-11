@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/language.dart';
+import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -104,7 +105,7 @@ class SettingsPageState extends State<SettingsPage>{
       InkWell(
         onTap: (){
           Navigator.pop(context);
-          Navigator.pushNamed(context, LanguagePage.RouteName);
+          Navigator.pushNamed(context, CancelPlansPage.RouteName);
         },
         child:    Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

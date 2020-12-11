@@ -209,17 +209,19 @@ class HHEditTextState extends State<HHEditText> {
 
   void Function() param2;
 
+
   @override
   void initState() {
-    if (widget.minLines == null) widget.minLines = 1;
     super.initState();
+    if (widget.minLines == null) widget.minLines = 1;
+    widget.obscureText??false;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       // obscureText: widget.obscureText != null && widget.error ? true : false,
-      obscureText: widget.obscureText != null ? true : false,
+      obscureText: widget.obscureText ?? false,
       controller: widget.controller,
       minLines: widget.minLines,
       maxLines: widget.minLines,
@@ -234,7 +236,7 @@ class HHEditTextState extends State<HHEditText> {
           hintText: widget.hint == null ? "" : widget.hint,
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder(),
-          suffixIcon: widget.showeye == true
+          suffixIcon: widget.showeye??false
               ? 
               IconButton(
                 icon: Icon(Icons.remove_red_eye, size: 20, color: Color(0xffCBCBCB)),
