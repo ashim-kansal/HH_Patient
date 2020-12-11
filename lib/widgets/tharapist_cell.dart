@@ -31,13 +31,14 @@ class TharapistCell extends StatelessWidget {
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(children: [
-                    Text("$name\nRole : $role", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
+                    Text("$name", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
                   ]),
-                  // Row(children: [
-                  //   Text("john.doe@yahoo.com", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070),),
-                  // ]),
+                  Row(children: [
+                    Text("Role : $role", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070),),
+                  ]),
                   ],
                ) ,
             ],
