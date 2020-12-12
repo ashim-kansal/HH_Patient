@@ -36,26 +36,21 @@ class SessionDateWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      // Create a grid with 2 columns. If you change the scrollDirection to
-      // horizontal, this produces 2 rows.
-      crossAxisCount: 4,
-      childAspectRatio: 2,
-      shrinkWrap: true,
-      // Generate 100 widgets that display their index in the List.
-      children: List.generate(10, (index) {
-        return Container(
-          decoration: BoxDecoration(
-            color: HH_Colors.grey_F2F2F2,
-          ),
-          padding: EdgeInsets.all(15),
-          child: Center(child: Text(
-            '16 Nov\nMon',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: HH_Colors.grey_707070),
-          ),),
-        );
-      })
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return Center(
+          child: Text(
+                  '16 Nov\nMon',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: HH_Colors.grey_707070),
+                ),);
+
+      },
+      separatorBuilder: (context, index) {
+        return Divider();
+      },
     );
   }
 }
