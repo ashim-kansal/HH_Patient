@@ -44,6 +44,11 @@ class _SignupPageState extends State<SignUpPage> {
     String password = passwordController.text;
     var number = phoneController.text;
 
+    var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+
     if(fname.trim().length == 0 && lname.trim().length == 0 && email.trim().length == 0 && 
     location.trim().length == 0 && password.trim().length == 0 && number.trim().length == 0){
       
@@ -58,6 +63,21 @@ class _SignupPageState extends State<SignUpPage> {
       
       return;
     }
+
+    if(!emailRegex.hasMatch(email)){
+      setState(() {
+        widget.emailError = true;
+      });
+      return;
+    }
+
+    if(!pwdRegex.hasMatch(password)){
+      setState(() {
+        widget.pwdError = true;
+      });
+      return;
+    }
+
     Navigator.pushNamed(context, LoginPage.RouteName);
   }
 
