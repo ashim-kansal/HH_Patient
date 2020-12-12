@@ -262,12 +262,6 @@ class HHEditTextState extends State<HHEditText> {
   @override
   Widget build(BuildContext context) {
 
-    // void onClickEye(){
-    //   setState(() {
-    //     widget.obscureText = !widget.obscureText;
-    //   });
-    // }
-
     return TextField(
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,

@@ -36,7 +36,6 @@ class SessionCard extends StatelessWidget {
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
                     HHOptionButton()
                   ],
-
                 ),
                 SizedBox(height: 10,),
                 Row(
