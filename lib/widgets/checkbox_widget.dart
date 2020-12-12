@@ -19,33 +19,36 @@ class CheckBoxQuestion extends StatefulWidget{
 class CheckBoxQuestionState extends State<CheckBoxQuestion>{
 
   @override
+  void initState() {
+    super.initState();
+    widget.option = {
+      'One' : false,
+      'Two' : false,
+      'Three' : false,
+    };
+  }
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RichText(
-          text: TextSpan(
-            text: 'Q. ',
-            style: TextStyle(fontSize: 18, decoration: TextDecoration.none, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w300),
-            children: <TextSpan>[
-              TextSpan(text: widget.ques, style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16, fontFamily: "ProximaNova")),
-            ],
-          ),
-        ),
-        Expanded(child:
-        ListView(
-          scrollDirection: Axis.horizontal,
-          children: widget.option.keys.map((String key) {
-            return new CheckboxListTile(
-              title: new Text(key),
-              value: widget.option[key],
-              onChanged: (bool value) {
-                setState(() {
-                  widget.option[key] = value;
-                });
-              },
-            );
-          }).toList(),
-        ))
+        Row(children:[
+          Text('Q. ', style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
+          Flexible(child:Text(widget.ques??'', textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
+        ]),
+        // Expanded(child:
+        // Column(
+        //   children: widget.option.keys.map((String key) {
+        //     return new CheckboxListTile(
+        //       title: new Text(key),
+        //       value: widget.option[key],
+        //       onChanged: (bool value) {
+        //         setState(() {
+        //           widget.option[key] = value;
+        //         });
+        //       },
+        //     );
+        //   }).toList(),
+        // ))
       ],
     );
   }

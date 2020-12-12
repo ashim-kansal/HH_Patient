@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class OtpPage extends StatefulWidget {
@@ -21,8 +22,6 @@ class _OtpState extends State<OtpPage> {
   TextEditingController controller2 = new TextEditingController();
   TextEditingController controller3 = new TextEditingController();
   TextEditingController controller4 = new TextEditingController();
-  TextEditingController controller5 = new TextEditingController();
-  TextEditingController controller6 = new TextEditingController();
 
   TextEditingController currController = new TextEditingController();
 
@@ -33,13 +32,10 @@ class _OtpState extends State<OtpPage> {
     controller2.dispose();
     controller3.dispose();
     controller4.dispose();
-    controller5.dispose();
-    controller6.dispose();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currController = controller1;
   }
@@ -64,11 +60,12 @@ class _OtpState extends State<OtpPage> {
                 LengthLimitingTextInputFormatter(1),
               ],decoration: InputDecoration(
                 border: InputBorder.none),
-              enabled: false,
+              enabled: true,
               controller: controller1,
-              autofocus: false,
+              autofocus: true,
+              maxLength: 1,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24.0, color: Colors.black),
+              style: TextStyle(fontSize: 18.0, color: Colors.black),
             )),
       ),
       Padding(
@@ -87,10 +84,11 @@ class _OtpState extends State<OtpPage> {
               border: InputBorder.none),
             controller: controller2,
             autofocus: false,
-            enabled: false,
+            enabled: true,
+            maxLength: 1,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24.0, color: Colors.black),
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
       ),
@@ -112,13 +110,14 @@ class _OtpState extends State<OtpPage> {
             controller: controller3,
             textAlign: TextAlign.center,
             autofocus: false,
-            enabled: false,
-            style: TextStyle(fontSize: 24.0, color: Colors.black),
+            enabled: true,
+            maxLength: 1,
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(right: 10),
+        padding: const EdgeInsets.only(right: 5),
         child: new Container(
           alignment: Alignment.center,
           decoration: new BoxDecoration(
@@ -135,124 +134,106 @@ class _OtpState extends State<OtpPage> {
             textAlign: TextAlign.center,
             controller: controller4,
             autofocus: false,
-            style: TextStyle(fontSize: 24.0, color: Colors.black),
+            enabled: true,
+            maxLength: 1,
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
       )
     ];
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('OTP Verification', style: TextStyle(color: Colors.white)),
-          centerTitle: true,
-          iconTheme: IconThemeData(
-            color: Colors.white, //change your color here
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          elevation: 0,
-        ),
-        body: Material(
-          color: Theme.of(context).accentColor,
-          child: Container(
-              padding: EdgeInsets.fromLTRB(20, 80, 20, 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
-                    topLeft: Radius.circular(30.0),
-                  ),
-                  color: Colors.white),
-              child: Column(
-                children: [
-                  Material(
-                    child: ClipPath(
-                      // color: Colors.white,
-                      // padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      clipper: ShapeBorderClipper(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
+    return MyWidget(
+      title: 'OTP Verification',
+      child: Column(
+          children: [
+            Material(
+              child: ClipPath(
+                // color: Colors.white,
+                // padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                clipper: ShapeBorderClipper(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
 
-                      child: Container(
+                child: Container(
+
+                  padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                              child: Image.asset('assets/images/ic_otp.png', height: 100,width: 60,),
-                            ),
-                           Padding(
-                              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                              child: Text(
-                                'Please enter you registered email address. We will help you retrieve your password.',
-                                style: TextStyle(color: Color(0xff8d8d8d)),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Padding(
-                                padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                                child: Column(
+                        child: Image.asset('assets/images/ic_otp.png', height: 100,width: 60,),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                        child: Text(
+                          'Please enter you registered email address. We will help you retrieve your password.',
+                          style: TextStyle(color: Color(0xff8d8d8d)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                          child: Column(
+                            children: <Widget>[
+                              Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                        children: <Widget>[
-                                          GridView.count(
-                                            crossAxisCount: 4,
-                                            // mainAxisSpacing: 10.0,
-                                            shrinkWrap: true,
-                                            primary: false,
-                                            scrollDirection: Axis.vertical,
-                                            children:
-                                              List<Container>.generate(4,
-                                                (int index) => 
+                                    GridView.count(
+                                        crossAxisCount: 4,
+                                        // mainAxisSpacing: 10.0,
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        scrollDirection: Axis.vertical,
+                                        children:
+                                        List<Container>.generate(4,
+                                                (int index) =>
                                                 Container(
                                                     child: widgetList[
-                                                        index]) 
-                                                        )),
-                                        ])
-                                  ],
-                                )),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Resend code in: 00:48'),
-                                  RaisedButton(
-                                      
-                                      child: Icon(Icons.arrow_right_alt_rounded,
-                                        color: HH_Colors.color_white,
-                                        size: 28,
-                                      ),
-                                    
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                        Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-                                      },
-                                      shape: CircleBorder()
-                                  )
-                                ],
-                              ),
+                                                    index])
+                                        )),
+                                  ])
+                            ],
+                          )),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Resend code in: 00:48'),
+                            RaisedButton(
+
+                                child: Icon(Icons.arrow_right_alt_rounded,
+                                  color: HH_Colors.color_white,
+                                  size: 28,
+                                ),
+
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                                },
+                                shape: CircleBorder()
                             )
                           ],
                         ),
-                      ),
-                    ),
-                    elevation: 8.0,
-                    shadowColor: Colors.black38,
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderOnForeground: true,
+                      )
+                    ],
                   ),
-                ],
+                ),
+              ),
+              elevation: 8.0,
+              shadowColor: Colors.black38,
+              borderRadius: BorderRadius.circular(8.0),
+              borderOnForeground: true,
+            ),
+          ],
 
-              )
-          ),
-          // backgroundColor: Colors.white,
-          // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+
+      ),
+    );
   }
 
   void inputTextToField(String str) {

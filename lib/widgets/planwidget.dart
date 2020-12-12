@@ -9,9 +9,11 @@ class PlanWidget extends StatefulWidget {
   var price = 0;
   String desc;
 
+  bool enable;
+
   final VoidCallback onClick;
 
-  PlanWidget({ Key key, @required this.title,@required  this.program_type,@required  this.desc,@required  this.price, this.onClick}): super(key: key);
+  PlanWidget({ Key key, @required this.title,@required  this.program_type,@required  this.desc,@required  this.price, this.onClick, this.enable}): super(key: key);
 
 
   @override
@@ -54,7 +56,7 @@ class PlanWidgetState extends State<PlanWidget> {
                 style: TextStyle(color: Colors.white, fontSize: 16),),
               SizedBox.fromSize(size: Size(8, 20),),
 
-              RaisedButton(
+              widget.enable ?? true ? RaisedButton(
                   child: Text( widget.price <= 0 ? 'Free':'Buy Now', style: TextStyle(color: Colors.white),),
                   onPressed: (){
                     widget.onClick();
@@ -62,7 +64,7 @@ class PlanWidgetState extends State<PlanWidget> {
                   color: Theme.of(context).primaryColor,
                   padding: EdgeInsets.fromLTRB(40, 20,40,20),
                   shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0))
-              )
+              ): Container()
 
             ],
           ),

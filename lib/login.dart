@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
 
   var emailerror = false;
   var pwderror = false;
-  var securepwd = true;
+  bool securepwd = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   // }
 
   void showPwd(){
-    print("action");
+    // print("action");
     setState(() {
       securepwd = !securepwd;
     });
