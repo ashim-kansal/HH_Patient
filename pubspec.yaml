@@ -22,8 +22,10 @@ environment:
 
 
 dependencies:
+  flutter_slidable:
   flutter:
     sdk: flutter
+    
 
 
   # The following adds the Cupertino Icons font to your application.

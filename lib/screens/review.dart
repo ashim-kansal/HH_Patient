@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/myplan.dart';
-import 'package:flutter_app/otp.dart';
-import 'package:flutter_app/screens/editProfile.dart';
-import 'package:flutter_app/signup.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -16,10 +13,10 @@ class ReviewPage extends StatefulWidget {
   var error = false;
 
   @override
-  _CreateAccountState createState() => _CreateAccountState();
+  State<StatefulWidget> createState() => ReviewState();
 }
 
-class _CreateAccountState extends State<ReviewPage> {
+class ReviewState extends State<ReviewPage> {
 
   String stateDropdown = 'Select State';
   String countryDropdown = 'Select Country';
@@ -162,7 +159,8 @@ class _CreateAccountState extends State<ReviewPage> {
                         error: widget.error,
                         errorText:
                         'Please enter your review',
-                        textarea: true
+                        textarea: true,
+                        minLines: 4,
                       ),
                     ),
                     
@@ -187,56 +185,5 @@ class _CreateAccountState extends State<ReviewPage> {
           ],
         ),
       ));
-    
-    // Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Share Your Reviews', style: TextStyle(color: Colors.white)),
-        //   centerTitle: true,
-        //   iconTheme: IconThemeData(
-        //     color: Colors.white, //change your color here
-        //   ),
-        //   backgroundColor: Theme.of(context).accentColor,
-        //   elevation: 0,
-
-        // ),
-
-        // body: Material(
-        //   color: Theme.of(context).accentColor,
-        //   child: Container(
-        //       padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-        //       decoration: BoxDecoration(
-        //           borderRadius: BorderRadius.only(
-        //             topRight: Radius.circular(30.0),
-        //             topLeft: Radius.circular(30.0),
-        //           ),
-        //           color: Colors.white),
-        //       child: Column(
-        //         children: [
-        //           Material(
-        //             child: ClipPath(
-        //               // child: Container(
-        //               //   padding: EdgeInsets.fromLTRB(10, 0, 10, 20),
-        //               //   color: Colors.white,
-        //               //   child: Column(
-        //               //     mainAxisSize: MainAxisSize.min,
-        //               //     children: <Widget>[
-
-        //               //       Padding(
-        //               //         padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
-        //               //         child: Container(),
-        //               //       ),
-        //               //   )
-        //               // ),
-        //             ),
-        //             // elevation: 8.0,
-        //             // shadowColor: Colors.black38,
-        //             // borderRadius: BorderRadius.circular(8.0),
-        //             // borderOnForeground: true,
-        //           ),
-        //         ],
-        //       )),
-        //   // backgroundColor: Colors.white,
-        //   // This trailing comma makes auto-formatting nicer for build methods.
-        // ));
   }
 }

@@ -50,6 +50,8 @@ class _LoginPageState extends State<LoginPage> {
 
     var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
     if(email.trim().length == 0 && password.trim().length == 0){
       setState(() {
         emailerror = true;
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    if(password.trim().length == 0){
+    if(password.trim().length == 0 || !pwdRegex.hasMatch(password)){
       setState(() {
         emailerror= false;
         pwderror = true;
@@ -269,7 +271,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               Container(
-                width: 50,
+                width: MediaQuery.of(context).size.width / 2,
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -277,6 +279,7 @@ class _LoginPageState extends State<LoginPage> {
                     border: Border.all(color: HH_Colors.borderGrey),
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
                 child: Center(
+                  widthFactor: 50,
                   child: RichText(
                     text: TextSpan(
                       text: 'Do you have an account ',

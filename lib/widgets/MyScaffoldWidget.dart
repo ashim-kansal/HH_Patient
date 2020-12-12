@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class MyWidget extends StatelessWidget{
 
   var title= "";
+  double sideMargin=20;
   Widget child;
   bool showFloatingButton = false;
 
-  MyWidget({Key key, @required this.title, @required this.child, this.showFloatingButton});
+  MyWidget({Key key, @required this.title, @required this.child, this.sideMargin, this.showFloatingButton});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class MyWidget extends StatelessWidget{
         body: Material(
             color: Theme.of(context).accentColor,
             child: Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(sideMargin),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30.0),

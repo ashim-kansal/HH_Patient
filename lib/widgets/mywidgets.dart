@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HHButton extends StatelessWidget {
   var title = "";
   var type = 1;
-  double textSize = 22;
+  var textSize = 22;
   final VoidCallback onClick;
   bool isEnable = true;
 
@@ -435,13 +436,77 @@ class CustomAlertDialog extends StatelessWidget {
   }
 }
 
+// NOTIFICATION
 
+class NotificationList extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  
+  
+  NotificationList({
+    @required
+    this.title,
+    @required
+    this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      child: Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          child: new Container(
+            // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            height: MediaQuery.of(context).size.width / 4,
+            decoration: BoxDecoration(
+              //  color: HH_Colors.color_F3F3F3,
+            ),
+            child: Column(children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                color: HH_Colors.color_F3F3F3,
+                child: new ListTile(
+                  title: Column(children: [
+                  HHTextView(
+                    title: this.title,
+                    color: HH_Colors.grey_35444D,
+                    size: 16,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: HHTextView(
+                      title: this.subtitle,
+                      color: HH_Colors.color_92ABBB,
+                      size: 14,
+                    ),
+                  )
+              ],),
+              )
+            ),
+            ],)
+          ),
+          secondaryActions: <Widget>[
+            Container(
+              child: new IconSlideAction(
+                
+                color: Colors.red,
+                icon: Icons.delete,
+                // onTap: () => _showSnackBar('Delete'),
+              ),
+            )
+          ],
+        )
+    );
+  }
+}
 
 OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
     // borderRadius: BorderRadius.all(Radius.circular(10.0)),
     borderSide: BorderSide(color: HH_Colors.borderGrey, width: 0.2),
-
+    
   );
 }
 

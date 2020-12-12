@@ -34,6 +34,7 @@ class _SignupPageState extends State<SignUpPage> {
 
   String stateDropdown = 'Select State';
   String countryDropdown = 'Select Country';
+  bool securepwd = true;
 
   void signupHandler(){
 
@@ -84,6 +85,7 @@ class _SignupPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
@@ -177,11 +179,17 @@ class _SignupPageState extends State<SignUpPage> {
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                               child: HHEditText(
                                 hint: "Create Password",
-                                obscureText: true,
+                                obscureText: securepwd,
                                 controller: passwordController,
                                 error: widget.pwdError,
                                 errorText: 'Please enter a valid password',
-                                showeye: true
+                                showeye: true,
+                                onClickEye: () {
+                                  print("clickable");
+                                  setState(() {
+                                    securepwd = !securepwd;
+                                  });
+                                },
                               ),
                             ),
                             Padding(
@@ -189,7 +197,7 @@ class _SignupPageState extends State<SignUpPage> {
                               child: HHEditText(
                                 hint: "Phone Number",
                                 obscureText: false,
-                                controller: passwordController,
+                                controller: phoneController,
                                 error: widget.numberError,
                                 errorText:
                                 'Please enter a phone number',
@@ -207,12 +215,12 @@ class _SignupPageState extends State<SignUpPage> {
                             ),
 
                             Container(
-                              width: 290,
+                              width: 295,
                               // margin: EdgeInsets.only(top: 5),
                               padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
-                                  border: Border.all(color: Color(0xffE9E7E7)),
+                                  border: Border.all(color: HH_Colors.borderGrey, width: 1.2),
                                   borderRadius: BorderRadius.all(Radius.circular(5.0))),
                               child: DropdownButtonHideUnderline(
                                 child: new DropdownButton<String>(
@@ -239,12 +247,12 @@ class _SignupPageState extends State<SignUpPage> {
                             
                             ),
                           Container(
-                            width: 290,
+                            width: 295,
                             margin: EdgeInsets.only(top: 10, bottom: 20),
                             padding: const EdgeInsets.only(left: 20.0,right: 10.0),
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              border: Border.all(color: Color(0xffE9E7E7)),
+                              border : Border.all(color: HH_Colors.borderGrey, width: 1.2),
                               borderRadius: BorderRadius.all(Radius.circular(5.0))),
                             child: DropdownButtonHideUnderline (
                               child: new DropdownButton<String>(
