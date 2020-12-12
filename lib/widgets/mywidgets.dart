@@ -37,6 +37,46 @@ class HHButton extends StatelessWidget {
   }
 }
 
+class HHSmallButton extends StatelessWidget {
+  var title = "";
+  var type = 1;
+  var textSize = 16;
+  final VoidCallback onClick;
+  bool isEnable = true;
+
+  HHSmallButton({@required this.title, @required this.type, this.onClick, this.isEnable, this.textSize});
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      margin: const EdgeInsets.only(top: 10.0),
+      child: MaterialButton(
+        minWidth: 100,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+          // side: BorderSide(color: Colors.red)
+        ),
+        padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        elevation: 5.0,
+        color: type == 1
+            ? (isEnable??false ? Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
+            : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable??false ?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
+        onPressed: () {
+          onClick();
+        },
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.white,
+          fontSize: textSize??16, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+    
+
+  }
+}
+
 class HHHomeButton extends StatelessWidget {
   var title = "";
   var type = 1;
@@ -183,6 +223,7 @@ class HHEditText extends StatefulWidget {
   var errorText = "";
   var obscureText = false;
   var showeye = false;
+  var textarea = false;
   // var controller = null;
   var inputType = TextInputType.text;
 
@@ -197,6 +238,7 @@ class HHEditText extends StatefulWidget {
       this.inputType,
       this.controller,
       this.onClickEye,
+      this.textarea,
       this.showeye})
       : super(key: key);
 
@@ -217,6 +259,13 @@ class HHEditTextState extends State<HHEditText> {
 
   @override
   Widget build(BuildContext context) {
+
+    // void onClickEye(){
+    //   setState(() {
+    //     widget.obscureText = !widget.obscureText;
+    //   });
+    // }
+
     return TextField(
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText != null ? true : false,
@@ -343,6 +392,48 @@ class DrinkingDiaryCell extends StatelessWidget{
           )
 
         ],
+      ),
+    );
+  }
+}
+
+// dialog
+
+class CustomAlertDialog extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+  
+  
+  CustomAlertDialog({
+    this.title,
+    this.content,
+    this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // return new CustomAlertDialog(
+    //   content: new Container(
+    //     width: 260.0,
+    //     height: 230.0,
+    //     decoration: new BoxDecoration(
+    //     shape: BoxShape.rectangle,
+    //     color: const Color(0xFFFFFF),
+    //     borderRadius:
+    //         new BorderRadius.all(new Radius.circular(32.0)),
+    //     ),
+    //   ),
+    // );
+    return AlertDialog(
+      title: Text(
+        this.title,
+        style: Theme.of(context).textTheme.title,
+      ),
+      actions: this.actions,
+      content: Text(
+        this.content,
+        style: Theme.of(context).textTheme.body1,
       ),
     );
   }

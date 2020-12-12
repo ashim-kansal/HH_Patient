@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
@@ -47,6 +48,8 @@ class _LoginPageState extends State<LoginPage> {
     String email = emailController.text;
     String password = passwordController.text;
 
+    var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
     if(email.trim().length == 0 && password.trim().length == 0){
       setState(() {
         emailerror = true;
@@ -55,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    if(email.trim().length == 0){
+    if(email.trim().length == 0 || !emailRegex.hasMatch(email)){
       setState(() {
         emailerror = true;
         pwderror = false;
@@ -182,6 +185,26 @@ class _LoginPageState extends State<LoginPage> {
                               child: HHButton(title: "Login", type: 4, isEnable: true, 
                               onClick: (){
                                 loginHandler();
+
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (BuildContext dialogContext) {
+                                //     return CustomAlertDialog(
+                                //       title: HHString.emailExist, 
+                                //       content: HHString.emailExistDesc,
+                                //       actions: [
+                                //         // set up the buttons
+                                //         FlatButton(
+                                //           child: Text("No"),
+                                //           onPressed:  () {},
+                                //         ),
+                                //         FlatButton(
+                                //           child: Text("Yes"),
+                                //           onPressed:  () {},
+                                //         )
+                                //       ],);
+                                //   },
+                                // );
                                 // 
                               },),
                             ),

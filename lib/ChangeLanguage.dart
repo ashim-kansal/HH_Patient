@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/goals.dart';
+import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
@@ -105,6 +107,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                           isEnable: true,
                           onClick: (){
                             Navigator.pop(context);
+                            // Navigator.pushNamed(context, NotificationPage.RouteName);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),
                         ))),
