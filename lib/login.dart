@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   var emailerror = false;
   var pwderror = false;
   bool securepwd = true;
+  bool isChecked = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -80,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
       emailerror = false;
       pwderror = false;
     });
+    Navigator.pop(context);
     Navigator.pushNamed(context, Dashboard.RouteName);
   }
 
@@ -244,11 +246,13 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
 
                     Checkbox(
-                      checkColor: Colors.greenAccent,
-                      activeColor: Colors.red,
-                      value: false,
+                      checkColor: Colors.white,
+                      activeColor: HH_Colors.purpleColor,
+                      value: isChecked,
                       onChanged: (bool value) {
-
+                        setState(() {
+                          isChecked = !isChecked;                          
+                        });  
                       },
                     ),
                     Flexible(
@@ -271,15 +275,14 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               Container(
-                width: MediaQuery.of(context).size.width / 2,
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                padding: EdgeInsets.all(10),
+
+                margin: EdgeInsets.only(top: 50, right: 30, left: 30),
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
+                    // shape: BoxShape.rectangle,
                     border: Border.all(color: HH_Colors.borderGrey),
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
                 child: Center(
-                  widthFactor: 50,
                   child: RichText(
                     text: TextSpan(
                       text: 'Do you have an account ',

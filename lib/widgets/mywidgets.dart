@@ -5,7 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class HHButton extends StatelessWidget {
   var title = "";
   var type = 1;
-  var textSize = 22;
+  double textSize = 22;
   final VoidCallback onClick;
   bool isEnable = true;
 
@@ -30,7 +30,7 @@ class HHButton extends StatelessWidget {
       },
       child: Text(
         title,
-        style: TextStyle(color: isEnable??false ?Colors.white:HH_Colors.color_949494,
+        style: TextStyle(color: isEnable??true ?Colors.white:HH_Colors.color_949494,
         fontSize: textSize??22, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),
@@ -189,12 +189,14 @@ class HHTextView extends StatelessWidget {
   var title;
   double size;
   var color;
+  var alignment = TextAlign.left;
+  var textweight = FontWeight.w200;
 
-  HHTextView({@required this.title, @required this.size, @required this.color});
+  HHTextView({@required this.title, @required this.size, @required this.color, this.alignment, this.textweight});
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: TextStyle(color: color, fontSize: size));
+    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontWeight: textweight?? FontWeight.w200));
   }
 }
 
@@ -378,7 +380,7 @@ class DrinkingDiaryCell extends StatelessWidget{
             onTap: (){
 
             },
-            child:           Row(
+            child: Row(
               children: [
                 Icon(Icons.add_circle_outlined, color: HH_Colors.color_949494,),
                 SizedBox(width: 5,),
@@ -396,13 +398,13 @@ class DrinkingDiaryCell extends StatelessWidget{
 
 // dialog
 
-class CustomAlertDialog extends StatelessWidget {
+class DialogWithImage extends StatelessWidget {
   final String title;
   final String content;
   final List<Widget> actions;
   
   
-  CustomAlertDialog({
+  DialogWithImage({
     this.title,
     this.content,
     this.actions = const [],
@@ -410,31 +412,181 @@ class CustomAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return new CustomAlertDialog(
-    //   content: new Container(
-    //     width: 260.0,
-    //     height: 230.0,
-    //     decoration: new BoxDecoration(
-    //     shape: BoxShape.rectangle,
-    //     color: const Color(0xFFFFFF),
-    //     borderRadius:
-    //         new BorderRadius.all(new Radius.circular(32.0)),
-    //     ),
-    //   ),
-    // );
-    return AlertDialog(
-      title: Text(
-        this.title,
-        style: Theme.of(context).textTheme.title,
-      ),
-      actions: this.actions,
-      content: Text(
-        this.content,
-        style: Theme.of(context).textTheme.body1,
+    return Dialog(
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+        height: 220,
+        width: 200,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: Center(
+                  child: Image.asset("assets/images/thumb.png", height: 80, width: 80,)
+                ),
+              ),
+              SizedBox(height: 20,),
+              HHTextView(
+                  title: title,
+                  size: 16,
+                  textweight: FontWeight.w300,
+                  color: HH_Colors.color_707070,
+                  alignment: TextAlign.center,
+                ),
+            ],
+          ),
+        ),
+      )
+    );
+  }
+}
+
+class DialogWithButtons extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+
+  final VoidCallback onLogoutPress;
+  final VoidCallback onDenyPress;
+  
+  
+  DialogWithButtons({
+    this.title,
+    this.content,
+    this.onLogoutPress,
+    this.onDenyPress,
+    this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+        constraints: BoxConstraints(
+              minHeight: 150, minWidth: double.infinity, maxHeight: 170),
+        // height: 150,
+        // width: 200,
+        child: Padding(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: Column(
+                    children: [
+                      HHTextView(title: "Logout", size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
+                      SizedBox(height: 20),
+                      HHTextView(title: "Are you sure you want to log out of the app ?", size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w300)
+                    ],
+                  )
+              ),
+              SizedBox(height: 20,),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: InkWell(
+                        onTap: () => {
+                          onDenyPress(),
+                        },
+                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: InkWell(
+                        onTap: () => {
+                          onLogoutPress()
+                        },
+                        child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400),),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      )
+    );
+  }
+}
+
+class DialogWithField extends StatelessWidget {
+  final String title;
+  // final List<Widget> actions;
+  
+  
+  DialogWithField({
+    this.title,
+    // this.content,
+    // this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+        height: 250,
+        width: 200,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+             Align(
+                alignment: Alignment.center,
+                child:  HHTextView(
+                  title: "New Note",
+                  size: 18,
+                  color: HH_Colors.color_707070,
+                ),
+              ),
+              SizedBox(
+                height: 10,),
+              HHEditText(
+                minLines: 4,
+              ),
+              
+              SizedBox(
+                height: 20.0,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  child: Center(
+                    child: RaisedButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Save & Send",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: HH_Colors.purpleColor,
+                    )
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
 
 // NOTIFICATION
 
@@ -504,8 +656,8 @@ class NotificationList extends StatelessWidget {
 
 OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
-    // borderRadius: BorderRadius.all(Radius.circular(10.0)),
-    borderSide: BorderSide(color: HH_Colors.borderGrey, width: 0.2),
+    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    borderSide: BorderSide(color: Color(0xffD9D7D7), width: 0.3),
     
   );
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/chatlist.dart';
+import 'package:flutter_app/screens/feedback.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/library.dart';
 import 'package:flutter_app/screens/myplan.dart';
@@ -153,7 +155,10 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Give Us Feedback"),
+              HHDrawerItem2(title: "Give Us Feedback", onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, FeedbackPage.RouteName);
+              },),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
@@ -194,7 +199,22 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "Log Out", icon: 'assets/images/ic_logout.png'),
+                  title: "Log Out", icon: 'assets/images/ic_logout.png',
+                  onClick: (){
+                    showDialog(context: context,
+                       builder: (BuildContext dialogContext) {
+                        return DialogWithButtons(
+                          onLogoutPress: (){
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, LoginPage.RouteName);
+                          },
+                          onDenyPress: (){
+                            Navigator.pop(context);
+                          }
+                        );
+                      },
+                    );
+                  }),
             ],
           ),
         ),

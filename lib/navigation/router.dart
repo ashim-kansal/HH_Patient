@@ -30,6 +30,7 @@ import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/feedback.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -91,6 +92,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ChnagePasswordPage());
     case ChatPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatPage());
+    case FeedbackPage.RouteName:
+      return MaterialPageRoute(builder: (context) => FeedbackPage());
     case NotificationPage.RouteName:
       return MaterialPageRoute(builder: (context) => NotificationPage());
     case AssessmentFormPage.RouteName:
