@@ -23,7 +23,6 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
         Row(children:[
           Text('Q. ', style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
           Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
-
         ]),
         SizedBox(height: 10,),
         Container(

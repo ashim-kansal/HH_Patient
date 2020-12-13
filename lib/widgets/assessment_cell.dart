@@ -93,7 +93,7 @@ class AssessmentQuestionCell extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
+          Text("",
               textAlign: TextAlign.start,
               overflow: TextOverflow.clip,
               style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070)),

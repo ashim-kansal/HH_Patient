@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignUpPage> {
   String stateDropdown = 'Select State';
   String countryDropdown = 'Select Country';
   bool securepwd = true;
-
+  bool isChecked = true;
   void signupHandler(){
 
     String fname = fnameController.text;
@@ -150,7 +150,7 @@ class _SignupPageState extends State<SignUpPage> {
                               child: HHEditText(
                                 hint: "First Name",
                                 obscureText: false,
-                                controller: emailController,
+                                controller: fnameController,
                                 error: widget.fnameError,
                                 errorText: 'Please enter your first name',
                               ),
@@ -160,7 +160,7 @@ class _SignupPageState extends State<SignUpPage> {
                               child: HHEditText(
                                 hint: "Last Name",
                                 obscureText: false,
-                                controller: emailController,
+                                controller: lnameController,
                                 error: widget.lnameError,
                                 errorText: 'Please enter your last name',
                               ),
@@ -208,7 +208,7 @@ class _SignupPageState extends State<SignUpPage> {
                               child: HHEditText(
                                 hint: "Enter Your Location",
                                 obscureText: false,
-                                controller: emailController,
+                                controller: locationController,
                                 error: widget.locationError,
                                 errorText: 'Please enter your location',
                               ),
@@ -305,11 +305,13 @@ class _SignupPageState extends State<SignUpPage> {
                 children: <Widget>[
                   
                   Checkbox( 
-                    checkColor: Colors.greenAccent,  
-                    activeColor: Colors.red,  
-                    value: false,  
+                    checkColor: Colors.white,  
+                    activeColor: HH_Colors.purpleColor,  
+                    value: isChecked,  
                     onChanged: (bool value) {  
-                    
+                      setState(() {
+                        isChecked = !isChecked;
+                      });
                     },  
                   ),
                   Flexible(
