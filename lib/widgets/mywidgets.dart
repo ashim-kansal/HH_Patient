@@ -269,8 +269,8 @@ class HHEditTextState extends State<HHEditText> {
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,
       controller: widget.controller,
-      minLines: widget.minLines,
-      maxLines: widget.minLines,
+      minLines: widget.minLines?? 1,
+      maxLines: widget.minLines?? 1,
       decoration: InputDecoration(
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
           errorText: widget.error != null && widget.error ? widget.errorText : null,
