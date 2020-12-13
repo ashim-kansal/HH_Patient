@@ -108,7 +108,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                           icon: Icon(
                                             Icons.camera_alt,
                                             size: 20,
-                                          ),
+                                          ), onPressed: () {  },
                                         ),
                                       ),
                                     )
