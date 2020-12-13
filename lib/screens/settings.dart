@@ -20,7 +20,7 @@ class SettingsPageState extends State<SettingsPage>{
   @override
   void initState() {
     super.initState();
-    isSwitched = true;
+    isSwitched??true;
   }
 
   @override
