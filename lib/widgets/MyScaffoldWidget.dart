@@ -26,7 +26,7 @@ class MyWidget extends StatelessWidget{
         body: Material(
             color: Theme.of(context).accentColor,
             child: Container(
-                padding: EdgeInsets.all(sideMargin),
+                padding: EdgeInsets.all(sideMargin?? sideMargin),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(30.0),
