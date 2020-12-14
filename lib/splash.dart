@@ -26,7 +26,7 @@ class SplashState extends State<Splash>{
     Timer(Duration(seconds: 3),
             ()=>{
                   Navigator.pop(context),
-                  Navigator.pushNamed(context, Dashboard.RouteName)
+                  Navigator.pushNamed(context, SelectLanguage.RouteName)
                 }
     );
   }
@@ -35,24 +35,12 @@ class SplashState extends State<Splash>{
     return 
       Container(
         color: Color(0xff777CEA),
-        child: 
-        // Column(children: [
-          Flexible(
-            // child: Container(
-              child: Image.asset('assets/images/ic_appicon_white.png', 
-                height: 100,
-                width: 150,
-                fit: BoxFit.none,
-                cacheHeight: 100,
-                cacheWidth: 150,
-                ),
-                
-            ),
-            
-          // )
-          
-        // ],)
-       
+        child: Center(
+          child: Image.asset('assets/images/ic_appicon_white.png',
+          height: 100,
+          width: 150,
+        ),
+        )
         
 
     );

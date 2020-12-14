@@ -196,7 +196,7 @@ class HHTextView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontFamily: "ProximaNova", fontWeight: textweight?? FontWeight.w200));
+    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontFamily: "ProximaNova", fontWeight: textweight?? FontWeight.w300));
   }
 }
 
@@ -536,19 +536,28 @@ class DialogWithButtons extends StatelessWidget {
   }
 }
 
-class DialogWithField extends StatelessWidget {
-  final String title;
+class DialogWithField extends StatefulWidget {
+  final String date;
   final VoidCallback onClick;
-  // final List<Widget> actions;
-
+  int count = 0;
 
   DialogWithField({
-    this.title,
+    this.date,
     this.onClick
     // this.content,
     // this.actions = const [],
   });
 
+  @override
+  State<StatefulWidget> createState() => DialogWithFieldState();
+}
+
+class DialogWithFieldState extends State<DialogWithField>{
+
+  @override
+  void initState() {
+    widget.count = 0;
+  }
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -582,11 +591,70 @@ class DialogWithField extends StatelessWidget {
                   textweight: FontWeight.w600,
                 ),
               ),
-              HHEditText(
-                minLines: 1,
-                maxLength: 1,
-              ),
+              SizedBox(
+                height: 10,),
+              Align(
+                alignment: Alignment.center,
+                child:
+                Container(
+                  width: 164,
+                  decoration: BoxDecoration(
+                    border: Border.fromBorderSide(BorderSide(width: 1, color:  HH_Colors.borderGrey)),
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    color: Colors.white,
 
+                  ),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            widget.count = widget.count ==0? 0 : widget.count-1;
+                          });
+                        },
+
+                        child:Container(
+                          width: 40,
+                          child:  Center(child: Text(
+                            "-",
+                            style: TextStyle(color: HH_Colors.color_949494, fontSize: 22),
+                          ),),
+                          padding: EdgeInsets.all(15),
+                        ),
+
+                      ),
+                      SizedBox(width: 1,height:40,child: Container(color: HH_Colors.borderGrey,),),
+                      Container(
+                        width: 80,
+                        child:  Center(child:Text(
+                          widget.count.toString(),
+                          style: TextStyle(color: Colors.black, fontSize: 22),
+                        )),
+                        padding: EdgeInsets.fromLTRB(20, 10,20,10),
+                      ),
+                      SizedBox(width: 1,height:40,child: Container(color: HH_Colors.borderGrey,),),
+                      InkWell(
+
+                        onTap: () {
+                         setState(() {
+                           widget.count = widget.count+1;
+                         });
+                        },
+
+                        child:Container(
+                          width: 40,
+                          child:  Text(
+                            "+",
+                            style: TextStyle(color: HH_Colors.accentColor),
+                          ),
+                          padding: EdgeInsets.all(15),
+                        ),
+
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(
                 height: 20.0,
               ),
@@ -596,7 +664,7 @@ class DialogWithField extends StatelessWidget {
                   child: Center(
                       child: RaisedButton(
                         onPressed: () {
-                          onClick();
+                          widget.onClick();
                         },
                         child: Text(
                           "Save",
@@ -653,6 +721,7 @@ class NotificationList extends StatelessWidget {
                     title: this.title,
                     color: HH_Colors.grey_35444D,
                     size: 16,
+                    textweight: FontWeight.w300,
                   ),
                   Align(
                     alignment: Alignment.bottomRight,

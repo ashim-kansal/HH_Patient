@@ -287,6 +287,7 @@ class DashboardState extends State<Dashboard> {
     print(tabIndex);
     showDialog(
       context: context,
+      barrierColor: Color(0x90000000),
       builder: (BuildContext dialogContext) {
         return  TherapistOptionsPage();
         //   Container(

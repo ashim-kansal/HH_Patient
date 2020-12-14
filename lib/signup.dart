@@ -182,7 +182,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: widget.pwdError,
-                                errorText: 'Please enter a valid password',
+                                errorText: 'Password should be alpha-numeric with 1 Small, Capital and Special character',
                                 showeye: true,
                                 onClickEye: () {
                                   print("clickable");

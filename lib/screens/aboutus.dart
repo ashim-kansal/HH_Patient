@@ -14,8 +14,8 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyWidget(
         title: title,
-        child: Flexible(
-          flex: 1,
+        child: Container(
+          height: MediaQuery.of(context).size.height,
           child: Text(
             HHString.terms,
             style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
