@@ -34,6 +34,7 @@ class _SignupPageState extends State<SignUpPage> {
 
   String stateDropdown = 'Select State';
   String countryDropdown = 'Select Country';
+  String pwdValidation = "Please enter a valid password";
   bool securepwd = true;
   bool isChecked = true;
   void signupHandler(){
@@ -47,7 +48,7 @@ class _SignupPageState extends State<SignUpPage> {
 
     var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
 
 
     if(fname.trim().length == 0 && lname.trim().length == 0 && email.trim().length == 0 && 
@@ -67,18 +68,32 @@ class _SignupPageState extends State<SignUpPage> {
 
     if(!emailRegex.hasMatch(email)){
       setState(() {
+         widget.fnameError = false;
+        widget.lnameError = false;
         widget.emailError = true;
+        widget.pwdError = false;
+        widget.numberError = false;
+        widget.locationError = false;
       });
       return;
     }
 
     if(!pwdRegex.hasMatch(password)){
       setState(() {
+        widget.fnameError = false;
+        widget.lnameError = false;
+        widget.emailError = false;
         widget.pwdError = true;
+        widget.numberError = false;
+        widget.locationError = false;
+        pwdValidation = "Password should contain alphanumeric with one small and cap and special character.";
       });
       return;
     }
 
+    setState(() {
+      pwdValidation = "Please enter a valid password";      
+    });
     Navigator.pushNamed(context, LoginPage.RouteName);
   }
 
@@ -182,7 +197,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: widget.pwdError,
-                                errorText: 'Please enter a valid password',
+                                errorText: pwdValidation,
                                 showeye: true,
                                 onClickEye: () {
                                   print("clickable");

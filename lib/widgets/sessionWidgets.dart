@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/screens/chat.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
 
@@ -243,7 +245,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
-                            // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                            Navigator.pushNamed(context, ChatPage.RouteName);
                           },
                           shape: CircleBorder(),
 
@@ -258,7 +260,7 @@ class UpcomingSessionItem extends StatelessWidget {
                               color: Colors.white,
                               child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                               onPressed: (){
-                                // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                                Navigator.pushNamed(context, ReviewPage.RouteName);
                               },
                               shape: CircleBorder()
                           )),
