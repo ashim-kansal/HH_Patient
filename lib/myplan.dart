@@ -43,9 +43,9 @@ class MyPlansState extends State<MyPlans> {
               controller: pagerController,
               children: [
                 PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 0, onClick: (){
-                  if(widget.isUpdate)
+                  // if(widget.isUpdate)
                     Navigator.pop(context);
-                  else
+                  // else
                     Navigator.pushNamed(context, QuestionairePage.RouteName);
 
                 },),

@@ -122,15 +122,17 @@ class TherapistOptionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
       child:         ListView(
         padding: EdgeInsets.all(40),
         children:[
           Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
+            Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
           },) ),
           SizedBox(height: 50,),
           Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
+            Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
 
           }),),

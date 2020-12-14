@@ -73,7 +73,7 @@ class HHSmallButton extends StatelessWidget {
         ),
       ),
     );
-    
+
 
   }
 }
@@ -196,7 +196,7 @@ class HHTextView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontWeight: textweight?? FontWeight.w200));
+    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontFamily: "ProximaNova", fontWeight: textweight?? FontWeight.w200));
   }
 }
 
@@ -209,7 +209,7 @@ class HHTextViewBoarder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, 
+    return Text(title,
     style: TextStyle(color: color, fontSize: size));
   }
 }
@@ -220,8 +220,9 @@ class HHEditText extends StatefulWidget {
   final TextEditingController controller;
 
   final VoidCallback onClickEye;
-  
+
   var minLines = 1;
+  var maxLength = 1;
   var error = false;
   var errorText = "";
   var obscureText = false;
@@ -230,7 +231,7 @@ class HHEditText extends StatefulWidget {
   // var controller = null;
   var inputType = TextInputType.text;
 
-  
+
   HHEditText(
       {Key key,
       this.hint,
@@ -239,6 +240,7 @@ class HHEditText extends StatefulWidget {
       this.errorText,
       this.obscureText,
       this.inputType,
+      this.maxLength,
       this.controller,
       this.onClickEye,
       this.textarea,
@@ -270,8 +272,10 @@ class HHEditTextState extends State<HHEditText> {
       obscureText: widget.obscureText ?? false,
       controller: widget.controller,
       minLines: widget.minLines?? 1,
+      maxLength: widget.maxLength??32,
       maxLines: widget.minLines?? 1,
       decoration: InputDecoration(
+          counterText: "",
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
           errorText: widget.error != null && widget.error ? widget.errorText : null,
           errorStyle: TextStyle(color: Color(0xffff8a73)),
@@ -283,13 +287,13 @@ class HHEditTextState extends State<HHEditText> {
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder(),
           suffixIcon: widget.showeye??false
-              ? 
+              ?
               IconButton(
                 icon: Icon(Icons.remove_red_eye, size: 20, color: Color(0xffCBCBCB)),
                 onPressed: () => widget.onClickEye(),
               )
               // const Icon(
-                
+
               //     Icons.remove_red_eye,
               //     size: 20,
               //     color: Color(0xffCBCBCB),
@@ -378,7 +382,17 @@ class DrinkingDiaryCell extends StatelessWidget{
           ),
           InkWell(
             onTap: (){
-
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext dialogContext) {
+                  return DialogWithField(
+                    onClick: () {
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+              );
             },
             child: Row(
               children: [
@@ -402,8 +416,8 @@ class DialogWithImage extends StatelessWidget {
   final String title;
   final String content;
   final List<Widget> actions;
-  
-  
+
+
   DialogWithImage({
     this.title,
     this.content,
@@ -452,8 +466,8 @@ class DialogWithButtons extends StatelessWidget {
 
   final VoidCallback onLogoutPress;
   final VoidCallback onDenyPress;
-  
-  
+
+
   DialogWithButtons({
     this.title,
     this.content,
@@ -524,11 +538,13 @@ class DialogWithButtons extends StatelessWidget {
 
 class DialogWithField extends StatelessWidget {
   final String title;
+  final VoidCallback onClick;
   // final List<Widget> actions;
-  
-  
+
+
   DialogWithField({
     this.title,
+    this.onClick
     // this.content,
     // this.actions = const [],
   });
@@ -537,7 +553,7 @@ class DialogWithField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0)),
+          borderRadius: BorderRadius.circular(20.0)),
       child: Container(
         height: 250,
         width: 200,
@@ -547,20 +563,30 @@ class DialogWithField extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-             Align(
+              Align(
                 alignment: Alignment.center,
                 child:  HHTextView(
-                  title: "New Note",
-                  size: 18,
+                  title: "12th Thursday/10/2020",
+                  size: 15,
                   color: HH_Colors.color_707070,
                 ),
               ),
               SizedBox(
                 height: 10,),
-              HHEditText(
-                minLines: 4,
+              Align(
+                alignment: Alignment.center,
+                child:  HHTextView(
+                  title: "No. of Drinks",
+                  size: 22,
+                  color: HH_Colors.color_3D3D3D,
+                  textweight: FontWeight.w600,
+                ),
               ),
-              
+              HHEditText(
+                minLines: 1,
+                maxLength: 1,
+              ),
+
               SizedBox(
                 height: 20.0,
               ),
@@ -568,14 +594,16 @@ class DialogWithField extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Container(
                   child: Center(
-                    child: RaisedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Save & Send",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: HH_Colors.purpleColor,
-                    )
+                      child: RaisedButton(
+                        onPressed: () {
+                          onClick();
+                        },
+                        child: Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: HH_Colors.purpleColor,
+                      )
                   ),
                 ),
               )
@@ -593,8 +621,8 @@ class DialogWithField extends StatelessWidget {
 class NotificationList extends StatelessWidget {
   final String title;
   final String subtitle;
-  
-  
+
+
   NotificationList({
     @required
     this.title,
@@ -642,7 +670,7 @@ class NotificationList extends StatelessWidget {
           secondaryActions: <Widget>[
             Container(
               child: new IconSlideAction(
-                
+
                 color: Colors.red,
                 icon: Icons.delete,
                 // onTap: () => _showSnackBar('Delete'),
@@ -658,7 +686,7 @@ OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(5.0)),
     borderSide: BorderSide(color: Color(0xffD9D7D7), width: 0.3),
-    
+
   );
 }
 

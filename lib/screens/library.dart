@@ -56,7 +56,7 @@ class _LibraryPageState extends State<LibraryPage> {
                             Icon(Icons.account_circle_outlined),
                             Text('Social-Posts.docx', textAlign: TextAlign.center,style: TextStyle(fontSize:13,color: HH_Colors.grey_585858, fontFamily: "ProximaNova", fontWeight: FontWeight.bold),)
                             ,Text('By Sophie Solmini 14/11/2020 12:30 PM', textAlign: TextAlign.center, style: TextStyle(fontSize:12,color: HH_Colors.accentColor),)
-                          ,HHButton(title: 'Download', type: 4, isEnable: true,)
+                          ,HHButton(title: 'Download', type: 4, isEnable: true, textSize: 18,)
                           ],
                         ),
                       ),
@@ -67,7 +67,7 @@ class _LibraryPageState extends State<LibraryPage> {
               color: Colors.white,
               padding: EdgeInsets.all(20),
               margin: EdgeInsets.only(left: 20, right: 20),
-              child: HHButton(title: 'Search Nearest Pharmacies',type: 1,isEnable: true,),
+              child: HHButton(title: 'Search Nearest Pharmacies',type: 1,isEnable: true,textSize: 18,),
             ),
           ],
 

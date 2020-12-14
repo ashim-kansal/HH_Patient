@@ -262,8 +262,9 @@ class UpcomingSessionItem extends StatelessWidget {
                               },
                               shape: CircleBorder()
                           )),
-                      Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-
+                      HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
+                        Navigator.pushNamed(context, BookSessionPage.RouteName);
+                      },)
                     ],
                   )
                 ],

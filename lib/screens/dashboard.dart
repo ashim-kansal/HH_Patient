@@ -226,8 +226,12 @@ class DashboardState extends State<Dashboard> {
             currentIndex: tabIndex,
             onTap: (int index) {
               setState(() {
-                tabIndex = index;
-                title = listNames[tabIndex];
+               if(index< 3){
+                 tabIndex = index;
+                 title = listNames[tabIndex];
+               }else{
+                 showTherapistOptions();
+               }
               });
             },
             type: BottomNavigationBarType.fixed,
@@ -263,8 +267,49 @@ class DashboardState extends State<Dashboard> {
                     topLeft: Radius.circular(30.0),
                   ),
                   color: Colors.white),
-              child: listScreens[tabIndex]
+              child: tabIndex<3 ? listScreens[tabIndex] : showDialog(context: context,
+              builder: (BuildContext dialogContext){
+                return  DialogWithButtons(
+                    onLogoutPress: (){
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, LoginPage.RouteName);
+                    },
+                    onDenyPress: (){
+                      Navigator.pop(context);
+                    }
+                );
+              })
             )
           ),
       );
+
+  showTherapistOptions() {
+    print(tabIndex);
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return  TherapistOptionsPage();
+        //   Container(
+        //   color: Colors.transparent,
+        //   child:         ListView(
+        //       padding: EdgeInsets.all(40),
+        //       children:[
+        //         Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
+        //           Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
+        //         },) ),
+        //         SizedBox(height: 50,),
+        //         Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
+        //           Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
+        //
+        //         }),),
+        //         SizedBox(height: 50,),
+        //         Center(child: TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
+        //
+        //         }),),
+        //       ]),
+        //
+        // );
+      },
+    );
+  }
 }

@@ -23,7 +23,7 @@ class SessionPageState extends State<SessionPage>{
             child: TextField(decoration: InputDecoration(
               hintText: 'Search',
               contentPadding: EdgeInsets.all(10),
-
+                counterText: ""
             ),),
           ),
           SizedBox(height: 20,),

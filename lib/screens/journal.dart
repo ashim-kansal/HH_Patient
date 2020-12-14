@@ -56,7 +56,7 @@ class JournalPageState extends State<JournalPage>{
       children: [
         Row(
           children: [
-            HHTextView(title: 'Hi! How are you feeling today ?', size: 17, color: HH_Colors.grey_707070,),
+            Text('Hi! How are you feeling today ?', style: TextStyle(color: HH_Colors.grey_707070, fontSize: 17),),
           ],
         ),
         SizedBox(height: 8,),
@@ -64,7 +64,7 @@ class JournalPageState extends State<JournalPage>{
         SizedBox(height: 20,),
         Row(
           children: [
-            HHTextView(title: 'Have you taken your medicine ?', size: 17, color: HH_Colors.grey_707070,),
+            Text('Have you taken your medicine ?', style: TextStyle(color: HH_Colors.grey_707070, fontSize: 17),),
           ],
         ),
 

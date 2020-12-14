@@ -46,6 +46,8 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
   void populateData() {
     for (int i = 0; i < 10; i++)
       widget.list.add(ListItem<String>("$i Nov\nMon"));
+
+    widget.list[0].isSelected = true;
   }
 
   @override

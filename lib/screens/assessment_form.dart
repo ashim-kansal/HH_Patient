@@ -13,12 +13,12 @@ class AssessmentFormPage extends StatefulWidget {
   var data = [
     AssessmentModel(title: 'a', quesType: 0),
     AssessmentModel(title: 'b', quesType: 1),
-    AssessmentModel(title: 'c', quesType: 2),
-    AssessmentModel(title: 'c', quesType: 2),
-    AssessmentModel(title: 'c', quesType: 2),
-    AssessmentModel(title: 'c', quesType: 2),
-    AssessmentModel(title: 'c', quesType: 2),
-    AssessmentModel(title: 'c', quesType: 2),
+    AssessmentModel(title: 'c', quesType: 0),
+    AssessmentModel(title: 'c', quesType: 1),
+    AssessmentModel(title: 'c', quesType: 0),
+    AssessmentModel(title: 'c', quesType: 1),
+    AssessmentModel(title: 'c', quesType: 0),
+    AssessmentModel(title: 'c', quesType: 1),
   ];
 
   var enable = false;

@@ -36,6 +36,7 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
 
             decoration: InputDecoration(
               border: normalOutlineInputBorder(),
+                counterText: ""
             ),
 
 

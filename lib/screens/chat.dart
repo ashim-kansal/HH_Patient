@@ -63,7 +63,7 @@ class _ChatPageState extends State<ChatPage> {
                                   child: new TextField(
                                     controller: _textController,
                                     decoration: new InputDecoration.collapsed(
-                                        hintText: "Enter message"),
+                                        hintText: "Enter message",),
                                   ),
                                 ),
 
