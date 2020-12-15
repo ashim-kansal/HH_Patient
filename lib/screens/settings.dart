@@ -28,7 +28,7 @@ class SettingsPageState extends State<SettingsPage>{
     children: [
       InkWell(
         onTap: (){
-          Navigator.pop(context);
+          // Navigator.pop(context);
           Navigator.pushNamed(context, LanguagePage.RouteName);
         },
         child:
@@ -51,7 +51,7 @@ class SettingsPageState extends State<SettingsPage>{
         Container(width: MediaQuery.of(context).size.width, color: HH_Colors.grey_707070, margin: EdgeInsets.fromLTRB(0,15, 0 ,15), height: 0.5,),
         InkWell(
           onTap: (){
-            Navigator.pop(context);
+            // Navigator.pop(context);
             Navigator.pushNamed(context, ChnagePasswordPage.RouteName);
           },
           child: Row(
@@ -104,7 +104,7 @@ class SettingsPageState extends State<SettingsPage>{
         Container(width: MediaQuery.of(context).size.width, color: HH_Colors.grey_707070, margin: EdgeInsets.fromLTRB(0,10, 0 ,15), height: 0.5,),
       InkWell(
         onTap: (){
-          Navigator.pop(context);
+          // Navigator.pop(context);
           Navigator.pushNamed(context, CancelPlansPage.RouteName);
         },
         child:    Row(

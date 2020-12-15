@@ -14,7 +14,7 @@ class TharapistCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return               Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       child: Row(
 
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -123,7 +123,7 @@ class TherapistOptionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      child:         ListView(
+      child: ListView(
         padding: EdgeInsets.all(40),
         children:[
           Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){

@@ -86,7 +86,7 @@ class _SignupPageState extends State<SignUpPage> {
         widget.pwdError = true;
         widget.numberError = false;
         widget.locationError = false;
-        pwdValidation = "Password should contain alphanumeric with one small and cap and special character.";
+        pwdValidation = "Password should be alpha-numeric with 1 Small, Capital and Special character.as";
       });
       return;
     }

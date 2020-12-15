@@ -56,6 +56,7 @@ class MyGoalsState extends State<MyGoals> {
                     height:( MediaQuery.of(context).size.height/3)*2,
                     child: PageView(
                       controller: pagerController,
+                        physics:NeverScrollableScrollPhysics(),
                       children: [
                         Container(
                             padding: EdgeInsets.all(30.0),

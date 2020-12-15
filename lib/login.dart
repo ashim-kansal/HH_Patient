@@ -174,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: pwderror,
-                                errorText: 'Please enter a valid password',
+                                errorText: 'Password containes be alpha-numeric with 1 Small, Capital and Special character',
                                 showeye: true,
                                 onClickEye: () {
                                   print("Count was selected.");

@@ -37,87 +37,87 @@ class ReviewState extends State<ReviewPage> {
       child: new Container(
         child: new Column(
           children: <Widget>[
-            Container(
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.fromLTRB(5, 20, 5, 10),
-              child: HHTextView(
-                title: "Share Your Reviews for Session/ Therapist!" ,
-                color: HH_Colors.purpleColor,
-                size: 20,)
-            ),
+            // Container(
+            //   alignment: Alignment.topLeft,
+            //   padding: const EdgeInsets.fromLTRB(5, 20, 5, 10),
+            //   child: HHTextView(
+            //     title: "Share Your Reviews for Session/ Therapist!" ,
+            //     color: HH_Colors.purpleColor,
+            //     size: 20,)
+            // ),
             Flexible(
               
               child: Column(children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  // margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.fromLTRB(5, 20, 5, 10),
+                // Container(
+                //   alignment: Alignment.topLeft,
+                //   // margin: const EdgeInsets.all(15.0),
+                //   padding: const EdgeInsets.fromLTRB(5, 20, 5, 10),
 
-                  decoration: BoxDecoration(
-                    border: Border(bottom: BorderSide(
-                      color: HH_Colors.borderGrey,
-                      width: 0.5
-                    ))
-                  ),
+                //   decoration: BoxDecoration(
+                //     border: Border(bottom: BorderSide(
+                //       color: HH_Colors.borderGrey,
+                //       width: 0.5
+                //     ))
+                //   ),
                   
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                        child : HHTextView(
-                          title: "Tuesday, may 12th 2020",
-                          size: 20,
-                          color: HH_Colors.grey_707070,
-                        ),
-                      ),
+                //   child: Column(
+                //     children: [
+                //       Container(
+                //         alignment: Alignment.topLeft,
+                //         padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                //         child : HHTextView(
+                //           title: "Tuesday, may 12th 2020",
+                //           size: 20,
+                //           color: HH_Colors.grey_707070,
+                //         ),
+                //       ),
 
-                      Container(
-                        alignment: Alignment.topLeft,
-                        padding: const EdgeInsets.fromLTRB(5, 2, 5, 0),
-                        child :HHTextView(
-                          title: "Please fill this log regularly.",
-                          size: 15,
-                          color: HH_Colors.grey_707070,
-                        ),
-                      ),
+                //       Container(
+                //         alignment: Alignment.topLeft,
+                //         padding: const EdgeInsets.fromLTRB(5, 2, 5, 0),
+                //         child :HHTextView(
+                //           title: "Please fill this log regularly.",
+                //           size: 15,
+                //           color: HH_Colors.grey_707070,
+                //         ),
+                //       ),
 
-                    ],
-                  )
+                //     ],
+                //   )
                   
-                ),
-                  Container(
-                  alignment: Alignment.topLeft,
-                  margin: const EdgeInsets.all(10.0),
-                  padding: const EdgeInsets.all(3.0),
-                  child: Column(children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      child: HHTextView(
-                        title: "Alcohol Management Commented",
-                        size: 16,
-                        color: Color(0xff777CEA)
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child:HHTextView(
-                        title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                        size: 14,
-                        color: Color(0xff707070)
-                      ),
-                    ),
+                // ),
+                //   Container(
+                //   alignment: Alignment.topLeft,
+                //   margin: const EdgeInsets.all(10.0),
+                //   padding: const EdgeInsets.all(3.0),
+                //   child: Column(children: [
+                //     Container(
+                //       alignment: Alignment.topLeft,
+                //       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                //       child: HHTextView(
+                //         title: "Alcohol Management Commented",
+                //         size: 16,
+                //         color: Color(0xff777CEA)
+                //       ),
+                //     ),
+                //     Container(
+                //       alignment: Alignment.topLeft,
+                //       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                //       child:HHTextView(
+                //         title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                //         size: 14,
+                //         color: Color(0xff707070)
+                //       ),
+                //     ),
 
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: HHSmallButton(
-                        title: "Reply",
-                        type: 2,)
-                    )
-                  ],)
-                ),
+                //     Container(
+                //       alignment: Alignment.topLeft,
+                //       child: HHSmallButton(
+                //         title: "Reply",
+                //         type: 2,)
+                //     )
+                //   ],)
+                // ),
                   Container(
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.all(10.0),
