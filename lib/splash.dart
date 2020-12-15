@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
-import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/feedback.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/settings.dart';
-import 'package:flutter_app/signup.dart';
 
 class Splash extends StatefulWidget{
 
@@ -28,7 +26,7 @@ class SplashState extends State<Splash>{
     Timer(Duration(seconds: 3),
             ()=>{
                   Navigator.pop(context),
-            Navigator.pushNamed(context, Dashboard.RouteName, arguments: MyPlansArguments(false))
+                  Navigator.pushNamed(context, SelectLanguage.RouteName)
                 }
     );
   }

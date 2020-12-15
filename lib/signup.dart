@@ -35,6 +35,7 @@ class _SignupPageState extends State<SignUpPage> {
 
   String stateDropdown = 'Select State';
   String countryDropdown = 'Select Country';
+  String pwdValidation = "Please enter a valid password";
   bool securepwd = true;
   bool isChecked = true;
   void signupHandler(){
@@ -48,7 +49,7 @@ class _SignupPageState extends State<SignUpPage> {
 
     var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
 
 
     if(fname.trim().length == 0 && lname.trim().length == 0 && email.trim().length == 0 && 
@@ -68,18 +69,32 @@ class _SignupPageState extends State<SignUpPage> {
 
     if(!emailRegex.hasMatch(email)){
       setState(() {
+         widget.fnameError = false;
+        widget.lnameError = false;
         widget.emailError = true;
+        widget.pwdError = false;
+        widget.numberError = false;
+        widget.locationError = false;
       });
       return;
     }
 
     if(!pwdRegex.hasMatch(password)){
       setState(() {
+        widget.fnameError = false;
+        widget.lnameError = false;
+        widget.emailError = false;
         widget.pwdError = true;
+        widget.numberError = false;
+        widget.locationError = false;
+        pwdValidation = "Password should be alpha-numeric with 1 Small, Capital and Special character.as";
       });
       return;
     }
 
+    setState(() {
+      pwdValidation = "Please enter a valid password";
+    });
     Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
   }
 
@@ -183,7 +198,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: widget.pwdError,
-                                errorText: 'Password should be alpha-numeric with 1 Small, Capital and Special character',
+                                errorText: pwdValidation,
                                 showeye: true,
                                 onClickEye: () {
                                   print("clickable");
@@ -216,38 +231,6 @@ class _SignupPageState extends State<SignUpPage> {
                             ),
 
                             Container(
-                              width: 295,
-                              // margin: EdgeInsets.only(top: 5),
-                              padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(color: HH_Colors.borderGrey, width: 1.2),
-                                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                              child: DropdownButtonHideUnderline(
-                                child: new DropdownButton<String>(
-                                value: stateDropdown,
-                                isExpanded: true,
-                                icon: Icon(Icons.arrow_drop_down),
-                                iconEnabledColor: Color(0xffC5C4C4),
-                                iconSize: 38,
-                                elevation: 16,
-                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                items: <String>['Select State', 'Chandigarh', 'Haryana', 'Punjab'].map((String value) {
-                                  return new DropdownMenuItem<String>(
-                                    
-                                    value: value,
-                                    child: new Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    stateDropdown = newValue;
-                                  });
-                                },
-                              )) 
-                            
-                            ),
-                          Container(
                             width: 295,
                             margin: EdgeInsets.only(top: 10, bottom: 20),
                             padding: const EdgeInsets.only(left: 20.0,right: 10.0),
@@ -278,6 +261,40 @@ class _SignupPageState extends State<SignUpPage> {
                               ),
                               )
                             ),
+                            
+                            Container(
+                              width: 295,
+                              // margin: EdgeInsets.only(top: 5),
+                              padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  border: Border.all(color: HH_Colors.borderGrey, width: 1.2),
+                                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                              child: DropdownButtonHideUnderline(
+                                child: new DropdownButton<String>(
+                                value: stateDropdown,
+                                isExpanded: true,
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconEnabledColor: Color(0xffC5C4C4),
+                                iconSize: 38,
+                                elevation: 16,
+                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                items: <String>['Select Province', 'Ontario', 'Ontario'].map((String value) {
+                                  return new DropdownMenuItem<String>(
+
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    stateDropdown = newValue;
+                                  });
+                                },
+                              ))
+
+                            ),
+
 
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 5, 10),

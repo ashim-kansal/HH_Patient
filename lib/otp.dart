@@ -25,24 +25,71 @@ class _OtpState extends State<OtpPage> {
 
   TextEditingController currController = new TextEditingController();
 
-  @override
-  void dispose() {
-    super.dispose();
-    controller1.dispose();
-    controller2.dispose();
-    controller3.dispose();
-    controller4.dispose();
-  }
+  FocusNode firstinput;
+  FocusNode secondinput;
+  FocusNode thirdinput;
+  FocusNode fourthinput;
 
   @override
   void initState() {
     super.initState();
     currController = controller1;
+
+    firstinput = FocusNode();
+    secondinput = FocusNode();
+    thirdinput = FocusNode();
+    fourthinput = FocusNode();
   }
+
+  @override
+    void dispose() {
+      super.dispose();
+      controller1.dispose();
+      controller2.dispose();
+      controller3.dispose();
+      controller4.dispose();
+
+      firstinput.dispose();
+      secondinput.dispose();
+      thirdinput.dispose();
+      fourthinput.dispose();
+    }
 
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+
+    void focusToField(val, type) {
+
+      switch (type) {
+        case "first":
+          if(val.trim().length != 0){
+            secondinput.requestFocus();
+          }
+          break;
+        case "second":
+          if(val.trim().length == 0){
+            firstinput.requestFocus();
+            return;
+          }
+          thirdinput.requestFocus();
+          break;
+        case "third":
+          if(val.trim().length == 0){
+            secondinput.requestFocus();
+            return;
+          }
+          fourthinput.requestFocus();
+          break;
+        case "fourth":
+          if(val.trim().length == 0){
+            thirdinput.requestFocus();
+            return;
+          }
+          break;
+        default:
+      }
+    }
 
     List<Widget> widgetList = [
 
@@ -58,15 +105,20 @@ class _OtpState extends State<OtpPage> {
             child: new TextField(
               inputFormatters: [
                 LengthLimitingTextInputFormatter(1),
-              ],decoration: InputDecoration(
+              ],
+              keyboardType: TextInputType.number,
+              onChanged: (val) => focusToField(val, "first"),
+              decoration: InputDecoration(
                 border: InputBorder.none),
               enabled: true,
               controller: controller1,
+              focusNode: firstinput,
               autofocus: true,
-              maxLength: 1,
+              // maxLength: 1,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18.0, color: Colors.black),
-            )),
+            )
+            ),
       ),
       Padding(
         padding: const EdgeInsets.only(right: 10),
@@ -80,12 +132,15 @@ class _OtpState extends State<OtpPage> {
           child: new TextField(
             inputFormatters: [
               LengthLimitingTextInputFormatter(1),
-            ],decoration: InputDecoration(
-              border: InputBorder.none),
+            ],
+            onChanged: (val) => focusToField(val, "second"),
+            decoration: InputDecoration(
+            border: InputBorder.none),
             controller: controller2,
-            autofocus: false,
+            // autofocus: false,
+            focusNode: secondinput,
             enabled: true,
-            maxLength: 1,
+            // maxLength: 1,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18.0, color: Colors.black),
@@ -104,14 +159,17 @@ class _OtpState extends State<OtpPage> {
           child: new TextField(
             inputFormatters: [
               LengthLimitingTextInputFormatter(1),
-            ],decoration: InputDecoration(
+            ],
+            onChanged: (val) => focusToField(val, "third"),
+            decoration: InputDecoration(
               border: InputBorder.none),
             keyboardType: TextInputType.number,
             controller: controller3,
             textAlign: TextAlign.center,
             autofocus: false,
+            focusNode: thirdinput,
             enabled: true,
-            maxLength: 1,
+            // maxLength: 1,
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
@@ -129,22 +187,45 @@ class _OtpState extends State<OtpPage> {
             inputFormatters: [
               LengthLimitingTextInputFormatter(1),
             ],
+            onChanged: (val) => focusToField(val, "fourth"),
             decoration: InputDecoration(
                 border: InputBorder.none),
             textAlign: TextAlign.center,
             controller: controller4,
             autofocus: false,
+            focusNode: fourthinput,
             enabled: true,
-            maxLength: 1,
+            // maxLength: 1,
             style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
       )
     ];
 
+    void otpVerifyHandler() {
+
+      if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
+        showDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return DialogWithSingleButton(
+              title: "Alert",
+              content: "Please enter the valid OTP.",
+            );
+          },
+        );
+        return;
+      }
+
+      Navigator.pop(context);
+      Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+    
+    }
+
     return MyWidget(
       title: 'OTP Verification',
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
           children: [
             Material(
               child: ClipPath(
@@ -212,8 +293,9 @@ class _OtpState extends State<OtpPage> {
                                 ),
 
                                 onPressed: (){
-                                  Navigator.pop(context);
-                                  Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                                  otpVerifyHandler();
+                                  // Navigator.pop(context);
+                                  // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
                                 },
                                 shape: CircleBorder()
                             )
@@ -232,7 +314,8 @@ class _OtpState extends State<OtpPage> {
           ],
 
 
-      ),
+        ),
+      ) ,
     );
   }
 

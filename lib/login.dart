@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
 
     var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
 
     if(email.trim().length == 0 && password.trim().length == 0){
       setState(() {
@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                               padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
                               child: 
                               HHEditText(
-                                hint: "Enter Email Id",
+                                hint: "Enter Email",
                                 controller: emailController,
                                 error: emailerror,
                                 errorText: 'Please enter a valid email address',

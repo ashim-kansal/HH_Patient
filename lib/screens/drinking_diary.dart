@@ -42,7 +42,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
                   ],
                 ),
               ),
-              Container(height:50,                 margin: EdgeInsets.only(right: 10, left: 10),
+              Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
                   child: DrinkingDiaryDateWidget()),
 
               // Container(
