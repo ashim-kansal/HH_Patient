@@ -41,22 +41,39 @@ class _LibraryPageState extends State<LibraryPage> {
                 // Generate 100 widgets that display their index in the List.
                 children: List.generate(10, (index) {
                   return
-                  Card(child:
+                  Card(
+                    elevation: 10,
+                    child:
                     InkWell(
                       onTap:(){},
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                           color: Colors.white,
                         ),
                         padding: EdgeInsets.all(15),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset('assets/images/ic_doc.png', height: 30, width: 30,),
+                            Image.asset('assets/images/ic_doc.png', height: 30, width: 40,),
                             Text('Social-Posts.docx', textAlign: TextAlign.center,style: TextStyle(fontSize:13,color: HH_Colors.grey_585858, fontFamily: "ProximaNova", fontWeight: FontWeight.bold),)
                             ,Text('By Sophie Solmini 14/11/2020 12:30 PM', textAlign: TextAlign.center, style: TextStyle(fontSize:12,color: HH_Colors.accentColor),)
-                          ,HHButton(title: 'Download', type: 4, isEnable: true, textSize: 18,)
+                            ,SizedBox(height: 5,),
+                            Card(child:                             Container(
+                              height: 45,
+                              width: 100,
+                              child: Center(
+                                child: Text('Download', style: TextStyle(fontSize: 18,
+                                    fontFamily: "ProximaNova", color: Colors.white),),
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(3)),
+                                color: HH_Colors.accentColor,
+                              ),
+                            )
+                              ,
+                            elevation: 10,)
+                            // HHButton(title: 'Download', type: 4, isEnable: true, textSize: 18)
                           ],
                         ),
                       ),

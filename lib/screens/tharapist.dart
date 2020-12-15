@@ -122,24 +122,24 @@ class TherapistOptionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
-      child:         ListView(
-        padding: EdgeInsets.all(40),
-        children:[
-          Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
+      child:         Column(
+
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children:[
+         TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
-          },) ),
+          },),
           SizedBox(height: 50,),
-          Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
+          TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
-
-          }),),
+          },),
           SizedBox(height: 50,),
-          Center(child: TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
+         TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
 
-          }),),
+          }),
     ]),
 
     );
@@ -158,15 +158,15 @@ class TherapistOptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
       elevation: 10,
       child: InkWell(
         child: Container(
           width: MediaQuery.of(context).size.width/2.2,
           height: MediaQuery.of(context).size.width/2.7,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            color: Colors.white,
-          ),
+
           padding: EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

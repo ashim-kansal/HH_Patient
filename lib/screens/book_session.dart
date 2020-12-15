@@ -22,7 +22,7 @@ class BookSessionState extends State<BookSessionPage>{
     return MyWidget(title: 'Schedule', child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  TharapistCell(name: 'Abc', role: 'Abcd', showBook: false, onClick: (){},),
+                  TharapistCell(name: 'Rejina Freak', role: 'Recovery Coach', showBook: false, onClick: (){},),
                   Container(height:50, child: SessionDateWidget()),
                   SizedBox(height: 10,),
                   Expanded(child: GridViewWidget(),),

@@ -290,26 +290,7 @@ class DashboardState extends State<Dashboard> {
       barrierColor: Color(0x90000000),
       builder: (BuildContext dialogContext) {
         return  TherapistOptionsPage();
-        //   Container(
-        //   color: Colors.transparent,
-        //   child:         ListView(
-        //       padding: EdgeInsets.all(40),
-        //       children:[
-        //         Center(child: TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
-        //           Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
-        //         },) ),
-        //         SizedBox(height: 50,),
-        //         Center(child: TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
-        //           Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
-        //
-        //         }),),
-        //         SizedBox(height: 50,),
-        //         Center(child: TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
-        //
-        //         }),),
-        //       ]),
-        //
-        // );
+
       },
     );
   }

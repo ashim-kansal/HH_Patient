@@ -68,52 +68,65 @@ class JournalPageState extends State<JournalPage> {
   }
 
   Widget getNewJournal() {
-    return   Container(            padding: EdgeInsets.all(20),child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
+    return Container(
+        padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Hi! How are you feeling today ?',
-              style: TextStyle(color: HH_Colors.grey_707070, fontSize: 17),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        'Hi! How are you feeling today ?',
+                        style: TextStyle(
+                            color: HH_Colors.grey_707070,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      margin: EdgeInsets.only(left: 5),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                HHEditText(
+                  minLines: 4,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        'Have you taken your medicine ?',
+                        style: TextStyle(
+                            color: HH_Colors.grey_707070,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      margin: EdgeInsets.only(left: 5),
+                    ),
+                  ],
+                ),
+                RadioGroup(),
+                HHEditText(
+                  minLines: 4,
+                  hint: 'Add note',
+                ),
+              ],
             ),
+            HHButton(
+              title: 'Submit',
+              type: 4,
+              isEnable: true,
+            )
           ],
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        HHEditText(
-          minLines: 4,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Text(
-              'Have you taken your medicine ?',
-              style: TextStyle(color: HH_Colors.grey_707070, fontSize: 17),
-            ),
-          ],
-        ),
-        RadioGroup(),
-        SizedBox(
-          height: 10,
-        ),
-        HHEditText(
-          minLines: 4,
-          hint: 'Add note',
-        ),
-        SizedBox(
-          height: 80,
-        ),
-        HHButton(
-          title: 'Submit',
-          type: 2,
-          isEnable: true,
-        )
-      ],
-    ));
+        ));
   }
 
   Widget getOldJournal() {
@@ -152,7 +165,9 @@ class JournalPageState extends State<JournalPage> {
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
               child: ListView.separated(
                   itemBuilder: (context, index) {
@@ -218,7 +233,8 @@ class JournalPageState extends State<JournalPage> {
                                   '7:20AM',
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
-                                      color: HH_Colors.grey_707070, fontSize: 12),
+                                      color: HH_Colors.grey_707070,
+                                      fontSize: 12),
                                 ),
                               )
                             ],

@@ -44,6 +44,8 @@ class HHOptionButton extends StatelessWidget{
         width: 30.0,
           height: 30,// you can adjust the width as you need
         child: PopupMenuButton<String>(
+            offset: Offset(20,20),
+
             onSelected: (String value) {
               print("You selected $value");
             },
@@ -54,7 +56,6 @@ class HHOptionButton extends StatelessWidget{
                 new PopupMenuWidget(
                   child:
                     Container(
-                      margin: EdgeInsets.only(top: 20),
                       child:  Column(
                         children: [
                           InkWell(
@@ -66,7 +67,7 @@ class HHOptionButton extends StatelessWidget{
                           Container(
                             color: HH_Colors.borderGrey,
                             height: 0.5,
-                            width: 50,
+                            width: 80,
                           )
                           ,InkWell(
                             child: Text('re-schedule'),

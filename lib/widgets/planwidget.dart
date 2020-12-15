@@ -35,10 +35,9 @@ class PlanWidgetState extends State<PlanWidget> {
                 .accentColor,
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
             children: [
               Text(widget.title,
                 style: TextStyle(color: Colors.white, fontSize: 22),),
@@ -48,7 +47,7 @@ class PlanWidgetState extends State<PlanWidget> {
                 style: TextStyle(color: Colors.white, fontSize: 15),),
               SizedBox.fromSize(size: Size(8, 8),),
 
-              Text(widget.price.toString(), textAlign: TextAlign.start,
+              Text('\$'+widget.price.toString(), textAlign: TextAlign.start,
                 style: TextStyle(color: Colors.white, fontSize: 44),),
               SizedBox.fromSize(size: Size(8, 8),),
 
@@ -62,7 +61,7 @@ class PlanWidgetState extends State<PlanWidget> {
                     widget.onClick();
                   },
                   color: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.fromLTRB(40, 20,40,20),
+                  padding: EdgeInsets.fromLTRB(80, 20,80,20),
                   shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0))
               ): Container()
 
