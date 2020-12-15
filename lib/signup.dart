@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
@@ -79,7 +80,7 @@ class _SignupPageState extends State<SignUpPage> {
       return;
     }
 
-    Navigator.pushNamed(context, LoginPage.RouteName);
+    Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
   }
 
   @override

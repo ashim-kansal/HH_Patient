@@ -13,7 +13,7 @@ class GridViewWidget extends StatelessWidget{
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       // Generate 100 widgets that display their index in the List.
-      children: List.generate(100, (index) {
+      children: List.generate(20, (index) {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(4.0)),

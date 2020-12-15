@@ -20,22 +20,27 @@ class SessionPageState extends State<SessionPage>{
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Card(
-            child: TextField(decoration: InputDecoration(
+            elevation: 10,
+            margin: EdgeInsets.only(left: 10, right: 10),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
               hintText: 'Search',
               contentPadding: EdgeInsets.all(10),
                 counterText: ""
-            ),),
+            ),
+            ),
           ),
           SizedBox(height: 20,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(child: HHButton(title: 'Upcoming Sessions',textSize: 18, type: 3, isEnable: isSwitched, onClick: (){
+              Flexible(child: HHButton(title: 'Upcoming',textSize: 18, type: 3, isEnable: isSwitched, onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });
               },), flex: 1,),
-              Flexible(child: HHButton(title: 'Completed Sessions',textSize: 18, type: 3, isEnable: !isSwitched,onClick: (){
+              Flexible(child: HHButton(title: 'Completed',textSize: 18, type: 3, isEnable: !isSwitched,onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });

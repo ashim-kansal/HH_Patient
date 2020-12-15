@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/colors.dart';
 /// An arbitrary widget that lives in a popup menu
 class PopupMenuWidget<T> extends PopupMenuEntry<T> {
   const PopupMenuWidget({ Key key, this.height, this.child }) : super(key: key);
@@ -51,21 +52,32 @@ class HHOptionButton extends StatelessWidget{
             itemBuilder: (BuildContext context) {
               return [
                 new PopupMenuWidget(
-                  child: new Column(
-                    children: [
-                      InkWell(
-                        child: Text('cancel'),
-                        onTap: (){ Navigator.pop(context, 'cancel');
-                        onClickCancel();
-                        },
-                      ),InkWell(
-                        child: Text('re-schedule'),
-                        onTap: (){ Navigator.pop(context, 're-schedule');
-                        onClickReSchedule();
-                        },
-                      )
-                    ],
-                  ),
+                  child:
+                    Container(
+                      margin: EdgeInsets.only(top: 20),
+                      child:  Column(
+                        children: [
+                          InkWell(
+                            child: Text('cancel'),
+                            onTap: (){ Navigator.pop(context, 'cancel');
+                            onClickCancel();
+                            },
+                          ),
+                          Container(
+                            color: HH_Colors.borderGrey,
+                            height: 0.5,
+                            width: 50,
+                          )
+                          ,InkWell(
+                            child: Text('re-schedule'),
+                            onTap: (){ Navigator.pop(context, 're-schedule');
+                            onClickReSchedule();
+                            },
+                          )
+                        ],
+                      ),
+
+                    )
                 ),
               ];
             }

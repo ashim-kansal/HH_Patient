@@ -18,10 +18,12 @@ class HHButton extends StatelessWidget {
       minWidth: MediaQuery.of(context).size.width,
       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
+
       // color: isEnable ? HH_Colors.,
       // color: type == 1
       //     ? Theme.of(context).primaryColor
       //     : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
+
       color: type == 1
           ? (isEnable??false ? Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
           : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable??false ?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
@@ -289,7 +291,7 @@ class HHEditTextState extends State<HHEditText> {
           suffixIcon: widget.showeye??false
               ?
               IconButton(
-                icon: Icon(Icons.remove_red_eye, size: 20, color: Color(0xffCBCBCB)),
+                icon: Icon( Icons.remove_red_eye, size: 20, color: widget.obscureText?? false ? HH_Colors.accentColor: Color(0xffCBCBCB)),
                 onPressed: () => widget.onClickEye(),
               )
               // const Icon(

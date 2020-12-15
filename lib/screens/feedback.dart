@@ -21,7 +21,7 @@ class FeedbackPageState extends State<FeedbackPage> {
 
 @override
 Widget build(BuildContext context) => MyWidget(
-  title: 'HHString',
+  title: 'Feedback',
   child: Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
