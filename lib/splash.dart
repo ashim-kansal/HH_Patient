@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/feedback.dart';
@@ -26,7 +27,7 @@ class SplashState extends State<Splash>{
     Timer(Duration(seconds: 3),
             ()=>{
                   Navigator.pop(context),
-                  Navigator.pushNamed(context, SelectLanguage.RouteName)
+                  Navigator.pushNamed(context, Dashboard.RouteName)
                 }
     );
   }

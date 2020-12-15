@@ -37,39 +37,41 @@ class _NotificationState extends State<NotificationPage> {
             width: double.infinity,
             height: double.infinity,
             color: Colors.white,
-            child: Column(children: [
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Padding(padding: EdgeInsets.only(bottom: 5),
+                  child: NotificationList(title: 
+                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                      subtitle: "Now"),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 5),
+                  child: NotificationList(title: 
+                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                      subtitle: "Now"),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 5),
+                  child: NotificationList(title: 
+                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                      subtitle: "Now"),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 5),
+                  child: NotificationList(title: 
+                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                      subtitle: "Now"),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 5),
+                  child: NotificationList(title: 
+                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                      subtitle: "Now"),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 5),
+                  child: NotificationList(title: 
+                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                      subtitle: "Now"),
+                ),
 
-            ],)
+              ],),
+              ) 
             ));
   }
 

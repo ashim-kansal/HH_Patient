@@ -721,7 +721,7 @@ class NotificationList extends StatelessWidget {
                     title: this.title,
                     color: HH_Colors.grey_35444D,
                     size: 16,
-                    textweight: FontWeight.w300,
+                    textweight: FontWeight.w400,
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
@@ -729,6 +729,7 @@ class NotificationList extends StatelessWidget {
                       title: this.subtitle,
                       color: HH_Colors.color_92ABBB,
                       size: 14,
+                      textweight: FontWeight.w300,
                     ),
                   )
               ],),
@@ -738,6 +739,7 @@ class NotificationList extends StatelessWidget {
           ),
           secondaryActions: <Widget>[
             Container(
+              margin: EdgeInsets.only(bottom: 1),
               child: new IconSlideAction(
 
                 color: Colors.red,
@@ -747,6 +749,70 @@ class NotificationList extends StatelessWidget {
             )
           ],
         )
+    );
+  }
+}
+
+class DialogWithSingleButton extends StatelessWidget {
+  final String title;
+  final String content;
+
+  final VoidCallback onLogoutPress;
+  final VoidCallback onDenyPress;
+  
+  
+  DialogWithSingleButton({
+    this.title,
+    this.content,
+    this.onLogoutPress,
+    this.onDenyPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+          height: 170,
+          width: 170,
+        child: Padding(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: Column(
+                    children: [
+                      HHTextView(title: title, size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
+                      SizedBox(height: 20),
+                      HHTextView(title: content, size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w400)
+                    ],
+                  )
+              ),
+              SizedBox(height: 20,),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
+                ),
+                child: Center(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: InkWell(
+                        onTap: () => {
+                          // onDenyPress(),
+                          Navigator.pop(context)
+                        },
+                        child: HHTextView(title: "Ok", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
+                    ),
+                ),
+              )
+            ],
+          ),
+        ),
+      )
     );
   }
 }

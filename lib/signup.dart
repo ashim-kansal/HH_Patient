@@ -230,6 +230,38 @@ class _SignupPageState extends State<SignUpPage> {
                             ),
 
                             Container(
+                            width: 295,
+                            margin: EdgeInsets.only(top: 10, bottom: 20),
+                            padding: const EdgeInsets.only(left: 20.0,right: 10.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border : Border.all(color: HH_Colors.borderGrey, width: 1.2),
+                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                            child: DropdownButtonHideUnderline (
+                              child: new DropdownButton<String>(
+                                isExpanded: true,
+                                value: countryDropdown,
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconEnabledColor: Color(0xffC5C4C4),
+                                iconSize: 38,
+                                elevation: 16,
+                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    countryDropdown = newValue;
+                                  });
+                                },
+                              ),
+                              )
+                            ),
+                            
+                            Container(
                               width: 295,
                               // margin: EdgeInsets.only(top: 5),
                               padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
@@ -261,37 +293,7 @@ class _SignupPageState extends State<SignUpPage> {
                               )) 
                             
                             ),
-                          Container(
-                            width: 295,
-                            margin: EdgeInsets.only(top: 10, bottom: 20),
-                            padding: const EdgeInsets.only(left: 20.0,right: 10.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border : Border.all(color: HH_Colors.borderGrey, width: 1.2),
-                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                            child: DropdownButtonHideUnderline (
-                              child: new DropdownButton<String>(
-                                isExpanded: true,
-                                value: countryDropdown,
-                                icon: Icon(Icons.arrow_drop_down),
-                                iconEnabledColor: Color(0xffC5C4C4),
-                                iconSize: 38,
-                                elevation: 16,
-                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
-                                  return new DropdownMenuItem<String>(
-                                    value: value,
-                                    child: new Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    countryDropdown = newValue;
-                                  });
-                                },
-                              ),
-                              )
-                            ),
+                          
 
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 5, 10),
