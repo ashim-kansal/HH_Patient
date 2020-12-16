@@ -8,12 +8,12 @@ import 'package:flutter_app/widgets/tharapist_cell.dart';
 class TherapistPage extends StatefulWidget {
   static const String RouteName = '/therapists';
   final therapists = [
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
   ];
 
   TherapistPage({Key key, this.title}) : super(key: key);

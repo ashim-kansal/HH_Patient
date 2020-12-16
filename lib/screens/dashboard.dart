@@ -150,6 +150,15 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
+                  title: "My Therapists", icon: 'assets/images/ic_therapists.png', onClick: (){
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('My Therapists',false));
+              },),
+              Container(
+                color: HH_Colors.grey,
+                height: 1,
+              ),
+              HHDrawerItem(
                   title: "Support", icon: 'assets/images/ic_support.png'),
               Container(
                 color: HH_Colors.grey,
@@ -237,20 +246,20 @@ class DashboardState extends State<Dashboard> {
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 20, width: 20,),
+                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
                 title: Text('Home'),
 
   ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 20, width: 20,),
+                icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 25, width: 25,),
                 title: Text('Library'),
 
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 20, width: 20,),
+                icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 25, width: 25,),
                 title: Text('Assessment'),
               ),BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 3?'assets/images/ic_therapists_select.png':'assets/images/ic_therapists.png' , height: 20, width: 20,),
+                icon: Image.asset(tabIndex == 3?'assets/images/ic_therapists_select.png':'assets/images/ic_therapists.png' , height: 25, width: 25,),
                 title: Text('Therapists'),
               ),
             ]

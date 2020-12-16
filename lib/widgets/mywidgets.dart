@@ -702,44 +702,43 @@ class NotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-      child: Slidable(
+        child: Slidable(
           actionPane: SlidableDrawerActionPane(),
-          actionExtentRatio: 0.25,
+          // actionExtentRatio: 0.25,
           child: new Container(
             // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-            height: MediaQuery.of(context).size.width / 4,
-            decoration: BoxDecoration(
-              //  color: HH_Colors.color_F3F3F3,
-            ),
-            child: Column(children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                color: HH_Colors.color_F3F3F3,
-                child: new ListTile(
-                  title: Column(children: [
-                  HHTextView(
-                    title: this.title,
-                    color: HH_Colors.grey_35444D,
-                    size: 16,
-                    textweight: FontWeight.w400,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: HHTextView(
-                      title: this.subtitle,
-                      color: HH_Colors.color_92ABBB,
-                      size: 14,
-                      textweight: FontWeight.w300,
-                    ),
-                  )
-              ],),
-              )
-            ),
-            ],)
+            // height: MediaQuery.of(context).size.width / 4,
+              decoration: BoxDecoration(
+                //  color: HH_Colors.color_F3F3F3,
+              ),
+              child: Column(children: [
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                    color: HH_Colors.color_F3F3F3,
+                    child: new ListTile(
+                      title: Column(children: [
+                        HHTextView(
+                          title: this.title,
+                          color: HH_Colors.grey_35444D,
+                          size: 16,
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: HHTextView(
+                            title: this.subtitle,
+                            color: HH_Colors.color_92ABBB,
+                            size: 14,
+                          ),
+                        )
+                      ],),
+                    )
+                ),
+              ],)
           ),
           secondaryActions: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 1),
+              // height: MediaQuery.of(context).size.width / 4,
+              // margin: EdgeInsets.only(bottom: 5),
               child: new IconSlideAction(
 
                 color: Colors.red,

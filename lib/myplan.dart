@@ -29,25 +29,24 @@ class MyPlansState extends State<MyPlans> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(title: HHString.hh, child: Column(
-      mainAxisAlignment : MainAxisAlignment.spaceBetween,
       children: [
-        // Container(
-        //   padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-        //   child: Text(
-        //     'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        //     textAlign: TextAlign.center,
-        //     style: TextStyle(color: Color(0xff707070), fontSize: 16),
-        //   ),
-        // ),
-        Flexible(
+        Container(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Text(
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Color(0xff707070), fontSize: 16),
+          ),
+        ),
+        Expanded(
             child: PageView(
               controller: pagerController,
               children: [
                 PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 0, onClick: (){
-                  // if(widget.isUpdate)
-                  Navigator.pop(context);
-                  // else
-                  Navigator.pushNamed(context, QuestionairePage.RouteName);
+                  if(widget.isUpdate)
+                    Navigator.pop(context);
+                  else
+                    Navigator.pushNamed(context, QuestionairePage.RouteName);
 
                 },),
                 PlanWidget(title: HHString.programHeading, program_type: HHString.program, desc: HHString.desc, price: 1, onClick: (){}),

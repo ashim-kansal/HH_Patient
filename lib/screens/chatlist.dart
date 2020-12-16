@@ -7,12 +7,12 @@ import 'package:flutter_app/widgets/tharapist_cell.dart';
 class ChatListPage extends StatefulWidget {
   static const String RouteName = '/chat_users';
   final users = [
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
+    'Rejina Freak',
   ];
 
   ChatListPage({Key key, this.title}) : super(key: key);
