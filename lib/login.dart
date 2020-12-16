@@ -1,13 +1,19 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
+import 'package:flutter_app/model/loginmodel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'dart:developer' as developer;
+
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   static const String RouteName = '/login';
@@ -81,15 +87,35 @@ class _LoginPageState extends State<LoginPage> {
       emailerror = false;
       pwderror = false;
     });
-    Navigator.pop(context);
-    Navigator.pushNamed(context, Dashboard.RouteName);
+
+    loginModel(email, password);
+   
   }
 
-  // void checkIfValidate(email, password){
-  //   var flag = true;
+  //API call 
 
-   
-  // }
+    // ignore: missing_return
+    Future<LoginModel> loginModel(String email, String password) async {
+      final url = "http://ec2-65-0-102-116.ap-south-1.compute.amazonaws.com:4000/api/v1/admin/login";
+
+      print(url);
+
+      final response = await http.post(url, 
+        body: jsonEncode(<String, String>{
+          email: email,
+          password: password
+        })
+      );
+
+      developer.log(
+        "response",
+         name: jsonEncode(response),
+      );
+      print(response);
+    }
+    // Navigator.pop(context);
+    // Navigator.pushNamed(context, Dashboard.RouteName);
+
 
   @override
   Widget build(BuildContext context) {

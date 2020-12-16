@@ -25,6 +25,11 @@ dependencies:
   flutter_slidable:
   flutter:
     sdk: flutter
+  flutter_bloc: ^3.0.0
+  http: ^0.12.0+4
+  meta: ^1.1.6
+  equatable: ^1.0.0
+  # shared_preferences: ^0.5.12
     
 
 
