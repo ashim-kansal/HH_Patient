@@ -106,7 +106,7 @@ class HHHomeButton extends StatelessWidget {
           ),
           Container(
             color: HH_Colors.light_accentcolor,
-            padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+            padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 30.0),
             child: Center(
               child: Icon(
                 Icons.arrow_forward_ios_rounded,
