@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
 
     // ignore: missing_return
     Future<LoginModel> loginModel(String email, String password) async {
-      final url = "http://ec2-65-0-102-116.ap-south-1.compute.amazonaws.com:4000/api/v1/admin/login";
+      final url = HHString.baseURL +"/api/v1/admin/login";
 
       print(url);
 
@@ -107,11 +107,10 @@ class _LoginPageState extends State<LoginPage> {
         })
       );
 
-      developer.log(
-        "response",
-         name: jsonEncode(response),
-      );
-      print(response);
+      debugPrint('$response');
+
+      print(response.body);
+      print(response.statusCode);
     }
     // Navigator.pop(context);
     // Navigator.pushNamed(context, Dashboard.RouteName);
