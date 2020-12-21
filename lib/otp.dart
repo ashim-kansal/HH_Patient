@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/models/AuthModel.dart';
 import 'package:flutter_app/resetpassword.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
 
 class OtpPage extends StatefulWidget {
   static const String RouteName = '/otp';
@@ -53,6 +59,62 @@ class _OtpState extends State<OtpPage> {
       secondinput.dispose();
       thirdinput.dispose();
       fourthinput.dispose();
+    }
+
+    //API call
+    // ignore: missing_return
+    Future<LoginResponseModel> _otpAPIHandler(String otp) async {
+      final url = HHString.baseURL +"/api/v1/user/verifyOtp";
+      
+      final response = await http.post(url, 
+      headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "otp": otp,
+          "userId": "5fd9c6aa9a512f3059c0f271"
+        })
+      );
+      
+      var res = json.decode(response.body);
+      if(response.statusCode == 200){
+        showToast(res["responseMessage"]);
+        if(res["responseCode"] == 200){
+          Navigator.pop(context);
+          Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+          return LoginResponseModel.fromJson(json.decode(response.body));
+        }
+      }else {
+        throw Exception('Failed to load data!');
+      }
+    }
+
+    //Resend OTP API call
+    Future<LoginResponseModel> _resendOTPHandler() async {
+      final url = HHString.baseURL +"/api/v1/user/resendOtp";
+      
+      final response = await http.post(url, 
+      headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "userId": "5fd9c6aa9a512f3059c0f271"
+        })
+      );
+      
+      var res = json.decode(response.body);
+      if(response.statusCode == 200){
+        showToast(res["responseMessage"]);
+        if(res["responseCode"] == 200){
+          return LoginResponseModel.fromJson(json.decode(response.body));
+        }
+      }else {
+        throw Exception('Failed to load data!');
+      }
+    }
+
+    //show Toast
+    showToast(String message){
+      Toast.show(message, 
+      context, 
+      duration: Toast.LENGTH_LONG, 
+      gravity:  Toast.BOTTOM);
     }
 
   @override
@@ -216,11 +278,13 @@ class _OtpState extends State<OtpPage> {
         );
         return;
       }
-
-      Navigator.pop(context);
-      Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-    
+      
+      String otp = controller1.text+controller2.text+controller3.text+controller4.text;
+     
+     _otpAPIHandler(otp);
     }
+
+    
 
     return MyWidget(
       title: 'OTP Verification',

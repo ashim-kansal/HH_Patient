@@ -1,13 +1,17 @@
 import 'dart:convert';
-import 'dart:developer' as developer;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
-import 'package:flutter_app/model/loginmodel.dart';
+import 'package:flutter_app/models/AuthModel.dart';
+import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toast/toast.dart';
+
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
@@ -27,16 +31,11 @@ class _LoginPageState extends State<LoginPage> {
   var pwderror = false;
   bool securepwd = true;
   bool isChecked = true;
+  bool isApiCallProcess = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void dispose() {
-    
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   void showPwd(){
     // print("action");
@@ -89,28 +88,39 @@ class _LoginPageState extends State<LoginPage> {
 
   //API call 
 
-    // ignore: missing_return
-    Future<LoginModel> loginModel(String email, String password) async {
-      final url = "http://ec2-65-0-102-116.ap-south-1.compute.amazonaws.com:4000/api/v1/admin/login";
-
-      print(url);
-
-      final response = await http.post(url, 
-        body: jsonEncode(<String, String>{
-          email: email,
-          password: password
-        })
-      );
-
-      developer.log(
-        "response",
-         name: jsonEncode(response),
-      );
-      print(response);
+  // ignore: missing_return
+  Future<LoginResponseModel> loginModel(String emailInput, String passwordInput) async {
+    final url = HHString.baseURL +"/api/v1/user/login";
+    
+    final response = await http.post(url, 
+    headers: {"Content-Type": "application/json"},
+      body: jsonEncode(<String, String>{
+        "email": emailInput,
+        "password": passwordInput,
+        "deviceToken": "test"
+      })
+    );
+    
+    var res = json.decode(response.body);
+    if(response.statusCode == 200){
+      showToast(res["responseMessage"]);
+      if(res["responseCode"] == 200){
+        Navigator.pop(context);
+        Navigator.pushNamed(context, Dashboard.RouteName);
+        return LoginResponseModel.fromJson(json.decode(response.body));
+      }
+    }else {
+      throw Exception('Failed to load data!');
     }
-    // Navigator.pop(context);
-    // Navigator.pushNamed(context, Dashboard.RouteName);
+  }
 
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                   Navigator.pushNamed(context, ForgotPasswordPage.RouteName);
                 },
                 child: Container(

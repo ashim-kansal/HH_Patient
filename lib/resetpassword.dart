@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/otp.dart';
-import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/models/AuthModel.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   static const String RouteName = '/reset_password';
@@ -62,14 +66,47 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       return;
     }
 
-     setState(() {
-        widget.pwderror = false;
-        widget.cpwderror = false;
-      });
+    setState(() {
+      widget.pwderror = false;
+      widget.cpwderror = false;
+    });
 
-    Navigator.pop(context);
-    Navigator.pushNamed(context, LoginPage.RouteName);
-                                    
+    _resetPwdAPIHandler(password, cPassword);                                
+  }
+
+  //API call
+  // ignore: missing_return
+  Future<LoginResponseModel> _resetPwdAPIHandler(String password, String cPassword) async {
+    final url = HHString.baseURL +"/api/v1/user/resetPassword";
+      
+    final response = await http.post(url, 
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(<String, String>{
+        "password": password,
+        "confirmPassword": cPassword,
+        "userId": "5fd9c6aa9a512f3059c0f271"
+      })
+    );
+      
+    var res = json.decode(response.body);
+    if(response.statusCode == 200){
+      showToast(res["responseMessage"]);
+      if(res["responseCode"] == 200){
+        Navigator.pop(context);
+        Navigator.pushNamed(context, LoginPage.RouteName);
+        return LoginResponseModel.fromJson(json.decode(response.body));
+      }
+    }else {
+      throw Exception('Failed to load data!');
+    }
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override

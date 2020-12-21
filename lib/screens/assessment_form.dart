@@ -46,20 +46,20 @@ class AssessmentFormState extends State<AssessmentFormPage> {
             ),
             SizedBox(height: 10,),
             Expanded(
-                child: ListView.separated(
-              itemCount: widget.data.length,
-              itemBuilder: (context, index) {
-                return AssessmentQuestionCell(
-                  title: 'Do you feel you are a normal drinker?',
-                  quesType: widget.data[index].quesType,
-                  completed: false,
-                  onClick: () {},
-                );
-              },
-              separatorBuilder: (context, index) {
-                return Divider();
-              },
-            )),
+              child: ListView.separated(
+                itemCount: widget.data.length,
+                itemBuilder: (context, index) {
+                  return AssessmentQuestionCell(
+                    title: 'Do you feel you are a normal drinker?',
+                    quesType: widget.data[index].quesType,
+                    completed: false,
+                    onClick: () {},
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+              )),
             SizedBox(height: 10,),
             widget.enable? HHButton(title: 'Submit', type: 2,isEnable: true, onClick: () {
 
