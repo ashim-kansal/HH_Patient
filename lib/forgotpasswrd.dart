@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/AuthModel.dart';
 import 'package:flutter_app/otp.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
+
+import 'package:http/http.dart' as http;
 
 class ForgotPasswordPage extends StatefulWidget {
   static const String RouteName = '/forgot_password';
@@ -40,9 +47,45 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
       widget.error = false;
     });
 
-    Navigator.pop(context);
-    Navigator.pushNamed(context, OtpPage.RouteName);
+    _forgotPwd(email);
   }
+
+  // API call
+
+  // ignore: missing_return
+  Future<ForgotPasswordModel> _forgotPwd(String emailInput) async {
+    final url = HHString.baseURL +"/api/v1/user/forgotPassword";
+    
+    final response = await http.post(url, 
+    headers: {"Content-Type": "application/json"},
+      body: jsonEncode(<String, String>{
+        "email": emailInput,
+      })
+    );
+    
+    var res = json.decode(response.body);
+
+    if(response.statusCode == 200){
+      showToast(res["responseMessage"]);
+      if(res["responseCode"] == 200){
+        
+        Navigator.pop(context);
+        Navigator.pushNamed(context, OtpPage.RouteName);
+        return ForgotPasswordModel.fromJson(json.decode(response.body));
+      }
+    }else {
+      throw Exception('Failed to load data!');
+    }
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
+
 
   @override
   Widget build(BuildContext context) {

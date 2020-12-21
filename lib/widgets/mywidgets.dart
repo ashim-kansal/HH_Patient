@@ -289,7 +289,7 @@ class HHEditTextState extends State<HHEditText> {
           suffixIcon: widget.showeye??false
               ?
               IconButton(
-                icon: Icon( Icons.remove_red_eye, size: 20, color: widget.obscureText?? false ? HH_Colors.accentColor: Color(0xffCBCBCB)),
+                icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
                 onPressed: () => widget.onClickEye(),
               )
               // const Icon(
@@ -813,6 +813,20 @@ class DialogWithSingleButton extends StatelessWidget {
           ),
         ),
       )
+    );
+  }
+}
+
+class ToastMessage extends StatelessWidget{
+  String message ="";
+  String type ="";
+
+  ToastMessage({@required this.message, @required this.type});
+
+  @override 
+  Widget build(BuildContext context){
+    return Container(
+
     );
   }
 }

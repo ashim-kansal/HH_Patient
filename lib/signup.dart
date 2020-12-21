@@ -1,9 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/models/AuthModel.dart';
 import 'package:flutter_app/myplan.dart';
+import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
+
+import 'package:http/http.dart' as http;
 
 class SignUpPage extends StatefulWidget {
   static const String RouteName = '/signup';
@@ -33,7 +41,7 @@ class _SignupPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  String stateDropdown = 'Select State';
+  String stateDropdown = 'Select Province';
   String countryDropdown = 'Select Country';
   String pwdValidation = "Please enter a valid password";
   bool securepwd = true;
@@ -95,8 +103,51 @@ class _SignupPageState extends State<SignUpPage> {
     setState(() {
       pwdValidation = "Please enter a valid password";
     });
+
+    _registerApiHandler(fname, lname, email, location, password, number);
     Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
   }
+
+  //api call
+
+  // ignore: missing_return
+  Future<SignupModel> _registerApiHandler(String firstname, String lastname, String email, String location, String password, String number) async {
+      final url = HHString.baseURL +"/api/v1/user/signUp";
+      
+      final response = await http.post(url, 
+      headers: {"Content-Type": "application/json"},
+        body: jsonEncode(<String, String>{
+          "appLanguage": "",
+          "firstName": firstname,
+          "lastName": lastname,
+          "email": email,
+          "mobileNumber": number,
+          "address": location,
+          "password": password,
+          "deviceToken": ""
+        })
+      );
+      
+      var res = json.decode(response.body);
+      if(response.statusCode == 200){
+        showToast(res["responseMessage"]);
+        if(res["responseCode"] == 200){
+          Navigator.pop(context);
+          Navigator.pushNamed(context, Dashboard.RouteName);
+          return SignupModel.fromJson(json.decode(response.body));
+        }
+      }else {
+        throw Exception('Failed to load data!');
+      }
+    }
+
+    //show Toast
+    showToast(String message){
+      Toast.show(message, 
+      context, 
+      duration: Toast.LENGTH_LONG, 
+      gravity:  Toast.BOTTOM);
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -231,40 +282,41 @@ class _SignupPageState extends State<SignUpPage> {
                             ),
 
                             Container(
-                            width: 295,
-                            margin: EdgeInsets.only(top: 10, bottom: 20),
-                            padding: const EdgeInsets.only(left: 20.0,right: 10.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              border : Border.all(color: HH_Colors.borderGrey, width: 1.2),
-                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                            child: DropdownButtonHideUnderline (
-                              child: new DropdownButton<String>(
-                                isExpanded: true,
-                                value: countryDropdown,
-                                icon: Icon(Icons.arrow_drop_down),
-                                iconEnabledColor: Color(0xffC5C4C4),
-                                iconSize: 38,
-                                elevation: 16,
-                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
-                                  return new DropdownMenuItem<String>(
-                                    value: value,
-                                    child: new Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    countryDropdown = newValue;
-                                  });
-                                },
-                              ),
+                              width: 295,
+                              margin: EdgeInsets.only(top: 0, bottom: 10),
+                              padding: const EdgeInsets.only(left: 20.0,right: 10.0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                border : Border.all(color: HH_Colors.borderGrey, width: 1.2),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                              child: DropdownButtonHideUnderline (
+                                child: new DropdownButton<String>(
+                                  isExpanded: true,
+                                  value: countryDropdown,
+                                  icon: Icon(Icons.arrow_drop_down),
+                                  iconEnabledColor: Color(0xffC5C4C4),
+                                  iconSize: 38,
+                                  elevation: 16,
+                                  style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                  items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
+                                    return new DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String newValue) {
+                                    setState(() {
+                                      countryDropdown = newValue;
+                                    });
+                                  },
+                                ),
                               )
                             ),
                             
+                          
                             Container(
                               width: 295,
-                              // margin: EdgeInsets.only(top: 5),
+                              margin: EdgeInsets.only(bottom: 20),
                               padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
@@ -279,9 +331,8 @@ class _SignupPageState extends State<SignUpPage> {
                                 iconSize: 38,
                                 elevation: 16,
                                 style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                items: <String>['Select Province', 'Ontario', 'Ontario'].map((String value) {
+                                items: <String>['Select Province', 'Ontario', 'Toronto'].map((String value) {
                                   return new DropdownMenuItem<String>(
-
                                     value: value,
                                     child: new Text(value),
                                   );
