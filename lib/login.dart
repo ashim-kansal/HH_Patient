@@ -1,18 +1,13 @@
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:developer' as developer;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/model/loginmodel.dart';
-import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/signup.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'dart:developer' as developer;
-
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
@@ -36,12 +31,12 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // void dispose() {
+  void dispose() {
     
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   void showPwd(){
     // print("action");
