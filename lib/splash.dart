@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 
 class Splash extends StatefulWidget{
@@ -36,7 +37,7 @@ class SplashState extends State<Splash>{
             ()=>{
                   Navigator.pop(context),
                   Navigator.pushNamed(context, Dashboard.RouteName)
-                }
+    }
     );
   }
   @override

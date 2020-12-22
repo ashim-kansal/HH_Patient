@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Assessment_services.dart';
+import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/assessment_cell.dart';
@@ -16,20 +18,33 @@ class MyAssessmentState extends State<MyAssessmentPage>{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.separated(
-      itemCount: widget.assessments.length,
-      itemBuilder: (context, index) {
-        return AssessmentCell(name: widget.assessments[index], completed: index%2 == 0, onClick: (){
-          Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments(
-            widget.assessments[index],index%2 == 0
-          ));
-        },);
+    return FutureBuilder<GetAssessmentResponse>(
+        future: getAllAssessments(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Text("Error");
+            }
+            return Container(
+              child: ListView.separated(
+                itemCount: snapshot.data.results.length,
+                itemBuilder: (context, index) {
+                  return AssessmentCell(name: snapshot.data.results[index].title, completed: snapshot.data.results[index].isSubmit, onClick: (){
+                    Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: AssessmentArguments(
+                        snapshot.data.results[index]
+                    ));
+                  },);
 
-      },
-      separatorBuilder: (context, index) {
-        return Divider();
-      },
-    ),);
+                },
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+              ),);
+
+
+          } else
+            return CircularProgressIndicator();
+        });
+
   }
 }

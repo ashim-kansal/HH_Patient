@@ -9,6 +9,7 @@ import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:toast/toast.dart';
 
@@ -105,6 +106,11 @@ class _LoginPageState extends State<LoginPage> {
     if(response.statusCode == 200){
       showToast(res["responseMessage"]);
       if(res["responseCode"] == 200){
+        // obtain shared preferences
+        final prefs = await SharedPreferences.getInstance();
+
+// set value
+        prefs.setString('token', res["result"]["token"]);
         Navigator.pop(context);
         Navigator.pushNamed(context, Dashboard.RouteName);
         return LoginResponseModel.fromJson(json.decode(response.body));

@@ -4,11 +4,12 @@ import 'package:flutter_app/utils/colors.dart';
 
 class TharapistCell extends StatelessWidget {
   var name = "";
+  String image = "";
   var role = "";
   var showBook = false;
   final VoidCallback onClick;
 
-  TharapistCell({@required this.name, @required this.role, this.showBook, this.onClick});
+  TharapistCell({@required this.name, @required this.role, this.image, this.showBook, this.onClick});
 
 
   @override
@@ -21,11 +22,12 @@ class TharapistCell extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(
-                'assets/images/ic_avatar.png',
-                height: 50,
-                width: 50,
-              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(25.0),
+                child:               Image.network(image, height: 50, width: 50,)
+
+              )
+              ,
               SizedBox(
                 width: 8,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/models/AssessmentModel.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -8,24 +9,11 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 class AssessmentFormPage extends StatefulWidget {
   static const String RouteName = '/assessment_form';
 
-  var title;
-
-  var data = [
-    AssessmentModel(title: 'a', quesType: 0),
-    AssessmentModel(title: 'b', quesType: 1),
-    AssessmentModel(title: 'c', quesType: 0),
-    AssessmentModel(title: 'c', quesType: 1),
-    AssessmentModel(title: 'c', quesType: 0),
-    AssessmentModel(title: 'c', quesType: 1),
-    AssessmentModel(title: 'c', quesType: 0),
-    AssessmentModel(title: 'c', quesType: 1),
-  ];
-
-  var enable = false;
+  Result data;
 
   AssessmentFormPage({
     Key key,
-    @required this.title, this.enable
+    @required this.data
   }) : super(key: key);
 
   @override
@@ -36,23 +24,23 @@ class AssessmentFormState extends State<AssessmentFormPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: widget.title,
+        title: widget.data.title,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.title,
+              widget.data.title,
               style: TextStyle(fontSize: 22, color: HH_Colors.accentColor),
             ),
             SizedBox(height: 10,),
             Expanded(
               child: ListView.separated(
-                itemCount: widget.data.length,
+                itemCount: widget.data.questions.length,
                 itemBuilder: (context, index) {
                   return AssessmentQuestionCell(
-                    title: 'Do you feel you are a normal drinker?',
-                    quesType: widget.data[index].quesType,
-                    completed: false,
+                    title: widget.data.questions[index].questionText,
+                    quesType: widget.data.questions[index].questionType,
+                    completed: widget.data.isSubmit,
                     onClick: () {},
                   );
                 },
@@ -61,9 +49,9 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                 },
               )),
             SizedBox(height: 10,),
-            widget.enable? HHButton(title: 'Submit', type: 2,isEnable: true, onClick: () {
+            widget.data.isSubmit? Container() : HHButton(title: 'Submit', type: 2,isEnable: true, onClick: () {
 
-            }): Container(),
+            }),
           ],
         ));
   }
@@ -74,4 +62,10 @@ class ScreenArguments {
   final bool completed;
 
   ScreenArguments(this.title, this.completed);
+}
+
+class AssessmentArguments {
+  final Result result;
+
+  AssessmentArguments(this.result);
 }

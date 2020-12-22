@@ -48,7 +48,7 @@ class AssessmentCell extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(12.0))),
                       child: Text(
-                        completed ? 'Log Now' : 'View',
+                        completed ? 'View' : 'Log Now',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: HH_Colors.accentColor),
                       ),
@@ -60,7 +60,7 @@ class AssessmentCell extends StatelessWidget {
                 ],
               ),
               Text(
-                completed ? 'Submitted' : 'Pending',
+                completed ?'Pending' : 'Submitted',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     fontSize: 15,
@@ -76,7 +76,7 @@ class AssessmentCell extends StatelessWidget {
 
 class AssessmentQuestionCell extends StatelessWidget {
   var title = "";
-  int quesType;
+  String quesType;
   var completed = false;
   final VoidCallback onClick;
 

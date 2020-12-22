@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/tharapist_cell.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TherapistPage extends StatefulWidget {
   static const String RouteName = '/therapists';
-  final therapists = [
-    'Rejina Freak',
-    'Rejina Freak',
-    'Rejina Freak',
-    'Rejina Freak',
-    'Rejina Freak',
-    'Rejina Freak',
-  ];
+
+  var therapists = [];
 
   TherapistPage({Key key, this.title}) : super(key: key);
 
   final String title;
+  String token;
   var error = false;
 
   @override
@@ -26,25 +24,48 @@ class TherapistPage extends StatefulWidget {
 }
 
 class _TherapistState extends State<TherapistPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MyWidget( title: 'Therapists',
-            child: ListView.separated(
-        itemCount: widget.therapists.length,
-          itemBuilder: (context, index) {
-            return TharapistCell(
-              name: widget.therapists[index],
-              role: "Recovery Coach",
-              showBook: true,
-              onClick: () {
-                Navigator.pushNamed(context, BookSessionPage.RouteName);
-              },
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider(color: HH_Colors.accentColor,);
-          },
-        ),
+    return MyWidget( title: widget.title,
+            child:FutureBuilder<GetTherapistsResponse>(
+                future: widget.title == "Therapist" ? getAllTherapists() : getAllPhysicians(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return Text("Error");
+                    }
+
+                    // setState(() {
+                    //   widget.therapists = snapshot.data.result;
+                    // });
+
+                    return ListView.separated(
+                      itemCount: snapshot.data.result.length,
+                      itemBuilder: (context, index) {
+                        return TharapistCell(
+                          name: snapshot.data.result[index].firstName + " " + snapshot.data.result[index].lastName,
+                          role: snapshot.data.result[index].role,
+                          image: snapshot.data.result[index].profilePic,
+                          showBook: true,
+                          onClick: () {
+                            Navigator.pushNamed(context, BookSessionPage.RouteName);
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(color: HH_Colors.accentColor,);
+                      },
+                    );
+                  } else
+                    return CircularProgressIndicator();
+                })
+
     );
   }
 }
