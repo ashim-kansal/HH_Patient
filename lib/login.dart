@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/models/AuthModel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
@@ -32,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
   bool securepwd = true;
   bool isChecked = true;
   bool isApiCallProcess = false;
+
+  String token = "";
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -105,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
     if(response.statusCode == 200){
       showToast(res["responseMessage"]);
       if(res["responseCode"] == 200){
+      
         Navigator.pop(context);
         Navigator.pushNamed(context, Dashboard.RouteName);
         return LoginResponseModel.fromJson(json.decode(response.body));
@@ -275,7 +279,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                   child : Row(
                   children: <Widget>[
-
+                    Text(
+                      "token"+token
+                    ),
                     Checkbox(
                       checkColor: Colors.white,
                       activeColor: HH_Colors.purpleColor,
@@ -323,7 +329,11 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => {
-                              Navigator.pushNamed(context, SignUpPage.RouteName)
+                              print(GetStringToSP("uToken")),
+                              // setState(() {
+                              //   token = GetStringToSP("uToken");
+                              // })
+                              // Navigator.pushNamed(context, SignUpPage.RouteName)
                             }),
                       ],
                     ),

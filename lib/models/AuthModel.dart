@@ -1,3 +1,5 @@
+import 'package:flutter_app/common/SharedPreferences.dart';
+
 class LoginResponseModel {
   final String token;
   final String deviceToken;
@@ -9,6 +11,8 @@ class LoginResponseModel {
   LoginResponseModel({this.token, this.deviceToken, this.appLanguage, this.notificationStatus, this.programSubscribed, this.id});
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
+    print(json["result"]["token"]?? "");
+    SetStringToSP("uToken", json["result"]["token"]?? "");
     return LoginResponseModel(
       token: json["result"]["token"]?? "",
       deviceToken: json["result"]["deviceToken"]?? "",
