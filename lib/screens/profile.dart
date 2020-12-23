@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   static const String RouteName = '/profile';
@@ -284,5 +285,9 @@ class _CreateAccountState extends State<ProfilePage> {
           // backgroundColor: Colors.white,
           // This trailing comma makes auto-formatting nicer for build methods.
         ));
+  }
+
+  getProfileDetails(){
+
   }
 }

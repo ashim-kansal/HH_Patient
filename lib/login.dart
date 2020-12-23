@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/models/AuthModel.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:toast/toast.dart';
 
@@ -85,38 +88,32 @@ class _LoginPageState extends State<LoginPage> {
       pwderror = false;
     });
 
-    loginModel(email, password);
+    APIService apiService = new APIService();
+
+    apiService.loginAPIHandler(email, password).then(
+      (value) => {
+
+        showToast(value.responseMsg),
+        // ignore: unrelated_type_equality_checks
+        if (value.responseCode == 200) {
+          SetStringToSP("token", value.token),
+
+          Timer(Duration(seconds: 2),
+            ()=>{
+                  Navigator.pop(context),
+                  Navigator.pushNamed(context, Dashboard.RouteName)
+            }
+          ),
+        }
+      });
+    // loginModel(email, password);
    
   }
 
   //API call 
 
   // ignore: missing_return
-  Future<LoginResponseModel> loginModel(String emailInput, String passwordInput) async {
-    final url = HHString.baseURL +"/api/v1/user/login";
-    
-    final response = await http.post(url, 
-    headers: {"Content-Type": "application/json"},
-      body: jsonEncode(<String, String>{
-        "email": emailInput,
-        "password": passwordInput,
-        "deviceToken": "test"
-      })
-    );
-    
-    var res = json.decode(response.body);
-    if(response.statusCode == 200){
-      showToast(res["responseMessage"]);
-      if(res["responseCode"] == 200){
-      
-        Navigator.pop(context);
-        Navigator.pushNamed(context, Dashboard.RouteName);
-        return LoginResponseModel.fromJson(json.decode(response.body));
-      }
-    }else {
-      throw Exception('Failed to load data!');
-    }
-  }
+  
 
   //show Toast
   showToast(String message){
@@ -279,9 +276,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                   child : Row(
                   children: <Widget>[
-                    Text(
-                      "token"+token
-                    ),
                     Checkbox(
                       checkColor: Colors.white,
                       activeColor: HH_Colors.purpleColor,
@@ -330,9 +324,6 @@ class _LoginPageState extends State<LoginPage> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => {
                               print(GetStringToSP("uToken")),
-                              // setState(() {
-                              //   token = GetStringToSP("uToken");
-                              // })
                               // Navigator.pushNamed(context, SignUpPage.RouteName)
                             }),
                       ],

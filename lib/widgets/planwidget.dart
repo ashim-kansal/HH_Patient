@@ -6,7 +6,7 @@ class PlanWidget extends StatefulWidget {
 
   String title;
   String program_type;
-  var price = 0;
+  String price = '0';
   String desc;
 
   bool enable;
@@ -56,7 +56,7 @@ class PlanWidgetState extends State<PlanWidget> {
               SizedBox.fromSize(size: Size(8, 20),),
 
               widget.enable ?? true ? RaisedButton(
-                  child: Text( widget.price <= 0 ? 'Free':'Buy Now', style: TextStyle(color: Colors.white),),
+                  child: Text( widget.price.compareTo('0') == 1 ? 'Free':'Buy Now', style: TextStyle(color: Colors.white),),
                   onPressed: (){
                     widget.onClick();
                   },

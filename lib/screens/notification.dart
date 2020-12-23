@@ -7,7 +7,6 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationPage extends StatefulWidget {
   static const String RouteName = '/notification';
@@ -28,51 +27,55 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
 
-    DateTime time = DateTime.now();
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text("Notification", style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          iconTheme: IconThemeData(
+            color: Colors.white, //change your color here
+          ),
+          backgroundColor: Theme.of(context).accentColor,
+          elevation: 0,
 
-    return new MyWidget(
-      title: 'Notification',
-      sideMargin: 15,
-        child: new Container(
+        ),
+
+        body:  new Container(
             width: double.infinity,
             height: double.infinity,
             color: Colors.white,
-            child: SingleChildScrollView(
-              child: Column(children: [
-                Padding(padding: EdgeInsets.only(bottom: 5),
-                  child: NotificationList(title: 
-                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                      subtitle: "Now"),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 5),
-                  child: NotificationList(title: 
-                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                      subtitle: "Now"),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 5),
-                  child: NotificationList(title: 
-                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                      subtitle: "Now"),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 5),
-                  child: NotificationList(title: 
-                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                      subtitle: "Now"),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 5),
-                  child: NotificationList(title: 
-                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                      subtitle: "Now"),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 5),
-                  child: NotificationList(title: 
-                    "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                      subtitle: "Now"),
-                ),
+            child: Column(children: [
+              NotificationList(title:
+              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                  subtitle: "Now"
+              ),
+              SizedBox(height: 1),
+              NotificationList(title:
+              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                  subtitle: "Now"
+              ),
+              SizedBox(height: 1),
+              NotificationList(title:
+              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                  subtitle: "Now"
+              ),
+              SizedBox(height: 1),
+              NotificationList(title:
+              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                  subtitle: "Now"
+              ),
+              SizedBox(height: 1),
+              NotificationList(title:
+              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                  subtitle: "Now"
+              ),
+              SizedBox(height: 1),
+              NotificationList(title:
+              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                  subtitle: "Now"
+              ),
 
-              ],),
-              ) 
-            ));
+            ],)
+        ));
   }
 
 

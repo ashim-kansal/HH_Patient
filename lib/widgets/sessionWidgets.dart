@@ -52,23 +52,23 @@ class SessionCard extends StatelessWidget {
                 Row(
                   children: [
                     ButtonTheme(
-                      height: 35,
-                      minWidth: 35,
+                      height: 40,
+                      minWidth: 40,
                       child: RaisedButton(
+
                         color: Colors.white,
                         child: Icon(Icons.chat
                           , color: HH_Colors.primaryColor, size: 18,),
                         onPressed: (){
                           // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
                         },
-                        shape: CircleBorder(),
-
+                        shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                       ),
                     ),
 
                     ButtonTheme(
-                        height: 35,
-                        minWidth: 35,
+                        height: 40,
+                        minWidth: 40,
                         child: RaisedButton(
 
                             color: Colors.white,
@@ -76,7 +76,7 @@ class SessionCard extends StatelessWidget {
                             onPressed: (){
                               // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
                             },
-                            shape: CircleBorder()
+                          shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                         )),
 
                   ],
@@ -247,7 +247,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           onPressed: (){
                             Navigator.pushNamed(context, ChatPage.RouteName);
                           },
-                          shape: CircleBorder(),
+                          shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
 
                         ),
                       ),
@@ -262,7 +262,7 @@ class UpcomingSessionItem extends StatelessWidget {
                               onPressed: (){
                                 Navigator.pushNamed(context, ReviewPage.RouteName);
                               },
-                              shape: CircleBorder()
+                            shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
                         Navigator.pushNamed(context, BookSessionPage.RouteName);

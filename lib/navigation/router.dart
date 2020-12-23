@@ -97,8 +97,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case NotificationPage.RouteName:
       return MaterialPageRoute(builder: (context) => NotificationPage());
     case AssessmentFormPage.RouteName:
-      final ScreenArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));
+      final AssessmentArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => AssessmentFormPage(data: args.result));
     case AboutUs.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AboutUs(title: args.title));

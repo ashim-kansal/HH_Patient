@@ -7,17 +7,21 @@ class LoginResponseModel {
   final bool notificationStatus;
   final bool programSubscribed;
   final String id;
+  final String responseMsg;
+  final String responseCode;
 
-  LoginResponseModel({this.token, this.deviceToken, this.appLanguage, this.notificationStatus, this.programSubscribed, this.id});
+  LoginResponseModel({this.token, this.deviceToken, this.appLanguage, this.notificationStatus, this.programSubscribed, this.id, this.responseMsg, this.responseCode});
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
-    print(json["result"]["token"]?? "");
+    print(json["responseMessage"]);
     SetStringToSP("uToken", json["result"]["token"]?? "");
     return LoginResponseModel(
       token: json["result"]["token"]?? "",
       deviceToken: json["result"]["deviceToken"]?? "",
       appLanguage: json["result"]["appLanguage"]?? "",
-      notificationStatus: json["result"]["notificationStatus"]?? ""
+      notificationStatus: json["result"]["notificationStatus"]?? "",
+      responseMsg: json["responseMessage"]?? "Some error occured. Please try again.",
+      responseCode: json["responseMessage"]?? 404
     );
   }
 }
