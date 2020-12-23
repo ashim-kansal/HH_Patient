@@ -31,13 +31,16 @@ class AssessmentCell extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(name, maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.justify,
+                    child: Text(name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
                         style: TextStyle(
                             fontSize: 18, color: HH_Colors.grey_585858)),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   InkWell(
                     child: Container(
                       width: 70,
@@ -60,7 +63,7 @@ class AssessmentCell extends StatelessWidget {
                 ],
               ),
               Text(
-                completed ?'Pending' : 'Submitted',
+                completed ? 'Submitted' : 'Pending',
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     fontSize: 15,
@@ -89,44 +92,44 @@ class AssessmentQuestionCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(top: 10, bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("",
-              textAlign: TextAlign.start,
-              overflow: TextOverflow.clip,
-              style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070)),
-          quesType == 0
-              ? getInputQuest()
-              : quesType == 1
-                  ? getSingleChoiceQuest()
-                  : getMultiChoiceQuest(),
+          quesType == 'text'
+              ? getInputQuest(title)
+              : quesType == 'YESNO'
+                  ? getSingleChoiceQuest(title)
+                  : getMultiChoiceQuest(title),
         ],
       ),
     );
   }
 
-  Widget getInputQuest() {
-    return InputBoxQuestion(ques: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry?');
+  Widget getInputQuest(String question) {
+    return InputBoxQuestion(ques: question);
   }
 
-  Widget getSingleChoiceQuest() {
-    return MySingleChoiceQuesWidget(ques: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry?');
+  Widget getSingleChoiceQuest(String question) {
+    return MySingleChoiceQuesWidget(ques: question);
   }
 
-  Widget getMultiChoiceQuest() {
-    return CheckBoxQuestion(ques: HHString.sample_ques);
+  Widget getMultiChoiceQuest(String question) {
+    return CheckBoxQuestion(ques: question);
   }
 }
 
 class MySingleChoiceQuesWidget extends StatefulWidget {
-  var ques;
 
-  MySingleChoiceQuesWidget({@required this.ques});
+  var ques;
+  VoidCallback onPressNo;
+  VoidCallback onPressYes;
+
+  MySingleChoiceQuesWidget({@required this.ques, this.onPressNo, this.onPressYes});
 
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+
 }
 
 class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
@@ -139,28 +142,43 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
     selectedRadio = 0;
     widget.ques ?? "";
   }
+
   setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
+      if(val == 1)
+        widget.onPressYes();
+      if(val == 2)
+        widget.onPressNo();
     });
   }
 
-
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(children:[
-          Text('Q. ', style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
-    Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
-        ]),
-        ButtonBar(
-      alignment: MainAxisAlignment.start,
-
-      children: <Widget>[
-        Row(
-          children: [
-            Radio(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(children: [
+        Text(
+          'Q. ',
+          style: TextStyle(
+              fontSize: 18,
+              color: HH_Colors.accentColor,
+              fontFamily: "ProximaNova",
+              fontWeight: FontWeight.w500),
+        ),
+        Flexible(
+            child: Text(widget.ques,
+                textAlign: TextAlign.start,
+                style: TextStyle(color: HH_Colors.grey_707070, fontSize: 16))),
+      ]),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
+            width: 120,
+            height: 20,
+            child: RadioListTile<int>(
+              title: Text("Yes"),
+              dense: true,
+              // <= here it is !
               value: 1,
               groupValue: selectedRadio,
               activeColor: HH_Colors.accentColor,
@@ -169,27 +187,39 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
                 setSelectedRadio(val);
               },
             ),
-            Text('Yes')
-
-          ],
-        ),
-
-        Row(
-          children: [
-        Radio(
-          value: 2,
-          groupValue: selectedRadio,
-          activeColor: HH_Colors.accentColor,
-          onChanged: (val) {
-            print("Radio $val");
-            setSelectedRadio(val);
-          },
-        ),
-            Text('No')
-          ],
-        )
-      ],
-    )
+          ),
+          SizedBox(
+            width: 150,
+            height: 20,
+            child: RadioListTile<int>(
+              title: Text("No"),
+              dense: true,
+              // <= here it is !
+              value: 2,
+              groupValue: selectedRadio,
+              activeColor: HH_Colors.accentColor,
+              onChanged: (val) {
+                print("Radio $val");
+                setSelectedRadio(val);
+              },
+            ),
+          ),
+          // Row(
+          //   children: [
+          // Radio(
+          //   value: 2,
+          //   groupValue: selectedRadio,
+          //   activeColor: HH_Colors.accentColor,
+          //   onChanged: (val) {
+          //     print("Radio $val");
+          //     setSelectedRadio(val);
+          //   },
+          // ),
+          //     Text('No')
+          //   ],
+          // )
+        ],
+      )
     ]);
   }
 

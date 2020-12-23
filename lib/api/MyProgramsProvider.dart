@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
     final response = await http.get(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
-          'token' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDljNmFhOWE1MTJmMzA1OWMwZjI3MSIsImlhdCI6MTYwODU4MDM2MiwiZXhwIjoxNjA4NjY2NzYyfQ.BYFoupiNHeuhaazy7Pb1hVaq2tzwn3F6cdIBUIHTdbA'
+          'token' : HHString.token
         });
     print(response.body);
     return getProgramsResponseFromJson(response.body);

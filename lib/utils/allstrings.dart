@@ -17,4 +17,10 @@ class HHString{
   static const String sample_ques = "Lorem Ipsum is simply dummy text of the printing and typesetting industry?";
   static const String feedbackTitle = "Feedback";
 
+
+
+  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDljNmFhOWE1MTJmMzA1OWMwZjI3MSIsImlhdCI6MTYwODcyMTI2MSwiZXhwIjoxNjA4ODA3NjYxfQ.oFy_mWFzgqVeH9ca-2xahnIlCTEEjs3mqTNBe0B0GSg";
+
+
+
 }
