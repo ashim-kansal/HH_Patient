@@ -13,13 +13,13 @@ class HHString{
   static const String select_language = "Select Language";
   static const String change_password = "Change Password";
   static const String emailExist = "Email already exist!";
-  static const String emailExistDesc = "We found an account with this email, do you want to login ?";
+  static const String emailExistDesc = "We found an account with this email, do you want to login?";
   static const String sample_ques = "Lorem Ipsum is simply dummy text of the printing and typesetting industry?";
   static const String feedbackTitle = "Feedback";
 
 
 
-  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDljNmFhOWE1MTJmMzA1OWMwZjI3MSIsImlhdCI6MTYwODcyMTI2MSwiZXhwIjoxNjA4ODA3NjYxfQ.oFy_mWFzgqVeH9ca-2xahnIlCTEEjs3mqTNBe0B0GSg";
+  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDljNmFhOWE1MTJmMzA1OWMwZjI3MSIsImlhdCI6MTYwODc1NTgwMiwiZXhwIjoxNjA4ODQyMjAyfQ.ZXoenIr-VC2YnZz4wsiLQ0v1cylzFcu5B67g3cp14Fg";
 
 
 
