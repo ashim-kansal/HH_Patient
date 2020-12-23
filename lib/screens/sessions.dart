@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
@@ -63,13 +65,31 @@ class SessionPageState extends State<SessionPage>{
   }
 
   Widget getUpcomingList(){
-    return ListView.separated(itemBuilder: (context, index){
-      return UpcomingSessionItem(name: 'abc', role: '', onClick: (){}, completed: !isSwitched,);
-    },
-        separatorBuilder: (context, index) {
-          return Divider();
-        },
-        itemCount: isSwitched? 5: 2);
+
+    return FutureBuilder<GetTherapistsResponse>(
+        future: getAllPhysicians(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Text("Error");
+            }
+
+            // setState(() {
+            //   widget.therapists = snapshot.data.result;
+            // });
+
+            return ListView.separated(itemBuilder: (context, index){
+              return UpcomingSessionItem(name: snapshot.data.result[index].firstName, role: '', onClick: (){}, completed: !isSwitched,);
+            },
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+                itemCount: isSwitched? 5: 2);
+          } else
+            return Container(
+              child: Center(child: CircularProgressIndicator(),),
+            );
+        });
 
   }
 

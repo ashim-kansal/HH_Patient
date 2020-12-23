@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Assessment_services.dart';
 import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/models/AssessmentModel.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -11,10 +13,7 @@ class AssessmentFormPage extends StatefulWidget {
 
   Result data;
 
-  AssessmentFormPage({
-    Key key,
-    @required this.data
-  }) : super(key: key);
+  AssessmentFormPage({Key key, @required this.data}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => AssessmentFormState();
@@ -25,35 +24,83 @@ class AssessmentFormState extends State<AssessmentFormPage> {
   Widget build(BuildContext context) {
     return MyWidget(
         title: widget.data.title,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              widget.data.title,
-              style: TextStyle(fontSize: 22, color: HH_Colors.accentColor),
-            ),
-            SizedBox(height: 10,),
-            Expanded(
-              child: ListView.separated(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.data.title,
+                style: TextStyle(
+                    fontSize: 22,
+                    color: HH_Colors.accentColor,
+                    fontFamily: "ProximaNova",
+                    fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                  child: ListView.separated(
                 itemCount: widget.data.questions.length,
                 itemBuilder: (context, index) {
-                  return AssessmentQuestionCell(
-                    title: widget.data.questions[index].questionText,
-                    quesType: widget.data.questions[index].questionType,
-                    completed: widget.data.isSubmit,
-                    onClick: () {},
-                  );
+                  return widget.data.isSubmit
+                      ? buildContainerForQuestionWithAnswer(index)
+                      : buildAssessmentQuestionCellForAnswer(index);
                 },
                 separatorBuilder: (context, index) {
                   return Divider();
                 },
               )),
-            SizedBox(height: 10,),
-            widget.data.isSubmit? Container() : HHButton(title: 'Submit', type: 2,isEnable: true, onClick: () {
-
-            }),
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              widget.data.isSubmit
+                  ? Container()
+                  : HHButton(
+                      title: 'Submit', type: 2, isEnable: true, onClick: () {
+                        submitForm(widget.data);
+              }),
+            ],
+          ),
         ));
+  }
+
+  Column buildContainerForQuestionWithAnswer(int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(widget.data.questions[index].questionText,
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.clip,
+            style: TextStyle(
+                fontSize: 16,
+                color: HH_Colors.grey_707070,
+                fontFamily: "ProximaNova")),
+        Text(widget.data.questions[index].answer??'hhh',
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.clip,
+            style: TextStyle(
+                fontSize: 16,
+                color: HH_Colors.grey_707070,
+                fontWeight: FontWeight.w600,
+                fontFamily: "ProximaNova"))
+      ],
+    );
+  }
+
+  AssessmentQuestionCell buildAssessmentQuestionCellForAnswer(int index) {
+    return AssessmentQuestionCell(
+      title: widget.data.questions[index].questionText,
+      quesType: widget.data.questions[index].questionType,
+      completed: widget.data.isSubmit,
+      onClick: () {},
+    );
+  }
+
+  void submitForm(Result data) {
+    submitAssessments(data);
   }
 }
 

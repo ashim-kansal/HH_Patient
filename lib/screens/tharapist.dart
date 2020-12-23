@@ -54,7 +54,7 @@ class _TherapistState extends State<TherapistPage> {
                           image: snapshot.data.result[index].profilePic,
                           showBook: true,
                           onClick: () {
-                            Navigator.pushNamed(context, BookSessionPage.RouteName);
+                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: snapshot.data.result[index]);
                           },
                         );
                       },
@@ -63,7 +63,9 @@ class _TherapistState extends State<TherapistPage> {
                       },
                     );
                   } else
-                    return CircularProgressIndicator();
+                    return Container(
+                      child: Center(child: CircularProgressIndicator(),),
+                    );
                 })
 
     );
@@ -212,4 +214,11 @@ class TherapistOptionItem extends StatelessWidget {
       ),
     );
   }
+}
+
+class TherapistModel{
+  Result result;
+
+  TherapistModel({@required this.result});
+
 }

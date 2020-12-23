@@ -11,8 +11,21 @@ Future<GetAssessmentResponse> getAllAssessments() async {
   final response = await http.get(url+"/get_Assessment_List",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDljNmFhOWE1MTJmMzA1OWMwZjI3MSIsImlhdCI6MTYwODU4MDM2MiwiZXhwIjoxNjA4NjY2NzYyfQ.BYFoupiNHeuhaazy7Pb1hVaq2tzwn3F6cdIBUIHTdbA'
+        'token' : HHString.token
       });
+  print(response.body);
+  return getAssessmentResponseFromJson(response.body);
+
+}
+
+Future<GetAssessmentResponse> submitAssessments(result) async {
+  final response = await http.post(url+"/submit_AssessmentForm",
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        'token' : HHString.token
+      },
+    body:result
+  );
   print(response.body);
   return getAssessmentResponseFromJson(response.body);
 

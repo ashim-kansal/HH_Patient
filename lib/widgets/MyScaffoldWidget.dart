@@ -26,6 +26,7 @@ class MyWidget extends StatelessWidget{
         body: Material(
             color: Theme.of(context).accentColor,
             child: Container(
+              width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.all(sideMargin??20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
