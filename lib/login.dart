@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
-import 'package:flutter_app/models/AuthModel.dart';
+import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -94,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
       (value) => {
 
         showToast(value.responseMsg),
+        print(value.responseCode),
         // ignore: unrelated_type_equality_checks
         if (value.responseCode == 200) {
           SetStringToSP("token", value.token),
@@ -221,29 +222,10 @@ class _LoginPageState extends State<LoginPage> {
                               child: HHButton(title: "Login", type: 4, isEnable: true, 
                               onClick: (){
                                 loginHandler();
-
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (BuildContext dialogContext) {
-                                //     return CustomAlertDialog(
-                                //       title: HHString.emailExist, 
-                                //       content: HHString.emailExistDesc,
-                                //       actions: [
-                                //         // set up the buttons
-                                //         FlatButton(
-                                //           child: Text("No"),
-                                //           onPressed:  () {},
-                                //         ),
-                                //         FlatButton(
-                                //           child: Text("Yes"),
-                                //           onPressed:  () {},
-                                //         )
-                                //       ],);
-                                //   },
-                                // );
-                                // 
+                               
                               },),
                             ),
+                         
                           ]),
                         ),
                       ],

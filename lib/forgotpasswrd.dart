@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/models/AuthModel.dart';
+import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';

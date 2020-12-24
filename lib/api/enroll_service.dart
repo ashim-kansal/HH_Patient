@@ -1,5 +1,5 @@
 
-import 'package:flutter_app/models/AuthModel.dart';
+import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -29,10 +29,5 @@ class APIService {
     }
   }
 
-  // showToast(String message){
-  //   Toast.show(message, 
-  //   context, 
-  //   duration: Toast.LENGTH_LONG, 
-  //   gravity:  Toast.BOTTOM);
-  // }
+
 }

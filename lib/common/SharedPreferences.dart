@@ -7,10 +7,9 @@ void SetStringToSP (key, value) async {
   prefs.setString(key, value);
 }
 
-GetStringToSP (key) async {
+Future<String> GetStringToSP(key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return String
   String stringValue = prefs.getString(key);
-  print(key);
-  print(stringValue);
-  return stringValue;
+  return stringValue?? "";
 }

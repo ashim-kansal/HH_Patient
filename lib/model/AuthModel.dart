@@ -8,7 +8,7 @@ class LoginResponseModel {
   final bool programSubscribed;
   final String id;
   final String responseMsg;
-  final String responseCode;
+  final int responseCode;
 
   LoginResponseModel({this.token, this.deviceToken, this.appLanguage, this.notificationStatus, this.programSubscribed, this.id, this.responseMsg, this.responseCode});
 
@@ -21,7 +21,7 @@ class LoginResponseModel {
       appLanguage: json["result"]["appLanguage"]?? "",
       notificationStatus: json["result"]["notificationStatus"]?? "",
       responseMsg: json["responseMessage"]?? "Some error occured. Please try again.",
-      responseCode: json["responseMessage"]?? 404
+      responseCode: json["responseCode"]?? 404
     );
   }
 }

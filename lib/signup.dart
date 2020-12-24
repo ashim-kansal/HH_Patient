@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/models/AuthModel.dart';
+import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/allstrings.dart';
