@@ -9,10 +9,12 @@ class SessionCard extends StatelessWidget {
   var name = "";
   var role = "";
   var completed = false;
+  var drname = "";
+  var sdate = "";
   final VoidCallback onClick;
 
   SessionCard(
-      {@required this.name, @required this.role, this.completed, this.onClick});
+      {@required this.name, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class SessionCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('22 Nov, 2020, 1:30 PM', style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                    Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
                     HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
                       Navigator.pushNamed(context, BookSessionPage.RouteName);
@@ -44,10 +46,10 @@ class SessionCard extends StatelessWidget {
                 ),
                 SizedBox(height: 10,),
                 Row(
-                    children: [Text('Group therapy to Patient 1' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
+                    children: [Text(name ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
                     ]),
                 Row(
-                    children: [Text('Dr. Ian Newton' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
+                    children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
                     ]),
                 Row(
                   children: [
@@ -181,10 +183,12 @@ class UpcomingSessionItem extends StatelessWidget {
   var name = "";
   var role = "";
   var completed = false;
+  var drname = "";
+  var sdate = "";
   final VoidCallback onClick;
 
   UpcomingSessionItem(
-      {@required this.name, @required this.role, this.completed, this.onClick});
+      {@required this.name, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +200,7 @@ class UpcomingSessionItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Container(
-              padding: EdgeInsets.fromLTRB(18, 10, 18, 10),
+              padding: EdgeInsets.fromLTRB(18, 10, 10, 10),
               child:
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -206,10 +210,10 @@ class UpcomingSessionItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
-                        Text('AMS Therapy', textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
+                        Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
                       ]),
                       Row(children: [
-                        Text('22 Nov, 2020, 1:30 PM', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                        Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                       ]),
                     ],
                   ),
@@ -247,7 +251,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           onPressed: (){
                             Navigator.pushNamed(context, ChatPage.RouteName);
                           },
-                          shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
+                          shape: CircleBorder( side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
 
                         ),
                       ),
@@ -262,7 +266,7 @@ class UpcomingSessionItem extends StatelessWidget {
                               onPressed: (){
                                 Navigator.pushNamed(context, ReviewPage.RouteName);
                               },
-                            shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
+                            shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
                         Navigator.pushNamed(context, BookSessionPage.RouteName);

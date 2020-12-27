@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -71,35 +72,21 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       widget.cpwderror = false;
     });
 
-    _resetPwdAPIHandler(password, cPassword);                                
+  //API call
+    APIService apiService = new APIService();
+    apiService.resetPwdAPIHandler(password, cPassword).then((value) => {
+       showToast(value.responseMsg),
+      if(value.responseCode == 200){
+        Navigator.pop(context),
+        Navigator.pushNamed(context, LoginPage.RouteName),
+      }
+    });
+    // _resetPwdAPIHandler(password, cPassword);                                
   }
 
   //API call
   // ignore: missing_return
-  Future<LoginResponseModel> _resetPwdAPIHandler(String password, String cPassword) async {
-    final url = HHString.baseURL +"/api/v1/user/resetPassword";
-      
-    final response = await http.post(url, 
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(<String, String>{
-        "password": password,
-        "confirmPassword": cPassword,
-        "userId": "5fd9c6aa9a512f3059c0f271"
-      })
-    );
-      
-    var res = json.decode(response.body);
-    if(response.statusCode == 200){
-      showToast(res["responseMessage"]);
-      if(res["responseCode"] == 200){
-        Navigator.pop(context);
-        Navigator.pushNamed(context, LoginPage.RouteName);
-        return LoginResponseModel.fromJson(json.decode(response.body));
-      }
-    }else {
-      throw Exception('Failed to load data!');
-    }
-  }
+
 
   //show Toast
   showToast(String message){

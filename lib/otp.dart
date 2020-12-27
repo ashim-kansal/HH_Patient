@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -31,12 +34,16 @@ class _OtpState extends State<OtpPage> {
 
   TextEditingController currController = new TextEditingController();
 
+  Timer _timer;
+  int _start = 30;
+
   FocusNode firstinput;
   FocusNode secondinput;
   FocusNode thirdinput;
   FocusNode fourthinput;
 
   @override
+
   void initState() {
     super.initState();
     currController = controller1;
@@ -45,11 +52,31 @@ class _OtpState extends State<OtpPage> {
     secondinput = FocusNode();
     thirdinput = FocusNode();
     fourthinput = FocusNode();
+    
+    startTimer();
   }
 
+   void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
   @override
     void dispose() {
       super.dispose();
+       _timer.cancel();
       controller1.dispose();
       controller2.dispose();
       controller3.dispose();
@@ -61,53 +88,19 @@ class _OtpState extends State<OtpPage> {
       fourthinput.dispose();
     }
 
-    //API call
-    // ignore: missing_return
-    Future<LoginResponseModel> _otpAPIHandler(String otp) async {
-      final url = HHString.baseURL +"/api/v1/user/verifyOtp";
-      
-      final response = await http.post(url, 
-      headers: {"Content-Type": "application/json"},
-        body: jsonEncode(<String, String>{
-          "otp": otp,
-          "userId": "5fd9c6aa9a512f3059c0f271"
-        })
-      );
-      
-      var res = json.decode(response.body);
-      if(response.statusCode == 200){
-        showToast(res["responseMessage"]);
-        if(res["responseCode"] == 200){
-          Navigator.pop(context);
-          Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-          return LoginResponseModel.fromJson(json.decode(response.body));
-        }
-      }else {
-        throw Exception('Failed to load data!');
-      }
-    }
 
-    //Resend OTP API call
-    Future<LoginResponseModel> _resendOTPHandler() async {
-      final url = HHString.baseURL +"/api/v1/user/resendOtp";
-      
-      final response = await http.post(url, 
-      headers: {"Content-Type": "application/json"},
-        body: jsonEncode(<String, String>{
-          "userId": "5fd9c6aa9a512f3059c0f271"
-        })
-      );
-      
-      var res = json.decode(response.body);
-      if(response.statusCode == 200){
-        showToast(res["responseMessage"]);
-        if(res["responseCode"] == 200){
-          return LoginResponseModel.fromJson(json.decode(response.body));
+    //API call
+
+   _resendOtp () async {
+      APIService apiService = new APIService();
+
+      apiService.resendOTPAPIHandler().then((value) => {
+        showToast(value.responseMsg),
+        if(value.responseCode == 200){
+          startTimer()
         }
-      }else {
-        throw Exception('Failed to load data!');
-      }
-    }
+      });
+   }
 
     //show Toast
     showToast(String message){
@@ -281,7 +274,19 @@ class _OtpState extends State<OtpPage> {
       
       String otp = controller1.text+controller2.text+controller3.text+controller4.text;
      
-     _otpAPIHandler(otp);
+    //  _otpAPIHandler(otp);
+      APIService apiService = new APIService();
+
+      apiService.otpAPIHandler(otp).then((value) => {
+        showToast(value.responseMessage),
+        if(value.responseCode == 200){
+          Timer(Duration(seconds: 2),
+            ()=>{
+            Navigator.pop(context),
+            Navigator.pushNamed(context, ResetPasswordPage.RouteName)
+          })
+        }
+      });
     }
 
     
@@ -343,12 +348,12 @@ class _OtpState extends State<OtpPage> {
                             ],
                           )),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                        padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Resend code in: 00:48'),
+                            Text('Resend code in: $_start'),
                             RaisedButton(
 
                                 child: Icon(Icons.arrow_right_alt_rounded,
@@ -365,6 +370,48 @@ class _OtpState extends State<OtpPage> {
                             )
                           ],
                         ),
+                      ),
+                      Container(
+                        child: _start == 00.00 ? (
+
+                          Container(
+                            margin: EdgeInsets.only(top: 10, right: 40, left: 40),
+                            padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                            decoration: BoxDecoration(
+                                // shape: BoxShape.rectangle,
+                                border: Border.all(color: HH_Colors.borderGrey),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                            child: Center(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: '',
+                                  style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                  children: <TextSpan>[
+                                    TextSpan(text: 'Resend OTP', 
+                                      style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => {
+                                          _resendOtp()
+                                        }),
+                                  ],
+                                ),
+                              )
+                            )
+                          )
+
+                          // Container(
+                          //   margin: EdgeInsets.only(top: 20),
+                          //   child: Row(
+                          //     mainAxisSize: MainAxisSize.max,
+                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //     children: [
+                          //       HHButton(title: "Resend OTP", type: 4, onClick: () {
+                          //         _resendOtp();
+                          //       },)
+                          //     ],
+                          //   ),
+                          // )
+                        ): null
                       )
                     ],
                   ),

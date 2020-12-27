@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
@@ -10,8 +11,10 @@ import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/library.dart';
 import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/settings.dart';
+import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -26,6 +29,9 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   var tabIndex = 0;
   String title = 'Dashboard';
+  String name;
+  String email;
+  String profileImage = "";
 
   List<Widget> listScreens;
   List<String> listNames = [
@@ -43,7 +49,24 @@ class DashboardState extends State<Dashboard> {
       MyAssessmentPage(),
       TherapistOptionsPage()
     ];
+
+    getProfile();
   }
+
+  void getProfile() {
+    UserAPIServices userAPIServices = new UserAPIServices();
+
+    userAPIServices.getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          name = value.result.firstName+" "+value.result.lastName;
+          email = value.result.email;
+          profileImage = value.result.profilePic;
+        })
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) =>
 
@@ -99,10 +122,17 @@ class DashboardState extends State<Dashboard> {
                   },
                   child: Row(
                     children: [
+                      profileImage == ""?
                       Image.asset(
                         'assets/images/ic_avatar.png',
                         height: 50,
                         width: 50,
+                      ) : CircleAvatar(
+                        backgroundImage: NetworkImage(profileImage),
+                        radius: 30,
+                        // Image.network(profileImage,
+                        // height: 50,
+                        // width: 50,),
                       ),
                       SizedBox(
                         width: 8,
@@ -112,8 +142,11 @@ class DashboardState extends State<Dashboard> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Hi John Doe", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.accentColor),),
-                          Text("john.doe@yahoo.com", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
+                          Text(name??"Hi John Doe", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.accentColor),),
+                          FittedBox(
+                            child: Text(email??"john.doe@yahoo.com", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.grey_35444D, fontSize: 10),),
+                            fit: BoxFit.fill,
+                            )
                         ],
                         
                       )
@@ -193,7 +226,7 @@ class DashboardState extends State<Dashboard> {
               ),
               HHDrawerItem2(title: "Terms & Conditions", onClick: (){
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('Terms & Conditions',false ));
+                Navigator.pushNamed(context, TermsPage.RouteName, arguments: ScreenArguments('Terms & Conditions',false ));
               }),
               Container(
                 color: HH_Colors.grey,
@@ -201,7 +234,7 @@ class DashboardState extends State<Dashboard> {
               ),
               HHDrawerItem2(title: "Privacy Policy", onClick: (){
                 Navigator.pop(context);
-                Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('Privacy Policy',false ));
+                Navigator.pushNamed(context, PrivacyPolicy.RouteName, arguments: ScreenArguments('Privacy Policy',false ));
               }),
               Container(
                 color: HH_Colors.grey,

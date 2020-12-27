@@ -14,12 +14,14 @@ Future<GetAssessmentResponse> getAllAssessments() async {
   final response = await http.get(url+"/get_Assessment_List",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : token
+        'token' : HHString.token
       });
   print(response.body);
   return getAssessmentResponseFromJson(response.body);
 
 }
+
+
 
 Future<GetAssessmentResponse> submitAssessments(result) async {
   var token = await GetStringToSP("token");
@@ -27,7 +29,7 @@ Future<GetAssessmentResponse> submitAssessments(result) async {
   final response = await http.post(url+"/submit_AssessmentForm",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : token
+        'token' : HHString.token
       },
     body:result
   );

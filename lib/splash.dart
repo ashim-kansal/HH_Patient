@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/forgotpasswrd.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/language.dart';
+import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget{
 
@@ -21,7 +27,7 @@ class SplashState extends State<Splash>{
   String nameKey = "_key_name";
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
 
    
@@ -35,23 +41,25 @@ class SplashState extends State<Splash>{
         return null;
       },
     );
-    
 
-    Timer(Duration(seconds: 3),
-      ()=>{
-            Navigator.pop(context),
-            Navigator.pushNamed(context, SelectLanguage.RouteName)
-      });
+    checkIfUserLoggedIn();
   }
 
   void checkIfUserLoggedIn () async {
 
-     var token = await GetStringToSP("token");
+    var token = await GetStringToSP("token");
 
-     Timer(Duration(seconds: 3),
+    // SharedPreferences pref = await SharedPreferences.getInstance();
+    
+    // var token = pref.getString("token");
+
+    // print("lTo");
+    print(token);
+
+     Timer(Duration(seconds: 4),
       ()=>{
             Navigator.pop(context),
-            if (token != "") {
+            if (token != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
               Navigator.pushNamed(context, SelectLanguage.RouteName)

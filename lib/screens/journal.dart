@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/ExpansionTile.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -74,52 +76,79 @@ class JournalPageState extends State<JournalPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        'Hi! How are you feeling today ?',
-                        style: TextStyle(
-                            color: HH_Colors.grey_707070,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      margin: EdgeInsets.only(left: 5),
-                    ),
-                  ],
+            Expanded(
+              child: 
+                FutureBuilder<JournalingList>(
+                  future: getJournalingList(),
+                  builder: (builder, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if(snapshot.hasError){
+                        return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                      }
+                      return ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 20);
+                        },
+                        itemCount: snapshot.data.result.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      snapshot.data.result[index].question,
+                                      overflow: TextOverflow.ellipsis,
+                                      // 'Hi! How are you feeling today ?',
+                                      style: TextStyle(
+                                          color: HH_Colors.grey_707070,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    margin: EdgeInsets.only(left: 5),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              HHEditText(
+                                minLines: 4,
+                              ),
+                            ],
+                          );
+                        }
+                      );
+                    }else {
+                      return Container(
+                        child: Center(child: CircularProgressIndicator(),),
+                      );
+                    }
+                  }
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                HHEditText(
-                  minLines: 4,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        'Have you taken your medicine ?',
-                        style: TextStyle(
-                            color: HH_Colors.grey_707070,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      margin: EdgeInsets.only(left: 5),
-                    ),
-                  ],
-                ),
-                RadioGroup(),
-                HHEditText(
-                  minLines: 4,
-                  hint: 'Add note',
-                ),
-              ],
-            ),
+              ),
+               
+                // Row(
+                //   children: [
+                //     Container(
+                //       child: Text(
+                //         'Have you taken your medicine ?',
+                //         style: TextStyle(
+                //             color: HH_Colors.grey_707070,
+                //             fontSize: 17,
+                //             fontWeight: FontWeight.w500),
+                //       ),
+                //       margin: EdgeInsets.only(left: 5),
+                //     ),
+                //   ],
+                // ),
+                // RadioGroup(),
+                // HHEditText(
+                //   minLines: 4,
+                //   hint: 'Add note',
+                // ),
+              
             HHButton(
               title: 'Submit',
               type: 4,

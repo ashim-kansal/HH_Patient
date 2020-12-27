@@ -42,7 +42,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                 height: 10,
               ),
               Expanded(
-                  child: ListView.separated(
+                child: ListView.separated(
                 itemCount: widget.data.questions.length,
                 itemBuilder: (context, index) {
                   return widget.data.isSubmit
@@ -60,7 +60,8 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                   ? Container()
                   : HHButton(
                       title: 'Submit', type: 2, isEnable: true, onClick: () {
-                        submitForm(widget.data);
+                        print(widget.data);
+                        // submitForm(widget.data);
               }),
             ],
           ),
@@ -95,11 +96,16 @@ class AssessmentFormState extends State<AssessmentFormPage> {
       title: widget.data.questions[index].questionText,
       quesType: widget.data.questions[index].questionType,
       completed: widget.data.isSubmit,
-      onClick: () {},
+      onClick: () {
+        widget.data.questions[index].answer = 'sss';
+      },
     );
   }
 
-  void submitForm(Result data) {
+  void submitForm(Result data) async {
+    
+    print("data");
+    print(data);
     submitAssessments(data);
   }
 }

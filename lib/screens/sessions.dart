@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart';
+import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class SessionPage extends StatefulWidget{
   static const String RouteName = '/mysessions';
@@ -14,6 +18,7 @@ class SessionPage extends StatefulWidget{
 
 class SessionPageState extends State<SessionPage>{
   bool isSwitched = true;
+  
   @override
   Widget build(BuildContext context) {
     return MyWidget(title: 'My Sessions', child: Container(
@@ -26,10 +31,10 @@ class SessionPageState extends State<SessionPage>{
             margin: EdgeInsets.only(left: 10, right: 10),
             child: TextField(
               decoration: InputDecoration(
-                border: InputBorder.none,
+              border: InputBorder.none,
               hintText: 'Search',
               contentPadding: EdgeInsets.all(10),
-                counterText: ""
+              counterText: ""
             ),
             ),
           ),
@@ -53,7 +58,7 @@ class SessionPageState extends State<SessionPage>{
           SizedBox(height: 20,),
 
           Expanded(
-            child: getUpcomingList()
+            child: isSwitched ? getUpcomingList() : getCompleteList()
           )
 
 
@@ -64,27 +69,61 @@ class SessionPageState extends State<SessionPage>{
     );
   }
 
-  Widget getUpcomingList(){
+  Widget getCompleteList(){
+    return FutureBuilder<UpcomingSession>(
+      future: completedSessoins(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+          }
+          return ListView.separated(
+            itemCount: snapshot.data.result.length,
+            itemBuilder: (context, index){
+            var _date = snapshot.data.result[index].createdAt;
+            Moment createdDt = Moment.parse('$_date');
+            return UpcomingSessionItem(
+              name: snapshot.data.result[index].programName, 
+              drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
+              sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
+              role: '', onClick: (){}, completed: !isSwitched,);
+          },
+              separatorBuilder: (context, index) {
+                return Divider();
+              },
+              // itemCount: isSwitched? 5: 2
+              );
+        } else
+          return Container(
+            child: Center(child: CircularProgressIndicator(),),
+          );
+      });
+  }
 
-    return FutureBuilder<GetTherapistsResponse>(
-        future: getAllPhysicians(),
+  Widget getUpcomingList(){
+    return FutureBuilder<UpcomingSession>(
+        future: upcomingSessions(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              return Text("Error");
+              return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
             }
-
-            // setState(() {
-            //   widget.therapists = snapshot.data.result;
-            // });
-
-            return ListView.separated(itemBuilder: (context, index){
-              return UpcomingSessionItem(name: snapshot.data.result[index].firstName, role: '', onClick: (){}, completed: !isSwitched,);
+            return ListView.separated(
+              itemCount: snapshot.data.result.length,
+              itemBuilder: (context, index){
+              var _date = snapshot.data.result[index].createdAt;
+              Moment createdDt = Moment.parse('$_date');
+              return UpcomingSessionItem(
+                name: snapshot.data.result[index].programName, 
+                drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
+                sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
+                role: '', onClick: (){}, completed: !isSwitched,);
             },
                 separatorBuilder: (context, index) {
                   return Divider();
                 },
-                itemCount: isSwitched? 5: 2);
+                // itemCount: isSwitched? 5: 2
+                );
           } else
             return Container(
               child: Center(child: CircularProgressIndicator(),),

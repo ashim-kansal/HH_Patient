@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class LibraryPage extends StatefulWidget {
+
   static const String RouteName = '/library';
   final docs = [
     'abcd',
@@ -31,55 +35,77 @@ class _LibraryPageState extends State<LibraryPage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(child: GridView.count(
-              // Create a grid with 2 columns. If you change the scrollDirection to
-              // horizontal, this produces 2 rows.
-                crossAxisCount: 2,
-                // childAspectRatio: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                // Generate 100 widgets that display their index in the List.
-                children: List.generate(10, (index) {
-                  return
-                  Card(
-                    elevation: 10,
-                    child:
-                    InkWell(
-                      onTap:(){},
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          color: Colors.white,
-                        ),
-                        padding: EdgeInsets.all(15),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset('assets/images/ic_doc.png', height: 30, width: 40,),
-                            Text('Social-Posts.docx', textAlign: TextAlign.center,style: TextStyle(fontSize:13,color: HH_Colors.grey_585858, fontFamily: "ProximaNova", fontWeight: FontWeight.bold),)
-                            ,Text('By Sophie Solmini 14/11/2020 12:30 PM', textAlign: TextAlign.center, style: TextStyle(fontSize:12,color: HH_Colors.accentColor),)
-                            ,SizedBox(height: 5,),
-                            Card(child:                             Container(
-                              height: 45,
-                              width: 100,
-                              child: Center(
-                                child: Text('Download', style: TextStyle(fontSize: 18,
-                                    fontFamily: "ProximaNova", color: Colors.white),),
-                              ),
+            Expanded(
+              child: FutureBuilder<LibraryList>(
+                future: getLibraryList(),
+                builder: (builder, snapshot){
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if(snapshot.hasError){
+                      return Text("Error");
+                    }
+                    return GridView.builder(
+                    // Create a grid with 2 columns. If you change the scrollDirection to
+                    // horizontal, this produces 2 rows.
+                      itemCount: snapshot.data.result.length,
+                      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+                      // crossAxisCount: 2,
+                      // crossAxisSpacing: 10,
+                      // mainAxisSpacing: 10,
+                      // Generate 100 widgets that display their index in the List.
+                      itemBuilder: (BuildContext context, int index){
+                        // var date = snapshot.data.result[index].createdAt;
+                        var _date = snapshot.data.result[index].createdAt;
+                        Moment createdDate = Moment.parse('$_date');
+                        createdDate.format("dd/MM/yyyy hh:mm a");
+                      return
+                        Card(
+                          elevation: 10,
+                          child:
+                          InkWell(
+                            onTap:(){},
+                            child: Container(
+                              height: 140,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(3)),
-                                color: HH_Colors.accentColor,
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
+                                color: Colors.white,
                               ),
-                            )
-                              ,
-                            elevation: 10,)
-                            // HHButton(title: 'Download', type: 4, isEnable: true, textSize: 18)
-                          ],
-                        ),
-                      ),
-                    ),);
-                })
-            )),
+                              padding: EdgeInsets.fromLTRB(15, 15, 15, 7),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image.asset('assets/images/ic_doc.png', height: 30, width: 40,),
+                                  Text(snapshot.data.result[index].title, textAlign: TextAlign.center,style: TextStyle(fontSize:13,color: HH_Colors.grey_585858, fontFamily: "ProximaNova", fontWeight: FontWeight.bold),)
+                                  ,Text('By '+ snapshot.data.result[index].uploadBy +" "+ createdDate.format("dd/MM/yyyy HH:mm a"), textAlign: TextAlign.center, style: TextStyle(fontSize:12,color: HH_Colors.accentColor),)
+                                  ,SizedBox(height: 5,),
+                                  Card(child: Container(
+                                    height: 30,
+                                    width: 100,
+                                    child: Center(
+                                      child: Text('Download', style: TextStyle(fontSize: 16,
+                                          fontFamily: "ProximaNova", color: Colors.white),),
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(Radius.circular(3)),
+                                      color: HH_Colors.accentColor,
+                                    ),
+                                  )
+                                    ,
+                                  elevation: 10,)
+                                  // HHButton(title: 'Download', type: 4, isEnable: true, textSize: 18)
+                                ],
+                              ),
+                            ),
+                          ),);
+                      });
+                    // );
+                  }else {
+                    return Container(
+                      child: Center(child: CircularProgressIndicator(),),
+                    );
+                  }
+                }),
+            ),
             Container(
               color: Colors.white,
               padding: EdgeInsets.all(20),

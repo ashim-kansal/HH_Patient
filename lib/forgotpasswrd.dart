@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -47,35 +49,18 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
       widget.error = false;
     });
 
-    _forgotPwd(email);
-  }
+    // APi call
+    APIService apiService = new APIService();
 
-  // API call
-
-  // ignore: missing_return
-  Future<ForgotPasswordModel> _forgotPwd(String emailInput) async {
-    final url = HHString.baseURL +"/api/v1/user/forgotPassword";
-    
-    final response = await http.post(url, 
-    headers: {"Content-Type": "application/json"},
-      body: jsonEncode(<String, String>{
-        "email": emailInput,
-      })
-    );
-    
-    var res = json.decode(response.body);
-
-    if(response.statusCode == 200){
-      showToast(res["responseMessage"]);
-      if(res["responseCode"] == 200){
-        
-        Navigator.pop(context);
-        Navigator.pushNamed(context, OtpPage.RouteName);
-        return ForgotPasswordModel.fromJson(json.decode(response.body));
+    apiService.forgotPwdApiHanlder(email).then((value) => {
+      showToast(value.responseMsg),
+      if(value.responseCode == 200){
+        SetStringToSP("userID", value.userid),
+        Navigator.pop(context),
+        Navigator.pushNamed(context, OtpPage.RouteName)
       }
-    }else {
-      throw Exception('Failed to load data!');
-    }
+    });
+    // _forgotPwd(email);
   }
 
   //show Toast

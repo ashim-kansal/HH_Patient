@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:intl/intl.dart';
 
 class GridViewWidget extends StatelessWidget{
 
@@ -35,8 +36,9 @@ class GridViewWidget extends StatelessWidget{
 
 class SessionDateWidget extends StatefulWidget{
   List<Result> list;
+  final ValueChanged<int> onSelectDate;
 
-  SessionDateWidget({@required this.list});
+  SessionDateWidget({Key key,@required this.list, this.onSelectDate});
 
 
   @override
@@ -56,8 +58,9 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
   @override
   void initState() {
     super.initState();
-    widget.list??List();
-
+    // widget.list??List();
+      if(widget.list.length > 0)
+        widget.list[0].isSelected = true;
     // populateData();
   }
 
@@ -77,7 +80,7 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
             padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: Center(
               child: Text(
-                widget.list[index].scheduleDate.timeZoneName,
+                DateFormat('d MMM\nEEE').format(widget.list[index].scheduleDate),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: widget.list[index].isSelected? Colors.white : HH_Colors.grey_707070),
               ),),
@@ -97,6 +100,7 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
   }
 
   void setItemSelected(int index) {
+    widget.onSelectDate(index);
     setState(() {
       for (int i = 0; i < widget.list.length; i++){
           if(index == i) {

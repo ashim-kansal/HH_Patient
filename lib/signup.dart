@@ -1,9 +1,15 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/model/AuthModel.dart';
+import 'package:flutter_app/model/CountryResponse.dart';
+import 'package:flutter_app/model/StateModel.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -40,13 +46,19 @@ class _SignupPageState extends State<SignUpPage> {
   TextEditingController locationController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  
+  List<CountryList> listProvinces;
 
   String stateDropdown = 'Select Province';
-  String countryDropdown = 'Select Country';
+  String countryDropdown = "Albania";
   String pwdValidation = "Please enter a valid password";
   bool securepwd = true;
   bool isChecked = true;
+  bool countrySelected = false;
+  String countryCode = "";
   void signupHandler(){
+
+    print("doneaaa");
 
     String fname = fnameController.text;
     String lname = lnameController.text;
@@ -54,6 +66,8 @@ class _SignupPageState extends State<SignUpPage> {
     String location = locationController.text;
     String password = passwordController.text;
     var number = phoneController.text;
+    String country = countryDropdown;
+    String state = stateDropdown;
 
     var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
@@ -104,50 +118,29 @@ class _SignupPageState extends State<SignUpPage> {
       pwdValidation = "Please enter a valid password";
     });
 
-    _registerApiHandler(fname, lname, email, location, password, number);
-    Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
+    APIService apiService = new APIService();
+     apiService.registerApiHandler(fname, lname, email, location, password, number, country, state, countryCode).then((value) => {
+       print(value),
+       showToast(value.responseMsg),
+       if(value.responseCode == 200){
+         Timer(Duration(seconds: 2),
+            ()=>{
+                  Navigator.pop(context),
+                  Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+            }
+          ),
+       }
+     });
+    // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
   }
 
-  //api call
-
-  // ignore: missing_return
-  Future<SignupModel> _registerApiHandler(String firstname, String lastname, String email, String location, String password, String number) async {
-      final url = HHString.baseURL +"/api/v1/user/signUp";
-      
-      final response = await http.post(url, 
-      headers: {"Content-Type": "application/json"},
-        body: jsonEncode(<String, String>{
-          "appLanguage": "",
-          "firstName": firstname,
-          "lastName": lastname,
-          "email": email,
-          "mobileNumber": number,
-          "address": location,
-          "password": password,
-          "deviceToken": ""
-        })
-      );
-      
-      var res = json.decode(response.body);
-      if(response.statusCode == 200){
-        showToast(res["responseMessage"]);
-        if(res["responseCode"] == 200){
-          Navigator.pop(context);
-          Navigator.pushNamed(context, Dashboard.RouteName);
-          return SignupModel.fromJson(json.decode(response.body));
-        }
-      }else {
-        throw Exception('Failed to load data!');
-      }
-    }
-
-    //show Toast
-    showToast(String message){
-      Toast.show(message, 
-      context, 
-      duration: Toast.LENGTH_LONG, 
-      gravity:  Toast.BOTTOM);
-    }
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -289,27 +282,53 @@ class _SignupPageState extends State<SignUpPage> {
                                 shape: BoxShape.rectangle,
                                 border : Border.all(color: HH_Colors.borderGrey, width: 1.2),
                                 borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                              child: DropdownButtonHideUnderline (
-                                child: new DropdownButton<String>(
-                                  isExpanded: true,
-                                  value: countryDropdown,
-                                  icon: Icon(Icons.arrow_drop_down),
-                                  iconEnabledColor: Color(0xffC5C4C4),
-                                  iconSize: 38,
-                                  elevation: 16,
-                                  style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                  items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
-                                    return new DropdownMenuItem<String>(
-                                      value: value,
-                                      child: new Text(value),
+                              child:DropdownButtonHideUnderline (
+                                child: new FutureBuilder<CountryList>(
+                                  future: getAllCountry(),
+                                  builder: (context, snapshot) {
+                                   if (snapshot.connectionState == ConnectionState.done) {
+                                      if(snapshot.hasError){
+                                        return new DropdownButton<String>(
+                                          value: "No Data Found",
+                                          isExpanded: true,
+                                          icon: Icon(Icons.arrow_drop_down),
+                                          iconEnabledColor: Color(0xffC5C4C4),
+                                          iconSize: 38,
+                                          elevation: 16,
+                                          style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                        );
+                                      }
+                                      return new DropdownButton<String>(
+                                        isExpanded: true,
+                                        value: countryDropdown,
+                                        // decoration: new InputDecoration(icon: Icon(Icons.language)), 
+                                        icon: Icon(Icons.arrow_drop_down),
+                                        iconEnabledColor: Color(0xffC5C4C4),
+                                        iconSize: 38,
+                                        elevation: 16,
+                                        style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                        items: snapshot.data.result.map((fc) => 
+                                              DropdownMenuItem<String>(
+                                                child: Text(fc.name),
+                                                value: fc.name
+                                              )
+                                        ).toList(),
+                                        onChanged: (String newValue){
+                                          getAllStates(newValue);
+                                          var obj = snapshot.data.result.firstWhere((obj) => obj.name == newValue);
+                                          print(obj.phoneCode);
+                                          setState(() {
+                                            countryDropdown = newValue;
+                                            countryCode = obj.phoneCode;
+                                            stateDropdown= "Select Province";
+                                          });
+                                        },
+                                      );
+                                   }else
+                                    return Container(
+                                      child: Center(child: CircularProgressIndicator(),),
                                     );
-                                  }).toList(),
-                                  onChanged: (String newValue) {
-                                    setState(() {
-                                      countryDropdown = newValue;
-                                    });
-                                  },
-                                ),
+                                  },)
                               )
                             ),
                             
@@ -323,32 +342,64 @@ class _SignupPageState extends State<SignUpPage> {
                                   border: Border.all(color: HH_Colors.borderGrey, width: 1.2),
                                   borderRadius: BorderRadius.all(Radius.circular(5.0))),
                               child: DropdownButtonHideUnderline(
-                                child: new DropdownButton<String>(
-                                value: stateDropdown,
-                                isExpanded: true,
-                                icon: Icon(Icons.arrow_drop_down),
-                                iconEnabledColor: Color(0xffC5C4C4),
-                                iconSize: 38,
-                                elevation: 16,
-                                style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                items: <String>['Select Province', 'Ontario', 'Toronto'].map((String value) {
-                                  return new DropdownMenuItem<String>(
-                                    value: value,
-                                    child: new Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    stateDropdown = newValue;
-                                  });
-                                },
-                              ))
+                                child: 
+                                // countrySelected ? (
+                                  new FutureBuilder<StateList>(
+                                  future: getAllStates(countryDropdown),
+                                  builder: (context, snapshot) {
+                                   if (snapshot.connectionState == ConnectionState.done) {
+                                      if(snapshot.hasError){
+                                        return new DropdownButton<String>(
+                                          value: "No Data Found",
+                                          isExpanded: true,
+                                          icon: Icon(Icons.arrow_drop_down),
+                                          iconEnabledColor: Color(0xffC5C4C4),
+                                          iconSize: 38,
+                                          elevation: 16,
+                                          style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                        );
+                                      }
+                                      // if(stateDropdown == "Select Province"){
+                                        snapshot.data.result[0].states.add("Select Province");
+                                      // }
+                                      // else {
+                                          // stateDropdown = snapshot.data.result[0].states.length == 0 ? "No Record Found": stateDropdown
+                                      // }
+                                      
+                                      // var stateList = snapshot.data.result.firstWhere((element) => element.country == countryDropdown);
+                                      return new DropdownButton<String>(
+                                        isExpanded: true,
+                                        value: stateDropdown,
+                                        // decoration: new InputDecoration(icon: Icon(Icons.language)), 
+                                        icon: Icon(Icons.arrow_drop_down),
+                                        iconEnabledColor: Color(0xffC5C4C4),
+                                        iconSize: 38,
+                                        elevation: 16,
+                                        style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                        items: snapshot.data.result[0].states.map((fc) => 
+                                              DropdownMenuItem<String>(
+                                                child: Text(fc),
+                                                value: fc
+                                              )
+                                        ).toList(),
+                                        onChanged: (String stateval) async {
+                                          setState(() {
+                                            stateDropdown = stateval;
+                                          });
+                                        },
+                                      );
+                                   }else
+                                    return Container(
+                                      child: Center(child: CircularProgressIndicator(),),
+                                    );
+                                  },)
+                              )
 
                             ),
 
 
                             Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 5, 10),
+                              padding: EdgeInsets.fromLTRB(15, 20, 5, 10),
                               child: HHButton(title: "Sign Up", type: 4, isEnable: true,onClick: (){
                                 signupHandler();
                               },),
@@ -401,6 +452,33 @@ class _SignupPageState extends State<SignUpPage> {
               ),
               ),
             ),
+
+            Container(
+
+                margin: EdgeInsets.only(top: 10, right: 40, left: 40),
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                decoration: BoxDecoration(
+                    // shape: BoxShape.rectangle,
+                    border: Border.all(color: HH_Colors.borderGrey),
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Back to ',
+                      style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Login', 
+                          style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => {
+                              // checkToken()
+                              Navigator.pushNamed(context, LoginPage.RouteName)
+                            }),
+                      ],
+                    ),
+                  )
+                )
+              )
         ],
       ),
       // This trailing comma makes auto-formatting nicer for build methods.

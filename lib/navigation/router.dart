@@ -20,9 +20,11 @@ import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/myplan.dart';
+import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/settings.dart';
+import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/splash.dart';
@@ -82,7 +84,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case CreateAccountPage.RouteName:
       return MaterialPageRoute(builder: (context) => CreateAccountPage());
     case EditProfilePage.RouteName:
-      return MaterialPageRoute(builder: (context) => EditProfilePage());
+      final ProfileArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => EditProfilePage(data: args.data));
     case ProfilePage.RouteName:
       return MaterialPageRoute(builder: (context) => ProfilePage());
     case ReviewPage.RouteName:
@@ -90,7 +93,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case SettingsPage.RouteName:
       return MaterialPageRoute(builder: (context) => SettingsPage());
     case LanguagePage.RouteName:
-      return MaterialPageRoute(builder: (context) => LanguagePage());
+      final LanguageArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => LanguagePage(languagedata: args.language));
     case ChnagePasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChnagePasswordPage());
     case ChatPage.RouteName:
@@ -99,6 +103,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FeedbackPage());
     case NotificationPage.RouteName:
       return MaterialPageRoute(builder: (context) => NotificationPage());
+    case TermsPage.RouteName:
+      return MaterialPageRoute(builder: (context) => TermsPage());
+    case PrivacyPolicy.RouteName:
+      return MaterialPageRoute(builder: (context) => PrivacyPolicy());
     case AssessmentFormPage.RouteName:
       final AssessmentArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(data: args.result));

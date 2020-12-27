@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
@@ -24,6 +25,24 @@ class BookSessionPage extends StatefulWidget{
 }
 
 class BookSessionState extends State<BookSessionPage>{
+  int selectedDatePos = 0;
+  Future<GetBookingSlotsResponse> _listFuture;
+
+  List<Result> list;
+
+  _updateSelectedDate(int pos) {
+    setState(() {
+      selectedDatePos = pos;
+      list[pos].isSelected = true;
+    });
+  }
+
+  @override
+  void initState() {
+    list ?? List();
+    _listFuture = getBookingSlots();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context){
@@ -33,15 +52,27 @@ class BookSessionState extends State<BookSessionPage>{
                   TharapistCell(name: widget.data.firstName+' '+widget.data.lastName, role: widget.data.role,
                     image: widget.data.profilePic, showBook: false, onClick: (){},),
                   FutureBuilder<GetBookingSlotsResponse>(
-                      future: getSlotsForBooking(widget.data.id),
+                      future: _listFuture,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {
                             return Text("Error");
                           }
+
+                          SchedulerBinding.instance.addPostFrameCallback((_){
+
+                            setState(() {
+                              list = snapshot.data.result;
+                              if(list.length > 0)
+                                list[0].isSelected = true;
+
+                            });
+
+                          });
+
                           return Expanded(child: Column(
                             children: [
-                              Container(height:50, child: SessionDateWidget(list:snapshot.data.result)),
+                              Container(height:50, child: SessionDateWidget(list:this.list, onSelectDate: _updateSelectedDate,)),
                               SizedBox(height: 10,),
                               Expanded(child: GridViewWidget(),),
                             ],
@@ -64,5 +95,10 @@ class BookSessionState extends State<BookSessionPage>{
 
     );
 
+  }
+
+  Future<GetBookingSlotsResponse> getBookingSlots() async {
+      var response = await getSlotsForBooking(widget.data.id);
+      return response;
   }
 }

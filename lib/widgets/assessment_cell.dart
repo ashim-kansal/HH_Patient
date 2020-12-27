@@ -111,7 +111,14 @@ class AssessmentQuestionCell extends StatelessWidget {
   }
 
   Widget getSingleChoiceQuest(String question) {
-    return MySingleChoiceQuesWidget(ques: question);
+    return MySingleChoiceQuesWidget(
+      ques: question,
+      onPressYes: () {
+        print("yes");
+      },
+      onPressNo: () {
+        print("no");
+      },);
   }
 
   Widget getMultiChoiceQuest(String question) {
@@ -144,6 +151,8 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
   }
 
   setSelectedRadio(int val) {
+    print("onval");
+    print(val);
     setState(() {
       selectedRadio = val;
       if(val == 1)
@@ -181,9 +190,9 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
               // <= here it is !
               value: 1,
               groupValue: selectedRadio,
-              activeColor: HH_Colors.accentColor,
+              activeColor: selectedRadio == "Yes" ? HH_Colors.purpleColor : HH_Colors.accentColor,
               onChanged: (val) {
-                print("Radio $val");
+                // print("Radio $val");
                 setSelectedRadio(val);
               },
             ),
@@ -197,9 +206,9 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
               // <= here it is !
               value: 2,
               groupValue: selectedRadio,
-              activeColor: HH_Colors.accentColor,
+              activeColor: selectedRadio == "No" ? HH_Colors.purpleColor : HH_Colors.accentColor,
               onChanged: (val) {
-                print("Radio $val");
+                // print("Radio $val");
                 setSelectedRadio(val);
               },
             ),

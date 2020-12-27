@@ -31,6 +31,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  @override
+  void initState() {
+    super.initState(); 
+  }
+
   var emailerror = false;
   var pwderror = false;
   bool securepwd = true;
@@ -50,8 +55,21 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+  }
+
   void loginHandler() {
-  
+
+
     String email = emailController.text;
     String password = passwordController.text;
 
@@ -89,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     APIService apiService = new APIService();
-
+    // buildShowDialog(context);
     apiService.loginAPIHandler(email, password).then(
       (value) => {
 
@@ -124,11 +142,19 @@ class _LoginPageState extends State<LoginPage> {
     gravity:  Toast.BOTTOM);
   }
 
+  void checkToken () async {
+    var token = await GetStringToSP("token");
+    print("objTo");
+    print(token);
+  }
+
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
-
+// Container(
+//                                       child: Center(child: CircularProgressIndicator(),),
+//                                     );
       body:
       Container(
           margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
@@ -305,8 +331,8 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => {
-                              print(GetStringToSP("uToken")),
-                              // Navigator.pushNamed(context, SignUpPage.RouteName)
+                              // checkToken()
+                              Navigator.pushNamed(context, SignUpPage.RouteName)
                             }),
                       ],
                     ),

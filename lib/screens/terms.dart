@@ -3,10 +3,10 @@ import 'package:flutter_app/api/StaticContent.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/utils/colors.dart';
 
-class AboutUs extends StatefulWidget {
-  static const String RouteName = '/AboutUs';
+class TermsPage extends StatefulWidget {
+  static const String RouteName = '/terms';
 
-  AboutUs({Key key, this.title}) : super(key: key);
+  TermsPage({Key key, this.title}) : super(key: key);
 
   final String title;
   var error = false;
@@ -15,7 +15,7 @@ class AboutUs extends StatefulWidget {
   _TermsState createState() => _TermsState();
 }
 
-class _TermsState extends State<AboutUs> {
+class _TermsState extends State<TermsPage> {
 
 
   @override
@@ -27,7 +27,7 @@ class _TermsState extends State<AboutUs> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('About Us', style: TextStyle(color: Colors.white)),
+          title: Text('Terms & Conditions', style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -54,7 +54,7 @@ class _TermsState extends State<AboutUs> {
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         color: Colors.white,
                         child: FutureBuilder<StaticContent>(
-                          future: getStaticContent("ABOUT_US"),
+                          future: getStaticContent("TERMS"),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState == ConnectionState.done) {
                               if(snapshot.hasError){
