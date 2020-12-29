@@ -6,6 +6,7 @@ import 'package:flutter_app/widgets/ExpansionTile.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/journalWidgets.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
 
 class JournalPage extends StatefulWidget {
   static const String RouteName = '/journal';
@@ -16,6 +17,63 @@ class JournalPage extends StatefulWidget {
 
 class JournalPageState extends State<JournalPage> {
   bool isSwitched = true;
+
+  var items = [];
+
+  // ignore: deprecated_member_use
+  List<TextEditingController> _controllers = new List();
+
+  List<String> litems = [];
+
+  void submitJournal (){
+
+    var params = [];
+    int totalItems = litems.length;
+
+    for (var i = 0; i < totalItems; i++) {
+
+      if(_controllers[i].text.trim().length == 0){
+        showDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return DialogWithSingleButton(
+              title: "Alert",
+              content: "Please enter the answers.",
+            );
+          },
+        );
+        return;
+      }
+
+      var obj = {
+        "question": litems[i],
+        "answer": _controllers[i].text
+      };
+      params.add(obj);
+    }
+
+    print(params);
+
+    InAppAPIServices inAppAPIServices = new InAppAPIServices();
+
+    inAppAPIServices.submitJournal(params).then((value) => {
+      
+      showToast(value.responseMsg),
+      if(value.responseCode == 200){
+        for (var i = 0; i < totalItems; i++) {
+          _controllers[i].clear()
+        }
+      }
+    });
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,15 +148,20 @@ class JournalPageState extends State<JournalPage> {
                         separatorBuilder: (context, index) {
                           return SizedBox(height: 20);
                         },
+                        
                         itemCount: snapshot.data.result.length,
                         itemBuilder: (context, index) {
+                           _controllers.add(new TextEditingController());
+                          litems.add(snapshot.data.result[index].question);
                           return Column(
                             children: [
-                              Row(
-                                children: [
+                              // Row(
+                              //   children: [
                                   Container(
+                                    alignment: Alignment.topLeft,
                                     child: Text(
                                       snapshot.data.result[index].question,
+                                      maxLines: 5,
                                       overflow: TextOverflow.ellipsis,
                                       // 'Hi! How are you feeling today ?',
                                       style: TextStyle(
@@ -108,13 +171,25 @@ class JournalPageState extends State<JournalPage> {
                                     ),
                                     margin: EdgeInsets.only(left: 5),
                                   ),
-                                ],
-                              ),
+                              //   ],
+                              // ),
                               SizedBox(
                                 height: 5,
                               ),
                               HHEditText(
                                 minLines: 4,
+                                controller: _controllers[index],
+                                // onSubmitText: () {
+                                //   print("done");
+                                //   var text =  _controllers[index].text;
+                                //   litems.add({
+                                //     "question":snapshot.data.result[index].question,
+                                //     "answer": text
+                                //   });
+                                // },
+                                // onChange: (text) async {
+                                //   print(text);
+                                // }
                               ),
                             ],
                           );
@@ -133,6 +208,9 @@ class JournalPageState extends State<JournalPage> {
               title: 'Submit',
               type: 4,
               isEnable: true,
+              onClick: (){
+                submitJournal();
+              },
             )
           ],
         ));

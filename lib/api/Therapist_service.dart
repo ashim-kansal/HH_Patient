@@ -12,6 +12,7 @@ String url = HHString.baseURL+"/api/v1/user";
 Future<GetTherapistsResponse> getAllTherapists() async {
   
   var token = await GetStringToSP("token");
+  print(token);
   final response = await http.get(url+"/getTherapistList",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',

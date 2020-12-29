@@ -257,37 +257,57 @@ class _OtpState extends State<OtpPage> {
       )
     ];
 
-    void otpVerifyHandler() {
 
-      if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
-        showDialog(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return DialogWithSingleButton(
-              title: "Alert",
-              content: "Please enter the valid OTP.",
-            );
-          },
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
         );
-        return;
-      }
-      
-      String otp = controller1.text+controller2.text+controller3.text+controller4.text;
-     
-    //  _otpAPIHandler(otp);
-      APIService apiService = new APIService();
+    });
+  }
 
-      apiService.otpAPIHandler(otp).then((value) => {
-        showToast(value.responseMessage),
-        if(value.responseCode == 200){
-          Timer(Duration(seconds: 2),
-            ()=>{
-            Navigator.pop(context),
-            Navigator.pushNamed(context, ResetPasswordPage.RouteName)
-          })
-        }
-      });
+  void otpVerifyHandler() {
+    if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return DialogWithSingleButton(
+            title: "Alert",
+            content: "Please enter the valid OTP.",
+          );
+        },
+      );
+      return;
     }
+    
+    String otp = controller1.text+controller2.text+controller3.text+controller4.text;
+    
+    //show circular bar
+    buildShowDialog(context);
+    // _otpAPIHandler(otp);
+    APIService apiService = new APIService();
+
+    apiService.otpAPIHandler(otp).then((value) => {
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+          
+          showToast(value.responseMsg),
+      }),
+      
+      if(value.responseCode == 200){
+        Timer(Duration(seconds: 2),
+          ()=>{
+          Navigator.pop(context),
+          Navigator.pushNamed(context, ResetPasswordPage.RouteName)
+        })
+      }
+    });
+  }
 
     
 
@@ -471,4 +491,10 @@ class _OtpState extends State<OtpPage> {
       currController = controller3;
     }
   }
+}
+
+class OTPArguements {
+  final bool isUpdate;
+
+  OTPArguements(this.isUpdate);
 }

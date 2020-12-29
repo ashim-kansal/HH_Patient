@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
+import 'package:flutter_app/model/SettingModel.dart';
 import 'package:flutter_app/model/StateModel.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -128,7 +129,7 @@ class APIService {
   // otp verify
 
    // ignore: missing_return
-    Future<UserProfile> otpAPIHandler(String otp) async {
+    Future<FeedbackResponseModel> otpAPIHandler(String otp) async {
 
       var userid = await GetStringToSP("userId");
 
@@ -144,7 +145,7 @@ class APIService {
       
       var res = json.decode(response.body);
       if(response.statusCode == 200){
-        return UserProfile.fromJson(res);
+        return FeedbackResponseModel.fromJson(res);
       }else {
         throw Exception('Failed to load data!');
       }

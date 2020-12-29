@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -48,12 +49,20 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
     setState(() {
       widget.error = false;
     });
-
+    
+    //show circular bar
+    buildShowDialog(context);
     // APi call
     APIService apiService = new APIService();
 
     apiService.forgotPwdApiHanlder(email).then((value) => {
-      showToast(value.responseMsg),
+       Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+         
+          showToast(value.responseMsg),
+      }),
+
       if(value.responseCode == 200){
         SetStringToSP("userID", value.userid),
         Navigator.pop(context),
@@ -61,6 +70,18 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
       }
     });
     // _forgotPwd(email);
+  }
+
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
+    });
   }
 
   //show Toast

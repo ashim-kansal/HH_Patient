@@ -220,6 +220,7 @@ class HHEditText extends StatefulWidget {
   final TextEditingController controller;
 
   final VoidCallback onClickEye;
+  final VoidCallback onSubmitText;
 
   var minLines = 1;
   var maxLength = 1;
@@ -246,7 +247,8 @@ class HHEditText extends StatefulWidget {
       this.onClickEye,
       this.textarea,
       this.enabled,
-      this.showeye})
+      this.showeye,
+      this.onSubmitText})
       : super(key: key);
 
   @override
@@ -277,6 +279,7 @@ class HHEditTextState extends State<HHEditText> {
       minLines: widget.minLines?? 1,
       maxLength: widget.maxLength??32,
       maxLines: widget.minLines?? 1,
+      onEditingComplete: () => widget.onSubmitText(),
       decoration: InputDecoration(
           counterText: "",
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),

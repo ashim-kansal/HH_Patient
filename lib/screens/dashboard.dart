@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/aboutus.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   static const String RouteName = '/home';
@@ -246,9 +248,13 @@ class DashboardState extends State<Dashboard> {
                     showDialog(context: context,
                        builder: (BuildContext dialogContext) {
                         return DialogWithButtons(
-                          onLogoutPress: (){
+                          onLogoutPress: ()async {
+
+                            SharedPreferences pref = await SharedPreferences.getInstance();
+                            pref.remove("token");
+
                             Navigator.pop(context);
-                            Navigator.pushNamed(context, LoginPage.RouteName);
+                            Navigator.pushNamed(context, SelectLanguage.RouteName);
                           },
                           onDenyPress: (){
                             Navigator.pop(context);

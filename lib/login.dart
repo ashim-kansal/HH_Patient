@@ -55,16 +55,16 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
+  // show circular 
   buildShowDialog(BuildContext context) {
     return showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Center(
-            child: CircularProgressIndicator(),
+            child:CircularProgressIndicator(),
           );
-        });
+      });
   }
 
   void loginHandler() {
@@ -107,11 +107,16 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     APIService apiService = new APIService();
-    // buildShowDialog(context);
+    buildShowDialog(context);
+
     apiService.loginAPIHandler(email, password).then(
       (value) => {
-
-        showToast(value.responseMsg),
+        Navigator.of(context).pop(),
+        Timer(Duration(seconds: 1),
+        ()=> {
+          showToast(value.responseMsg),
+        }),
+        
         print(value.responseCode),
         // ignore: unrelated_type_equality_checks
         if (value.responseCode == 200) {
