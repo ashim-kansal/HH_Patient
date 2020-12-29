@@ -5,8 +5,16 @@ import 'package:intl/intl.dart';
 
 class GridViewWidget extends StatelessWidget{
 
+  List<Schedule> list;
+  final ValueChanged<int> onSelectSlot;
+
+  GridViewWidget({Key key,@required this.list, this.onSelectSlot});
+
+
   @override
   Widget build(BuildContext context) {
+    list??List();
+
     return GridView.count(
       // Create a grid with 2 columns. If you change the scrollDirection to
       // horizontal, this produces 2 rows.
@@ -15,7 +23,7 @@ class GridViewWidget extends StatelessWidget{
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       // Generate 100 widgets that display their index in the List.
-      children: List.generate(20, (index) {
+      children: List.generate(list.length, (index) {
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -23,7 +31,7 @@ class GridViewWidget extends StatelessWidget{
           ),
           padding: EdgeInsets.all(10),
           child: Center(child: Text(
-            'Item $index',
+            list[index].startTime.toString(),
             textAlign: TextAlign.center,
             style: TextStyle(color: HH_Colors.grey_707070),
           ),),

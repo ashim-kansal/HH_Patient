@@ -73,7 +73,7 @@ class SettingAPIService {
     final response = await http.put(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token??HHString.token},
+      "token": token},
       body: jsonEncode(<String, bool>{
         "notificationStatus": value,
       })
@@ -97,7 +97,7 @@ class SettingAPIService {
     final response = await http.put(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token??HHString.token},
+      "token": token},
       body: jsonEncode(<String, String>{
         "appLanguage": value,
       })

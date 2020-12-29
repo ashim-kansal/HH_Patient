@@ -205,27 +205,7 @@ class JournalPageState extends State<JournalPage> {
                   }
                 ),
               ),
-               
-                // Row(
-                //   children: [
-                //     Container(
-                //       child: Text(
-                //         'Have you taken your medicine ?',
-                //         style: TextStyle(
-                //             color: HH_Colors.grey_707070,
-                //             fontSize: 17,
-                //             fontWeight: FontWeight.w500),
-                //       ),
-                //       margin: EdgeInsets.only(left: 5),
-                //     ),
-                //   ],
-                // ),
-                // RadioGroup(),
-                // HHEditText(
-                //   minLines: 4,
-                //   hint: 'Add note',
-                // ),
-              
+
             HHButton(
               title: 'Submit',
               type: 4,

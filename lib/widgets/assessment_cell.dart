@@ -82,6 +82,7 @@ class AssessmentQuestionCell extends StatelessWidget {
   String quesType;
   var completed = false;
   final VoidCallback onClick;
+  // typedef void Mycallback(String answer);
 
   AssessmentQuestionCell(
       {@required this.title,
@@ -262,10 +263,11 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
 class MyMultiChoiceQuesWidget extends StatefulWidget {
 
   var ques;
+  var ans;
   VoidCallback onPressNo;
   VoidCallback onPressYes;
 
-  MyMultiChoiceQuesWidget({@required this.ques, this.onPressNo, this.onPressYes});
+  MyMultiChoiceQuesWidget({@required this.ques, @required this.ans, this.onPressNo, this.onPressYes});
 
   @override
   StatefulWidgetState createState() => StatefulWidgetState();

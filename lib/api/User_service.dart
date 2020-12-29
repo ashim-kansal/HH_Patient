@@ -19,7 +19,7 @@ class UserAPIServices {
     final response = await http.get(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token??HHString.token},
+      "token": token},
     );
     
     var res = json.decode(response.body);
@@ -89,7 +89,7 @@ class UserAPIServices {
     final response = await http.put(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token??HHString.token},
+      "token": token},
       body: jsonEncode(<String, String>{
         "firstName": fname,
         "lastName": lname,

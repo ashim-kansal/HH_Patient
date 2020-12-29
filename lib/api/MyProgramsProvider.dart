@@ -15,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
     final response = await http.get(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
-          'token' : token == null ? HHString.token : token
+          'token' : token
         });
     print(response.body);
     return getProgramsResponseFromJson(response.body);

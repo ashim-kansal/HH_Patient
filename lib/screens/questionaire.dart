@@ -56,7 +56,9 @@ class QuestionairePageState extends State<QuestionairePage> {
                             if(snapshot.data.result[0].questions[index].questionType == "text"){
                               return getQues(InputBoxQuestion(ques: snapshot.data.result[0].questions[index].questionText));
                             }else {
-                              return  getQues(MySingleChoiceQuesWidget(ques: snapshot.data.result[0].questions[index].questionText));
+                              return  getQues(MyMultiChoiceQuesWidget(
+                                ques: snapshot.data.result[0].questions[index].questionText,
+                                ans: snapshot.data.result[0].questions[index].options));
                             }
                           }, 
                           itemCount: snapshot.data.result[0].questions.length, 

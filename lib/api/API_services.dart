@@ -19,7 +19,7 @@ Future<LibraryList> getLibraryList() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token?? HHString.token
+        "token": token
       },);
   print(response.body);
   return libraryListFromJson(response.body);
@@ -31,7 +31,7 @@ Future<UpcomingSession> upcomingSessions() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token?? HHString.token
+        "token": token
       },);
   print(response.body);
   return upcomingSessionFromJson(response.body);
@@ -43,7 +43,7 @@ Future<UpcomingSession> completedSessoins() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token?? HHString.token
+        "token": token
       },);
   print(response.body);
   return upcomingSessionFromJson(response.body);
@@ -55,7 +55,7 @@ Future<JournalingList> getJournalingList() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token?? HHString.token
+        "token": token
       },);
   return journalingListFromJson(response.body);
 }

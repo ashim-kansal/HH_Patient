@@ -96,6 +96,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
       title: widget.data.questions[index].questionText,
       quesType: widget.data.questions[index].questionType,
       completed: widget.data.isSubmit,
+
       onClick: () {
         widget.data.questions[index].answer = 'sss';
       },
