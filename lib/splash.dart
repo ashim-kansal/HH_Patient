@@ -64,7 +64,7 @@ class SplashState extends State<Splash>{
             if (token != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
-              Navigator.pushNamed(context, QuestionairePage.RouteName)
+              Navigator.pushNamed(context, SelectLanguage.RouteName)
             },
       }
     );

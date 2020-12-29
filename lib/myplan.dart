@@ -61,8 +61,10 @@ class MyPlansState extends State<MyPlans> {
                             if (widget.isUpdate)
                               Navigator.pop(context);
                             else
-                              Navigator.pushNamed(
-                                  context, QuestionairePage.RouteName);
+                             Navigator.pushNamed(
+                                  context, Dashboard.RouteName);
+                              // Navigator.pushNamed(
+                              //     context, QuestionairePage.RouteName);
                           },
                         );
                       },

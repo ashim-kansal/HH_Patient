@@ -66,7 +66,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
       if(value.responseCode == 200){
         SetStringToSP("userID", value.userid),
         Navigator.pop(context),
-        Navigator.pushNamed(context, OtpPage.RouteName)
+        Navigator.pushNamed(context, OtpPage.RouteName, arguments: OTPArguements("forgot"))
       }
     });
     // _forgotPwd(email);

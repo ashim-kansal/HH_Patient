@@ -11,6 +11,7 @@ import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/StateModel.dart';
 import 'package:flutter_app/myplan.dart';
+import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -128,10 +129,14 @@ class _SignupPageState extends State<SignUpPage> {
       }),
       //  showToast(value.responseMsg),
        if(value.responseCode == 200){
+         SetStringToSP("userID", value.userID),
+         SetStringToSP("token", value.token),
          Timer(Duration(seconds: 2),
             ()=>{
                   Navigator.pop(context),
-                  Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+                  // arguments: OTPArguements("forgot")
+                  // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+                  Navigator.pushNamed(context, OtpPage.RouteName, arguments: OTPArguements("signup")),
             }
           ),
        }

@@ -50,7 +50,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ForgotPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ForgotPasswordPage());
     case OtpPage.RouteName:
-      return MaterialPageRoute(builder: (context) => OtpPage());
+      final OTPArguements args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => OtpPage(from: args.from));
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
     case QuestionairePage.RouteName:

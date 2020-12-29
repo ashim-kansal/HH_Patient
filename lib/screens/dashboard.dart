@@ -97,7 +97,7 @@ class DashboardState extends State<Dashboard> {
           ],
         ),
         drawer: Container(
-          width: 260,
+          width: 300,
           padding: EdgeInsets.all(20),
           color: Colors.white,
           child: Column(
@@ -146,7 +146,7 @@ class DashboardState extends State<Dashboard> {
                         children: [
                           Text(name??"Hi John Doe", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.accentColor),),
                           FittedBox(
-                            child: Text(email??"john.doe@yahoo.com", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.grey_35444D, fontSize: 10),),
+                            child: Text(email??"john.doe@yahoo.com", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.grey_35444D, fontSize: 12),),
                             fit: BoxFit.fill,
                             )
                         ],

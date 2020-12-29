@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/model/AuthModel.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -17,7 +18,9 @@ import 'package:toast/toast.dart';
 class OtpPage extends StatefulWidget {
   static const String RouteName = '/otp';
 
-  OtpPage({Key key, this.title}) : super(key: key);
+  final String from;
+
+  OtpPage({Key key, this.title, this.from}) : super(key: key);
 
   final String title;
   var error = false;
@@ -283,7 +286,8 @@ class _OtpState extends State<OtpPage> {
       );
       return;
     }
-    
+    print("from");
+    print(widget.from);
     String otp = controller1.text+controller2.text+controller3.text+controller4.text;
     
     //show circular bar
@@ -303,7 +307,12 @@ class _OtpState extends State<OtpPage> {
         Timer(Duration(seconds: 2),
           ()=>{
           Navigator.pop(context),
-          Navigator.pushNamed(context, ResetPasswordPage.RouteName)
+          if(widget.from == "forgot"){
+            Navigator.pushNamed(context, ResetPasswordPage.RouteName),
+          }else {
+            Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+          }
+          
         })
       }
     });
@@ -494,7 +503,7 @@ class _OtpState extends State<OtpPage> {
 }
 
 class OTPArguements {
-  final bool isUpdate;
+  final String from;
 
-  OTPArguements(this.isUpdate);
+  OTPArguements(this.from);
 }
