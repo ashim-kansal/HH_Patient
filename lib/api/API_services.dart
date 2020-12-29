@@ -4,6 +4,8 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
+import 'package:flutter_app/model/OldJournalingLisrModel.dart';
+import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -55,8 +57,33 @@ Future<JournalingList> getJournalingList() async {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token?? HHString.token
       },);
-  print(response.body);
   return journalingListFromJson(response.body);
+}
+
+// fetch old journal 
+Future<OldJournalingList> getOldJournalingList() async {
+  var token = await GetStringToSP("token");
+  final url = HHString.baseURL +"/api/v1/user/old_journalList";
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token?? HHString.token
+      },);
+  return oldJournalingListFromJson(response.body);
+}
+
+// fetch old journal 
+Future<QuestionarieList> getQuestionaire(programId) async {
+  var token = await GetStringToSP("token");
+
+  var pid = "5fd9d4e69a512f3059c0f272";
+  final url = HHString.baseURL +"/api/v1/user/getQuestionnaire?programId="+pid;
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token?? HHString.token
+      },);
+  return questionarieListFromJson(response.body);
 }
 
 class InAppAPIServices {

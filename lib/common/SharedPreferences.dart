@@ -26,3 +26,9 @@ Future<int> GetIntToSP(key) async {
   int value = prefs.getInt(key);
   return value;
 }
+
+// ignore: non_constant_identifier_names
+// void AfterLoginSetData (key, value) async {
+//   SharedPreferences app_preferences = PreferanceManager.
+//   prefs.setInt(key, int.parse(value));
+// }

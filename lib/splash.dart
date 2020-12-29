@@ -11,6 +11,7 @@ import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,12 +27,22 @@ class SplashState extends State<Splash>{
 
   String data = "";
   String nameKey = "_key_name";
+  String token;
+
+  getToken() async{
+    var userToken = await GetStringToSP("token");
+
+    setState(() {
+      token = userToken;
+    });
+    token = userToken;
+    print(userToken);
+  }
 
   @override
   void initState() {
+    getToken();
     super.initState();
-
-   
 
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
@@ -47,23 +58,14 @@ class SplashState extends State<Splash>{
   }
 
   void checkIfUserLoggedIn () async {
-
-    var token = await GetStringToSP("token");
-
-    // SharedPreferences pref = await SharedPreferences.getInstance();
-    
-    // var token = pref.getString("token");
-
-    // print("lTo");
-    print(token);
-
+  
      Timer(Duration(seconds: 4),
       ()=>{
             Navigator.pop(context),
             if (token != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
-              Navigator.pushNamed(context, Dashboard.RouteName)
+              Navigator.pushNamed(context, QuestionairePage.RouteName)
             },
       }
     );

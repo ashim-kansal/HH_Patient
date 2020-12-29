@@ -257,3 +257,122 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
     );
   }
 }
+
+
+class MyMultiChoiceQuesWidget extends StatefulWidget {
+
+  var ques;
+  VoidCallback onPressNo;
+  VoidCallback onPressYes;
+
+  MyMultiChoiceQuesWidget({@required this.ques, this.onPressNo, this.onPressYes});
+
+  @override
+  StatefulWidgetState createState() => StatefulWidgetState();
+
+}
+
+class StatefulWidgetState extends State<MyMultiChoiceQuesWidget> {
+  var options = ['Yes', 'No'];
+  int selectedRadio = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedRadio = 0;
+    widget.ques ?? "";
+  }
+
+  setSelectedRadio(int val) {
+    print("onval");
+    print(val);
+    setState(() {
+      selectedRadio = val;
+      if(val == 1)
+        widget.onPressYes();
+      if(val == 2)
+        widget.onPressNo();
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(children: [
+        Text(
+          'Q. ',
+          style: TextStyle(
+              fontSize: 18,
+              color: HH_Colors.accentColor,
+              fontFamily: "ProximaNova",
+              fontWeight: FontWeight.w500),
+        ),
+        Flexible(
+            child: Text(widget.ques,
+                textAlign: TextAlign.start,
+                style: TextStyle(color: HH_Colors.grey_707070, fontSize: 16))),
+      ]),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
+            width: 120,
+            height: 20,
+            child: RadioListTile<int>(
+              title: Text("Yes"),
+              dense: true,
+              // <= here it is !
+              value: 1,
+              groupValue: selectedRadio,
+              activeColor: selectedRadio == "Yes" ? HH_Colors.purpleColor : HH_Colors.accentColor,
+              onChanged: (val) {
+                // print("Radio $val");
+                setSelectedRadio(val);
+              },
+            ),
+          ),
+          SizedBox(
+            width: 150,
+            height: 20,
+            child: RadioListTile<int>(
+              title: Text("No"),
+              dense: true,
+              // <= here it is !
+              value: 2,
+              groupValue: selectedRadio,
+              activeColor: selectedRadio == "No" ? HH_Colors.purpleColor : HH_Colors.accentColor,
+              onChanged: (val) {
+                // print("Radio $val");
+                setSelectedRadio(val);
+              },
+            ),
+          ),
+        ],
+      )
+    ]);
+  }
+
+  getOptions(options, _site) {
+    final children = <Widget>[];
+    for (var i = 0; i < options.length; i++) {
+      children.add(getRadioOption(options[i], _site, () {}));
+    }
+    return children;
+  }
+
+  Widget getRadioOption(String title, String _site, String Function() param2) {
+    return Row(
+      children: [
+        Radio(
+          value: title,
+          groupValue: _site,
+          onChanged: (String value) {},
+          activeColor: HH_Colors.grey_707070,
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
+        ),
+      ],
+    );
+  }
+}

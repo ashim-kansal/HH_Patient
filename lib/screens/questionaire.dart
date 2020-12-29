@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -31,23 +33,49 @@ class QuestionairePageState extends State<QuestionairePage> {
               ),
               SizedBox(height: 10),
               Expanded(
-                  child: ListView(
-                children: [
-                  LinearProgressIndicator(
-                    minHeight: 5,
-                    backgroundColor: HH_Colors.color_F2EEEE,
-                    valueColor: AlwaysStoppedAnimation(HH_Colors.primaryColor),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  getQues(InputBoxQuestion(ques: HHString.sample_ques)),
-                  getQues(InputBoxQuestion(ques: HHString.sample_ques)),
-                  // getQues(CheckBoxQuestion(ques:HHString.sample_ques)),
-                  getQues(MySingleChoiceQuesWidget(ques: HHString.sample_ques)),
-                  getQues(MySingleChoiceQuesWidget(ques: HHString.sample_ques)),
-                ],
-              )),
+                child: 
+                // Column(
+                // children: [
+                //   // LinearProgressIndicator(
+                //   //   minHeight: 5,
+                //   //   backgroundColor: HH_Colors.color_F2EEEE,
+                //   //   valueColor: AlwaysStoppedAnimation(HH_Colors.primaryColor),
+                //   // ),
+                //   SizedBox(
+                //     height: 5,
+                //   ),
+                  FutureBuilder<QuestionarieList>(
+                    future: getQuestionaire("s"),
+                    builder: (builder, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if(snapshot.hasError){
+                          return Text("Error"); 
+                        }
+                        return ListView.separated(
+                          itemBuilder: (context, index) {
+                            if(snapshot.data.result[0].questions[index].questionType == "text"){
+                              return getQues(InputBoxQuestion(ques: snapshot.data.result[0].questions[index].questionText));
+                            }else {
+                              return  getQues(MySingleChoiceQuesWidget(ques: snapshot.data.result[0].questions[index].questionText));
+                            }
+                          }, 
+                          itemCount: snapshot.data.result[0].questions.length, 
+                          separatorBuilder: (BuildContext context, int index) {  return SizedBox(height: 5); },
+                        ); 
+                      }else {
+                        return Container(
+                          child: Center(child: CircularProgressIndicator(),),
+                        );
+                      }
+                  }),
+                  // getQues(InputBoxQuestion(ques: HHString.sample_ques)),
+                  // getQues(InputBoxQuestion(ques: HHString.sample_ques)),
+                  // // getQues(CheckBoxQuestion(ques:HHString.sample_ques)),
+                  // getQues(MySingleChoiceQuesWidget(ques: HHString.sample_ques)),
+                  // getQues(MySingleChoiceQuesWidget(ques: HHString.sample_ques)),
+              //   ],
+              // )
+              ),
               SizedBox(height: 10),
               HHButton(
                 title: 'Submit & Proceed',
