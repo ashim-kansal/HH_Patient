@@ -8,6 +8,7 @@ import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/signup.dart';
@@ -62,7 +63,7 @@ class SplashState extends State<Splash>{
             if (token != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
-              Navigator.pushNamed(context, SelectLanguage.RouteName)
+              Navigator.pushNamed(context, Dashboard.RouteName)
             },
       }
     );

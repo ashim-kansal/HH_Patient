@@ -19,7 +19,7 @@ class HHString{
 
 
 
-  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZDljNmFhOWE1MTJmMzA1OWMwZjI3MSIsImlhdCI6MTYwOTA5NTI5MCwiZXhwIjoxNjA5MTgxNjkwfQ.8TcM-VgLIzgCYbRIwSf17e2uimOYckVd4upKj6wi6mE";
+  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTg3MDIyY2ViMWIzNWRlYjliNWQ4OSIsImlhdCI6MTYwOTI1MzkxMCwiZXhwIjoxNjA5MzQwMzEwfQ.LKxYVC-cLPBpyIV0EyOATop00GQl4_2XA871pL_M4-U";
 
   static const String uid = "5fd9c6aa9a512f3059c0f271";
 

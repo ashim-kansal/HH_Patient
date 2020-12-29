@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
@@ -56,4 +57,24 @@ Future<JournalingList> getJournalingList() async {
       },);
   print(response.body);
   return journalingListFromJson(response.body);
+}
+
+class InAppAPIServices {
+  Future<CommonResponse> submitJournal(params) async {
+    var token = await GetStringToSP("token");
+    final url = HHString.baseURL +"/api/v1/user/fill_journal";
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token?? HHString.token
+        },
+        body:  jsonEncode({
+          "Questions": params})
+      );
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(json.decode(response.body));
+    }else {
+        throw Exception('Failed to load data!');
+      }
+  }
 }

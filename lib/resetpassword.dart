@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -36,6 +37,18 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     cpasswordController.dispose();
   }
 
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
+    });
+  }
+
   void resetPwdHandler(){
 
     String password = passwordController.text;
@@ -72,10 +85,18 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       widget.cpwderror = false;
     });
 
-  //API call
+    //show circular bar
+    buildShowDialog(context);
+    //API call
     APIService apiService = new APIService();
     apiService.resetPwdAPIHandler(password, cPassword).then((value) => {
-       showToast(value.responseMsg),
+      //  showToast(value.responseMsg),
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+          showToast(value.responseMsg),
+      }),
+
       if(value.responseCode == 200){
         Navigator.pop(context),
         Navigator.pushNamed(context, LoginPage.RouteName),

@@ -118,10 +118,15 @@ class _SignupPageState extends State<SignUpPage> {
       pwdValidation = "Please enter a valid password";
     });
 
+    buildShowDialog(context);
     APIService apiService = new APIService();
      apiService.registerApiHandler(fname, lname, email, location, password, number, country, state, countryCode).then((value) => {
-       print(value),
-       showToast(value.responseMsg),
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+          showToast(value.responseMsg),
+      }),
+      //  showToast(value.responseMsg),
        if(value.responseCode == 200){
          Timer(Duration(seconds: 2),
             ()=>{
@@ -132,6 +137,18 @@ class _SignupPageState extends State<SignUpPage> {
        }
      });
     // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
+  }
+
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
+    });
   }
 
   //show Toast
