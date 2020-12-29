@@ -89,51 +89,27 @@ class Schedule {
 
   Status status;
   String id;
-  StartTime startTime;
-  EndTime endTime;
+  String startTime;
+  String endTime;
 
   factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
     status: statusValues.map[json["status"]],
     id: json["_id"],
-    startTime: startTimeValues.map[json["startTime"]],
-    endTime: endTimeValues.map[json["endTime"]],
+    startTime: json["startTime"],
+    endTime:json["endTime"],
   );
 
   Map<String, dynamic> toJson() => {
     "status": statusValues.reverse[status],
     "_id": id,
-    "startTime": startTimeValues.reverse[startTime],
-    "endTime": endTimeValues.reverse[endTime],
+    "startTime": startTime,
+    "endTime": endTime,
   };
 }
 
-enum EndTime { THE_1030, THE_1130, THE_1230, THE_0130, THE_0230, THE_0330, THE_0430, THE_0530, THE_0630 }
 
-final endTimeValues = EnumValues({
-  "01:30": EndTime.THE_0130,
-  "02:30": EndTime.THE_0230,
-  "03:30": EndTime.THE_0330,
-  "04:30": EndTime.THE_0430,
-  "05:30": EndTime.THE_0530,
-  "06:30": EndTime.THE_0630,
-  "10:30": EndTime.THE_1030,
-  "11:30": EndTime.THE_1130,
-  "12:30": EndTime.THE_1230
-});
 
-enum StartTime { THE_1000, THE_1100, THE_1200, THE_1300, THE_1400, THE_1500, THE_1600, THE_1700, THE_1800 }
 
-final startTimeValues = EnumValues({
-  "10:00": StartTime.THE_1000,
-  "11:00": StartTime.THE_1100,
-  "12:00": StartTime.THE_1200,
-  "13:00": StartTime.THE_1300,
-  "14:00": StartTime.THE_1400,
-  "15:00": StartTime.THE_1500,
-  "16:00": StartTime.THE_1600,
-  "17:00": StartTime.THE_1700,
-  "18:00": StartTime.THE_1800
-});
 
 enum Status { AVAILABLE }
 

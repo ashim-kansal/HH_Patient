@@ -59,11 +59,13 @@ class SplashState extends State<Splash>{
      Timer(Duration(seconds: 4),
       ()=>{
             Navigator.pop(context),
-            if (token != null) {
+        // Navigator.pushNamed(context, Dashboard.RouteName)
+
+        if (token != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
-            }else{
+        }else{
               Navigator.pushNamed(context, SelectLanguage.RouteName)
-            },
+        },
       }
     );
   }

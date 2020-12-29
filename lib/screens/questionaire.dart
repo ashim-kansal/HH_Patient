@@ -43,11 +43,11 @@ class QuestionairePageState extends State<QuestionairePage> {
                   ),
                   getQues(InputBoxQuestion(ques: HHString.sample_ques)),
                   getQues(InputBoxQuestion(ques: HHString.sample_ques)),
-                  // getQues(CheckBoxQuestion(ques:HHString.sample_ques)),
                   getQues(MySingleChoiceQuesWidget(ques: HHString.sample_ques)),
                   getQues(MySingleChoiceQuesWidget(ques: HHString.sample_ques)),
                 ],
-              )),
+              )
+              ),
               SizedBox(height: 10),
               HHButton(
                 title: 'Submit & Proceed',

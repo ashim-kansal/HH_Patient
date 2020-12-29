@@ -82,6 +82,7 @@ class AssessmentQuestionCell extends StatelessWidget {
   String quesType;
   var completed = false;
   final VoidCallback onClick;
+  // typedef void Mycallback(String answer);
 
   AssessmentQuestionCell(
       {@required this.title,
