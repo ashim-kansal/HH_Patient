@@ -133,7 +133,7 @@ class BookSessionState extends State<BookSessionPage>{
   }
 
   Future<GetBookingSlotsResponse> getBookingSlots() async {
-      var response = await getSlotsForBooking(widget.data.id);
+      var response = await service.getSlotsForBooking(widget.data.id);
       return response;
   }
 
