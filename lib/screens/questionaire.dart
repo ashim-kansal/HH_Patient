@@ -12,6 +12,9 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 class QuestionairePage extends StatefulWidget {
   static const String RouteName = '/questionaire';
 
+  String programId;
+  QuestionairePage({this.programId});
+
   @override
   State<StatefulWidget> createState() => QuestionairePageState();
 }
@@ -45,7 +48,7 @@ class QuestionairePageState extends State<QuestionairePage> {
                 //     height: 5,
                 //   ),
                   FutureBuilder<QuestionarieList>(
-                    future: getQuestionaire("s"),
+                    future: getQuestionaire(widget.programId),
                     builder: (builder, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if(snapshot.hasError){
@@ -55,6 +58,8 @@ class QuestionairePageState extends State<QuestionairePage> {
                           itemBuilder: (context, index) {
                             if(snapshot.data.result[0].questions[index].questionType == "text"){
                               return getQues(InputBoxQuestion(ques: snapshot.data.result[0].questions[index].questionText));
+                            }else if(snapshot.data.result[0].questions[index].questionType == "YESNO"){
+                              return getQues(MySingleChoiceQuesWidget(ques: snapshot.data.result[0].questions[index].questionText));
                             }else {
                               return  getQues(MyMultiChoiceQuesWidget(
                                 ques: snapshot.data.result[0].questions[index].questionText,
@@ -102,4 +107,11 @@ class QuestionairePageState extends State<QuestionairePage> {
       ),
     );
   }
+}
+
+
+class QuestionaireArguments {
+  final String programId;
+
+  QuestionaireArguments(this.programId);
 }

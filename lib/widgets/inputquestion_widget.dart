@@ -5,9 +5,10 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 
 class InputBoxQuestion extends StatefulWidget{
   var ques;
-  TextEditingController controller;
+  var controller = TextEditingController();
+  final ValueChanged<String> onSelectAnswer;
 
-  InputBoxQuestion({Key key, @required this.ques, this.controller});
+  InputBoxQuestion({Key key, @required this.ques, this.onSelectAnswer});
 
   @override
   State<StatefulWidget> createState() =>InputBoxQuestionState();
@@ -15,6 +16,20 @@ class InputBoxQuestion extends StatefulWidget{
 
 class InputBoxQuestionState extends State<InputBoxQuestion>{
 
+  @override
+  void initState() {
+    widget.controller.addListener((){
+      widget.onSelectAnswer(widget.controller.text);
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,7 +48,7 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
           child:         TextField(
             minLines: 1,
             maxLines: 1,
-
+            controller: widget.controller,
             decoration: InputDecoration(
               border: normalOutlineInputBorder(),
                 counterText: ""

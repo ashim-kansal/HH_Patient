@@ -55,7 +55,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
     case QuestionairePage.RouteName:
-      return MaterialPageRoute(builder: (context) => QuestionairePage());
+      final QuestionaireArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => QuestionairePage(programId: args.programId));
     case MyPlans.RouteName:
       final MyPlansArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => MyPlans(isUpdate: args.isUpdate?true:false,));

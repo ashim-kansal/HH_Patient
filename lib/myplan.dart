@@ -79,9 +79,9 @@ class MyPlansState extends State<MyPlans> {
     buyPlan(id, amount).then((value) => {
       if(value.responseCode == 200){
         Navigator.pop(context),
-        if(!widget.isUpdate){
-          Navigator.pushNamed(context, Dashboard.RouteName)
-        }
+        // if(!widget.isUpdate){
+          Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+        // }
 
       }
     });
@@ -94,3 +94,4 @@ class MyPlansArguments {
 
   MyPlansArguments(this.isUpdate);
 }
+
