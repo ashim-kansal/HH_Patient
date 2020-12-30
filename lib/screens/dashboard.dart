@@ -97,7 +97,7 @@ class DashboardState extends State<Dashboard> {
           ],
         ),
         drawer: Container(
-          width: 300,
+          width: 320,
           padding: EdgeInsets.all(20),
           color: Colors.white,
           child: Column(
