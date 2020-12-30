@@ -27,6 +27,7 @@ Future<GetAssessmentResponse> getAllAssessments() async {
 
 Future<SubmitAssessmentResponse> submitAssessments(result) async {
   var token = await GetStringToSP("token");
+  print(json.encode(result));
 
   final response = await http.post(url+"/submit_AssessmentForm",
       headers: {

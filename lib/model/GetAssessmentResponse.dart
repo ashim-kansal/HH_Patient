@@ -42,7 +42,7 @@ class GetAssessmentResponse {
 
 class Result {
   Result({
-    this.id,
+    this.formId,
     this.userSubmit,
     this.status,
     this.programId,
@@ -54,7 +54,7 @@ class Result {
     this.isSubmit,
   });
 
-  String id;
+  String formId;
   List<dynamic> userSubmit;
   String status;
   String programId;
@@ -66,7 +66,7 @@ class Result {
   bool isSubmit;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-    id: json["_id"],
+    formId: json["_id"],
     userSubmit: List<dynamic>.from(json["userSubmit"].map((x) => x)),
     status: json["status"],
     programId: json["programId"],
@@ -79,7 +79,8 @@ class Result {
   );
 
   Map<String, dynamic> toJson() => {
-    "_id": id,
+    // "_id": id,
+    "formId": formId,
     "userSubmit": List<dynamic>.from(userSubmit.map((x) => x)),
     "status": status,
     "programId": programId,

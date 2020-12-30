@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/Assessment_services.dart';
 import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/models/AssessmentModel.dart';
+import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/assessment_cell.dart';
@@ -106,6 +107,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
     
     print("data");
     print(data);
+
     // submitAssessments(data);
     submitAssessments(data).then(
             (value) => {
@@ -113,7 +115,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
           print(value.responseCode),
           if (value.responseCode == 200) {
             Navigator.pop(context),
-            // Navigator.pushNamed(context, Dashboard.RouteName)
+            Navigator.pushNamed(context, Dashboard.RouteName)
           }
         });
   }

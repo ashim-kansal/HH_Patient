@@ -70,7 +70,8 @@ class MyPlansState extends State<MyPlans> {
                 );
               } else
                 return CircularProgressIndicator();
-            }));
+            })
+    );
   }
 
   void buyNewPlan(String id, String amount) {
