@@ -59,8 +59,6 @@ class _SignupPageState extends State<SignUpPage> {
   String countryCode = "";
   void signupHandler(){
 
-    print("doneaaa");
-
     String fname = fnameController.text;
     String lname = lnameController.text;
     String email = emailController.text;
@@ -118,6 +116,11 @@ class _SignupPageState extends State<SignUpPage> {
     setState(() {
       pwdValidation = "Please enter a valid password";
     });
+
+    if(!isChecked){
+      showToast("Please agree with terms & conditions");
+      return;
+    }
 
     buildShowDialog(context);
     APIService apiService = new APIService();

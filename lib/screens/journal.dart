@@ -29,13 +29,28 @@ class JournalPageState extends State<JournalPage> {
 
   List<String> litems = [];
 
+  Future journalFuture;
+
+  
+  @override
+  void initState(){
+    super.initState();
+    journalFuture = _getJournal();
+  }
+
+  _getJournal() async {
+    return await getJournalingList();
+  }
+
   void submitJournal (){
 
     var params = [];
     int totalItems = litems.length;
 
-    for (var i = 0; i < totalItems; i++) {
+    print(totalItems);
 
+    for (var i = 0; i < totalItems; i++) {
+      print(_controllers[i].text);
       if(_controllers[i].text.trim().length == 0){
         showDialog(
           context: context,
@@ -66,7 +81,8 @@ class JournalPageState extends State<JournalPage> {
       if(value.responseCode == 200){
         for (var i = 0; i < totalItems; i++) {
           _controllers[i].clear()
-        }
+        },
+        params = [],
       }
     });
   }
@@ -131,7 +147,11 @@ class JournalPageState extends State<JournalPage> {
     );
   }
 
+  
   Widget getNewJournal() {
+
+    // Future<JournalingList> _future = getJournalingList();
+
     return Container(
         padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
         height: MediaQuery.of(context).size.height,
@@ -139,15 +159,14 @@ class JournalPageState extends State<JournalPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: 
-                FutureBuilder<JournalingList>(
-                  future: getJournalingList(),
+              child:  FutureBuilder(
+                  future: journalFuture,
                   builder: (builder, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if(snapshot.hasError){
                         return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                       }
-                      return ListView.separated(
+                      return  ListView.separated(
                         scrollDirection: Axis.vertical,
                         separatorBuilder: (context, index) {
                           return SizedBox(height: 20);
@@ -159,41 +178,27 @@ class JournalPageState extends State<JournalPage> {
                           litems.add(snapshot.data.result[index].question);
                           return Column(
                             children: [
-                              // Row(
-                              //   children: [
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      snapshot.data.result[index].question,
-                                      maxLines: 5,
-                                      overflow: TextOverflow.ellipsis,
-                                      // 'Hi! How are you feeling today ?',
-                                      style: TextStyle(
-                                          color: HH_Colors.grey_707070,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    margin: EdgeInsets.only(left: 5),
-                                  ),
-                              //   ],
-                              // ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  snapshot.data.result[index].question,
+                                  maxLines: 5,
+                                  overflow: TextOverflow.ellipsis,
+                                  // 'Hi! How are you feeling today ?',
+                                  style: TextStyle(
+                                      color: HH_Colors.grey_707070,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                margin: EdgeInsets.only(left: 5),
+                              ),
+                              
                               SizedBox(
                                 height: 5,
                               ),
                               HHEditText(
                                 minLines: 4,
                                 controller: _controllers[index],
-                                // onSubmitText: () {
-                                //   print("done");
-                                //   var text =  _controllers[index].text;
-                                //   litems.add({
-                                //     "question":snapshot.data.result[index].question,
-                                //     "answer": text
-                                //   });
-                                // },
-                                // onChange: (text) async {
-                                //   print(text);
-                                // }
                               ),SizedBox(
                                 height: 10,
                               ),
@@ -208,6 +213,7 @@ class JournalPageState extends State<JournalPage> {
                     }
                   }
                 ),
+                // )
               ),
 
             HHButton(
@@ -219,48 +225,16 @@ class JournalPageState extends State<JournalPage> {
               },
             )
           ],
-        ));
+        )
+      );
   }
 
   Widget getOldJournal() {
+    
     return Container(
       margin: EdgeInsets.only(top: 20, bottom: 20),
       child: Column(
         children: [
-          // Container(
-          //   alignment: Alignment.center,
-          //   width: MediaQuery.of(context).size.width,
-          //   decoration: BoxDecoration(
-          //       color: HH_Colors.primaryColor,
-          //       borderRadius: BorderRadius.all(Radius.circular(5.0))),
-          //   padding: EdgeInsets.all(5),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       SizedBox(
-          //         width: 10,
-          //       ),
-          //       Icon(
-          //         Icons.arrow_back_ios_rounded,
-          //         color: Colors.white,
-          //       ),
-          //       Text(
-          //         '20th Oct to 14th Nov',
-          //         style: TextStyle(color: Colors.white),
-          //       ),
-          //       Icon(
-          //         Icons.arrow_forward_ios_rounded,
-          //         color: Colors.white,
-          //       ),
-          //       SizedBox(
-          //         width: 10,
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // SizedBox(
-          //   height: 20,
-          // ),
           Expanded(
             child: FutureBuilder<OldJournalingList>(
               future: getOldJournalingList(),
@@ -352,3 +326,12 @@ class JournalPageState extends State<JournalPage> {
 
 
 }
+
+// class NewJournalWidget
+// class NewJournalWidget extends StatelessWidget  {
+
+//   final Journal = journal;
+
+//   NewJournalWidget(this.Journal);
+    
+// }

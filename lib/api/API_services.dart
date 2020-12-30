@@ -55,7 +55,7 @@ Future<JournalingList> getJournalingList() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token
+        "token": token??HHString.token
       },);
   return journalingListFromJson(response.body);
 }

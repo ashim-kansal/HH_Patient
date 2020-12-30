@@ -279,7 +279,8 @@ class HHEditTextState extends State<HHEditText> {
       minLines: widget.minLines?? 1,
       maxLength: widget.maxLength??32,
       maxLines: widget.minLines?? 1,
-      onEditingComplete: () => widget.onSubmitText(),
+      onSubmitted: (value){return;},
+      // onEditingComplete: () => widget.onSubmitText(),
       decoration: InputDecoration(
           counterText: "",
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
