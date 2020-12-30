@@ -8,6 +8,7 @@ import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/questionaire.dart';

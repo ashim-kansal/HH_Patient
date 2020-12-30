@@ -52,5 +52,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSBonjourServices</key>
+	<array>
+		 <string>_http._tcp</string>
+		 <string>_dartobservatory._tcp</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>HH Patient needs to access network</string>
 </dict>
 </plist>
