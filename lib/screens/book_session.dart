@@ -66,7 +66,7 @@ class BookSessionState extends State<BookSessionPage>{
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return Text("Error");
+                            return Center(child: Text("Not Found"),);
                           }
 
                           SchedulerBinding.instance.addPostFrameCallback((_){
@@ -79,7 +79,7 @@ class BookSessionState extends State<BookSessionPage>{
 
                           return Expanded(child: Column(
                             children: [
-                              Container(height:50, child: SessionDateWidget(list:this.list, onSelectDate: _updateSelectedDate,)),
+                              Container(height:50, child: SessionDateWidget(list:snapshot.data.result, onSelectDate: _updateSelectedDate,)),
                               SizedBox(height: 10,),
                               Expanded(child: GridView.count(
                                 // Create a grid with 2 columns. If you change the scrollDirection to
@@ -89,18 +89,18 @@ class BookSessionState extends State<BookSessionPage>{
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
                                   // Generate 100 widgets that display their index in the List.
-                                  children: List.generate(list[selectedDatePos].schedule.length, (index) {
+                                  children: List.generate(snapshot.data.result[selectedDatePos].schedule.length, (index) {
                                     return GestureDetector(
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                                          color: HH_Colors.grey_F2F2F2,
+                                          color: index == selectedSlotPos?HH_Colors.primaryColor:HH_Colors.grey_F2F2F2,
                                         ),
                                         padding: EdgeInsets.all(10),
                                         child: Center(child: Text(
-                                          list[selectedDatePos].schedule[index].startTime.toString(),
+                                          snapshot.data.result[selectedDatePos].schedule[index].startTime.toString(),
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(color: HH_Colors.grey_707070),
+                                          style: TextStyle(color: index == selectedSlotPos?Colors.white:HH_Colors.grey_707070),
                                         ),),
                                       ),
                                       onTap: (){

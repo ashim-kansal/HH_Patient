@@ -116,7 +116,7 @@ class SessionPageState extends State<SessionPage>{
               return UpcomingSessionItem(
                 name: snapshot.data.result[index].programName, 
                 drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
-                sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
+                sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,);
             },
                 separatorBuilder: (context, index) {

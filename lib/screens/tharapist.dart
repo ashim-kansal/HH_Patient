@@ -191,7 +191,7 @@ class TherapistOptionItem extends StatelessWidget {
           height: MediaQuery.of(context).size.width/2.7,
 
           padding: EdgeInsets.all(10),
-          child: Column(
+          child: Container(child: Center(child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -206,7 +206,7 @@ class TherapistOptionItem extends StatelessWidget {
                 style: TextStyle(fontSize: 20, color: HH_Colors.grey_3d3d3d),
               ),
             ],
-          ),
+          ),)),
         ),
         onTap: (){
           onClick();

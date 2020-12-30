@@ -82,12 +82,15 @@ class AssessmentQuestionCell extends StatelessWidget {
   String quesType;
   var completed = false;
   final VoidCallback onClick;
+  final ValueChanged<String> onSelectAnswer;
+
   // typedef void Mycallback(String answer);
 
   AssessmentQuestionCell(
       {@required this.title,
       @required this.quesType,
       this.completed,
+        this.onSelectAnswer,
       this.onClick});
 
   @override
@@ -116,9 +119,11 @@ class AssessmentQuestionCell extends StatelessWidget {
       ques: question,
       onPressYes: () {
         print("yes");
+        onSelectAnswer("YES");
       },
       onPressNo: () {
         print("no");
+        onSelectAnswer("NO");
       },);
   }
 
@@ -184,7 +189,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
         children: <Widget>[
           SizedBox(
             width: 120,
-            height: 20,
+            height: 30,
             child: RadioListTile<int>(
               title: Text("Yes"),
               dense: true,
@@ -199,8 +204,8 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
             ),
           ),
           SizedBox(
-            width: 150,
-            height: 20,
+            width: 120,
+            height: 30,
             child: RadioListTile<int>(
               title: Text("No"),
               dense: true,

@@ -173,7 +173,7 @@ class _SignupPageState extends State<SignUpPage> {
       body: ListView(
         children: [
          Container(
-            margin: EdgeInsets.fromLTRB(20, 60, 20, 20),
+            margin: EdgeInsets.fromLTRB(20, 60, 20, 40),
             color: Colors.white,
             child: Material(
               child: ClipPath(
@@ -297,8 +297,7 @@ class _SignupPageState extends State<SignUpPage> {
                             ),
 
                             Container(
-                              width: 295,
-                              margin: EdgeInsets.only(top: 0, bottom: 10),
+                              margin: EdgeInsets.only(top: 0, bottom: 10, left: 15, right: 15),
                               padding: const EdgeInsets.only(left: 20.0,right: 10.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
@@ -356,8 +355,7 @@ class _SignupPageState extends State<SignUpPage> {
                             
                           
                             Container(
-                              width: 295,
-                              margin: EdgeInsets.only(bottom: 20),
+                              margin: EdgeInsets.only(bottom: 20, left: 15,right: 15),
                               padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
                               decoration: BoxDecoration(
                                   shape: BoxShape.rectangle,
@@ -477,7 +475,7 @@ class _SignupPageState extends State<SignUpPage> {
 
             Container(
 
-                margin: EdgeInsets.only(top: 10, right: 40, left: 40),
+                margin: EdgeInsets.only(top: 10, right: 40, left: 40, bottom: 20),
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 decoration: BoxDecoration(
                     // shape: BoxShape.rectangle,

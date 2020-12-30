@@ -85,6 +85,18 @@ Future<QuestionarieList> getQuestionaire(programId) async {
       },);
   return questionarieListFromJson(response.body);
 }
+// fetch drinkingDairy_details
+Future<QuestionarieList> getdrinkingDairyDetails() async {
+  var token = await GetStringToSP("token");
+
+  final url = HHString.baseURL +"/api/v1/user/drinkingDairy_details";
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      },);
+  return questionarieListFromJson(response.body);
+}
 
 class InAppAPIServices {
   Future<CommonResponse> submitJournal(params) async {

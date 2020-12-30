@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/GetBookingResponse.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -49,7 +50,7 @@ Future<GetBookingSlotsResponse> getSlotsForBooking(String id) async {
 
 }
 
-Future<GetBookingSlotsResponse> bookSession(String id) async {
+Future<GetBookingResponse> bookSession(String id) async {
   var token = await GetStringToSP("token");
 
   final response = await http.post(url+"/bookSession",
@@ -59,7 +60,7 @@ Future<GetBookingSlotsResponse> bookSession(String id) async {
         'token' : token
   });
   print(response.body);
-  return getBookingSlotsResponseFromJson(response.body);
+  return getBookingResponseFromJson(response.body);
 
 }
 

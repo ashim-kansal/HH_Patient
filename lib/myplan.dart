@@ -58,11 +58,8 @@ class MyPlansState extends State<MyPlans> {
                           desc: snapshot.data.result[position].description,
                           price: snapshot.data.result[position].amount,
                           onClick: () {
-                            if (widget.isUpdate)
-                              Navigator.pop(context);
-                            else
-                             Navigator.pushNamed(
-                                  context, Dashboard.RouteName);
+                            buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
+
                               // Navigator.pushNamed(
                               //     context, QuestionairePage.RouteName);
                           },
@@ -75,6 +72,20 @@ class MyPlansState extends State<MyPlans> {
                 return CircularProgressIndicator();
             }));
   }
+
+  void buyNewPlan(String id, String amount) {
+
+    buyPlan(id, amount).then((value) => {
+      if(value.responseCode == 200){
+        Navigator.pop(context),
+        if(!widget.isUpdate){
+          Navigator.pushNamed(context, Dashboard.RouteName)
+        }
+
+      }
+    });
+  }
+
 }
 
 class MyPlansArguments {

@@ -61,7 +61,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                   : HHButton(
                       title: 'Submit', type: 2, isEnable: true, onClick: () {
                         print(widget.data);
-                        // submitForm(widget.data);
+                        submitForm(widget.data);
               }),
             ],
           ),
@@ -96,10 +96,9 @@ class AssessmentFormState extends State<AssessmentFormPage> {
       title: widget.data.questions[index].questionText,
       quesType: widget.data.questions[index].questionType,
       completed: widget.data.isSubmit,
-
-      onClick: () {
-        widget.data.questions[index].answer = 'sss';
-      },
+      onSelectAnswer: (answer){
+        widget.data.questions[index].answer = answer;
+      }
     );
   }
 
@@ -107,7 +106,16 @@ class AssessmentFormState extends State<AssessmentFormPage> {
     
     print("data");
     print(data);
-    submitAssessments(data);
+    // submitAssessments(data);
+    submitAssessments(data).then(
+            (value) => {
+
+          print(value.responseCode),
+          if (value.responseCode == 200) {
+            Navigator.pop(context),
+            // Navigator.pushNamed(context, Dashboard.RouteName)
+          }
+        });
   }
 }
 

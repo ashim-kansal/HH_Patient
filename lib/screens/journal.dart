@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
+import 'package:flutter_app/model/OldJournalingLisrModel.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/ExpansionTile.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_app/widgets/journalWidgets.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_app/common/aaa.dart';
 
 class JournalPage extends StatefulWidget {
   static const String RouteName = '/journal';
@@ -192,6 +194,8 @@ class JournalPageState extends State<JournalPage> {
                                 // onChange: (text) async {
                                 //   print(text);
                                 // }
+                              ),SizedBox(
+                                height: 10,
                               ),
                             ],
                           );
@@ -282,50 +286,49 @@ class JournalPageState extends State<JournalPage> {
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.only(
                                 left: 15, top: 15, bottom: 10, right: 10),
-                            child: Column(
-                              // crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ListView.separated(
-                                itemBuilder: (context, qIndex) {
-                                  return Column(
-                                    children: [
-                                      Text(
-                                        snapshot.data.result[index].questions[qIndex].question,
-                                        style: TextStyle(
-                                            color: HH_Colors.grey_585858,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        snapshot.data.result[index].questions[qIndex].answer,
-                                        style: TextStyle(
-                                            color: HH_Colors.grey_707070, fontSize: 14),
-                                      ),
-                                    ],
-                                  );
-                                }, 
-                                itemCount: snapshot.data.result[index].questions.length, 
-                                separatorBuilder: (BuildContext context, int index) {  
-                                  return SizedBox(
-                                        height: 10,
-                                      );
-                                },
-                              ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Text(
-                                    createdDate.format("hh:mm a"),
-                                    textAlign: TextAlign.end,
-                                    style: TextStyle(
-                                        color: HH_Colors.grey_707070,
-                                        fontSize: 12),
-                                  ),
-                                )
-                              ],
-                            ),
+                            child: ExpandableListTile(result:snapshot.data.result[index], date:createdDate.format("hh:mm a"))
+                                // [
+                                // Expanded(child: ListView.separated(
+                                //   itemBuilder: (context, qIndex) {
+                                //     return Column(
+                                //       children: [
+                                //         Text(
+                                //           snapshot.data.result[index].questions[qIndex].question,
+                                //           style: TextStyle(
+                                //               color: HH_Colors.grey_585858,
+                                //               fontSize: 15,
+                                //               fontWeight: FontWeight.bold),
+                                //         ),
+                                //         Text(
+                                //           snapshot.data.result[index].questions[qIndex].answer,
+                                //           style: TextStyle(
+                                //               color: HH_Colors.grey_707070, fontSize: 14),
+                                //         ),
+                                //       ],
+                                //     );
+                                //   },
+                                //   itemCount: snapshot.data.result[index].questions.length,
+                                //   separatorBuilder: (BuildContext context, int index) {
+                                //     return SizedBox(
+                                //       height: 10,
+                                //     );
+                                //   },
+                                // )),
+                                // SizedBox(
+                                //   height: 10,
+                                // ),
+                                // Container(
+                                //   width: MediaQuery.of(context).size.width,
+                                //   child: Text(
+                                //     createdDate.format("hh:mm a"),
+                                //     textAlign: TextAlign.end,
+                                //     style: TextStyle(
+                                //         color: HH_Colors.grey_707070,
+                                //         fontSize: 12),
+                                //   ),
+                                // )
+                              // ],
+                            // ),
                           )
                         ],
                       );
@@ -346,4 +349,6 @@ class JournalPageState extends State<JournalPage> {
       ),
     );
   }
+
+
 }

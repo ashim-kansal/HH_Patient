@@ -217,20 +217,7 @@ class UpcomingSessionItem extends StatelessWidget {
                       ]),
                     ],
                   ),
-                  // Column(
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //         Container(child:
-                  //         Text('AMS Therapy',textAlign:TextAlign.start, style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
-                  //             )
-                  //      ,
-                  //     Row(
-                  //       children: [
-                  //         Text('22 Nov, 2020, 1:30 PM',textAlign:TextAlign.start, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                  //       ],
-                  //     )
-                  //   ],
-                  // ),
+
                   completed?
                       Row(
                         children: [

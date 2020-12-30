@@ -56,7 +56,7 @@ class PlanWidgetState extends State<PlanWidget> {
               SizedBox.fromSize(size: Size(8, 20),),
 
               widget.enable ?? true ? RaisedButton(
-                  child: Text( widget.price.compareTo('0') == 1 ? 'Free':'Buy Now', style: TextStyle(color: Colors.white),),
+                  child: Text( widget.price.compareTo('0') == 1 ? 'Buy Now':'Free', style: TextStyle(color: Colors.white),),
                   onPressed: (){
                     widget.onClick();
                   },

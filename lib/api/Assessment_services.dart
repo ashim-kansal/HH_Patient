@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart';
+import 'package:flutter_app/model/SubmitAssessmentResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +25,7 @@ Future<GetAssessmentResponse> getAllAssessments() async {
 
 
 
-Future<GetAssessmentResponse> submitAssessments(result) async {
+Future<SubmitAssessmentResponse> submitAssessments(result) async {
   var token = await GetStringToSP("token");
 
   final response = await http.post(url+"/submit_AssessmentForm",
@@ -31,9 +33,9 @@ Future<GetAssessmentResponse> submitAssessments(result) async {
         HttpHeaders.contentTypeHeader: 'application/json',
         'token' : token
       },
-    body:result
+    body:json.encode(result)
   );
   print(response.body);
-  return getAssessmentResponseFromJson(response.body);
+  return submitAssessmentResponseFromJson(response.body);
 
 }

@@ -41,8 +41,8 @@ class HHOptionButton extends StatelessWidget{
     return
       Container(
         padding: const EdgeInsets.all(0.0),
-        width: 30.0,
-          height: 30,// you can adjust the width as you need
+        width: 25,
+          height: 35,// you can adjust the width as you need
         child: PopupMenuButton<String>(
             offset: Offset(20,20),
 
@@ -50,7 +50,7 @@ class HHOptionButton extends StatelessWidget{
               print("You selected $value");
             },
           // captureInheritedThemes: false,
-            icon: Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,),
+            icon: Image.asset('assets/images/ic_option_menu.png', width: 20, height: 35,),
             itemBuilder: (BuildContext context) {
               return [
                 new PopupMenuWidget(
