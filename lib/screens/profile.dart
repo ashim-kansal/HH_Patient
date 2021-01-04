@@ -70,15 +70,14 @@ class _CreateAccountState extends State<ProfilePage> {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
-        print(pickedFile.path);
+        // print(pickedFile.path);
         _image = File(pickedFile.path);
-        final bytes = _image.readAsBytesSync();
-        String base64 = base64Encode(bytes);
-
-        print(base64);
+        // final bytes = _image.readAsBytesSync();
+        // File base64 = _image;
+        // print(base64);
         
         SettingAPIService settingAPIService = new SettingAPIService();
-        settingAPIService.updateProfile(base64).then((value) => {
+        settingAPIService.updateProfile(pickedFile).then((value) => {
           showToast(value.responseMsg),
         });
       } else {

@@ -19,7 +19,7 @@ class UserAPIServices {
     final response = await http.get(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token},
+      "token": token??HHString.token},
     );
     
     var res = json.decode(response.body);
@@ -66,7 +66,7 @@ class UserAPIServices {
     final response = await http.post(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token},
+      "token": token??HHString.token},
       body: jsonEncode(<String, String>{
         "image": imagebase64,
       })
@@ -89,7 +89,7 @@ class UserAPIServices {
     final response = await http.put(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token},
+      "token": token??HHString.token},
       body: jsonEncode(<String, String>{
         "firstName": fname,
         "lastName": lname,

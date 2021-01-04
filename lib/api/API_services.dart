@@ -31,7 +31,7 @@ Future<UpcomingSession> upcomingSessions() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token
+        "token": token??HHString.token
       },);
   print(response.body);
   return upcomingSessionFromJson(response.body);
@@ -43,7 +43,7 @@ Future<UpcomingSession> completedSessoins() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token
+        "token": token?? HHString.token
       },);
   print(response.body);
   return upcomingSessionFromJson(response.body);
