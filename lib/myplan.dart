@@ -7,6 +7,8 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
 import 'package:flutter_app/api/MyProgramsProvider.dart';
+import 'package:stripe_payment/stripe_payment.dart';
+import 'dart:convert';
 
 class MyPlans extends StatefulWidget {
   static const String RouteName = '/planwidget';
@@ -24,6 +26,32 @@ class MyPlansState extends State<MyPlans> {
     initialPage: 0,
   );
 
+  Token _paymentToken;
+  PaymentMethod _paymentMethod;
+  String _error;
+  final String _currentSecret = "sk_test_51HpT2LCqtD4cxQPsXTUC40N2Eloiyw91WdjH09qYPUpxmTt2hiXq0vqI13gNWpJ8lqzbsAgR6XHECWE07shIUWG900UDpAxVn3"; //set this yourself, e.g using curl
+  PaymentIntentResult _paymentIntent;
+  Source _source;
+
+  final CreditCard testCard = CreditCard(
+    number: '4111111111111111',
+    expMonth: 08,
+    expYear: 22,
+  );
+
+
+
+  @override
+  void initState() {
+    StripePayment.setOptions(
+        StripeOptions(
+            publishableKey:"pk_test_51HpT2LCqtD4cxQPsFF7QxxGBIrDz3Y9e8Obc1zfdtuZLn3AePI5hbHUKS6zqYxalohLN3TSgrUvUe2tolkH8fuEf00p9PQAOi3",
+            //YOUR_PUBLISHABLE_KEY
+            merchantId: "Test",//YOUR_MERCHANT_ID
+            androidPayMode: 'test'
+        ));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MyWidget(
@@ -60,8 +88,7 @@ class MyPlansState extends State<MyPlans> {
                           onClick: () {
                             buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
 
-                              // Navigator.pushNamed(
-                              //     context, QuestionairePage.RouteName);
+
                           },
                         );
                       },
@@ -69,21 +96,74 @@ class MyPlansState extends State<MyPlans> {
                   ],
                 );
               } else
-                return CircularProgressIndicator();
+                return                Center(child: CircularProgressIndicator());
+
             })
     );
   }
 
-  void buyNewPlan(String id, String amount) {
+  void buyNewPlan(String id, String paymentAmount) {
 
-    buyPlan(id, amount).then((value) => {
-      if(value.responseCode == 200){
-        Navigator.pop(context),
-        // if(!widget.isUpdate){
-          Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
-        // }
+    // StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest()).then((paymentMethod) {
+    //   print(paymentMethod);
+    // }).catchError((setError){
+    //   print(setError);
+    // });
+    StripePayment.createSourceWithParams(SourceParams(
+      type: 'ideal',
+      amount: int.parse(paymentAmount),
+      currency: 'usd',
+      returnURL: 'example://stripe-redirect',
+    )).then((source) {
+      print(jsonEncode(source));
 
-      }
+      StripePayment.createTokenWithCard(
+         testCard
+      ).then((token) {
+        // print('response'+ jsonEncode(token));
+        print(token.tokenId);
+        StripePayment.createPaymentMethod(
+          PaymentMethodRequest(
+            card: CreditCard(
+              token: token.tokenId,
+            ),
+          ),
+        ).then((paymentMethod) {
+
+          print('response  dd '+ jsonEncode(paymentMethod));
+          StripePayment.confirmPaymentIntent(
+            PaymentIntent(
+              clientSecret: _currentSecret,
+              paymentMethodId: paymentMethod.id,
+            ),
+          ).then((paymentIntent) {
+            print('response'+ jsonEncode(paymentIntent));
+          }).catchError((setError) {
+            print(setError);
+
+          });
+        }).catchError((setError){
+          print((setError));
+        });
+
+      }).catchError((setError){
+        print((setError));
+      });
+
+
+
+      // buyPlan(id, paymentAmount).then((value) => {
+      //   if(value.responseCode == 200){
+      //     // Navigator.pop(context),
+      //     // if(!widget.isUpdate){
+      //     Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+      //     // }
+      //
+      //   }
+      // });
+
+    }).catchError((error){
+      print(error);
     });
   }
 

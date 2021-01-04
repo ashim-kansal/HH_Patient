@@ -62,8 +62,8 @@ class Result {
     );
 
     Map<String, dynamic> toJson() => {
-        "status": status,
-        "_id": id,
+        // "status": status,
+        // "_id": id,
         "programId": programId,
         "Questions": List<dynamic>.from(questions.map((x) => x.toJson())),
         "createdAt": createdAt.toIso8601String(),
@@ -77,6 +77,7 @@ class Question {
         this.id,
         this.questionText,
         this.questionType,
+        this.Answer,
         this.options,
         this.questionNumber,
     });
@@ -84,6 +85,7 @@ class Question {
     String id;
     String questionText;
     String questionType;
+    String Answer;
     List<Option> options;
     String questionNumber;
 
@@ -99,6 +101,7 @@ class Question {
         "_id": id,
         "QuestionText": questionText,
         "QuestionType": questionType,
+        "Answer": Answer,
         "options": List<dynamic>.from(options.map((x) => x.toJson())),
         "QuestionNumber": questionNumber,
     };
@@ -108,18 +111,22 @@ class Option {
     Option({
         this.id,
         this.option,
+        this.Answer,
     });
 
     String id;
     String option;
+    String Answer;
 
     factory Option.fromJson(Map<String, dynamic> json) => Option(
         id: json["_id"],
         option: json["option"],
+        Answer: "NO",
     );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
         "option": option,
+        "Answer": Answer,
     };
 }

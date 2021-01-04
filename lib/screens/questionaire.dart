@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
@@ -6,11 +7,14 @@ import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/assessment_cell.dart';
+import 'package:flutter_app/widgets/checkbox_widget.dart';
 import 'package:flutter_app/widgets/inputquestion_widget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 class QuestionairePage extends StatefulWidget {
   static const String RouteName = '/questionaire';
+  Result result;
+  Future<QuestionarieList> _listFuture;
 
   String programId;
   QuestionairePage({this.programId});
@@ -20,6 +24,15 @@ class QuestionairePage extends StatefulWidget {
 }
 
 class QuestionairePageState extends State<QuestionairePage> {
+
+  @override
+  void initState() {
+    widget.result??Result();
+
+    widget._listFuture = getQuestionaire(widget.programId);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MyWidget(
@@ -48,22 +61,42 @@ class QuestionairePageState extends State<QuestionairePage> {
                 //     height: 5,
                 //   ),
                   FutureBuilder<QuestionarieList>(
-                    future: getQuestionaire(widget.programId),
+                    future: widget._listFuture,
                     builder: (builder, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if(snapshot.hasError){
                           return Text("Error"); 
                         }
+                        SchedulerBinding.instance.addPostFrameCallback((_){
+
+                          setState(() {
+                            widget.result = snapshot.data.result[0];
+                          });
+
+                        });
                         return ListView.separated(
                           itemBuilder: (context, index) {
                             if(snapshot.data.result[0].questions[index].questionType == "text"){
-                              return getQues(InputBoxQuestion(ques: snapshot.data.result[0].questions[index].questionText));
+                              return getQues(InputBoxQuestion(ques: snapshot.data.result[0].questions[index].questionText, onSelectAnswer: (answer){
+                                widget.result.questions[index].Answer = answer;
+                              },));
                             }else if(snapshot.data.result[0].questions[index].questionType == "YESNO"){
-                              return getQues(MySingleChoiceQuesWidget(ques: snapshot.data.result[0].questions[index].questionText));
+                              return getQues(AssessmentQuestionCell(
+                                  title: snapshot.data.result[0].questions[index].questionText,
+                                  onSelectAnswer: (answer){
+                                    widget.result.questions[index].Answer = answer;
+                              },
+                                  quesType: snapshot.data.result[0].questions[index].questionType,
+                                  completed: false
+                              ));
                             }else {
-                              return  getQues(MyMultiChoiceQuesWidget(
+                              return  getQues(CheckBoxQuestion(
                                 ques: snapshot.data.result[0].questions[index].questionText,
-                                ans: snapshot.data.result[0].questions[index].options));
+                                options: snapshot.data.result[0].questions[index].options,
+                                onSelectAnswers: (answer){
+                                  widget.result.questions[index].options = answer;
+                                },),
+                              );
                             }
                           }, 
                           itemCount: snapshot.data.result[0].questions.length, 
@@ -89,8 +122,7 @@ class QuestionairePageState extends State<QuestionairePage> {
                 type: 4,
                 isEnable: true,
                 onClick: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, Dashboard.RouteName);
+                 submitForm();
                 },
               )
             ],
@@ -106,6 +138,23 @@ class QuestionairePageState extends State<QuestionairePage> {
         padding: EdgeInsets.all(5),
       ),
     );
+  }
+
+  void submitForm() async {
+
+    print("data");
+    print(widget.result);
+
+    // submitAssessments(data);
+    submitQuestionaire(widget.result).then(
+            (value) => {
+
+          print(value.responseCode),
+          if (value.responseCode == 200) {
+            Navigator.pop(context),
+            Navigator.pushNamed(context, Dashboard.RouteName)
+          }
+        });
   }
 }
 

@@ -216,20 +216,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
               },
             ),
           ),
-          // Row(
-          //   children: [
-          // Radio(
-          //   value: 2,
-          //   groupValue: selectedRadio,
-          //   activeColor: HH_Colors.accentColor,
-          //   onChanged: (val) {
-          //     print("Radio $val");
-          //     setSelectedRadio(val);
-          //   },
-          // ),
-          //     Text('No')
-          //   ],
-          // )
+
         ],
       )
     ]);

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/screens/FaqPage.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
@@ -199,7 +200,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Give Us Feedback", onClick: (){
+              HHDrawerItem2(title: "Contact Us", onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, FeedbackPage.RouteName);
               },),
@@ -207,7 +208,10 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "FAQ's"),
+              HHDrawerItem2(title: "FAQ's", onClick: (){
+                Navigator.pop(context);
+                Navigator.pushNamed(context, FaqPage.RouteName);
+              }),
               Container(
                 color: HH_Colors.grey,
                 height: 1,

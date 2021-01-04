@@ -7,6 +7,7 @@ import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
+import 'package:flutter_app/model/SubmitQuestionaireResponse.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
@@ -51,6 +52,7 @@ Future<UpcomingSession> completedSessoins() async {
 
 Future<JournalingList> getJournalingList() async {
   var token = await GetStringToSP("token");
+  print(token);
   final url = HHString.baseURL +"/api/v1/user/journalQuestion_list";
   final response = await http.get(url,
       headers: {
@@ -83,6 +85,20 @@ Future<QuestionarieList> getQuestionaire(programId) async {
         "token": token?? HHString.token
       },);
   return questionarieListFromJson(response.body);
+}
+
+// submit questionaire
+Future<SubmitQuestionaireResponse> submitQuestionaire(result) async {
+  var token = await GetStringToSP("token");
+  print(json.encode(result));
+  final url = HHString.baseURL +"/api/v1/user/fillQuestionnaire_form";
+  final response = await http.put(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      },
+  body: json.encode(result));
+  return submitQuestionaireResponseFromJson(response.body);
 }
 // fetch drinkingDairy_details
 Future<QuestionarieList> getdrinkingDairyDetails() async {

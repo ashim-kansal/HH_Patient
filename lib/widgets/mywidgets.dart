@@ -232,6 +232,7 @@ class HHEditText extends StatefulWidget {
   var textarea = false;
   // var controller = null;
   var inputType = TextInputType.text;
+  final ValueChanged<String> onSelectAnswer;
 
 
   HHEditText(
@@ -248,7 +249,8 @@ class HHEditText extends StatefulWidget {
       this.textarea,
       this.enabled,
       this.showeye,
-      this.onSubmitText})
+      this.onSubmitText,
+      this.onSelectAnswer})
       : super(key: key);
 
   @override
@@ -279,6 +281,10 @@ class HHEditTextState extends State<HHEditText> {
       minLines: widget.minLines?? 1,
       maxLength: widget.maxLength??32,
       maxLines: widget.minLines?? 1,
+      onChanged: (text){
+        if(widget.onSelectAnswer!=null)
+          widget.onSelectAnswer(text);
+      },
       onSubmitted: (value){return;},
       // onEditingComplete: () => widget.onSubmitText(),
       decoration: InputDecoration(
@@ -299,12 +305,7 @@ class HHEditTextState extends State<HHEditText> {
                 icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
                 onPressed: () => widget.onClickEye(),
               )
-              // const Icon(
 
-              //     Icons.remove_red_eye,
-              //     size: 20,
-              //     color: Color(0xffCBCBCB),
-              //   )
               : null),
     );
   }

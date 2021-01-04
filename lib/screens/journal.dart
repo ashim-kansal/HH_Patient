@@ -261,48 +261,6 @@ class JournalPageState extends State<JournalPage> {
                             padding: EdgeInsets.only(
                                 left: 15, top: 15, bottom: 10, right: 10),
                             child: ExpandableListTile(result:snapshot.data.result[index], date:createdDate.format("hh:mm a"))
-                                // [
-                                // Expanded(child: ListView.separated(
-                                //   itemBuilder: (context, qIndex) {
-                                //     return Column(
-                                //       children: [
-                                //         Text(
-                                //           snapshot.data.result[index].questions[qIndex].question,
-                                //           style: TextStyle(
-                                //               color: HH_Colors.grey_585858,
-                                //               fontSize: 15,
-                                //               fontWeight: FontWeight.bold),
-                                //         ),
-                                //         Text(
-                                //           snapshot.data.result[index].questions[qIndex].answer,
-                                //           style: TextStyle(
-                                //               color: HH_Colors.grey_707070, fontSize: 14),
-                                //         ),
-                                //       ],
-                                //     );
-                                //   },
-                                //   itemCount: snapshot.data.result[index].questions.length,
-                                //   separatorBuilder: (BuildContext context, int index) {
-                                //     return SizedBox(
-                                //       height: 10,
-                                //     );
-                                //   },
-                                // )),
-                                // SizedBox(
-                                //   height: 10,
-                                // ),
-                                // Container(
-                                //   width: MediaQuery.of(context).size.width,
-                                //   child: Text(
-                                //     createdDate.format("hh:mm a"),
-                                //     textAlign: TextAlign.end,
-                                //     style: TextStyle(
-                                //         color: HH_Colors.grey_707070,
-                                //         fontSize: 12),
-                                //   ),
-                                // )
-                              // ],
-                            // ),
                           )
                         ],
                       );
