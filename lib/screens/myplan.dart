@@ -123,7 +123,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                 ],
               );
             } else
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
           }),
 
     );

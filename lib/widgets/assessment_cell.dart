@@ -101,7 +101,7 @@ class AssessmentQuestionCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           quesType == 'text'
-              ? getInputQuest(title)
+              ? InputBoxQuestion(ques:title, onSelectAnswer: onSelectAnswer)
               : quesType == 'YESNO'
                   ? getSingleChoiceQuest(title)
                   : getMultiChoiceQuest(title),
@@ -110,9 +110,6 @@ class AssessmentQuestionCell extends StatelessWidget {
     );
   }
 
-  Widget getInputQuest(String question) {
-    return InputBoxQuestion(ques: question);
-  }
 
   Widget getSingleChoiceQuest(String question) {
     return MySingleChoiceQuesWidget(
@@ -219,20 +216,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
               },
             ),
           ),
-          // Row(
-          //   children: [
-          // Radio(
-          //   value: 2,
-          //   groupValue: selectedRadio,
-          //   activeColor: HH_Colors.accentColor,
-          //   onChanged: (val) {
-          //     print("Radio $val");
-          //     setSelectedRadio(val);
-          //   },
-          // ),
-          //     Text('No')
-          //   ],
-          // )
+
         ],
       )
     ]);

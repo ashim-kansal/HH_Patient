@@ -56,13 +56,6 @@ class SessionDateWidget extends StatefulWidget{
 
 class SessionDateWidgetState extends State<SessionDateWidget>{
 
-  // void populateData() {
-  //   for (int i = 0; i < 10; i++)
-  //     widget.list.add(ListItem<String>("$i Nov\nMon"));
-  //
-  //   widget.list[0].isSelected = true;
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -206,3 +199,4 @@ class ListItem<String> {
   String data; //Data of the user
   ListItem(this.data); //Constructor to assign the data
 }
+

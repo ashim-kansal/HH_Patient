@@ -67,7 +67,7 @@ class FeedbackPageState extends State<FeedbackPage> {
 
 @override
 Widget build(BuildContext context) => MyWidget(
-  title: 'Feedback',
+  title: 'Contact Us',
   child: Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

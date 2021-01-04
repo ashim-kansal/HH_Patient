@@ -8,6 +8,7 @@ import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
+import 'package:flutter_app/screens/FaqPage.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
@@ -22,11 +23,13 @@ import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/myplan.dart';
 import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/questionaire.dart';
+import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/model/UpcomingSessionsModel.dart' as upcoming;
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/screens/editProfile.dart';
@@ -55,7 +58,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
     case QuestionairePage.RouteName:
-      return MaterialPageRoute(builder: (context) => QuestionairePage());
+      final QuestionaireArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => QuestionairePage(programId: args.programId));
     case MyPlans.RouteName:
       final MyPlansArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => MyPlans(isUpdate: args.isUpdate?true:false,));
@@ -78,6 +82,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MyAssessmentPage());
     case SessionPage.RouteName:
       return MaterialPageRoute(builder: (context) => SessionPage());
+    case ReScheduleSessionPage.RouteName:
+      final upcoming.Result args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => ReScheduleSessionPage(sessionId: args.id, therapistId: args.therapistId.id,
+        name: args.therapistId.firstName+' '+args.therapistId.lastName,role: '', image: '',));
     case ChatListPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatListPage());
     case JournalPage.RouteName:
@@ -108,6 +116,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => TermsPage());
     case PrivacyPolicy.RouteName:
       return MaterialPageRoute(builder: (context) => PrivacyPolicy());
+    case FaqPage.RouteName:
+      return MaterialPageRoute(builder: (context) => FaqPage());
     case AssessmentFormPage.RouteName:
       final AssessmentArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(data: args.result));

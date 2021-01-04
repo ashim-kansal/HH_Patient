@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
+import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 
 class SessionCard extends StatelessWidget {
   var name = "";
@@ -12,9 +14,10 @@ class SessionCard extends StatelessWidget {
   var drname = "";
   var sdate = "";
   final VoidCallback onClick;
+  Result data;
 
   SessionCard(
-      {@required this.name, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +42,10 @@ class SessionCard extends StatelessWidget {
                   children: [
                     Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-                    HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
-                      Navigator.pushNamed(context, BookSessionPage.RouteName);
+                    HHOptionButton(onClickCancel: (){
+
+                    }, onClickReSchedule: (){
+                      Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
                     },)
                   ],
                 ),
@@ -90,6 +95,8 @@ class SessionCard extends StatelessWidget {
         )
         ));
   }
+
+
 }
 
 class AssessmentQuestionCell extends StatelessWidget {
@@ -185,10 +192,11 @@ class UpcomingSessionItem extends StatelessWidget {
   var completed = false;
   var drname = "";
   var sdate = "";
+  Result data;
   final VoidCallback onClick;
 
   UpcomingSessionItem(
-      {@required this.name, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -205,6 +213,12 @@ class UpcomingSessionItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // ClipRRect(
+                  //     borderRadius: BorderRadius.circular(25.0),
+                  //     child:               Image.network(image, height: 50, width: 50,)
+                  //
+                  // )
+                  // ,
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,7 +270,7 @@ class UpcomingSessionItem extends StatelessWidget {
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
-                        Navigator.pushNamed(context, BookSessionPage.RouteName);
+                        Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
                       },)
                     ],
                   )
