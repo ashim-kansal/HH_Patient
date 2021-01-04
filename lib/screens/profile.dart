@@ -74,14 +74,6 @@ class _CreateAccountState extends State<ProfilePage> {
         // print(pickedFile.path);
         _image = File(pickedFile.path);
         // final bytes = _image.readAsBytesSync();
-<<<<<<< HEAD
-        // File base64 = _image;
-        // print(base64);
-        
-        SettingAPIService settingAPIService = new SettingAPIService();
-        settingAPIService.updateProfile(pickedFile).then((value) => {
-          showToast(value.responseMsg),
-=======
         // String base64 = base64Encode(bytes);
         //
         // print(base64);
@@ -91,11 +83,11 @@ class _CreateAccountState extends State<ProfilePage> {
           print(value),
           // if(value == 200){
           setState(() {
-            profilepic = value['result']['profilePic'];
+            if(value['result'] != null && value['result']['profilePic'] != null)
+              profilepic = value['result']['profilePic'];
 
           })
           // }
->>>>>>> a43589f1eecd7251514e3ce80c788067fde67752
         });
       } else {
         print('No image selected.');
