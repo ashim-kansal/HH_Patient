@@ -104,67 +104,62 @@ class MyPlansState extends State<MyPlans> {
 
   void buyNewPlan(String id, String paymentAmount) {
 
-    // StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest()).then((paymentMethod) {
-    //   print(paymentMethod);
-    // }).catchError((setError){
-    //   print(setError);
-    // });
-    StripePayment.createSourceWithParams(SourceParams(
-      type: 'ideal',
-      amount: int.parse(paymentAmount),
-      currency: 'usd',
-      returnURL: 'example://stripe-redirect',
-    )).then((source) {
-      print(jsonEncode(source));
+    // StripePayment.createSourceWithParams(SourceParams(
+    //   type: 'ideal',
+    //   amount: int.parse(paymentAmount),
+    //   currency: 'usd',
+    //   returnURL: 'example://stripe-redirect',
+    // )).then((source) {
+    //   print(jsonEncode(source));
+    //
+    //   StripePayment.createTokenWithCard(
+    //      testCard
+    //   ).then((token) {
+    //     // print('response'+ jsonEncode(token));
+    //     print(token.tokenId);
+    //     StripePayment.createPaymentMethod(
+    //       PaymentMethodRequest(
+    //         card: CreditCard(
+    //           token: token.tokenId,
+    //         ),
+    //       ),
+    //     ).then((paymentMethod) {
+    //
+    //       print('response  dd '+ jsonEncode(paymentMethod));
+    //       StripePayment.confirmPaymentIntent(
+    //         PaymentIntent(
+    //           clientSecret: _currentSecret,
+    //           paymentMethodId: paymentMethod.id,
+    //         ),
+    //       ).then((paymentIntent) {
+    //         print('response'+ jsonEncode(paymentIntent));
+    //       }).catchError((setError) {
+    //         print(setError);
+    //
+    //       });
+    //     }).catchError((setError){
+    //       print((setError));
+    //     });
+    //
+    //   }).catchError((setError){
+    //     print((setError));
+    //   });
 
-      StripePayment.createTokenWithCard(
-         testCard
-      ).then((token) {
-        // print('response'+ jsonEncode(token));
-        print(token.tokenId);
-        StripePayment.createPaymentMethod(
-          PaymentMethodRequest(
-            card: CreditCard(
-              token: token.tokenId,
-            ),
-          ),
-        ).then((paymentMethod) {
 
-          print('response  dd '+ jsonEncode(paymentMethod));
-          StripePayment.confirmPaymentIntent(
-            PaymentIntent(
-              clientSecret: _currentSecret,
-              paymentMethodId: paymentMethod.id,
-            ),
-          ).then((paymentIntent) {
-            print('response'+ jsonEncode(paymentIntent));
-          }).catchError((setError) {
-            print(setError);
 
-          });
-        }).catchError((setError){
-          print((setError));
-        });
+      buyPlan(id, paymentAmount).then((value) => {
+        if(value.responseCode == 200){
+          // Navigator.pop(context),
+          // if(!widget.isUpdate){
+          Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+          // }
 
-      }).catchError((setError){
-        print((setError));
+        }
       });
 
-
-
-      // buyPlan(id, paymentAmount).then((value) => {
-      //   if(value.responseCode == 200){
-      //     // Navigator.pop(context),
-      //     // if(!widget.isUpdate){
-      //     Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
-      //     // }
-      //
-      //   }
-      // });
-
-    }).catchError((error){
-      print(error);
-    });
+    // }).catchError((error){
+    //   print(error);
+    // });
   }
 
 }

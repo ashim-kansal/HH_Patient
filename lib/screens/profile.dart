@@ -83,7 +83,8 @@ class _CreateAccountState extends State<ProfilePage> {
           print(value),
           // if(value == 200){
           setState(() {
-            profilepic = value['result']['profilePic'];
+            if(value['result'] != null && value['result']['profilePic'] != null)
+              profilepic = value['result']['profilePic'];
 
           })
           // }

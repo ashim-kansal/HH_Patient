@@ -213,24 +213,32 @@ class UpcomingSessionItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // ClipRRect(
-                  //     borderRadius: BorderRadius.circular(25.0),
-                  //     child:               Image.network(image, height: 50, width: 50,)
-                  //
-                  // )
-                  // ,
-                  Column(
+                  Container(
+                    width: (MediaQuery.of(context).size.width)/2,
+                    child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: [
-                        Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
+                        Flexible(
+                          child: new Container(
+                            child: new Text(
+                              name,
+                              overflow: TextOverflow.ellipsis,
+                              style: new TextStyle(
+                                fontSize: 16.0,
+                                color: HH_Colors.grey_585858,
+                              ),
+                            ),
+                          ),
+                        )
+
                       ]),
                       Row(children: [
                         Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                       ]),
                     ],
-                  ),
+                  ),),
 
                   completed?
                       Row(

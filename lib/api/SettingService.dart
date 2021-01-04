@@ -141,27 +141,4 @@ class SettingAPIService {
     return data;
   }
 
-
-  Future<FeedbackResponseModel> updateProfile(String imagebase64) async {
-
-    var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/user/uploadImage";
-    
-    final response = await http.post(url, 
-    headers: {
-      "Content-Type": "application/json",
-      "token": token},
-      body: jsonEncode(<String, String>{
-        "image": imagebase64,
-      })
-    );
-    
-    var res = json.decode(response.body);
-    if(response.statusCode == 200){
-      return FeedbackResponseModel.fromJson(res);
-    }else {
-      throw Exception('Failed to load data!');
-    }
-  }
-
 }

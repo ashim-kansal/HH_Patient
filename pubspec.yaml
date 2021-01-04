@@ -36,7 +36,7 @@ dependencies:
   image_picker: ^0.6.7+17
   simple_moment: ^1.0.7
   stripe_payment: ^1.0.9
-  twilio_programmable_video: ^0.6.3+1
+#  twilio_programmable_video: ^0.6.3+1
 
 
 
