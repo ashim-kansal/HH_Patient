@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
+import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/SettingModel.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
@@ -19,7 +20,7 @@ class UserAPIServices {
     final response = await http.get(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token},
+      "token": token??HHString.token},
     );
     
     var res = json.decode(response.body);
@@ -67,7 +68,7 @@ class UserAPIServices {
     final response = await http.post(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token},
+      "token": token??HHString.token},
       body: jsonEncode(<String, String>{
         "image": imagebase64,
       })
@@ -90,7 +91,7 @@ class UserAPIServices {
     final response = await http.put(url, 
     headers: {
       "Content-Type": "application/json",
-      "token": token},
+      "token": token??HHString.token},
       body: jsonEncode(<String, String>{
         "firstName": fname,
         "lastName": lname,
@@ -106,4 +107,21 @@ class UserAPIServices {
       throw Exception('Failed to load data!');
     }
   }
+}
+
+// fetch chat listing
+Future<ChatList> getChatList(chatId) async {
+  var token = await GetStringToSP("token");
+
+  final url = HHString.baseURL +"chat/chatHistory";
+  final response = await http.post(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token??HHString.token
+      },
+      body:  jsonEncode({
+      "chatId": chatId??""})
+      );
+      print(response.body);
+  return chatListFromJson(response.body);
 }

@@ -3,12 +3,18 @@ import 'dart:io';
 
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
+import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/SettingModel.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
+import 'package:async/async.dart';
+// import 'package:stripe_payment/stripe_payment.dart';
+
+import 'package:mime/mime.dart';
 
 class SettingAPIService {
   Future<FeedbackResponseModel> submitFeedback(String feedback) async {

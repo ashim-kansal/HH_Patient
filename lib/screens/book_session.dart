@@ -70,11 +70,9 @@ class BookSessionState extends State<BookSessionPage>{
                           }
 
                           SchedulerBinding.instance.addPostFrameCallback((_){
-
                             setState(() {
                               list = snapshot.data.result;
                             });
-
                           });
 
                           return Expanded(child: Column(

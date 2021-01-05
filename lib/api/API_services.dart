@@ -33,7 +33,7 @@ Future<UpcomingSession> upcomingSessions() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token
+        "token": token??HHString.token
       },);
   print(response.body);
   return upcomingSessionFromJson(response.body);
@@ -45,7 +45,7 @@ Future<UpcomingSession> completedSessoins() async {
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token
+        "token": token?? HHString.token
       },);
   print(response.body);
   return upcomingSessionFromJson(response.body);
@@ -131,5 +131,26 @@ class InAppAPIServices {
     }else {
         throw Exception('Failed to load data!');
       }
+  }
+
+  Future<CommonResponse> sendMessage(receiverId, msg) async {
+    var token = await GetStringToSP("token");
+
+    final url = HHString.baseURL +"chat/chatAPI";
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token??HHString.token
+        },
+        body: jsonEncode({
+          "receiverId": receiverId,
+          "message": msg
+        }));
+
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(jsonDecode(response.body));
+    }else {
+      throw Exception("Failed to add note");
+    }
   }
 }
