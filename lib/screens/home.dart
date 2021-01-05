@@ -93,6 +93,11 @@ class HomePageState extends State<HomePage> {
                     onClick: (){
                       Navigator.pushNamed(context, SessionPage.RouteName);
                     },
+                    onClickCancel: (){
+                      setState(() {
+
+                      });
+                    }
                   );
                 },
                 separatorBuilder: (context, index) {

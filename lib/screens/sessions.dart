@@ -119,7 +119,12 @@ class SessionPageState extends State<SessionPage>{
                 data: snapshot.data.result[index],
                 drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
                 sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
-                role: '', onClick: (){}, completed: !isSwitched,);
+                role: '', onClick: (){}, completed: !isSwitched,
+                  onClickCancel: (){
+                setState(() {
+
+                });
+              });
             },
                 separatorBuilder: (context, index) {
                   return Divider();

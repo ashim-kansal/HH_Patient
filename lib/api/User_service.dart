@@ -83,7 +83,7 @@ class UserAPIServices {
   }
 
   // update Profile 
-  Future<UserProfile> updateProfileDetails(String fname, String lname, String phone, String address) async {
+  Future<UserProfile> updateProfileDetails(String fname, String lname, String phone, String address, String profileImage) async {
 
     var token = await GetStringToSP("token");
     final url = HHString.baseURL +"/api/v1/user/updateProfile";
@@ -96,6 +96,7 @@ class UserAPIServices {
         "firstName": fname,
         "lastName": lname,
         "mobileNumber": phone,
+        "profilePic": profileImage,
         "address": address
       })
     );
@@ -113,14 +114,14 @@ class UserAPIServices {
 Future<ChatList> getChatList(chatId) async {
   var token = await GetStringToSP("token");
 
-  final url = HHString.baseURL +"chat/chatHistory";
+  final url = HHString.baseURL +"/api/v1/chat/chatHistory";
   final response = await http.post(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token??HHString.token
       },
       body:  jsonEncode({
-      "chatId": chatId??""})
+      "receiverId": chatId})
       );
       print(response.body);
   return chatListFromJson(response.body);

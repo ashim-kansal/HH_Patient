@@ -1,11 +1,13 @@
 
 import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
+import 'package:flutter_app/model/SendMessageResponse.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/model/SubmitQuestionaireResponse.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -133,24 +135,23 @@ class InAppAPIServices {
       }
   }
 
-  Future<CommonResponse> sendMessage(receiverId, msg) async {
+  Future<SendMessageResponse> sendMessage(receiverId, msg) async {
     var token = await GetStringToSP("token");
+    print(token);
+    final url = HHString.baseURL +"/api/v1/chat/chatAPI";
+    print(url);
+    print(receiverId);
 
-    final url = HHString.baseURL +"chat/chatAPI";
     final response = await http.post(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
-          "token": token??HHString.token
+          "token": token
         },
         body: jsonEncode({
           "receiverId": receiverId,
           "message": msg
         }));
 
-    if(response.statusCode == 200){
-      return CommonResponse.fromJson(jsonDecode(response.body));
-    }else {
-      throw Exception("Failed to add note");
-    }
+    return sendMessageResponseFromJson(response.body);
   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 
@@ -15,10 +17,11 @@ class SessionCard extends StatelessWidget {
   var drname = "";
   var sdate = "";
   final VoidCallback onClick;
+  final VoidCallback onClickCancel;
   Result data;
 
   SessionCard(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickCancel, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,28 @@ class SessionCard extends StatelessWidget {
                   children: [
                     Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     HHOptionButton(onClickCancel: (){
+                      showDialog(context: context,
+                        builder: (BuildContext dialogContext) {
+                          return CancelDialog(
+                              onYesPress: ()async {
+                                cancelSession(data.id).then(
+                                        (value) => {
 
+                                      print(value.responseCode),
+                                      if (value.responseCode == 200) {
+                                        Navigator.pop(context),
+                                        onClickCancel()
+                                        // Navigator.pushNamed(context, Dashboard.RouteName)
+                                      }
+                                    });
+                                // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                              },
+                              onDenyPress: (){
+                                Navigator.pop(context);
+                              }
+                          );
+                        },
+                      );
                     }, onClickReSchedule: (){
                       Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
                     },)
@@ -66,7 +90,8 @@ class SessionCard extends StatelessWidget {
                         child: Icon(Icons.chat
                           , color: HH_Colors.primaryColor, size: 18,),
                         onPressed: (){
-                          // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                          print('receiverId  : '+data.therapistId.id);
+                          Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
                         },
                         shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                       ),
@@ -192,9 +217,11 @@ class UpcomingSessionItem extends StatelessWidget {
   var sdate = "";
   Result data;
   final VoidCallback onClick;
+  final VoidCallback onClickCancel;
+
 
   UpcomingSessionItem(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +283,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
-                            Navigator.pushNamed(context, ChatPage.RouteName);
+                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
                           },
                           shape: CircleBorder( side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
 
@@ -275,7 +302,30 @@ class UpcomingSessionItem extends StatelessWidget {
                               },
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
                           )),
-                      HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
+                      HHOptionButton(onClickCancel: (){
+                        showDialog(context: context,
+                          builder: (BuildContext dialogContext) {
+                            return CancelDialog(
+                                onYesPress: ()async {
+                                  cancelSession(data.id).then(
+                                          (value) => {
+
+                                        print(value.responseCode),
+                                        if (value.responseCode == 200) {
+                                          Navigator.pop(context),
+                                          onClickCancel()
+                                          // Navigator.pushNamed(context, Dashboard.RouteName)
+                                        }
+                                      });
+                                  // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                },
+                                onDenyPress: (){
+                                  Navigator.pop(context);
+                                }
+                            );
+                          },
+                        );
+                      }, onClickReSchedule: (){
                         Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
                       },)
                     ],

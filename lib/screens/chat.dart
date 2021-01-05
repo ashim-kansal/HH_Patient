@@ -37,7 +37,6 @@ class _ChatPageState extends State<ChatPage> {
    @override
   void initState() {
     super.initState();
-    messagesList = getChat();
   }
 
   getChat() async{
@@ -59,8 +58,8 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  FutureBuilder(
-                    future: messagesList,
+                  FutureBuilder<ChatList>(
+                    future: getChatList(widget.chatId),
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
@@ -78,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
                                   msg: item[0].message[index].message,
-                                  direction: item[0].message[index].senderId == widget.senderId ? "left" : "right",
+                                  direction: item[0].message[index].senderId == widget.senderId ? "right" : "left",
                                   dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                                 );
                               // });
@@ -162,23 +161,23 @@ class _ChatPageState extends State<ChatPage> {
       //     timeInSecForIos: 1,
       //     backgroundColor: Colors.blue);
     } else {
-      
-      MessageWidget messageWidget = new MessageWidget(
-        msg: msg,
-        direction: messageDirection,
-        dateTime: date,
-      );
+      //
+      // MessageWidget messageWidget = new MessageWidget(
+      //   msg: msg,
+      //   direction: messageDirection,
+      //   dateTime: date,
+      // );
 
       InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-      inAppAPIServices.sendMessage(receiverId, msg).then((value) => {
+      inAppAPIServices.sendMessage(widget.chatId, msg).then((value) => {
         if(value.responseCode == 200){
           _textController.clear(),
-          messagesList = getChat(),
-          Navigator.pop(context)
-          //  setState(() {
-          //   // messageWidget.insert(0, messageWidget);
-          // })
+          // messagesList = getChat(),
+          // Navigator.pop(context)
+           setState(() {
+            // messageWidget.insert(0, messageWidget);
+          })
         }
       });
      

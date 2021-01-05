@@ -72,33 +72,6 @@ class _CreateAccountState extends State<ProfilePage> {
     });
   }
 
-  Future imagePicker () async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        // print(pickedFile.path);
-        _image = File(pickedFile.path);
-        // final bytes = _image.readAsBytesSync();
-        // String base64 = base64Encode(bytes);
-        //
-        // print(base64);
-        
-        SettingAPIService settingAPIService = new SettingAPIService();
-        settingAPIService.uploadImageFile(file:_image).then((value) => {
-          print(value),
-          // if(value == 200){
-          setState(() {
-            if(value['result'] != null && value['result']['profilePic'] != null)
-              profilepic = value['result']['profilePic'];
-
-          })
-          // }
-        });
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
 
     //show Toast
   showToast(String message){
@@ -145,35 +118,35 @@ class _CreateAccountState extends State<ProfilePage> {
                                          ),
                                        )
                                    ),
-                                   Container(
-                                     margin: EdgeInsets.only(left: 155),
-                                     child: Container(
-                                       width: 35,
-                                       height:35,
-                                       decoration: BoxDecoration(
-                                           boxShadow: [//background color of box
-                                             BoxShadow(
-                                               color: HH_Colors.color_F2EEEE,
-                                               blurRadius: 65.0, // soften the shadow
-                                               spreadRadius: 1.0, //extend the shadow
-                                               offset: Offset(
-                                                 15.0, // Move to right 10  horizontally
-                                                 15.0, // Move to bottom 10 Vertically
-                                               ),
-                                             )
-                                           ],
-                                           color: Colors.white,
-                                           borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                                       child: IconButton(
-                                         icon: Icon(
-                                           Icons.camera_alt,
-                                           size: 20,
-                                         ), onPressed: () {
-                                         imagePicker();
-                                       },
-                                       ),
-                                     ),
-                                   )
+                                   // Container(
+                                   //   margin: EdgeInsets.only(left: 155),
+                                   //   child: Container(
+                                   //     width: 35,
+                                   //     height:35,
+                                   //     decoration: BoxDecoration(
+                                   //         boxShadow: [//background color of box
+                                   //           BoxShadow(
+                                   //             color: HH_Colors.color_F2EEEE,
+                                   //             blurRadius: 65.0, // soften the shadow
+                                   //             spreadRadius: 1.0, //extend the shadow
+                                   //             offset: Offset(
+                                   //               15.0, // Move to right 10  horizontally
+                                   //               15.0, // Move to bottom 10 Vertically
+                                   //             ),
+                                   //           )
+                                   //         ],
+                                   //         color: Colors.white,
+                                   //         borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                                   //     child: IconButton(
+                                   //       icon: Icon(
+                                   //         Icons.camera_alt,
+                                   //         size: 20,
+                                   //       ), onPressed: () {
+                                   //       imagePicker();
+                                   //     },
+                                   //     ),
+                                   //   ),
+                                   // )
                                  ],
                                ),
                              ),
@@ -324,7 +297,8 @@ class _CreateAccountState extends State<ProfilePage> {
                                    title: "Edit",
                                    type: 4,
                                    onClick: () {
-                                     Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), ).then((value) => setState(() {}));
+                                     Navigator.pop(context);
+                                     Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), );
 
 
                                      // Navigator.pushNamed(context, EditProfilePage.RouteName, arguments: ProfileArguments(userData)).whenComplete(getprofile());

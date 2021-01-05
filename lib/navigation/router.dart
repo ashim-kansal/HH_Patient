@@ -110,7 +110,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ChnagePasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChnagePasswordPage());
     case ChatPage.RouteName:
-      return MaterialPageRoute(builder: (context) => ChatPage());
+      ChatArguments arguments = settings.arguments;
+      return MaterialPageRoute(builder: (context) => ChatPage(chatId: arguments.chatId, senderId: arguments.senderId,));
     case FeedbackPage.RouteName:
       return MaterialPageRoute(builder: (context) => FeedbackPage());
     case NotificationPage.RouteName:
