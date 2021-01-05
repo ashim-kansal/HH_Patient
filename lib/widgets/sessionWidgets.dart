@@ -3,6 +3,7 @@ import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -22,12 +23,11 @@ class SessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 260,
+      width: MediaQuery.of(context).size.width*(2/3),
         child: Card(
-        elevation: 5,
             color: HH_Colors.color_F2EEEE,
             shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         child: InkWell(
           onTap: (){
@@ -36,12 +36,12 @@ class SessionCard extends StatelessWidget {
           child:  Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             child:Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                    // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
                     HHOptionButton(onClickCancel: (){
 
                     }, onClickReSchedule: (){
@@ -49,7 +49,7 @@ class SessionCard extends StatelessWidget {
                     },)
                   ],
                 ),
-                SizedBox(height: 10,),
+                // SizedBox(height: 5,),
                 Row(
                     children: [Text(name ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
                     ]),
@@ -62,7 +62,6 @@ class SessionCard extends StatelessWidget {
                       height: 40,
                       minWidth: 40,
                       child: RaisedButton(
-
                         color: Colors.white,
                         child: Icon(Icons.chat
                           , color: HH_Colors.primaryColor, size: 18,),
@@ -77,11 +76,10 @@ class SessionCard extends StatelessWidget {
                         height: 40,
                         minWidth: 40,
                         child: RaisedButton(
-
                             color: Colors.white,
                             child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                             onPressed: (){
-                              // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                              Navigator.pushNamed(context, VideoCallPage.RouteName);
                             },
                           shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                         )),

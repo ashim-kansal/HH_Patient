@@ -23,6 +23,7 @@ class UserAPIServices {
     );
     
     var res = json.decode(response.body);
+    print(res);
     if(response.statusCode == 200){
       return UserProfile.fromJson(res);
     }else {

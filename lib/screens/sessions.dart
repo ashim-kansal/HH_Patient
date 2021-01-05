@@ -112,7 +112,7 @@ class SessionPageState extends State<SessionPage>{
             return ListView.separated(
               itemCount: snapshot.data.result.length,
               itemBuilder: (context, index){
-              var _date = snapshot.data.result[index].createdAt;
+              var _date = snapshot.data.result[index].date;
               Moment createdDt = Moment.parse('$_date');
               return UpcomingSessionItem(
                 name: snapshot.data.result[index].programName, 

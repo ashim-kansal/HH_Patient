@@ -90,7 +90,7 @@ class HomePageState extends State<HomePage> {
                   return SessionCard(data: snapshot.data.result[index],name: snapshot.data.result[index].programName,
                     drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
-                    completed: index%2 == 0, onClick: (){
+                    onClick: (){
                       Navigator.pushNamed(context, SessionPage.RouteName);
                     },
                   );

@@ -14,6 +14,9 @@ class PopupMenuWidget<T> extends PopupMenuEntry<T> {
   bool get enabled => false;
 
   @override
+
+
+  @override
   _PopupMenuWidgetState createState() => new _PopupMenuWidgetState();
 
   @override
@@ -41,35 +44,41 @@ class HHOptionButton extends StatelessWidget{
     return
       Container(
         padding: const EdgeInsets.all(0.0),
-        width: 25,
-          height: 35,// you can adjust the width as you need
+        width: 20,
+        height: 40,
+        //   height: 35,// you can adjust the width as you need
         child: PopupMenuButton<String>(
-            offset: Offset(20,20),
+            offset: Offset(40,40),
 
             onSelected: (String value) {
               print("You selected $value");
             },
           // captureInheritedThemes: false,
-            icon: Image.asset('assets/images/ic_option_menu.png', width: 20, height: 35,),
+            icon: Image.asset('assets/images/dot.png', height: 60,),
             itemBuilder: (BuildContext context) {
               return [
                 new PopupMenuWidget(
+
                   child:
                     Container(
+
                       child:  Column(
                         children: [
                           InkWell(
                             child: Text('cancel'),
+
                             onTap: (){ Navigator.pop(context, 'cancel');
                             onClickCancel();
                             },
                           ),
+                          SizedBox(height: 5,),
                           Container(
                             color: HH_Colors.borderGrey,
                             height: 0.5,
-                            width: 80,
-                          )
-                          ,InkWell(
+                            width: 100,
+                          ),
+                          SizedBox(height: 5,),
+                          InkWell(
                             child: Text('re-schedule'),
                             onTap: (){ Navigator.pop(context, 're-schedule');
                             onClickReSchedule();

@@ -62,6 +62,7 @@ class _CreateAccountState extends State<EditProfilePage> {
       showToast(value.responseMessage),
       if(value.responseCode == 200){
         // Navigator.pushNamed(context, ProfilePage.RouteName)
+        Navigator.pop(context)
       }
     });
   }
@@ -99,7 +100,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                     topLeft: Radius.circular(30.0),
                   ),
                   color: Colors.white),
-              child: Column(
+              child: SingleChildScrollView(child:  Column(
                 children: [
                   Material(
                     child: ClipPath(
@@ -111,18 +112,18 @@ class _CreateAccountState extends State<EditProfilePage> {
                           children: <Widget>[
 
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                              child: Container(
-                                child: profileImage == null ? Image.asset('assets/images/userimage.png', 
-                                height: 120,
-                                width: 90) : 
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(profileImage),
-                                  radius: 46,
-                                ),
+                                padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                                child: Container(
+                                  child: profileImage == null ? Image.asset('assets/images/userimage.png',
+                                      height: 120,
+                                      width: 90) :
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(profileImage),
+                                    radius: 46,
+                                  ),
                                 )
                             ),
-                           
+
                             Form(
                               key: _formKey,
                               child: Column(children: <Widget>[
@@ -160,7 +161,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                     'Please enter a valid email address',
                                   ),
                                 ),
-                                
+
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
@@ -234,7 +235,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 //     style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
                                 //     items: <String>['Select Province', 'Chandigarh', 'Haryana', 'Punjab'].map((String value) {
                                 //       return new DropdownMenuItem<String>(
-                                        
+
                                 //         value: value,
                                 //         child: new Text(value),
                                 //       );
@@ -244,7 +245,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 //         stateDropdown = newValue;
                                 //       });
                                 //     },
-                                //   )) 
+                                //   ))
                                 // ),
 
                                 Align(
@@ -261,7 +262,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                     ),
                                   ),
                                 )
-                                
+
                               ]),
                             ),
                           ],
@@ -274,7 +275,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                     // borderOnForeground: true,
                   ),
                 ],
-              )),
+              ),)),
           // backgroundColor: Colors.white,
           // This trailing comma makes auto-formatting nicer for build methods.
         ));

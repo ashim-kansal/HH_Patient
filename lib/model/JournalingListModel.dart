@@ -37,6 +37,7 @@ class Result {
         this.status,
         this.id,
         this.question,
+        this.answer,
         this.createdAt,
         this.updatedAt,
         this.v,
@@ -45,6 +46,7 @@ class Result {
     String status;
     String id;
     String question;
+    String answer;
     DateTime createdAt;
     DateTime updatedAt;
     int v;
@@ -53,17 +55,19 @@ class Result {
         status: json["status"],
         id: json["_id"],
         question: json["question"],
+        answer: '',
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
-        "status": status,
-        "_id": id,
+        // "status": status,
+        // "_id": id,
         "question": question,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
+        "answer": answer,
+        // "createdAt": createdAt.toIso8601String(),
+        // "updatedAt": updatedAt.toIso8601String(),
+        // "__v": v,
     };
 }

@@ -58,7 +58,7 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
 
   @override
   Widget build(BuildContext context){
-    return MyWidget(title: 'Schedule', child: Column(
+    return MyWidget(title: 'Re-Schedule', child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TharapistCell(name: widget.name, role: widget.role,
@@ -120,7 +120,7 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
             }),
 
         Container(
-            child: HHButton(title: 'Save', type: 4, isEnable: true,onClick: (){
+            child: HHButton(title: 'Update', type: 4, isEnable: true,onClick: (){
               // Navigator.pushNamed(context, SessionPage.RouteName);
               reScheduleSession();
             },)

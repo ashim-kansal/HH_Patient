@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/api/API_services.dart';
-import 'package:flutter_app/model/JournalingListModel.dart';
-import 'package:flutter_app/model/OldJournalingLisrModel.dart';
+import 'package:flutter_app/model/JournalingListModel.dart' as NewJournal;
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/ExpansionTile.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_app/common/aaa.dart';
 
 class JournalPage extends StatefulWidget {
   static const String RouteName = '/journal';
+  List<NewJournal.Result> result;
 
   @override
   State<StatefulWidget> createState() => JournalPageState();
@@ -22,12 +25,6 @@ class JournalPage extends StatefulWidget {
 class JournalPageState extends State<JournalPage> {
   bool isSwitched = true;
 
-  var items = [];
-
-  // ignore: deprecated_member_use
-  List<TextEditingController> _controllers = new List();
-
-  List<String> litems = [];
 
   Future journalFuture;
 
@@ -44,14 +41,10 @@ class JournalPageState extends State<JournalPage> {
 
   void submitJournal (){
 
-    var params = [];
-    int totalItems = litems.length;
+    print(jsonEncode(widget.result));
 
-    print(totalItems);
-
-    for (var i = 0; i < totalItems; i++) {
-      print(_controllers[i].text);
-      if(_controllers[i].text.trim().length == 0){
+    for (var i = 0; i < widget.result.length; i++) {
+      if(widget.result[i].answer.trim().length == 0){
         showDialog(
           context: context,
           builder: (BuildContext dialogContext) {
@@ -64,25 +57,17 @@ class JournalPageState extends State<JournalPage> {
         return;
       }
 
-      var obj = {
-        "question": litems[i],
-        "answer": _controllers[i].text
-      };
-      params.add(obj);
     }
-
-    print(params);
 
     InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-    inAppAPIServices.submitJournal(params).then((value) => {
-      params = [],
+    inAppAPIServices.submitJournal(widget.result).then((value) => {
       showToast(value.responseMsg),
       if(value.responseCode == 200){
-        for (var i = 0; i < totalItems; i++) {
-          _controllers[i].clear()
-        },
-        params = [],
+        print(value.responseCode),
+        setState(() {
+        isSwitched = !isSwitched;
+        })
       }
     });
   }
@@ -150,8 +135,6 @@ class JournalPageState extends State<JournalPage> {
   
   Widget getNewJournal() {
 
-    // Future<JournalingList> _future = getJournalingList();
-
     return Container(
         padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
         height: MediaQuery.of(context).size.height,
@@ -166,6 +149,14 @@ class JournalPageState extends State<JournalPage> {
                       if(snapshot.hasError){
                         return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                       }
+
+                      SchedulerBinding.instance.addPostFrameCallback((_){
+
+                        setState(() {
+                          widget.result = snapshot.data.result;
+                        });
+
+                      });
                       return  ListView.separated(
                         scrollDirection: Axis.vertical,
                         separatorBuilder: (context, index) {
@@ -174,8 +165,6 @@ class JournalPageState extends State<JournalPage> {
                         
                         itemCount: snapshot.data.result.length,
                         itemBuilder: (context, index) {
-                           _controllers.add(new TextEditingController());
-                          litems.add(snapshot.data.result[index].question);
                           return Column(
                             children: [
                               Container(
@@ -196,9 +185,13 @@ class JournalPageState extends State<JournalPage> {
                               SizedBox(
                                 height: 5,
                               ),
+
                               HHEditText(
                                 minLines: 4,
-                                controller: _controllers[index],
+                                onSelectAnswer:(text){
+                                  print(text);
+                                  widget.result[index].answer = text;
+                                },
                               ),SizedBox(
                                 height: 10,
                               ),
@@ -284,12 +277,3 @@ class JournalPageState extends State<JournalPage> {
 
 
 }
-
-// class NewJournalWidget
-// class NewJournalWidget extends StatelessWidget  {
-
-//   final Journal = journal;
-
-//   NewJournalWidget(this.Journal);
-    
-// }

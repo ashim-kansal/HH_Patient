@@ -16,6 +16,7 @@ import 'dart:convert';
 
 Future<LibraryList> getLibraryList() async {
   var token = await GetStringToSP("token");
+  print(token);
   final url = HHString.baseURL +"/api/v1/user/library_list";
   final response = await http.get(url,
       headers: {

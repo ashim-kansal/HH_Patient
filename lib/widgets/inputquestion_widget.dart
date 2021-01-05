@@ -41,23 +41,6 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
           Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
         ]),
         SizedBox(height: 10,),
-        // Container(
-        //   // width: MediaQuery.of(context).size.width/3,
-        //   height: 40,
-        //   margin: EdgeInsets.only(left: 20),
-        //   alignment: Alignment.topLeft,
-        //   child:         TextField(
-        //     maxLines: 2,
-        //     minLines: 2,
-        //     // controller: widget.controller,
-        //     decoration: InputDecoration(
-        //       border: normalOutlineInputBorder(),
-        //     ),
-        //
-        //
-        //   )
-        //   ,
-        // ),
         HHEditText(onSelectAnswer:(text){
           widget.onSelectAnswer(text);
         }),
