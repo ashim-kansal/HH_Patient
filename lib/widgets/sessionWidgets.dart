@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
+import 'package:flutter_app/utils/Utils.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
@@ -56,6 +57,8 @@ class SessionCard extends StatelessWidget {
                                       print(value.responseCode),
                                       if (value.responseCode == 200) {
                                         Navigator.pop(context),
+                                        showToast(context, value.responseMessage),
+
                                         onClickCancel()
                                         // Navigator.pushNamed(context, Dashboard.RouteName)
                                       }
@@ -313,6 +316,7 @@ class UpcomingSessionItem extends StatelessWidget {
                                         print(value.responseCode),
                                         if (value.responseCode == 200) {
                                           Navigator.pop(context),
+                                          showToast(context, value.responseMessage),
                                           onClickCancel()
                                           // Navigator.pushNamed(context, Dashboard.RouteName)
                                         }

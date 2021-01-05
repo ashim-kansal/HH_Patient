@@ -32,7 +32,11 @@ class MyAssessmentState extends State<MyAssessmentPage>{
                   return AssessmentCell(name: snapshot.data.results[index].title, completed: snapshot.data.results[index].isSubmit, onClick: (){
                     Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: AssessmentArguments(
                         snapshot.data.results[index]
-                    ));
+                    )).then((value)=>{
+                    setState(() {
+
+                    })
+                    });
                   },);
 
                 },

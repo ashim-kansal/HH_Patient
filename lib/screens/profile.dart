@@ -297,8 +297,12 @@ class _CreateAccountState extends State<ProfilePage> {
                                    title: "Edit",
                                    type: 4,
                                    onClick: () {
-                                     Navigator.pop(context);
-                                     Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), );
+                                     Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), )
+                                     .then((value){
+                                       // setState(() {
+                                         getprofile();
+                                       // });
+                                     });
 
 
                                      // Navigator.pushNamed(context, EditProfilePage.RouteName, arguments: ProfileArguments(userData)).whenComplete(getprofile());

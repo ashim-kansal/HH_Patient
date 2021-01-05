@@ -115,7 +115,6 @@ class AssessmentFormState extends State<AssessmentFormPage> {
           print(value.responseCode),
           if (value.responseCode == 200) {
             Navigator.pop(context),
-            Navigator.pushNamed(context, Dashboard.RouteName)
           }
         });
   }

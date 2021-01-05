@@ -113,7 +113,7 @@ class AssessmentQuestionCell extends StatelessWidget {
 
   Widget getSingleChoiceQuest(String question) {
     return MySingleChoiceQuesWidget(
-      ques: question,
+      ques: question??"",
       onPressYes: () {
         print("yes");
         onSelectAnswer("YES");

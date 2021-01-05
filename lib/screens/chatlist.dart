@@ -13,14 +13,6 @@ import 'package:simple_moment/simple_moment.dart';
 
 class ChatListPage extends StatefulWidget {
   static const String RouteName = '/chat_users';
-  final users = [
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-  ];
 
   ChatListPage({Key key, this.title}) : super(key: key);
 
@@ -34,7 +26,7 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'Chat', child: Container(
+    return MyWidget(title: 'My Chat', child: Container(
       child: FutureBuilder<GetChatUsers>(
         future: getChatList(""),
         builder: (context, snapshot) {
@@ -43,7 +35,7 @@ class _ChatListPageState extends State<ChatListPage> {
             if(snapshot.hasError){
               return Container(
                 child: Center(
-                  child: HHTextView(title: "No new messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                  child: HHTextView(title: "No Messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                 ),
               );
             }
