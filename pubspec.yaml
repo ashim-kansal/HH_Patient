@@ -39,9 +39,7 @@ dependencies:
   http_parser: ^3.1.4
   async: ^2.4.2
   # stripe_payment: ^1.0.9
-  
-    
-  stripe_payment: ^1.0.9
+
 #  twilio_programmable_video: ^0.6.3+1
 
 

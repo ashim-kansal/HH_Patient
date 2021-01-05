@@ -67,9 +67,12 @@ class TharapistCell extends StatelessWidget {
 class ChatUserCell extends StatelessWidget {
   var name = "";
   var online = false;
+  var message = "";
+  var profile = "";
+  var time = "";
   final VoidCallback onClick;
 
-  ChatUserCell({@required this.name, @required this.online, this.onClick});
+  ChatUserCell({@required this.name, @required this.online, this.onClick, this.message,this.profile, this.time});
 
 
   @override
@@ -93,11 +96,19 @@ class ChatUserCell extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Image.asset(
-                      'assets/images/ic_avatar.png',
-                      height: 50,
-                      width: 50,
+                     ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: Image.network(
+                        profile,
+                        height: 50,
+                        width: 50,
+                      ),
                     ),
+                    // Image.asset(
+                    //   'assets/images/ic_avatar.png',
+                    //   height: 50,
+                    //   width: 50,
+                    // ),
                     SizedBox(
                       width: 8,
                     ),
@@ -108,7 +119,7 @@ class ChatUserCell extends StatelessWidget {
                           Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:20,color: HH_Colors.grey_585858),),
                         ]),
                         Row(children: [
-                          Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
+                          Text(message, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
                         ]),
                       ],
                     ) ,
@@ -117,7 +128,7 @@ class ChatUserCell extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('7:30 PM',textAlign: TextAlign.start ,style: TextStyle(color: HH_Colors.accentColor, fontSize: 15),)
+                    Text(time,textAlign: TextAlign.start ,style: TextStyle(color: HH_Colors.accentColor, fontSize: 15),)
                   ],
                 )
               ],
