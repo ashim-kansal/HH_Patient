@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/ChatList.dart';
+import 'package:flutter_app/model/ChatUsers.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/tharapist_cell.dart';
 import 'package:simple_moment/simple_moment.dart';
@@ -32,11 +34,12 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder<ChatList>(
-        future: getChatList(null),
+    return MyWidget(title: 'Chat', child: Container(
+      child: FutureBuilder<GetChatUsers>(
+        future: getChatList(""),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+
             if(snapshot.hasError){
               return Container(
                 child: Center(
@@ -51,9 +54,9 @@ class _ChatListPageState extends State<ChatListPage> {
                 var _date = item.message[item.message.length - 1].createdAt;
                 Moment createdDt = Moment.parse('$_date');
                 return ChatUserCell(
-                  name: item.senderId.firstName+" "+item.senderId.lastName,
+                  name: item.receiverId ==null ?"":item.receiverId.firstName+" "+item.receiverId.lastName,
                   message: item.message[item.message.length - 1].message,
-                  profile: item.senderId.profilePic,
+                  profile: item.receiverId == null ? '':item.receiverId.profilePic,
                   time: createdDt.format("hh:mm a"),
                   online: true,
                   onClick: () {
@@ -72,6 +75,6 @@ class _ChatListPageState extends State<ChatListPage> {
           }
         },
       ),
-    );
+    ));
   }
 }

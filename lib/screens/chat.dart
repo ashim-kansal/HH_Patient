@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/ChatList.dart';
+import 'package:flutter_app/model/ChatUsers.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
@@ -58,7 +59,7 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  FutureBuilder<ChatList>(
+                  FutureBuilder<GetChatUsers>(
                     future: getChatList(widget.chatId),
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
@@ -69,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
                         return  new Flexible(
                           child: new ListView.builder(
                             padding: new EdgeInsets.all(8.0),
-                            // reverse: true,
+                            reverse: true,
                             itemBuilder: (context, int index) {
                               receiverId = item[0].senderId.id;
                               // return ListView.builder(itemBuilder: (context, qindex){

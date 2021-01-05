@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/model/ChatList.dart';
+import 'package:flutter_app/model/ChatUsers.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/SettingModel.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
@@ -111,18 +112,18 @@ class UserAPIServices {
 }
 
 // fetch chat listing
-Future<ChatList> getChatList(chatId) async {
+Future<GetChatUsers> getChatList(chatId) async {
   var token = await GetStringToSP("token");
-
+    print(token);
   final url = HHString.baseURL +"/api/v1/chat/chatHistory";
   final response = await http.post(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token??HHString.token
       },
-      body:  jsonEncode({
+       body:  chatId ==null ? null :  jsonEncode({
       "receiverId": chatId})
       );
       print(response.body);
-  return chatListFromJson(response.body);
+  return getChatUsersFromJson(response.body);
 }
