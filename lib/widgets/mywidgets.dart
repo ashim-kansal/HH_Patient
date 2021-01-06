@@ -214,6 +214,112 @@ class HHTextViewBoarder extends StatelessWidget {
   }
 }
 
+class HHEditFormText extends StatefulWidget {
+  final String hint;
+  final String text = "";
+  final TextEditingController controller;
+
+  final VoidCallback onClickEye;
+  final VoidCallback onSubmitText;
+
+  final VoidCallback onFieldSubmit;
+
+  var minLines = 1;
+  var maxLength = 1;
+  var error = false;
+  var errorText = "";
+  var obscureText = false;
+  var enabled = true;
+  var showeye = false;
+  var textarea = false;
+  // var controller = null;
+  var inputType = TextInputType.text;
+  final ValueChanged<String> onSelectAnswer;
+
+  final TextInputAction textInputAction;
+
+
+  HHEditFormText(
+      {Key key,
+        this.hint,
+        this.minLines,
+        this.error,
+        this.errorText,
+        this.obscureText,
+        this.inputType,
+        this.maxLength,
+        this.controller,
+        this.onClickEye,
+        this.textarea,
+        this.enabled,
+        this.showeye,
+        this.onSubmitText,
+        this.onFieldSubmit,
+        this.textInputAction,
+        this.onSelectAnswer})
+      : super(key: key);
+
+  @override
+  HHEditFormTextState createState() => HHEditFormTextState();
+}
+
+class HHEditFormTextState extends State<HHEditFormText> {
+  // final TextEditingController controller = TextEditingController();
+
+  void Function() param2;
+
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.minLines == null) widget.minLines = 1;
+    widget.obscureText??false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return TextFormField(
+      textInputAction: widget.textInputAction??TextInputAction.none,
+      enabled: widget.enabled?? true,
+      // obscureText: widget.obscureText != null && widget.error ? true : false,
+      obscureText: widget.obscureText ?? false,
+      controller: widget.controller,
+      minLines: widget.minLines?? 1,
+      maxLength: widget.maxLength??32,
+      maxLines: widget.minLines?? 1,
+      onChanged: (text){
+        if(widget.onSelectAnswer!=null)
+          widget.onSelectAnswer(text);
+      },
+      onFieldSubmitted: (term) {
+        widget.onFieldSubmit();
+      },
+      // onEditingComplete: () => widget.onSubmitText(),
+      decoration: InputDecoration(
+          counterText: "",
+          hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
+          errorText: widget.error != null && widget.error ? widget.errorText : null,
+          errorStyle: TextStyle(color: Color(0xffff8a73)),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5.0),
+              borderSide: BorderSide(color: Color(0xffff8a73))),
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: widget.hint == null ? "" : widget.hint,
+          errorBorder: errorOutlineInputBorder(),
+          border: normalOutlineInputBorder(),
+          suffixIcon: widget.showeye??false
+              ?
+          IconButton(
+            icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
+            onPressed: () => widget.onClickEye(),
+          )
+
+              : null),
+    );
+  }
+}
+
 class HHEditText extends StatefulWidget {
   final String hint;
   final String text = "";
@@ -234,23 +340,26 @@ class HHEditText extends StatefulWidget {
   var inputType = TextInputType.text;
   final ValueChanged<String> onSelectAnswer;
 
+  final TextInputAction textInputAction;
+
 
   HHEditText(
       {Key key,
-      this.hint,
-      this.minLines,
-      this.error,
-      this.errorText,
-      this.obscureText,
-      this.inputType,
-      this.maxLength,
-      this.controller,
-      this.onClickEye,
-      this.textarea,
-      this.enabled,
-      this.showeye,
-      this.onSubmitText,
-      this.onSelectAnswer})
+        this.hint,
+        this.minLines,
+        this.error,
+        this.errorText,
+        this.obscureText,
+        this.inputType,
+        this.maxLength,
+        this.controller,
+        this.onClickEye,
+        this.textarea,
+        this.enabled,
+        this.showeye,
+        this.onSubmitText,
+        this.textInputAction,
+        this.onSelectAnswer})
       : super(key: key);
 
   @override
@@ -274,6 +383,7 @@ class HHEditTextState extends State<HHEditText> {
   Widget build(BuildContext context) {
 
     return TextField(
+      textInputAction: widget.textInputAction??TextInputAction.none,
       enabled: widget.enabled?? true,
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,
@@ -301,10 +411,10 @@ class HHEditTextState extends State<HHEditText> {
           border: normalOutlineInputBorder(),
           suffixIcon: widget.showeye??false
               ?
-              IconButton(
-                icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
-                onPressed: () => widget.onClickEye(),
-              )
+          IconButton(
+            icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
+            onPressed: () => widget.onClickEye(),
+          )
 
               : null),
     );

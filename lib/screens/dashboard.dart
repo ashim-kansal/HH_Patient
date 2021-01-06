@@ -45,16 +45,15 @@ class DashboardState extends State<Dashboard> {
     'My Assessment',
     ''
   ];
+
+  _updateFromHome(String s) {
+    showTherapistOptions();
+  }
   @override
   void initState() {
     super.initState();
     listScreens = [
-      HomePage(showTherapist:(){
-        // setState(() {
-        //   tabIndex = 1;
-        //   title = listNames[tabIndex];
-        // });
-      }),
+      HomePage(onUpdateDashboard: _updateFromHome),
       LibraryPage(),
       MyAssessmentPage(),
       TherapistOptionsPage()

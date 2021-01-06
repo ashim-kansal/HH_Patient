@@ -25,7 +25,7 @@ class ViewerPage extends StatelessWidget{
   }
 
   Widget videoView(String document) {
-    return NativeVideoView(
+    return Center(child: NativeVideoView(
       keepAspectRatio: true,
       showMediaController: true,
       onCreated: (controller) {
@@ -46,7 +46,7 @@ class ViewerPage extends StatelessWidget{
       onProgress: (progress, duration) {
         print('$progress | $duration');
       },
-    );
+    ),);
   }
 
   Widget pdfView(BuildContext  context, String document) {

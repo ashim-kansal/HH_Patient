@@ -112,6 +112,7 @@ class MyPlansState extends State<MyPlans> {
       if(value.responseCode == 200){
         // Navigator.pop(context),
         // if(!widget.isUpdate){
+        Navigator.pop(context),
         Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
         // }
     
