@@ -18,6 +18,7 @@ import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,6 +36,7 @@ class DashboardState extends State<Dashboard> {
   String name;
   String email;
   String profileImage = "";
+  bool showTherapist = false;
 
   List<Widget> listScreens;
   List<String> listNames = [
@@ -47,7 +49,12 @@ class DashboardState extends State<Dashboard> {
   void initState() {
     super.initState();
     listScreens = [
-      HomePage(),
+      HomePage(showTherapist:(){
+        // setState(() {
+        //   tabIndex = 1;
+        //   title = listNames[tabIndex];
+        // });
+      }),
       LibraryPage(),
       MyAssessmentPage(),
       TherapistOptionsPage()
@@ -76,7 +83,7 @@ class DashboardState extends State<Dashboard> {
       Scaffold(
         
         appBar: AppBar(
-          title: Text(title, style: TextStyle(color: Colors.white)),
+          title: Text(HHString.dashboard, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -159,7 +166,7 @@ class DashboardState extends State<Dashboard> {
                
               ),
               HHDrawerItem(
-                  title: "My Chats", icon: 'assets/images/ic_chat.png', onClick: (){
+                  title: HHString.mychat, icon: 'assets/images/ic_chat.png', onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, ChatListPage.RouteName);
               },),
@@ -168,7 +175,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "My Programs", icon: 'assets/images/ic_prgrams.png', onClick: (){
+                  title: HHString.my_programs, icon: 'assets/images/ic_prgrams.png', onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, CurrentPlansPage.RouteName);
               }),
@@ -177,7 +184,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "Settings", icon: 'assets/images/ic_settings.png', onClick: (){
+                  title: HHString.Settings, icon: 'assets/images/ic_settings.png', onClick: (){
                     Navigator.pop(context);
                     Navigator.pushNamed(context, SettingsPage.RouteName);
               },),
@@ -186,7 +193,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "My Therapists", icon: 'assets/images/ic_therapists.png', onClick: (){
+                  title: HHString.my_therapists, icon: 'assets/images/ic_therapists.png', onClick: (){
                     Navigator.pop(context);
                     Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('My Therapists',false));
               },),
@@ -195,12 +202,12 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "Support", icon: 'assets/images/ic_support.png'),
+                  title: HHString.Support, icon: 'assets/images/ic_support.png'),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Contact Us", onClick: (){
+              HHDrawerItem2(title: HHString.Contact_Us, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, FeedbackPage.RouteName);
               },),
@@ -208,7 +215,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "FAQ's", onClick: (){
+              HHDrawerItem2(title: HHString.FAQ, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, FaqPage.RouteName);
               }),
@@ -217,12 +224,12 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "More Information", icon: 'assets/images/ic_info.png'),
+                  title: HHString.more_info, icon: 'assets/images/ic_info.png'),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "About Us", onClick: (){
+              HHDrawerItem2(title: HHString.about_us, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('About Us',false ));
               },),
@@ -230,7 +237,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Terms & Conditions", onClick: (){
+              HHDrawerItem2(title: HHString.tnc, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, TermsPage.RouteName, arguments: ScreenArguments('Terms & Conditions',false ));
               }),
@@ -238,7 +245,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: "Privacy Policy", onClick: (){
+              HHDrawerItem2(title: HHString.privacy, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, PrivacyPolicy.RouteName, arguments: ScreenArguments('Privacy Policy',false ));
               }),
@@ -247,7 +254,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: "Log Out", icon: 'assets/images/ic_logout.png',
+                  title: HHString.logout, icon: 'assets/images/ic_logout.png',
                   onClick: (){
                     showDialog(context: context,
                        builder: (BuildContext dialogContext) {
@@ -290,20 +297,20 @@ class DashboardState extends State<Dashboard> {
             items: [
               BottomNavigationBarItem(
                   icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
-                title: Text('Home'),
+                title: Text(HHString.home),
 
   ),
               BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 25, width: 25,),
-                title: Text('Library'),
+                title: Text(HHString.library),
 
               ),
               BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 25, width: 25,),
-                title: Text('Assessment'),
+                title: Text(HHString.assessment),
               ),BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 3?'assets/images/ic_therapists_select.png':'assets/images/ic_therapists.png' , height: 25, width: 25,),
-                title: Text('Therapists'),
+                title: Text(HHString.therapists),
               ),
             ]
         ),

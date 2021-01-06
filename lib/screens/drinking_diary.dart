@@ -81,6 +81,30 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
 
               ),
               SizedBox(height: 20,),
+              InkWell(
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (BuildContext dialogContext) {
+                      return DialogWithField(
+                        onClick: () {
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  );
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.add_circle_outlined, color: HH_Colors.color_949494,),
+                    SizedBox(width: 5,),
+                    Text('Goal', style: TextStyle(fontSize: 14, color: HH_Colors.color_949494, fontFamily: "ProximaNova"),)
+                  ],
+                )
+                ,
+              ),
+              SizedBox(height: 20,),
               DrinkingDiaryCell(),
               DrinkingDiaryCell(),
               DrinkingDiaryCell(),

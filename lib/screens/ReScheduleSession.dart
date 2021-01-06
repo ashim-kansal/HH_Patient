@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/api/Therapist_service.dart' as service;
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/utils/Utils.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -58,7 +60,7 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
 
   @override
   Widget build(BuildContext context){
-    return MyWidget(title: 'Re-Schedule', child: Column(
+    return MyWidget(title: HHString.reschedule, child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TharapistCell(name: widget.name, role: widget.role,
@@ -68,7 +70,7 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return Center(child: Text("Not Found"),);
+                  return Center(child: Text(HHString.not_found),);
                 }
 
                 SchedulerBinding.instance.addPostFrameCallback((_){
@@ -120,7 +122,7 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
             }),
 
         Container(
-            child: HHButton(title: 'Update', type: 4, isEnable: true,onClick: (){
+            child: HHButton(title: HHString.Update, type: 4, isEnable: true,onClick: (){
               // Navigator.pushNamed(context, SessionPage.RouteName);
               reScheduleSession();
             },)
@@ -145,6 +147,8 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
 
           print(value.responseCode),
           if (value.responseCode == 200) {
+            showToast(context, value.responseMessage),
+
             Navigator.pop(context),
             Navigator.pushNamed(context, Dashboard.RouteName)
           }

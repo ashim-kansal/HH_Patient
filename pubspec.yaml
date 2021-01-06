@@ -26,10 +26,15 @@ dependencies:
   toast: ^0.1.5
   flutter:
     sdk: flutter
+  firebase_core: ^0.5.3
+  firebase_messaging: ^7.0.3
+  # flutter_localizations: # Add this line
+  #   sdk: flutter
+  # intl: ^0.16.0
+
   flutter_bloc: ^3.0.0
   http: ^0.12.0+4
   meta: ^1.1.6
-  intl: ^0.16.0
   equatable: ^1.0.0
   dson: 
   shared_preferences: ^0.5.12
@@ -39,14 +44,16 @@ dependencies:
   http_parser: ^3.1.4
   async: ^2.4.2
   # stripe_payment: ^1.0.9
-
-#  twilio_programmable_video: ^0.6.3+1
-  stripe_payment: ^1.0.9
   # twilio_programmable_video: ^0.6.3+1
+  stripe_payment: ^1.0.9
+  twilio_programmable_video: ^0.6.3+1
   after_layout: ^1.0.7
-  wakelock: ^0.1.4
-
-
+  wakelock: ^0.2.1+1
+  flutter_html: ^1.1.0
+  native_video_view: ^0.3.0
+  flutter_cached_pdfview : ^0.3.4
+  path_provider : ^1.6.24
+  open_file : ^3.0.3
 
 
 
@@ -68,6 +75,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/

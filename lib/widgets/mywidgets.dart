@@ -214,13 +214,16 @@ class HHTextViewBoarder extends StatelessWidget {
   }
 }
 
-class HHEditText extends StatefulWidget {
+//
+class HHEditFormText extends StatefulWidget {
   final String hint;
   final String text = "";
   final TextEditingController controller;
 
   final VoidCallback onClickEye;
   final VoidCallback onSubmitText;
+
+  final VoidCallback onFieldSubmit;
 
   var minLines = 1;
   var maxLength = 1;
@@ -233,6 +236,114 @@ class HHEditText extends StatefulWidget {
   // var controller = null;
   var inputType = TextInputType.text;
   final ValueChanged<String> onSelectAnswer;
+
+  final TextInputAction textInputAction;
+
+
+  HHEditFormText(
+      {Key key,
+      this.hint,
+      this.minLines,
+      this.error,
+      this.errorText,
+      this.obscureText,
+      this.inputType,
+      this.maxLength,
+      this.controller,
+      this.onClickEye,
+      this.textarea,
+      this.enabled,
+      this.showeye,
+      this.onSubmitText,
+      this.onFieldSubmit,
+      this.textInputAction,
+      this.onSelectAnswer})
+      : super(key: key);
+
+  @override
+  HHEditFormTextState createState() => HHEditFormTextState();
+}
+
+class HHEditFormTextState extends State<HHEditFormText> {
+  // final TextEditingController controller = TextEditingController();
+
+  void Function() param2;
+
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.minLines == null) widget.minLines = 1;
+    widget.obscureText??false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return TextFormField(
+      textInputAction: widget.textInputAction??TextInputAction.none,
+      enabled: widget.enabled?? true,
+      // obscureText: widget.obscureText != null && widget.error ? true : false,
+      obscureText: widget.obscureText ?? false,
+      controller: widget.controller,
+      minLines: widget.minLines?? 1,
+      maxLength: widget.maxLength??32,
+      maxLines: widget.minLines?? 1,
+      onChanged: (text){
+        if(widget.onSelectAnswer!=null)
+          widget.onSelectAnswer(text);
+      },
+      onFieldSubmitted: (term) {
+        widget.onFieldSubmit();
+      },
+      // onEditingComplete: () => widget.onSubmitText(),
+      decoration: InputDecoration(
+          counterText: "",
+          hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
+          errorText: widget.error != null && widget.error ? widget.errorText : null,
+          errorStyle: TextStyle(color: Color(0xffff8a73)),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5.0),
+              borderSide: BorderSide(color: Color(0xffff8a73))),
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: widget.hint == null ? "" : widget.hint,
+          errorBorder: errorOutlineInputBorder(),
+          border: normalOutlineInputBorder(),
+          suffixIcon: widget.showeye??false
+              ?
+              IconButton(
+                icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
+                onPressed: () => widget.onClickEye(),
+              )
+
+              : null),
+    );
+  }
+}
+
+class HHEditText extends StatefulWidget {
+  final String hint;
+  final String text = "";
+  final TextEditingController controller;
+
+  final VoidCallback onClickEye;
+  final VoidCallback onSubmitText;
+
+  final VoidCallback onFieldSubmit;
+
+  var minLines = 1;
+  var maxLength = 1;
+  var error = false;
+  var errorText = "";
+  var obscureText = false;
+  var enabled = true;
+  var showeye = false;
+  var textarea = false;
+  // var controller = null;
+  var inputType = TextInputType.text;
+  final ValueChanged<String> onSelectAnswer;
+
+  final TextInputAction textInputAction;
 
 
   HHEditText(
@@ -250,6 +361,8 @@ class HHEditText extends StatefulWidget {
       this.enabled,
       this.showeye,
       this.onSubmitText,
+      this.onFieldSubmit,
+      this.textInputAction,
       this.onSelectAnswer})
       : super(key: key);
 
@@ -274,6 +387,7 @@ class HHEditTextState extends State<HHEditText> {
   Widget build(BuildContext context) {
 
     return TextField(
+      textInputAction: widget.textInputAction??TextInputAction.none,
       enabled: widget.enabled?? true,
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,
@@ -388,29 +502,6 @@ class DrinkingDiaryCell extends StatelessWidget{
 
             ],
           ),
-          InkWell(
-            onTap: (){
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext dialogContext) {
-                  return DialogWithField(
-                    onClick: () {
-                      Navigator.pop(context);
-                    },
-                  );
-                },
-              );
-            },
-            child: Row(
-              children: [
-                Icon(Icons.add_circle_outlined, color: HH_Colors.color_949494,),
-                SizedBox(width: 5,),
-                Text('Goal', style: TextStyle(fontSize: 14, color: HH_Colors.color_949494, fontFamily: "ProximaNova"),)
-              ],
-            )
-            ,
-          )
 
         ],
       ),
@@ -424,11 +515,13 @@ class DialogWithImage extends StatelessWidget {
   final String title;
   final String content;
   final List<Widget> actions;
+  VoidCallback onClick;
 
 
   DialogWithImage({
     this.title,
     this.content,
+    this.onClick,
     this.actions = const [],
   });
 
@@ -446,11 +539,16 @@ class DialogWithImage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
+              InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  onClick();
+                },
+             child: Container(
                 child: Center(
                   child: Image.asset("assets/images/thumb.png", height: 80, width: 80,)
                 ),
-              ),
+              )),
               SizedBox(height: 20,),
               HHTextView(
                   title: title,
@@ -767,13 +865,18 @@ class DialogWithFieldState extends State<DialogWithField>{
 class NotificationList extends StatelessWidget {
   final String title;
   final String subtitle;
+  final String id;
+  VoidCallback onDeleteClick;
 
 
   NotificationList({
     @required
+    this.id,
+    @required
     this.title,
     @required
     this.subtitle,
+    this.onDeleteClick
   });
 
   @override
@@ -794,11 +897,14 @@ class NotificationList extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
                     color: HH_Colors.color_F3F3F3,
                     child: new ListTile(
-                      title: Column(children: [
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                         HHTextView(
                           title: this.title,
                           color: HH_Colors.grey_35444D,
                           size: 16,
+                          textweight: FontWeight.w400,
                         ),
                         Align(
                           alignment: Alignment.bottomRight,
@@ -821,7 +927,7 @@ class NotificationList extends StatelessWidget {
 
                 color: Colors.red,
                 icon: Icons.delete,
-                // onTap: () => _showSnackBar('Delete'),
+                onTap: () => {onDeleteClick()},
               ),
             )
           ],

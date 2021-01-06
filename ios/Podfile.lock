@@ -1,13 +1,99 @@
 PODS:
+  - Firebase/CoreOnly (6.33.0):
+    - FirebaseCore (= 6.10.3)
+  - Firebase/Messaging (6.33.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.7.0)
+  - firebase_core (0.5.3):
+    - Firebase/CoreOnly (~> 6.33.0)
+    - Flutter
+  - firebase_core_web (0.1.0):
+    - Flutter
+  - firebase_messaging (7.0.3):
+    - Firebase/CoreOnly (~> 6.33.0)
+    - Firebase/Messaging (~> 6.33.0)
+    - firebase_core
+    - Flutter
+  - FirebaseCore (6.10.3):
+    - FirebaseCoreDiagnostics (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+  - FirebaseCoreDiagnostics (1.7.0):
+    - GoogleDataTransport (~> 7.4)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
+    - nanopb (~> 1.30906.0)
+  - FirebaseFirestore (1.15.0)
+  - FirebaseInstallations (1.7.0):
+    - FirebaseCore (~> 6.10)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (4.8.0):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstallations (~> 1.6)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+  - FirebaseMessaging (4.7.1):
+    - FirebaseCore (~> 6.10)
+    - FirebaseInstanceID (~> 4.7)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Reachability (~> 6.7)
+    - GoogleUtilities/UserDefaults (~> 6.7)
+    - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.22.4)
+  - flutter_pdfview (1.0.2):
+    - Flutter
   - flutter_plugin_android_lifecycle (0.0.1):
     - Flutter
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - GoogleDataTransport (7.5.1):
+    - nanopb (~> 1.30906.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.7.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.7.2):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.2):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/Network (6.7.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.7.2)"
+  - GoogleUtilities/Reachability (6.7.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.7.2):
+    - GoogleUtilities/Logger
   - image_picker (0.0.1):
+    - Flutter
+  - import_js_library (1.0.0):
+    - Flutter
+  - nanopb (1.30906.0):
+    - nanopb/decode (= 1.30906.0)
+    - nanopb/encode (= 1.30906.0)
+  - nanopb/decode (1.30906.0)
+  - nanopb/encode (1.30906.0)
+  - native_video_view (0.0.1):
+    - Flutter
+  - open_file (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
     - Flutter
   - path_provider_linux (0.0.1):
     - Flutter
+  - path_provider_macos (0.0.1):
+    - Flutter
   - path_provider_windows (0.0.1):
     - Flutter
+  - "permission_handler (5.0.1+1)":
+    - Flutter
+  - PromisesObjC (1.2.12)
+  - Protobuf (3.14.0)
   - shared_preferences (0.0.1):
     - Flutter
   - shared_preferences_linux (0.0.1):
@@ -18,40 +104,109 @@ PODS:
     - Flutter
   - shared_preferences_windows (0.0.1):
     - Flutter
+  - sqflite (0.0.2):
+    - Flutter
+    - FMDB (>= 2.7.5)
   - Stripe (19.4.0)
   - stripe_payment (1.0.0):
     - Flutter
     - Stripe (~> 19.4.0)
+  - "twilio_programmable_video (0.6.3+1)":
+    - Flutter
+    - TwilioVideo (~> 3.7)
+  - TwilioVideo (3.8.0)
+  - video_player (0.0.1):
+    - Flutter
+  - video_player_web (0.0.1):
+    - Flutter
   - wakelock (0.0.1):
+    - Flutter
+  - wakelock_web (0.0.1):
+    - Flutter
+  - webview_flutter (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - Firebase/Messaging
+  - firebase_core (from `Pods/.symlinks/plugins/firebase_core-0.5.3/ios`)
+  - "firebase_core_web (from `Pods/.symlinks/plugins/firebase_core_web-0.2.1+1/ios`)"
+  - firebase_messaging (from `Pods/.symlinks/plugins/firebase_messaging-7.0.3/ios`)
+  - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `6.26.0`)
+  - flutter_pdfview (from `Pods/.symlinks/plugins/flutter_pdfview-1.0.4/ios`)
   - flutter_plugin_android_lifecycle (from `Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios`)
   - "image_picker (from `Pods/.symlinks/plugins/image_picker-0.6.7+17/ios`)"
+  - import_js_library (from `Pods/.symlinks/plugins/import_js_library-1.0.2/ios`)
+  - native_video_view (from `Pods/.symlinks/plugins/native_video_view-0.3.0/ios`)
+  - open_file (from `Pods/.symlinks/plugins/open_file-3.0.3/ios`)
+  - path_provider (from `Pods/.symlinks/plugins/path_provider-1.6.24/ios`)
   - "path_provider_linux (from `Pods/.symlinks/plugins/path_provider_linux-0.0.1+2/ios`)"
+  - "path_provider_macos (from `Pods/.symlinks/plugins/path_provider_macos-0.0.4+6/ios`)"
   - "path_provider_windows (from `Pods/.symlinks/plugins/path_provider_windows-0.0.4+3/ios`)"
+  - "permission_handler (from `Pods/.symlinks/plugins/permission_handler-5.0.1+1/ios`)"
   - "shared_preferences (from `Pods/.symlinks/plugins/shared_preferences-0.5.12+4/ios`)"
   - "shared_preferences_linux (from `Pods/.symlinks/plugins/shared_preferences_linux-0.0.2+4/ios`)"
   - "shared_preferences_macos (from `Pods/.symlinks/plugins/shared_preferences_macos-0.0.1+11/ios`)"
   - "shared_preferences_web (from `Pods/.symlinks/plugins/shared_preferences_web-0.1.2+7/ios`)"
   - "shared_preferences_windows (from `Pods/.symlinks/plugins/shared_preferences_windows-0.0.1+3/ios`)"
+  - "sqflite (from `Pods/.symlinks/plugins/sqflite-1.3.2+1/ios`)"
   - stripe_payment (from `Pods/.symlinks/plugins/stripe_payment-1.0.9/ios`)
-  - "wakelock (from `Pods/.symlinks/plugins/wakelock-0.1.4+2/ios`)"
+  - "twilio_programmable_video (from `Pods/.symlinks/plugins/twilio_programmable_video-0.6.3+1/ios`)"
+  - video_player (from `Pods/.symlinks/plugins/video_player-1.0.1/ios`)
+  - "video_player_web (from `Pods/.symlinks/plugins/video_player_web-0.1.4+1/ios`)"
+  - "wakelock (from `Pods/.symlinks/plugins/wakelock-0.2.1+1/ios`)"
+  - "wakelock_web (from `Pods/.symlinks/plugins/wakelock_web-0.1.0+3/ios`)"
+  - webview_flutter (from `Pods/.symlinks/plugins/webview_flutter-1.0.7/ios`)
 
 SPEC REPOS:
   trunk:
+    - Firebase
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebaseMessaging
     - Flutter
+    - FMDB
+    - GoogleDataTransport
+    - GoogleUtilities
+    - nanopb
+    - PromisesObjC
+    - Protobuf
     - Stripe
+    - TwilioVideo
 
 EXTERNAL SOURCES:
+  firebase_core:
+    :path: Pods/.symlinks/plugins/firebase_core-0.5.3/ios
+  firebase_core_web:
+    :path: "Pods/.symlinks/plugins/firebase_core_web-0.2.1+1/ios"
+  firebase_messaging:
+    :path: Pods/.symlinks/plugins/firebase_messaging-7.0.3/ios
+  FirebaseFirestore:
+    :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
+    :tag: 6.26.0
+  flutter_pdfview:
+    :path: Pods/.symlinks/plugins/flutter_pdfview-1.0.4/ios
   flutter_plugin_android_lifecycle:
     :path: Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios
   image_picker:
     :path: "Pods/.symlinks/plugins/image_picker-0.6.7+17/ios"
+  import_js_library:
+    :path: Pods/.symlinks/plugins/import_js_library-1.0.2/ios
+  native_video_view:
+    :path: Pods/.symlinks/plugins/native_video_view-0.3.0/ios
+  open_file:
+    :path: Pods/.symlinks/plugins/open_file-3.0.3/ios
+  path_provider:
+    :path: Pods/.symlinks/plugins/path_provider-1.6.24/ios
   path_provider_linux:
     :path: "Pods/.symlinks/plugins/path_provider_linux-0.0.1+2/ios"
+  path_provider_macos:
+    :path: "Pods/.symlinks/plugins/path_provider_macos-0.0.4+6/ios"
   path_provider_windows:
     :path: "Pods/.symlinks/plugins/path_provider_windows-0.0.4+3/ios"
+  permission_handler:
+    :path: "Pods/.symlinks/plugins/permission_handler-5.0.1+1/ios"
   shared_preferences:
     :path: "Pods/.symlinks/plugins/shared_preferences-0.5.12+4/ios"
   shared_preferences_linux:
@@ -62,26 +217,73 @@ EXTERNAL SOURCES:
     :path: "Pods/.symlinks/plugins/shared_preferences_web-0.1.2+7/ios"
   shared_preferences_windows:
     :path: "Pods/.symlinks/plugins/shared_preferences_windows-0.0.1+3/ios"
+  sqflite:
+    :path: "Pods/.symlinks/plugins/sqflite-1.3.2+1/ios"
   stripe_payment:
     :path: Pods/.symlinks/plugins/stripe_payment-1.0.9/ios
+  twilio_programmable_video:
+    :path: "Pods/.symlinks/plugins/twilio_programmable_video-0.6.3+1/ios"
+  video_player:
+    :path: Pods/.symlinks/plugins/video_player-1.0.1/ios
+  video_player_web:
+    :path: "Pods/.symlinks/plugins/video_player_web-0.1.4+1/ios"
   wakelock:
-    :path: "Pods/.symlinks/plugins/wakelock-0.1.4+2/ios"
+    :path: "Pods/.symlinks/plugins/wakelock-0.2.1+1/ios"
+  wakelock_web:
+    :path: "Pods/.symlinks/plugins/wakelock_web-0.1.0+3/ios"
+  webview_flutter:
+    :path: Pods/.symlinks/plugins/webview_flutter-1.0.7/ios
+
+CHECKOUT OPTIONS:
+  FirebaseFirestore:
+    :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
+    :tag: 6.26.0
 
 SPEC CHECKSUMS:
+  Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
+  firebase_core: 5d6a02f3d85acd5f8321c2d6d62877626a670659
+  firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
+  firebase_messaging: 0aea2cd5885b65e19ede58ee3507f485c992cc75
+  FirebaseCore: d889d9e12535b7f36ac8bfbf1713a0836a3012cd
+  FirebaseCoreDiagnostics: 770ac5958e1372ce67959ae4b4f31d8e127c3ac1
+  FirebaseFirestore: 2cf6944bc538e57c94d8332bae501178edb70727
+  FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
+  FirebaseInstanceID: bd3ffc24367f901a43c063b36c640b345a4a5dd1
+  FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
   Flutter: d466195df8a9933b705cb82c53140202e097ec55
+  flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
+  GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
+  import_js_library: 1e36c695286e1efded5c9c07583bf1d06ac44065
+  nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  native_video_view: 02756aebe7ec9d0ab00d039b7aa3756548900bc3
+  open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
+  path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
   path_provider_windows: a2b81600c677ac1959367280991971cb9a1edb3b
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  Protobuf: 0cde852566359049847168e51bd1c690e0f70056
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   shared_preferences_linux: afefbfe8d921e207f01ede8b60373d9e3b566b78
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   shared_preferences_windows: 36b76d6f54e76ead957e60b49e2f124b4cd3e6ae
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Stripe: 92f1c73a9dbd3c54277ed06a1fea6e08f20414c6
   stripe_payment: 1cbe9c339c21b5ecf01035e80eea351067c67c56
-  wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
+  twilio_programmable_video: 2403026c377fe03dab878f74ad62e1ba8012f198
+  TwilioVideo: c13a51ceca375e91620eb7578d2573c90cf53b46
+  video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
+  video_player_web: da8cadb8274ed4f8dbee8d7171b420dedd437ce7
+  wakelock: bfc7955c418d0db797614075aabbc58a39ab5107
+  wakelock_web: 926054421610791ae9c8bdd36666798e67be5a4c
+  webview_flutter: d2b4d6c66968ad042ad94cbb791f5b72b4678a96
 
-PODFILE CHECKSUM: cfb55973062b353abf51694a98a669f12e881ee3
+PODFILE CHECKSUM: 619760c65804162dd322b7c8d1528f827011cc9f
 
 COCOAPODS: 1.10.0

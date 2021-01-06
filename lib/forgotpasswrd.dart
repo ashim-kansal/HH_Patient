@@ -98,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Forgot Password', style: TextStyle(color: Colors.white)),
+          title: Text(HHString.forgot_password, style: TextStyle(color: Colors.white)),
           centerTitle: true,
             iconTheme: IconThemeData(
               color: Colors.white, //change your color here
@@ -141,7 +141,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                               child: Text(
-                                'Please enter you registered email address. We will help you retrieve your password.',
+                                HHString.pls_enter_reg_email,
                                 style: TextStyle(color: Color(0xff8d8d8d)),
                                 textAlign: TextAlign.center,
                               ),
@@ -152,7 +152,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
                                   child: HHEditText(
-                                    hint: "Enter Email",
+                                    hint: HHString.enter_email,
                                     obscureText: false,
                                     controller: emailController,
                                     error: widget.error,
@@ -163,7 +163,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
                                   child: HHButton(
-                                    title: "Proceed",
+                                    title: HHString.proceed,
                                     isEnable: true,
                                     type: 4,
                                     onClick: () {

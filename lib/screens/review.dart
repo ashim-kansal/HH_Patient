@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -33,7 +34,7 @@ class ReviewState extends State<ReviewPage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return new MyWidget(
-      title: "Share Your Reviews", 
+      title: HHString.share_reviews,
       child: new Container(
         child: new Column(
           children: <Widget>[
@@ -158,7 +159,7 @@ class ReviewState extends State<ReviewPage> {
                         controller: reviewController,
                         error: widget.error,
                         errorText:
-                        'Please enter your review',
+                        HHString.please_enter_review,
                         textarea: true,
                         minLines: 4,
                       ),
@@ -174,7 +175,7 @@ class ReviewState extends State<ReviewPage> {
                 padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                 child: HHButton(
                   isEnable: true,
-                  title: "Submit",
+                  title: HHString.submit,
                   type: 4,
                   onClick: () {
                     

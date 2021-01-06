@@ -4,16 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
-import 'package:flutter_app/forgotpasswrd.dart';
-import 'package:flutter_app/login.dart';
-import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
-import 'package:flutter_app/screens/journal.dart';
-import 'package:flutter_app/screens/language.dart';
-import 'package:flutter_app/screens/profile.dart';
-import 'package:flutter_app/screens/questionaire.dart';
-import 'package:flutter_app/signup.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Splash extends StatefulWidget{
 
@@ -28,6 +20,13 @@ class SplashState extends State<Splash>{
   String data = "";
   String nameKey = "_key_name";
   String token;
+  String _message = '';
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  _register() {
+    _firebaseMessaging.getToken().then((fcmtoken) => print(fcmtoken));
+  }
 
   getToken() async{
     var userToken = await GetStringToSP("token");
@@ -43,6 +42,10 @@ class SplashState extends State<Splash>{
   void initState() {
     getToken();
     super.initState();
+
+    _register();
+
+    getMessage();
 
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
@@ -69,6 +72,20 @@ class SplashState extends State<Splash>{
             },
       }
     );
+  }
+
+  void getMessage(){
+    _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+      print('on message $message');
+      setState(() => _message = message["notification"]["title"]);
+    }, onResume: (Map<String, dynamic> message) async {
+      print('on resume $message');
+      setState(() => _message = message["notification"]["title"]);
+    }, onLaunch: (Map<String, dynamic> message) async {
+      print('on launch $message');
+      setState(() => _message = message["notification"]["title"]);
+    });
   }
 
   @override

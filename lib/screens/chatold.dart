@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +30,7 @@ class _ChatPageState extends State<ChatPage> {
     String formattedDate = DateFormat('yyyy-MM-dd hh:mm').format(time);
 
     return new MyWidget(
-      title: 'Chat',
+      title: HHString.chat,
         child: new Container(
             width: double.infinity,
             height: double.infinity,
@@ -63,7 +64,7 @@ class _ChatPageState extends State<ChatPage> {
                                   child: new TextField(
                                     controller: _textController,
                                     decoration: new InputDecoration.collapsed(
-                                        hintText: "Enter message",),
+                                        hintText: HHString.enter_msg,),
                                   ),
                                 ),
 

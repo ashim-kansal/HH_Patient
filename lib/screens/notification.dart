@@ -2,11 +2,15 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/model/NotificationListRepsonse.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:intl/intl.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class NotificationPage extends StatefulWidget {
   static const String RouteName = '/notification';
@@ -27,55 +31,54 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
 
-    return new Scaffold(
-        appBar: AppBar(
-          title: Text("Notification", style: TextStyle(color: Colors.white)),
-          centerTitle: true,
-          iconTheme: IconThemeData(
-            color: Colors.white, //change your color here
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          elevation: 0,
+    return MyWidget( title: HHString.Notification,
+        child:FutureBuilder<NotificationListRepsonse>(
+            future: getNotifications() ,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return Center(child: Text(HHString.not_data_found),);
+                }
 
-        ),
+                if(snapshot.data.result.length == 0){
+                  return Center(child: Text(HHString.no_record_found),);
+                }
 
-        body:  new Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.white,
-            child: Column(children: [
-              NotificationList(title:
-              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                  subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                  subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                  subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                  subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                  subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-              "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                  subtitle: "Now"
-              ),
+                // setState(() {
+                //   widget.therapists = snapshot.data.result;
+                // });
 
-            ],)
-        ));
+                return ListView.separated(
+                  itemCount: snapshot.data.result.length,
+                  itemBuilder: (context, index) {
+                    var _date = snapshot.data.result[index].createdAt;
+                    Moment createdDt = Moment.parse('$_date');
+                    return NotificationList(
+                      title: snapshot.data.result[index].body,
+                      subtitle: createdDt.format("HH:MM"),
+                      id: snapshot.data.result[index].id,
+                      onDeleteClick: (){
+                          deleteNotification(snapshot.data.result[index].id).then((value) => {
+                            if(value.responseCode == 200){
+                              setState((){
+
+                              })
+                            }
+                          });
+                      },
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(color: HH_Colors.accentColor,);
+                  },
+                );
+              } else
+                return Container(
+                  child: Center(child: CircularProgressIndicator(),),
+                );
+            })
+
+    );
   }
 
 

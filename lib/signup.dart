@@ -209,7 +209,7 @@ class _SignupPageState extends State<SignUpPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                             child: Text(
-                              'Lets get started!',
+                              "Lets get started!",
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Color(0xff5c5c5c),

@@ -6,6 +6,8 @@ import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart' as Therapist;
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/utils/Utils.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -56,17 +58,18 @@ class BookSessionState extends State<BookSessionPage>{
 
   @override
   Widget build(BuildContext context){
-    return MyWidget(title: 'Schedule', child: Column(
+    return MyWidget(title: HHString.schedule, child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TharapistCell(name: widget.data.firstName+' '+widget.data.lastName, role: widget.data.role,
                     image: widget.data.profilePic, showBook: false, onClick: (){},),
+                  SizedBox(height: 5,),
                   FutureBuilder<GetBookingSlotsResponse>(
                       future: _listFuture,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return Center(child: Text("Not Found"),);
+                            return Center(child: Text(HHString.not_found),);
                           }
 
                           SchedulerBinding.instance.addPostFrameCallback((_){
@@ -78,7 +81,7 @@ class BookSessionState extends State<BookSessionPage>{
                           return Expanded(child: Column(
                             children: [
                               Container(height:50, child: SessionDateWidget(list:snapshot.data.result, onSelectDate: _updateSelectedDate,)),
-                              SizedBox(height: 10,),
+                              SizedBox(height: 15,),
                               Expanded(child: GridView.count(
                                 // Create a grid with 2 columns. If you change the scrollDirection to
                                 // horizontal, this produces 2 rows.
@@ -116,7 +119,7 @@ class BookSessionState extends State<BookSessionPage>{
                       }),
 
                   Container(
-                      child: HHButton(title: 'Save', type: 4, isEnable: true,onClick: (){
+                      child: HHButton(title: HHString.save, type: 4, isEnable: true,onClick: (){
                         // Navigator.pushNamed(context, SessionPage.RouteName);
                         bookSession();
                       },)
@@ -141,6 +144,7 @@ class BookSessionState extends State<BookSessionPage>{
 
           print(value.responseCode),
           if (value.responseCode == 200) {
+            showToast(context, value.responseMessage),
             Navigator.pop(context),
             Navigator.pushNamed(context, Dashboard.RouteName)
           }

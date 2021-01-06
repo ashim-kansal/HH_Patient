@@ -5,6 +5,7 @@ import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ChatUsers.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -26,7 +27,7 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'My Chat', child: Container(
+    return MyWidget(title: HHString.mychat, child: Container(
       child: FutureBuilder<GetChatUsers>(
         future: getChatList(""),
         builder: (context, snapshot) {
@@ -35,7 +36,7 @@ class _ChatListPageState extends State<ChatListPage> {
             if(snapshot.hasError){
               return Container(
                 child: Center(
-                  child: HHTextView(title: "No Messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                  child: HHTextView(title: HHString.no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                 ),
               );
             }

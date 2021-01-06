@@ -121,7 +121,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
             Column(
               children: [
                 HHEditText(
-                    hint: "Old Password",
+                    hint: HHString.old_password,
                     obscureText: secureOld,
                     controller: oldPasswordController,
                     error: errorOld,
@@ -136,7 +136,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: "New Password",
+                    hint: HHString.new_password,
                     obscureText: secureNew,
                     controller: newPasswordController,
                     error: errorNew,
@@ -151,7 +151,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: "Confirm Password",
+                    hint: HHString.confirm_password,
                     obscureText: secureConfirm,
                     controller: cPasswordController,
                     error: errorConfirm,
@@ -166,7 +166,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 )
               ],
             ),
-            HHButton(title: 'Save', type: 4, isEnable: true,
+            HHButton(title: HHString.save, type: 4, isEnable: true,
             onClick: (){ passwordHandler();},)
           ],
         ),

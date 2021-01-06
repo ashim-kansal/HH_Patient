@@ -122,7 +122,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reset Password', style: TextStyle(color: Colors.white)),
+          title: Text(HHString.reset_password, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

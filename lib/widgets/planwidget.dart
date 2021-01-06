@@ -35,7 +35,7 @@ class PlanWidgetState extends State<PlanWidget> {
                 .accentColor,
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,8 +51,11 @@ class PlanWidgetState extends State<PlanWidget> {
                 style: TextStyle(color: Colors.white, fontSize: 44),),
               SizedBox.fromSize(size: Size(8, 8),),
 
-              Text(widget.desc, textAlign: TextAlign.start,
-                style: TextStyle(color: Colors.white, fontSize: 16),),
+              Expanded(child: SingleChildScrollView(
+                child:               Text(widget.desc, textAlign: TextAlign.start,
+                  style: TextStyle(color: Colors.white, fontSize: 16),),
+
+              )),
               SizedBox.fromSize(size: Size(8, 20),),
 
               widget.enable ?? true ? RaisedButton(

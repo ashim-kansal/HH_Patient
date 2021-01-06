@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/CommonModel.dart';
+import 'package:flutter_app/model/GetTokenResponse.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_app/model/SendMessageResponse.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/model/SubmitQuestionaireResponse.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/model/UpdateLanguageResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -116,6 +118,26 @@ Future<QuestionarieList> getdrinkingDairyDetails() async {
   return questionarieListFromJson(response.body);
 }
 
+Future<GetTokenResponse> getTwilioToken(roomName, identity) async {
+  var token = await GetStringToSP("token");
+  print(token);
+  print(roomName);
+  print(identity);
+  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName;
+  print(url);
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      });
+
+  print(response.body);
+  return getTokenResponseFromJson(response.body);
+}
+
+
+
+
 class InAppAPIServices {
   Future<CommonResponse> submitJournal(params) async {
     var token = await GetStringToSP("token");
@@ -154,4 +176,6 @@ class InAppAPIServices {
 
     return sendMessageResponseFromJson(response.body);
   }
+
+
 }

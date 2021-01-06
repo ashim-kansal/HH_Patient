@@ -6,6 +6,7 @@ import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/SettingModel.dart';
+import 'package:flutter_app/model/UpdateLanguageResponse.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
@@ -20,16 +21,15 @@ class SettingAPIService {
   Future<FeedbackResponseModel> submitFeedback(String feedback) async {
 
     var token = await GetStringToSP("token");
-    var userId = await GetStringToSP("userId");
-    final url = HHString.baseURL +"/api/v1/user/feedback";
+    // var userId = await GetStringToSP("userId");
+    final url = HHString.baseURL +"/api/v1/user/query";
     
     final response = await http.post(url, 
     headers: {
       "Content-Type": "application/json",
       "token": token},
       body: jsonEncode(<String, String>{
-        "feedback": feedback,
-        "sessionId": userId,
+        "query": feedback,
       })
     );
     
@@ -115,6 +115,24 @@ class SettingAPIService {
     }else {
       throw Exception('Failed to load data!');
     }
+  }
+
+  Future<UpdateLanguageResponse> UpdateLanguage(langType) async {
+    var token = await GetStringToSP("token");
+    print(token);
+    final url = HHString.baseURL +"/api/v1/user/changeLanguage";
+    print(url);
+    final response = await http.put(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token
+        },
+        body: jsonEncode({
+          "appLanguage": langType
+        }));
+
+    print(response.body);
+    return updateLanguageResponseFromJson(response.body);
   }
 
   Future<Map<String, dynamic>> uploadImageFile({File file})async{

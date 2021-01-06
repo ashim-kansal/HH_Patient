@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
+import 'package:flutter_app/screens/ViewerPage.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:native_video_view/native_video_view.dart';
 import 'package:simple_moment/simple_moment.dart';
 
 class LibraryPage extends StatefulWidget {
@@ -41,7 +45,7 @@ class _LibraryPageState extends State<LibraryPage> {
                 builder: (builder, snapshot){
                   if (snapshot.connectionState == ConnectionState.done) {
                     if(snapshot.hasError){
-                      return Text("Error");
+                      return Center(child: Text(HHString.error),);
                     }
                     return GridView.builder(
                     // Create a grid with 2 columns. If you change the scrollDirection to
@@ -54,6 +58,7 @@ class _LibraryPageState extends State<LibraryPage> {
                       // mainAxisSpacing: 10,
                       // Generate 100 widgets that display their index in the List.
                       itemBuilder: (BuildContext context, int index){
+                        print(snapshot.data.result[index].document);
                         // var date = snapshot.data.result[index].createdAt;
                         var _date = snapshot.data.result[index].createdAt;
                         Moment createdDate = Moment.parse('$_date');
@@ -78,11 +83,15 @@ class _LibraryPageState extends State<LibraryPage> {
                                   Text(snapshot.data.result[index].title, textAlign: TextAlign.center,style: TextStyle(fontSize:13,color: HH_Colors.grey_585858, fontFamily: "ProximaNova", fontWeight: FontWeight.bold),)
                                   ,Text('By '+ snapshot.data.result[index].uploadBy +" "+ createdDate.format("dd/MM/yyyy HH:mm a"), textAlign: TextAlign.center, style: TextStyle(fontSize:12,color: HH_Colors.accentColor),)
                                   ,SizedBox(height: 5,),
-                                  Card(child: Container(
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.push( context, MaterialPageRoute( builder: (context) => ViewerPage(url: snapshot.data.result[index].document,)));
+                                    },
+                                    child: Card(child: Container(
                                     height: 30,
                                     width: 100,
                                     child: Center(
-                                      child: Text('Download', style: TextStyle(fontSize: 16,
+                                      child: Text(HHString.open, style: TextStyle(fontSize: 16,
                                           fontFamily: "ProximaNova", color: Colors.white),),
                                     ),
                                     decoration: BoxDecoration(
@@ -92,6 +101,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                   )
                                     ,
                                   elevation: 10,)
+                                    ,)
                                   // HHButton(title: 'Download', type: 4, isEnable: true, textSize: 18)
                                 ],
                               ),
@@ -110,10 +120,12 @@ class _LibraryPageState extends State<LibraryPage> {
               color: Colors.white,
               padding: EdgeInsets.all(20),
               margin: EdgeInsets.only(left: 20, right: 20),
-              child: HHButton(title: 'Search Nearest Pharmacies',type: 1,isEnable: true,textSize: 18,),
+              child: HHButton(title: HHString.search_pharma,type: 1,isEnable: true,textSize: 18,),
             ),
           ],
 
         ));
   }
+
+
 }

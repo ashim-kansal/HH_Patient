@@ -6,8 +6,9 @@ class MyWidget extends StatelessWidget{
   double sideMargin=20;
   Widget child;
   bool showFloatingButton = false;
+  VoidCallback onClickFAB;
 
-  MyWidget({Key key, @required this.title, @required this.child, this.sideMargin, this.showFloatingButton});
+  MyWidget({Key key, @required this.title, @required this.child, this.sideMargin, this.showFloatingButton, this.onClickFAB});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,9 @@ class MyWidget extends StatelessWidget{
         floatingActionButton: new Visibility(
           visible: (showFloatingButton==null || !showFloatingButton )? false:true,
           child: new FloatingActionButton(child: new Icon(Icons.add),
+            onPressed: (){
+              onClickFAB();
+            },
           ),
     ),
     );

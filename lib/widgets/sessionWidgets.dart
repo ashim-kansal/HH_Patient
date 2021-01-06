@@ -19,10 +19,11 @@ class SessionCard extends StatelessWidget {
   var sdate = "";
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
+  final VoidCallback onClickVideo;
   Result data;
 
   SessionCard(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickCancel, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickVideo, this.onClickCancel, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -78,42 +79,71 @@ class SessionCard extends StatelessWidget {
                 ),
                 // SizedBox(height: 5,),
                 Row(
-                    children: [Text(name ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
-                    ]),
-                Row(
-                    children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
-                    ]),
-                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ButtonTheme(
-                      height: 40,
-                      minWidth: 40,
-                      child: RaisedButton(
-                        color: Colors.white,
-                        child: Icon(Icons.chat
-                          , color: HH_Colors.primaryColor, size: 18,),
-                        onPressed: (){
-                          print('receiverId  : '+data.therapistId.id);
-                          Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
-                        },
-                        shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
-                      ),
+                    data.therapistId.profilePic == ""?
+                    Image.asset(
+                      'assets/images/ic_avatar.png',
+                      height: 18,
+                      width: 18,
+                    ) : CircleAvatar(
+                      backgroundImage: NetworkImage(data.therapistId.profilePic),
+                      radius: 18,
+                      // Image.network(profileImage,
+                      // height: 50,
+                      // width: 50,),
                     ),
+                    SizedBox(width: 10,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                    ButtonTheme(
-                        height: 40,
-                        minWidth: 40,
-                        child: RaisedButton(
-                            color: Colors.white,
-                            child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                            onPressed: (){
-                              // Navigator.pushNamed(context, VideoCallPage.RouteName);
-                            },
-                          shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
-                        )),
+                        Row(
+                            children: [Text(name ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
+                            ]),
+                        Row(
+                            children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
+                            ]),
+                        Row(
+                          children: [
+                            ButtonTheme(
+                              height: 40,
+                              minWidth: 40,
+                              child: RaisedButton(
+                                color: Colors.white,
+                                child: Icon(Icons.chat
+                                  , color: HH_Colors.primaryColor, size: 18,),
+                                onPressed: (){
+                                  print('receiverId  : '+data.therapistId.id);
+                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
+                                },
+                                shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
+                              ),
+                            ),
 
+                            ButtonTheme(
+                                height: 40,
+                                minWidth: 40,
+                                child: RaisedButton(
+                                  color: Colors.white,
+                                  child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                                  onPressed: (){
+                                    onClickVideo();
+                                  },
+                                  shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
+                                )),
+
+                          ],
+                        )
+
+                      ],
+                    )
                   ],
-                )
+                ),
+
+
+
 
               ],
             ),
@@ -121,6 +151,8 @@ class SessionCard extends StatelessWidget {
         )
         ));
   }
+
+
 
 
 }
@@ -241,32 +273,44 @@ class UpcomingSessionItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: (MediaQuery.of(context).size.width)/2,
-                    child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Row(children: [
-                        Flexible(
-                          child: new Container(
-                            child: new Text(
+                      data.therapistId.profilePic == ""?
+                      Image.asset(
+                        'assets/images/ic_avatar.png',
+                        height: 18,
+                        width: 18,
+                      ) : CircleAvatar(
+                        backgroundImage: NetworkImage(data.therapistId.profilePic),
+                        radius: 18,
+                        // Image.network(profileImage,
+                        // height: 50,
+                        // width: 50,),
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Column(
+                        children: [
+                          Row(children: [
+                            Text(
                               name,
                               overflow: TextOverflow.ellipsis,
                               style: new TextStyle(
                                 fontSize: 16.0,
                                 color: HH_Colors.grey_585858,
+                                fontWeight: FontWeight.w600
                               ),
-                            ),
-                          ),
-                        )
+                            )
 
-                      ]),
-                      Row(children: [
-                        Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                      ]),
+                          ]),
+                          Row(children: [
+                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                          ]),
+                        ],
+                      )
                     ],
-                  ),),
+                  ),
 
                   completed?
                       Row(
