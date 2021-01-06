@@ -6,6 +6,8 @@ import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart' as Therapist;
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/utils/Utils.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -56,7 +58,7 @@ class BookSessionState extends State<BookSessionPage>{
 
   @override
   Widget build(BuildContext context){
-    return MyWidget(title: 'Schedule', child: Column(
+    return MyWidget(title: HHString.schedule, child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TharapistCell(name: widget.data.firstName+' '+widget.data.lastName, role: widget.data.role,
@@ -66,7 +68,7 @@ class BookSessionState extends State<BookSessionPage>{
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.hasError) {
-                            return Center(child: Text("Not Found"),);
+                            return Center(child: Text(HHString.not_found),);
                           }
 
                           SchedulerBinding.instance.addPostFrameCallback((_){
@@ -116,7 +118,7 @@ class BookSessionState extends State<BookSessionPage>{
                       }),
 
                   Container(
-                      child: HHButton(title: 'Save', type: 4, isEnable: true,onClick: (){
+                      child: HHButton(title: HHString.save, type: 4, isEnable: true,onClick: (){
                         // Navigator.pushNamed(context, SessionPage.RouteName);
                         bookSession();
                       },)
@@ -141,6 +143,7 @@ class BookSessionState extends State<BookSessionPage>{
 
           print(value.responseCode),
           if (value.responseCode == 200) {
+            showToast(context, value.responseMessage),
             Navigator.pop(context),
             Navigator.pushNamed(context, Dashboard.RouteName)
           }

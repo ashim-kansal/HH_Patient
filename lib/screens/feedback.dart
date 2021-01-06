@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -49,7 +50,10 @@ class FeedbackPageState extends State<FeedbackPage> {
           context: context,
           builder: (BuildContext dialogContext) {
             return DialogWithImage(
-              title: "We appreciate your feedback. Our team will have a look at it shortly.", 
+              title: value.responseMsg,
+              onClick: (){
+                Navigator.pop(context);
+              }
             );
           },
         )
@@ -67,7 +71,7 @@ class FeedbackPageState extends State<FeedbackPage> {
 
 @override
 Widget build(BuildContext context) => MyWidget(
-  title: 'Contact Us',
+  title: HHString.Contact_Us,
   child: Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -76,8 +80,9 @@ Widget build(BuildContext context) => MyWidget(
         child: Column(children: [
           HHTextView(
             color: HH_Colors.color_707070,
-            title: "Please share your thoughts with us",
+            title: HHString.please_share_thoughts,
             size: 16,
+              textweight:FontWeight.w600
           ),
           SizedBox(
             height: 10,
@@ -86,13 +91,15 @@ Widget build(BuildContext context) => MyWidget(
             minLines: 5,
             controller: feedbackController,
             error: error,
-            errorText: 'Please enter a feedback',
+            errorText: HHString.please_enter_feedback,
           ),
       ])),
-      HHButton(title: "Send", type: 4, onClick: () => {
-        _feedbackHandler()
-      },)
-
+      Container(
+        margin: EdgeInsets.only(left: 20, right: 30),
+        child:       HHButton(title: HHString.send, type: 4, onClick: () => {
+          _feedbackHandler()
+        },)
+      )
     ],
   ));
 }

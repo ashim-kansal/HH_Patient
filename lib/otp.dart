@@ -321,7 +321,7 @@ class _OtpState extends State<OtpPage> {
     
 
     return MyWidget(
-      title: 'OTP Verification',
+      title: HHString.otp_verification,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -347,7 +347,7 @@ class _OtpState extends State<OtpPage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                         child: Text(
-                          'Please enter you registered email address. We will help you retrieve your password.',
+                          HHString.pls_enter_reg_email,
                           style: TextStyle(color: Color(0xff8d8d8d)),
                           textAlign: TextAlign.center,
                         ),
@@ -382,7 +382,7 @@ class _OtpState extends State<OtpPage> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Resend code in: $_start'),
+                            Text(HHString.resend_code+' $_start'),
                             RaisedButton(
 
                                 child: Icon(Icons.arrow_right_alt_rounded,
@@ -416,7 +416,7 @@ class _OtpState extends State<OtpPage> {
                                   text: '',
                                   style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                                   children: <TextSpan>[
-                                    TextSpan(text: 'Resend OTP', 
+                                    TextSpan(text: HHString.Resend_OTP,
                                       style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () => {

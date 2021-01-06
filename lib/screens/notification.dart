@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
@@ -29,7 +30,7 @@ class _NotificationState extends State<NotificationPage> {
 
     return new Scaffold(
         appBar: AppBar(
-          title: Text("Notification", style: TextStyle(color: Colors.white)),
+          title: Text(HHString.Notification, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

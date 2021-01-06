@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
-import 'package:flutter_app/myplan.dart';
-import 'package:flutter_app/otp.dart';
-import 'package:flutter_app/screens/profile.dart';
-import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -91,7 +88,7 @@ class _CreateAccountState extends State<EditProfilePage> {
     return WillPopScope(
         onWillPop: _onBackPressed,
         child: MyWidget(
-          title: 'Edit Profile',
+          title: HHString.edit_profile,
           child: Container(
               padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
               decoration: BoxDecoration(
@@ -174,7 +171,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 25, 5, 10),
                                     child: HHEditText(
-                                      hint: "First Name",
+                                      hint: HHString.fname,
                                       obscureText: false,
                                       controller: fname,
                                       error: widget.error,
@@ -184,7 +181,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: "Last Name",
+                                      hint: HHString.lname,
                                       obscureText: false,
                                       controller: lname,
                                       error: widget.error,
@@ -194,7 +191,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: "Email",
+                                      hint: HHString.email,
                                       obscureText: false,
                                       enabled: false,
                                       controller: email,
@@ -206,7 +203,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: "Phone Number",
+                                      hint: HHString.phone_number,
                                       obscureText: false,
                                       controller: number,
                                       error: widget.error,
@@ -216,7 +213,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: "Address",
+                                      hint: HHString.address,
                                       obscureText: false,
                                       controller: address,
                                       error: widget.error,
@@ -230,7 +227,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                           EdgeInsets.fromLTRB(5, 50, 5, 15),
                                       child: HHButton(
                                         isEnable: true,
-                                        title: "Save",
+                                        title: HHString.save,
                                         type: 4,
                                         onClick: () {
                                           updateProfile();

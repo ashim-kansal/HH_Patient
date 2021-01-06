@@ -18,6 +18,7 @@ import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
+import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/myplan.dart';
@@ -86,11 +87,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ReScheduleSessionPage.RouteName:
       final upcoming.Result args = settings.arguments;
       return MaterialPageRoute(builder: (context) => ReScheduleSessionPage(sessionId: args.id, therapistId: args.therapistId.id,
-        name: args.therapistId.firstName+' '+args.therapistId.lastName,role: '', image: '',));
+        name: args.therapistId.firstName+' '+args.therapistId.lastName,role: args.therapistId.role, image: args.therapistId.profilePic,));
     case ChatListPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatListPage());
     case VideoCallPage.RouteName:
-      return MaterialPageRoute(builder: (context) => VideoCallPage(token: '',roomName: '',identity: '',));
+      VideoPageArgument args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity,));
     case JournalPage.RouteName:
       return MaterialPageRoute(builder: (context) => JournalPage());
     case CreateAccountPage.RouteName:

@@ -26,6 +26,9 @@ dependencies:
   toast: ^0.1.5
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
+
   flutter_bloc: ^3.0.0
   http: ^0.12.0+4
   meta: ^1.1.6
@@ -44,8 +47,11 @@ dependencies:
   stripe_payment: ^1.0.9
   twilio_programmable_video: ^0.6.3+1
   after_layout: ^1.0.7
-  wakelock: ^0.1.4
-
+  wakelock: ^0.2.1+1
+  flutter_html: ^1.1.0
+  native_video_view: ^0.3.0
+  flutter_cached_pdfview : ^0.3.4
+  path_provider : ^1.6.24
 
 
 
@@ -68,6 +74,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/

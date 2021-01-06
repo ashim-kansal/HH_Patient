@@ -16,6 +16,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class APIService {
   Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput) async {
     final url = HHString.baseURL +"/api/v1/user/login";
+    print(jsonEncode(<String, String>{
+      "email": emailInput,
+      "password": passwordInput,
+      "deviceToken": "test"
+    }));
     
     final response = await http.post(url, 
     headers: {"Content-Type": "application/json"},

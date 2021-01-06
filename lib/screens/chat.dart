@@ -6,6 +6,7 @@ import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ChatUsers.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
@@ -50,7 +51,7 @@ class _ChatPageState extends State<ChatPage> {
     String formattedDate = DateFormat('yyyy-MM-dd hh:mm').format(time);
 
     return new MyWidget(
-      title: 'Chat',
+      title: HHString.chat,
         child: new Container(
             width: double.infinity,
             height: double.infinity,
@@ -64,7 +65,7 @@ class _ChatPageState extends State<ChatPage> {
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
-                          return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                          return  HHTextView(title: HHString.no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                         }
                         var item = snapshot.data.result;
                         return  new Flexible(
@@ -111,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
                                   child: new TextField(
                                     controller: _textController,
                                     decoration: new InputDecoration.collapsed(
-                                        hintText: "Enter message"
+                                        hintText: HHString.enter_msg
                                     ),
                                   ),
                                 ),

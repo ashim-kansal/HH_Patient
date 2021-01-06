@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -105,7 +107,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-                          child: HHButton(title: "Get Started", 
+                          child: HHButton(title: HHString.get_started,
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
@@ -119,4 +121,6 @@ class SelectLanguageState extends State<StatefulWidget> {
         )
     );
   }
+
+
 }

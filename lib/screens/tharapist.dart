@@ -3,6 +3,7 @@ import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/tharapist_cell.dart';
@@ -34,11 +35,11 @@ class _TherapistState extends State<TherapistPage> {
   Widget build(BuildContext context) {
     return MyWidget( title: widget.title,
             child:FutureBuilder<GetTherapistsResponse>(
-                future: widget.title == "Therapist" ? getAllTherapists() : getAllPhysicians(),
+                future: widget.title == "Therapist" ? getAllTherapists() :  widget.title == "Physician" ? getAllPhysicians() : getAllCasemanagers(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
-                      return Text("Error");
+                      return Center(child: Text(HHString.error),);
                     }
 
                     // setState(() {
@@ -150,17 +151,20 @@ class TherapistOptionsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-         TherapistOptionItem(title: 'Therapist', image: 'assets/images/ic_therapist.png', onClick: (){
+         TherapistOptionItem(title: HHString.Therapist, image: 'assets/images/ic_therapist.png', onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
           },),
           SizedBox(height: 50,),
-          TherapistOptionItem(title: 'Physician', image: 'assets/images/ic_physician.png', onClick: (){
+          TherapistOptionItem(title: HHString.Physician, image: 'assets/images/ic_physician.png', onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
           },),
           SizedBox(height: 50,),
-         TherapistOptionItem(title: 'Case manager', image: 'assets/images/ic_case_manager.png', onClick: (){
+         TherapistOptionItem(title: HHString.case_manager, image: 'assets/images/ic_case_manager.png', onClick: (){
+
+           Navigator.pop(context);
+           Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Case manager',false));
 
           }),
     ]),

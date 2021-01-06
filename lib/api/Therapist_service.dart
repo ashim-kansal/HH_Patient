@@ -38,6 +38,19 @@ Future<GetTherapistsResponse> getAllPhysicians() async {
 
 }
 
+Future<GetTherapistsResponse> getAllCasemanagers() async {
+  var token = await GetStringToSP("token");
+
+  final response = await http.get(url+"/getCaseManagerList",
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        'token' : token
+      });
+  print(response.body);
+  return getTherapistsResponseFromJson(response.body);
+
+}
+
 Future<GetBookingSlotsResponse> getSlotsForBooking(String id) async {
   var token = await GetStringToSP("token");
 

@@ -19,10 +19,11 @@ class SessionCard extends StatelessWidget {
   var sdate = "";
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
+  final VoidCallback onClickVideo;
   Result data;
 
   SessionCard(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickCancel, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickVideo, this.onClickCancel, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +108,7 @@ class SessionCard extends StatelessWidget {
                             color: Colors.white,
                             child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                             onPressed: (){
-                              Navigator.pushNamed(context, VideoCallPage.RouteName);
+                                onClickVideo();
                             },
                           shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                         )),
@@ -121,6 +122,8 @@ class SessionCard extends StatelessWidget {
         )
         ));
   }
+
+
 
 
 }

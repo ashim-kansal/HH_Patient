@@ -137,21 +137,29 @@ class TherapistId {
         this.id,
         this.firstName,
         this.lastName,
+        this.profilePic,
+        this.role,
     });
 
     String id;
     String firstName;
     String lastName;
+    String profilePic;
+    String role;
 
     factory TherapistId.fromJson(Map<String, dynamic> json) => TherapistId(
         id: json["_id"],
         firstName: json["firstName"],
         lastName: json["lastName"],
+        profilePic: json["profilePic"],
+        role: json["role"],
     );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
         "firstName": firstName,
         "lastName": lastName,
+        "profilePic": profilePic,
+        "role": role,
     };
 }

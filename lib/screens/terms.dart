@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/StaticContent.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 
 class TermsPage extends StatefulWidget {
   static const String RouteName = '/terms';
@@ -27,7 +30,7 @@ class _TermsState extends State<TermsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Terms & Conditions', style: TextStyle(color: Colors.white)),
+          title: Text(HHString.tems_condi, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -58,15 +61,26 @@ class _TermsState extends State<TermsPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState == ConnectionState.done) {
                               if(snapshot.hasError){
-                                return Text("Error");
+                                return Center(child: Text(HHString.error),);
                               }
                               return  Container(
                                 // height: MediaQuery.of(context).size.height,
-                                child: Text(
-                                      snapshot.data.result.description,
-                                      style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
-                                    )
-                                    
+                                  child: Html(
+
+                                    data:snapshot.data.result.description,
+                                    style: {
+                                      "div": Style(
+                                          color: HH_Colors.color_707070,
+                                          fontSize: FontSize(15.0)
+                                      ),"p": Style(
+                                          color: HH_Colors.color_707070,
+                                          fontSize: FontSize(15.0)
+                                      ),
+                                    },
+                                    // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
+                                  )
+
+
                               );
                             }else
                               return Container(

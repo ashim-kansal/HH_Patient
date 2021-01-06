@@ -36,7 +36,7 @@ class QuestionairePageState extends State<QuestionairePage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: 'Questionaire',
+        title: HHString.Questionaire,
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Column(
@@ -65,7 +65,7 @@ class QuestionairePageState extends State<QuestionairePage> {
                     builder: (builder, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if(snapshot.hasError){
-                          return Text("Error"); 
+                          return Center(child: Text(HHString.error),);
                         }
                         SchedulerBinding.instance.addPostFrameCallback((_){
 
@@ -118,7 +118,7 @@ class QuestionairePageState extends State<QuestionairePage> {
               ),
               SizedBox(height: 10),
               HHButton(
-                title: 'Submit & Proceed',
+                title: HHString.submit_proceed,
                 type: 4,
                 isEnable: true,
                 onClick: () {

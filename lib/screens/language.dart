@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -35,8 +36,9 @@ class LanguagePageState extends State<LanguagePage> {
   void changeLanguage (String lang){
     SettingAPIService settingAPIService = new SettingAPIService();
 
-    settingAPIService.changeLanguage(lang).then((value) => {
-      showToast(value.responseMessage)
+    settingAPIService.UpdateLanguage(lang).then((value) => {
+      if(value.responseCode == 200)
+        showToast(value.responseMessage)
     });
   }
 
@@ -167,6 +169,8 @@ class LanguagePageState extends State<LanguagePage> {
           ),
         ],
       ));
+
+
 }
 
 class LanguageArguments {

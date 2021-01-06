@@ -9,6 +9,7 @@ import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -85,7 +86,7 @@ class _CreateAccountState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return MyWidget(
-        title: 'Profile',
+        title: HHString.Profile,
         child: Material(
           color: Theme.of(context).accentColor,
           child: SingleChildScrollView(
@@ -169,7 +170,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                            alignment: Alignment.topLeft,
                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                            child: HHTextView(
-                                               title: "Name",
+                                               title: HHString.name,
                                                size: 18,
                                                textweight: FontWeight.w500,
                                                color: Color(0xff777CEA)
@@ -202,7 +203,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                            alignment: Alignment.topLeft,
                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                            child: HHTextView(
-                                               title: "Email",
+                                               title: HHString.email,
                                                size: 18,
                                                textweight: FontWeight.w500,
                                                color: Color(0xff777CEA)
@@ -235,7 +236,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                            alignment: Alignment.topLeft,
                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                            child: HHTextView(
-                                               title: "Phone",
+                                               title: HHString.phone_number,
                                                size: 18,
                                                textweight: FontWeight.w500,
                                                color: Color(0xff777CEA)
@@ -268,7 +269,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                            alignment: Alignment.topLeft,
                                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                            child: HHTextView(
-                                               title: "Address",
+                                               title: HHString.address,
                                                size: 18,
                                                textweight: FontWeight.w500,
                                                color: Color(0xff777CEA)
@@ -294,7 +295,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                  padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                                  child: HHButton(
                                    isEnable: true,
-                                   title: "Edit",
+                                   title: HHString.edit,
                                    type: 4,
                                    onClick: () {
                                      Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/StaticContent.dart';
 import 'package:flutter_app/model/FaqResponse.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 
@@ -31,7 +32,7 @@ class _FaqPageState extends State<FaqPage> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if(snapshot.hasError){
-              return Center(child: Text("No Data Found"),);
+              return Center(child: Text(HHString.not_data_found),);
             }
             return  Container(
               // height: MediaQuery.of(context).size.height,

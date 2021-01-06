@@ -34,9 +34,9 @@ class _ConferencePageState extends State<VideoCallPage> {
   @override
   void initState() {
     super.initState();
-    widget.roomName = "abc";
-    widget.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyLTE2MDk3ODc5NDUiLCJpc3MiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyIiwic3ViIjoiQUMxODA1YTNlYzQ0ZGNiZmQyZGEyYjRhYzkzMWEzNjdiMyIsImV4cCI6MTYwOTc5MTU0NSwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidXNlciIsInZpZGVvIjp7InJvb20iOiJhYmMifX19.dOBZ9j6Kffw4G7e46kuanhg0jtCJOciokcIOnXIQY2o";
-    widget.identity = "user";
+    // widget.roomName = "abc";
+    // widget.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyLTE2MDk3ODc5NDUiLCJpc3MiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyIiwic3ViIjoiQUMxODA1YTNlYzQ0ZGNiZmQyZGEyYjRhYzkzMWEzNjdiMyIsImV4cCI6MTYwOTc5MTU0NSwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidXNlciIsInZpZGVvIjp7InJvb20iOiJhYmMifX19.dOBZ9j6Kffw4G7e46kuanhg0jtCJOciokcIOnXIQY2o";
+    // widget.identity = "user";
     _lockInPortrait();
     _connectToRoom();
     _wakeLock(true);

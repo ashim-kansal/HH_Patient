@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/Assessment_services.dart';
 import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/assessment_cell.dart';
 
@@ -23,7 +24,7 @@ class MyAssessmentState extends State<MyAssessmentPage>{
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              return Text("Error");
+              return Center(child: Text(HHString.error),);
             }
             return Container(
               child: ListView.separated(

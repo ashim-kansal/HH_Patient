@@ -25,7 +25,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
-                return Text("Error");
+                return Center(child: Text(HHString.error),);
               }
 
               return Column(
@@ -111,7 +111,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                       )),
                   SizedBox(height: 10),
                   HHButton(
-                    title: 'Upgrade Now',
+                    title: HHString.UpgradeNow,
                     type: 1,
                     isEnable: true,
                     onClick: () {
@@ -202,7 +202,7 @@ class CancelPlansPageState extends State<CancelPlansPage> {
               Container(
                 margin: EdgeInsets.only(left: 30, right: 30),
                 child: HHButton(
-                  title: 'Cancel',
+                  title: HHString.cancel,
                   type: 1,
                   isEnable: true,
                   onClick: () {

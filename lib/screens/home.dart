@@ -2,10 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
@@ -14,6 +18,9 @@ import 'package:simple_moment/simple_moment.dart';
 class HomePage extends StatefulWidget {
   static const String RouteName = '/home';
   final assessments = ['abc', 'def', 'ghi' ];
+
+  VoidCallback showTherapist;
+  HomePage({this.showTherapist});
 
 
   @override
@@ -41,16 +48,21 @@ class HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(20, 40,20,40),
             child: Column(
               children: [
-                HHHomeButton(title: 'Drinking Diary', type: 2, onClick: (){
+                HHHomeButton(title: HHString.drinking_diary, type: 2, onClick: (){
                   Navigator.pushNamed(context, DrinkingDiaryPage.RouteName);
                 },),
                 SizedBox(height: 15),
-                HHHomeButton(title: 'Daily Journaling', type: 2, onClick: (){
+                HHHomeButton(title: HHString.dailyjournaling, type: 2, onClick: (){
                   Navigator.pushNamed(context, JournalPage.RouteName);
                 },),
                 SizedBox(height: 15),
-                HHHomeButton(title: 'My Session', type: 2, onClick: (){
-                  Navigator.pushNamed(context, SessionPage.RouteName);
+                HHHomeButton(title: HHString.mysession, type: 2, onClick: (){
+                  Navigator.pushNamed(context, SessionPage.RouteName).then((value){
+                    if(value == 'fab' ) {
+                      print(value);
+                      widget.showTherapist();
+                    }
+                  });
                 },),
               ],
             ),
@@ -60,12 +72,12 @@ class HomePageState extends State<HomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Upcoming Sessions', style: TextStyle(fontSize: 22, color: HH_Colors.grey_3d3d3d),),
+            Text(HHString.upcoming_sessions, style: TextStyle(fontSize: 22, color: HH_Colors.grey_3d3d3d),),
             new GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, SessionPage.RouteName);
               },
-              child: Text('View All', style: TextStyle(color: HH_Colors.accentColor, fontSize: 15, ), ),    
+              child: Text(HHString.viewall, style: TextStyle(color: HH_Colors.accentColor, fontSize: 15, ), ),
             ),
             
             ],
@@ -79,7 +91,7 @@ class HomePageState extends State<HomePage> {
             builder: (builder, snapshot){
             if (snapshot.connectionState == ConnectionState.done) {
               if(snapshot.hasError){
-                return HHTextView(title: "No Upcoming Sessions", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                return HHTextView(title: HHString.no_up_sessions, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
               }
               return ListView.separated(
                 scrollDirection: Axis.horizontal,
@@ -91,8 +103,13 @@ class HomePageState extends State<HomePage> {
                     drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                     onClick: (){
-                      Navigator.pushNamed(context, SessionPage.RouteName);
+                      Navigator.pushNamed(context, SessionPage.RouteName).then((value) => (){
+                        print('value returned ');
+                      });
                     },
+                      onClickVideo: (){
+                        getToken(snapshot.data.result[index].therapistId.id, snapshot.data.result[index].patientId);
+                      },
                     onClickCancel: (){
                       setState(() {
 
@@ -129,4 +146,27 @@ class HomePageState extends State<HomePage> {
     )
     );
   }
+
+  void getToken(therapistId, patientId) {
+    String roomName = 'room_'+therapistId+'_'+patientId;
+      getTwilioToken(roomName, patientId).then(
+              (value) => {
+                if (value.responseCode == '200') {
+                Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt)),
+            }
+          });
+
+
+  }
+
+
+}
+
+class VideoPageArgument{
+
+  String token;
+  String roomName;
+  String identity;
+
+  VideoPageArgument(this.identity, this.roomName, this.token);
 }

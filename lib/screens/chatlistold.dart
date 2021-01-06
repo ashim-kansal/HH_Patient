@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/tharapist_cell.dart';
@@ -32,7 +33,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('My Chat', style: TextStyle(color: Colors.white)),
+          title: Text(HHString.mychat, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -57,7 +58,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     if(snapshot.hasError){
                       return Container(
                         child: Center(
-                          child: HHTextView(title: "No new messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                          child: HHTextView(title: HHString.no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                         ),
                       );
                     }

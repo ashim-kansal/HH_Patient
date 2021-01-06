@@ -388,29 +388,6 @@ class DrinkingDiaryCell extends StatelessWidget{
 
             ],
           ),
-          InkWell(
-            onTap: (){
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext dialogContext) {
-                  return DialogWithField(
-                    onClick: () {
-                      Navigator.pop(context);
-                    },
-                  );
-                },
-              );
-            },
-            child: Row(
-              children: [
-                Icon(Icons.add_circle_outlined, color: HH_Colors.color_949494,),
-                SizedBox(width: 5,),
-                Text('Goal', style: TextStyle(fontSize: 14, color: HH_Colors.color_949494, fontFamily: "ProximaNova"),)
-              ],
-            )
-            ,
-          )
 
         ],
       ),
@@ -424,11 +401,13 @@ class DialogWithImage extends StatelessWidget {
   final String title;
   final String content;
   final List<Widget> actions;
+  VoidCallback onClick;
 
 
   DialogWithImage({
     this.title,
     this.content,
+    this.onClick,
     this.actions = const [],
   });
 
@@ -446,11 +425,16 @@ class DialogWithImage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
+              InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                  onClick();
+                },
+             child: Container(
                 child: Center(
                   child: Image.asset("assets/images/thumb.png", height: 80, width: 80,)
                 ),
-              ),
+              )),
               SizedBox(height: 20,),
               HHTextView(
                   title: title,

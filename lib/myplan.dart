@@ -1,14 +1,11 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/MyProgramsProvider.dart';
 import 'package:flutter_app/model/GetProgramsResponse.dart';
-import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
-import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
-import 'package:flutter_app/api/MyProgramsProvider.dart';
-// import 'package:stripe_payment/stripe_payment.dart';
-import 'dart:convert';
 
 class MyPlans extends StatefulWidget {
   static const String RouteName = '/planwidget';
@@ -61,7 +58,7 @@ class MyPlansState extends State<MyPlans> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return Text("Error");
+                  return Center(child: Text(HHString.error),);
                 }
 
                 return Column(
