@@ -42,7 +42,7 @@ dependencies:
 
 #  twilio_programmable_video: ^0.6.3+1
   stripe_payment: ^1.0.9
-  twilio_programmable_video: ^0.6.3+1
+  # twilio_programmable_video: ^0.6.3+1
   after_layout: ^1.0.7
   wakelock: ^0.1.4
 

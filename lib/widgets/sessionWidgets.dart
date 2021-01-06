@@ -4,7 +4,7 @@ import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
+// import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/Utils.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -107,7 +107,7 @@ class SessionCard extends StatelessWidget {
                             color: Colors.white,
                             child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                             onPressed: (){
-                              Navigator.pushNamed(context, VideoCallPage.RouteName);
+                              // Navigator.pushNamed(context, VideoCallPage.RouteName);
                             },
                           shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                         )),
