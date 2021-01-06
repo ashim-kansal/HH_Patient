@@ -63,6 +63,7 @@ class BookSessionState extends State<BookSessionPage>{
                 children: [
                   TharapistCell(name: widget.data.firstName+' '+widget.data.lastName, role: widget.data.role,
                     image: widget.data.profilePic, showBook: false, onClick: (){},),
+                  SizedBox(height: 5,),
                   FutureBuilder<GetBookingSlotsResponse>(
                       future: _listFuture,
                       builder: (context, snapshot) {
@@ -80,7 +81,7 @@ class BookSessionState extends State<BookSessionPage>{
                           return Expanded(child: Column(
                             children: [
                               Container(height:50, child: SessionDateWidget(list:snapshot.data.result, onSelectDate: _updateSelectedDate,)),
-                              SizedBox(height: 10,),
+                              SizedBox(height: 15,),
                               Expanded(child: GridView.count(
                                 // Create a grid with 2 columns. If you change the scrollDirection to
                                 // horizontal, this produces 2 rows.

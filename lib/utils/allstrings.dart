@@ -32,7 +32,7 @@ class HHString{
   static const String dashboard = "Dashboard";
   static const String no_msg = "No New Messages";
   static const String not_found = "Not Found";
-  static const String not_data_found = "Not Data Found";
+  static const String not_data_found = "No Data Found";
   static const String my_programs = "My Programs";
   static const String please_share_thoughts = "Please share your thoughts with us";
   static const String please_enter_feedback = "Please enter a feedback";

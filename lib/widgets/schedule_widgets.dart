@@ -78,7 +78,7 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
               color: widget.list[index].isSelected ? HH_Colors.primaryColor : Colors.white,
 
             ),
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+            padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
             child: Center(
               child: Text(
                 DateFormat('d MMM\nEEE').format(widget.list[index].scheduleDate),

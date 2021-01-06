@@ -52,7 +52,7 @@ dependencies:
   native_video_view: ^0.3.0
   flutter_cached_pdfview : ^0.3.4
   path_provider : ^1.6.24
-
+  open_file : ^3.0.3
 
 
 

@@ -65,7 +65,8 @@ class _TermsState extends State<PrivacyPolicy> {
                               }
                               return  Container(
                                 // height: MediaQuery.of(context).size.height,
-                                  child: Html(
+
+                                  child: snapshot.data.result.description.contains("div") ? Html(
 
                                     data:snapshot.data.result.description,
                                     style: {
@@ -78,7 +79,9 @@ class _TermsState extends State<PrivacyPolicy> {
                                       )
                                     },
                                     // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
-                                  )
+                                  ): Text(snapshot.data.result.description, style: TextStyle(
+                                      color: HH_Colors.color_707070,
+                                      fontSize: 15,)),
                                     
                               );
                             }else

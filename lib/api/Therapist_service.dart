@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/DeleteNotificationRepsonse.dart';
 import 'package:flutter_app/model/GetBookingResponse.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart';
+import 'package:flutter_app/model/NotificationListRepsonse.dart';
 import 'package:flutter_app/model/RescheduleSessionResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
@@ -35,6 +37,35 @@ Future<GetTherapistsResponse> getAllPhysicians() async {
       });
   print(response.body);
   return getTherapistsResponseFromJson(response.body);
+
+}
+
+
+Future<NotificationListRepsonse> getNotifications() async {
+
+  var token = await GetStringToSP("token");
+  print(token);
+  final response = await http.get(url+"/notificationList",
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        'token' : token
+      });
+  print(response.body);
+  return notificationListRepsonseFromJson(response.body);
+
+}
+
+Future<DeleteNotificationRepsonse> deleteNotification(id) async {
+
+  var token = await GetStringToSP("token");
+  print(token);
+  final response = await http.delete(url+"/deleteNotification?notificationId="+id,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        'token' : token
+      });
+  print(response.body);
+  return deleteNotificationRepsonseFromJson(response.body);
 
 }
 

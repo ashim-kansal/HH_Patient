@@ -65,7 +65,7 @@ class _ChatPageState extends State<ChatPage> {
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
-                          return  HHTextView(title: HHString.no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                          return  Expanded(child: Center(child: HHTextView(title: HHString.no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),));
                         }
                         var item = snapshot.data.result;
                         return  new Flexible(
@@ -89,7 +89,7 @@ class _ChatPageState extends State<ChatPage> {
                         );
                       }else {
                         return Container(
-                          child: Center(child: CircularProgressIndicator()),
+                          child: Expanded(child: Center(child: CircularProgressIndicator()),),
                         );
                       }
                     },

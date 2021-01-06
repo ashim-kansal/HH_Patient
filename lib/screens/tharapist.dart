@@ -42,6 +42,10 @@ class _TherapistState extends State<TherapistPage> {
                       return Center(child: Text(HHString.error),);
                     }
 
+                    if(snapshot.data.result.length == 0){
+                      return Center(child: Text(HHString.no_record_found),);
+                    }
+
                     // setState(() {
                     //   widget.therapists = snapshot.data.result;
                     // });

@@ -751,13 +751,18 @@ class DialogWithFieldState extends State<DialogWithField>{
 class NotificationList extends StatelessWidget {
   final String title;
   final String subtitle;
+  final String id;
+  VoidCallback onDeleteClick;
 
 
   NotificationList({
     @required
+    this.id,
+    @required
     this.title,
     @required
     this.subtitle,
+    this.onDeleteClick
   });
 
   @override
@@ -778,11 +783,14 @@ class NotificationList extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
                     color: HH_Colors.color_F3F3F3,
                     child: new ListTile(
-                      title: Column(children: [
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                         HHTextView(
                           title: this.title,
                           color: HH_Colors.grey_35444D,
                           size: 16,
+                          textweight: FontWeight.w400,
                         ),
                         Align(
                           alignment: Alignment.bottomRight,
@@ -805,7 +813,7 @@ class NotificationList extends StatelessWidget {
 
                 color: Colors.red,
                 icon: Icons.delete,
-                // onTap: () => _showSnackBar('Delete'),
+                onTap: () => {onDeleteClick()},
               ),
             )
           ],

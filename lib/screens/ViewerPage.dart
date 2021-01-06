@@ -12,14 +12,14 @@ class ViewerPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'View', child: getWidget(url));
+    return MyWidget(title: 'View', child: getWidget(url, context));
   }
 
-  getWidget(String url) {
-    if(url.endsWith('.pdf')){
-      return pdfView(url);
+  getWidget(String url, BuildContext context) {
+    if(url.endsWith('.pdf') || url.endsWith('.doc')){
+      return pdfView(context, url);
     }
-    if(url.endsWith('.mp4')){
+    if(url.endsWith('.mp4') || url.endsWith('.mp3')){
       return videoView(url);
     }
   }
@@ -49,13 +49,19 @@ class ViewerPage extends StatelessWidget{
     );
   }
 
-  Widget pdfView(String document) {
+  Widget pdfView(BuildContext  context, String document) {
     print(document);
-    return const PDF().cachedFromUrl(
-      document,
-      placeholder: (double progress) => Center(child: Text('$progress %')),
-      errorWidget: (dynamic error) => Center(child: Text(error.toString())),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: const PDF(
+      ).cachedFromUrl(
+        document,
+        placeholder: (double progress) => Center(child: Text('$progress %')),
+        errorWidget: (dynamic error) => Center(child: Text(error.toString())),
+      ),
     );
+
 
 
   }

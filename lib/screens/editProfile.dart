@@ -90,6 +90,8 @@ class _CreateAccountState extends State<EditProfilePage> {
         child: MyWidget(
           title: HHString.edit_profile,
           child: Container(
+              height: MediaQuery.of(context).size.height,
+
               padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -116,16 +118,18 @@ class _CreateAccountState extends State<EditProfilePage> {
                                         decoration: new BoxDecoration(
                                             color: Colors.white),
                                         alignment: Alignment.center,
-                                        child: CircleAvatar(
+                                        child:  CircleAvatar(
                                           radius: 55,
                                           backgroundColor:
                                               HH_Colors.color_F2EEEE,
-                                          child: CircleAvatar(
+                                          child:
+                                          // _image !=null ? FileImage(_image):
+                                          //   (profileImage.startsWith('http')) ?
+                                            CircleAvatar(
                                             backgroundImage:
-                                                NetworkImage(profileImage),
-                                            // AssetImage("assets/images/userimage.png"),
+                                                NetworkImage(profileImage) ,
                                             radius: 46,
-                                          ),
+                                          ) ,
                                         )),
                                     Container(
                                       margin: EdgeInsets.only(left: 155),
@@ -273,8 +277,9 @@ class _CreateAccountState extends State<EditProfilePage> {
         settingAPIService.uploadImageFile(file: _image).then((value) => {
               print(value),
               // if(value == 200){
+
               setState(() {
-                if (value['result'] != null && value['result']['image'] != null)
+                // if (value['result'] != null && value['result']['image'] != null)
                   profileImage = value['result']['image'];
               })
               // }

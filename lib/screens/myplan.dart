@@ -19,7 +19,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-      title: 'Heal@heal',
+      title: HHString.hh,
       child: FutureBuilder<MyPlanResponse>(
           future: getMyPrograms(),
           builder: (context, snapshot) {
@@ -39,77 +39,87 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                      padding: EdgeInsets.only(left: 10),
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              color: Theme.of(context).accentColor,
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  snapshot.data.result.programSubscription.title,
-                                  style:
-                                  TextStyle(color: Colors.white, fontSize: 22),
-                                ),
-                                SizedBox.fromSize(
-                                  size: Size(8, 8),
-                                ),
-                                Text(
-                                  snapshot.data.result.programSubscription.programType,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                                ),
-                                SizedBox.fromSize(
-                                  size: Size(8, 8),
-                                ),
-                                Text(
-                                  '\$'+snapshot.data.result.programSubscription.amount,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                  TextStyle(color: Colors.white, fontSize: 44),
-                                ),
-                                SizedBox.fromSize(
-                                  size: Size(8, 8),
-                                ),
-                                Text(
-                                  snapshot.data.result.programSubscription.description,
-                                  textAlign: TextAlign.start,
-                                  style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
-                                ),
-                                SizedBox.fromSize(
-                                  size: Size(8, 20),
-                                ),
-                                Container(
-                                    child: Text(
-                                      'Free',
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child:                   Container(
+                          padding: EdgeInsets.only(left: 10),
+                          margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: Theme.of(context).accentColor,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      snapshot.data.result.programSubscription.title,
                                       style:
-                                      TextStyle(color: HH_Colors.grey_585858),
+                                      TextStyle(color: Colors.white, fontSize: 22),
                                     ),
-                                    padding: EdgeInsets.fromLTRB(70, 20, 70, 20),
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                        color: Colors.white)),
-                                SizedBox.fromSize(
-                                  size: Size(8, 15),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 8),
+                                    ),
+                                    Text(
+                                      snapshot.data.result.programSubscription.programType,
+                                      textAlign: TextAlign.start,
+                                      style:
+                                      TextStyle(color: Colors.white, fontSize: 15),
+                                    ),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 8),
+                                    ),
+                                    Text(
+                                      '\$'+snapshot.data.result.programSubscription.amount,
+                                      textAlign: TextAlign.start,
+                                      style:
+                                      TextStyle(color: Colors.white, fontSize: 44),
+                                    ),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 8),
+                                    ),
+                                    Text(
+                                      snapshot.data.result.programSubscription.description ,
+                                      textAlign: TextAlign.start,
+                                      style:
+                                      TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                    // new Expanded(
+                                    //   flex: 1,
+                                    //   child: new SingleChildScrollView(
+                                    //       scrollDirection: Axis.vertical,
+                                    //   child:                                ,
+                                    //       )),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 20),
+                                    ),
+                                    Container(
+                                        child: Text(
+                                          'Free',
+                                          style:
+                                          TextStyle(color: HH_Colors.grey_585858),
+                                        ),
+                                        padding: EdgeInsets.fromLTRB(70, 20, 70, 20),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            new BorderRadius.circular(10.0),
+                                            color: Colors.white)),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 15),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      )),
-                  SizedBox(height: 10),
+                          )),
+                    ),
+
+                  ),
                   HHButton(
                     title: HHString.UpgradeNow,
                     type: 1,
@@ -141,79 +151,117 @@ class CancelPlansPageState extends State<CancelPlansPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: 'Heal@heal',
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Color(0xff707070), fontSize: 16),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 40, right: 40),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        HHString.hh,
-                        style: TextStyle(color: Colors.white, fontSize: 22),
+        title: HHString.hh,
+        child:FutureBuilder<MyPlanResponse>(
+            future: getMyPrograms(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return Center(child: Text(HHString.error),);
+                }
+
+                return Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: Text(
+                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Color(0xff707070), fontSize: 16),
                       ),
-                      SizedBox.fromSize(
-                        size: Size(8, 8),
+                    ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child:                   Container(
+                            padding: EdgeInsets.only(left: 10),
+                            margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    color: Theme.of(context).accentColor,
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0))),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        snapshot.data.result.programSubscription.title,
+                                        style:
+                                        TextStyle(color: Colors.white, fontSize: 22),
+                                      ),
+                                      SizedBox.fromSize(
+                                        size: Size(8, 8),
+                                      ),
+                                      Text(
+                                        snapshot.data.result.programSubscription.programType,
+                                        textAlign: TextAlign.start,
+                                        style:
+                                        TextStyle(color: Colors.white, fontSize: 15),
+                                      ),
+                                      SizedBox.fromSize(
+                                        size: Size(8, 8),
+                                      ),
+                                      Text(
+                                        '\$'+snapshot.data.result.programSubscription.amount,
+                                        textAlign: TextAlign.start,
+                                        style:
+                                        TextStyle(color: Colors.white, fontSize: 44),
+                                      ),
+                                      SizedBox.fromSize(
+                                        size: Size(8, 8),
+                                      ),
+                                      Text(
+                                        snapshot.data.result.programSubscription.description ,
+                                        textAlign: TextAlign.start,
+                                        style:
+                                        TextStyle(color: Colors.white, fontSize: 16),
+                                      ),
+                                      // new Expanded(
+                                      //   flex: 1,
+                                      //   child: new SingleChildScrollView(
+                                      //       scrollDirection: Axis.vertical,
+                                      //   child:                                ,
+                                      //       )),
+                                      SizedBox.fromSize(
+                                        size: Size(8, 20),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )),
                       ),
-                      Text(
-                        HHString.hh,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                      SizedBox.fromSize(
-                        size: Size(8, 8),
-                      ),
-                      Text(
-                        '\$0',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(color: Colors.white, fontSize: 44),
-                      ),
-                      SizedBox.fromSize(
-                        size: Size(8, 8),
-                      ),
-                      Text(
-                        HHString.desc,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                      SizedBox.fromSize(
-                        size: Size(8, 20),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 30, right: 30),
-                child: HHButton(
-                  title: HHString.cancel,
-                  type: 1,
-                  isEnable: true,
-                  onClick: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, MyPlans.RouteName,
-                        arguments: MyPlansArguments(true));
-                  },
-                ),
-              )
-            ],
-          ),
-        ));
+
+                    ),
+                    HHButton(
+                      title: HHString.cancel,
+                      type: 1,
+                      isEnable: true,
+                      onClick: () {
+                        cancelProgram();
+                      },
+                    )
+                  ],
+                );
+              } else
+                return Center(child: CircularProgressIndicator());
+            }),
+    );
+  }
+
+  void cancelProgram() {
+    cancelPrograms().then((value) => {
+      if(value.responseCode == 200){
+        Navigator.pop(context),
+        Navigator.pushNamed(context, MyPlans.RouteName,
+            arguments: MyPlansArguments(true))
+      }
+    });
   }
 }

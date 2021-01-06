@@ -249,6 +249,7 @@ class _OtpState extends State<OtpPage> {
             decoration: InputDecoration(
                 border: InputBorder.none),
             textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
             controller: controller4,
             autofocus: false,
             focusNode: fourthinput,

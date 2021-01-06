@@ -73,23 +73,24 @@ class MyPlansState extends State<MyPlans> {
                       ),
                     ),
                     Expanded(
-                        child: PageView.builder(
-                      itemCount: snapshot.data.result.length, // Can be null
-                      itemBuilder: (context, position) {
-                        return PlanWidget(
-                          title: snapshot.data.result[position].title,
-                          program_type:
-                              snapshot.data.result[position].programType,
-                          desc: snapshot.data.result[position].description,
-                          price: snapshot.data.result[position].amount,
-                          onClick: () {
-                            buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
+                         child: PageView.builder(
+                           itemCount: snapshot.data.result.length, // Can be null
+                           itemBuilder: (context, position) {
+                             return PlanWidget(
+                               title: snapshot.data.result[position].title,
+                               program_type:
+                               snapshot.data.result[position].programType,
+                               desc: snapshot.data.result[position].description,
+                               price: snapshot.data.result[position].amount,
+                               onClick: () {
+                                 buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
 
 
-                          },
-                        );
-                      },
-                    )),
+                               },
+                             );
+                           },
+                         ) ,
+                       ),
                   ],
                 );
               } else
