@@ -214,6 +214,7 @@ class HHTextViewBoarder extends StatelessWidget {
   }
 }
 
+//
 class HHEditFormText extends StatefulWidget {
   final String hint;
   final String text = "";
@@ -241,22 +242,22 @@ class HHEditFormText extends StatefulWidget {
 
   HHEditFormText(
       {Key key,
-        this.hint,
-        this.minLines,
-        this.error,
-        this.errorText,
-        this.obscureText,
-        this.inputType,
-        this.maxLength,
-        this.controller,
-        this.onClickEye,
-        this.textarea,
-        this.enabled,
-        this.showeye,
-        this.onSubmitText,
-        this.onFieldSubmit,
-        this.textInputAction,
-        this.onSelectAnswer})
+      this.hint,
+      this.minLines,
+      this.error,
+      this.errorText,
+      this.obscureText,
+      this.inputType,
+      this.maxLength,
+      this.controller,
+      this.onClickEye,
+      this.textarea,
+      this.enabled,
+      this.showeye,
+      this.onSubmitText,
+      this.onFieldSubmit,
+      this.textInputAction,
+      this.onSelectAnswer})
       : super(key: key);
 
   @override
@@ -310,10 +311,10 @@ class HHEditFormTextState extends State<HHEditFormText> {
           border: normalOutlineInputBorder(),
           suffixIcon: widget.showeye??false
               ?
-          IconButton(
-            icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
-            onPressed: () => widget.onClickEye(),
-          )
+              IconButton(
+                icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
+                onPressed: () => widget.onClickEye(),
+              )
 
               : null),
     );
@@ -327,6 +328,8 @@ class HHEditText extends StatefulWidget {
 
   final VoidCallback onClickEye;
   final VoidCallback onSubmitText;
+
+  final VoidCallback onFieldSubmit;
 
   var minLines = 1;
   var maxLength = 1;
@@ -345,21 +348,22 @@ class HHEditText extends StatefulWidget {
 
   HHEditText(
       {Key key,
-        this.hint,
-        this.minLines,
-        this.error,
-        this.errorText,
-        this.obscureText,
-        this.inputType,
-        this.maxLength,
-        this.controller,
-        this.onClickEye,
-        this.textarea,
-        this.enabled,
-        this.showeye,
-        this.onSubmitText,
-        this.textInputAction,
-        this.onSelectAnswer})
+      this.hint,
+      this.minLines,
+      this.error,
+      this.errorText,
+      this.obscureText,
+      this.inputType,
+      this.maxLength,
+      this.controller,
+      this.onClickEye,
+      this.textarea,
+      this.enabled,
+      this.showeye,
+      this.onSubmitText,
+      this.onFieldSubmit,
+      this.textInputAction,
+      this.onSelectAnswer})
       : super(key: key);
 
   @override

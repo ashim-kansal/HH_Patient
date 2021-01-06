@@ -187,24 +187,25 @@ class JournalPageState extends State<JournalPage> {
                                   height: 5,
                                 ),
 
-                                HHEditFormText(
-                                  minLines: 4,
-                                  onSelectAnswer:(text){
-                                    print(text);
-                                    widget.result[index].answer = text;
-                                  },
-                                  onFieldSubmit: () {
-                                    if(snapshot.data.result.length - 1 == index){
-                                      submitJournal();
-                                    }
-                                  },
-                                  textInputAction: snapshot.data.result.length - 1 == index ? TextInputAction.done : TextInputAction.next,
-                                ),SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            );
-                          }
+                              HHEditFormText(
+                                minLines: 4,
+                                onSelectAnswer:(text){
+                                  print(text);
+                                  widget.result[index].answer = text;
+                                },
+                                onFieldSubmit: () {
+                                  if(snapshot.data.result.length - 1 == index){
+                                    submitJournal();
+                                  }
+                                },
+                                textInputAction: snapshot.data.result.length - 1 == index ? TextInputAction.done : TextInputAction.next,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          );
+                        }
                       );
                     }else {
                       return Container(
@@ -226,11 +227,11 @@ class JournalPageState extends State<JournalPage> {
             )
           ],
         )
-    );
+      );
   }
 
   Widget getOldJournal() {
-
+    
     return Container(
       margin: EdgeInsets.only(top: 20, bottom: 20),
       child: Column(

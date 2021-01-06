@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "930358040441",
+    "firebase_url": "https://healathome-41a42-default-rtdb.firebaseio.com",
+    "project_id": "healathome-41a42",
+    "storage_bucket": "healathome-41a42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930358040441:android:c34bc2a5f3e00a1cc4c1a8",
+        "android_client_info": {
+          "package_name": "com.HatH.patient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdoQ0YMuMLovtV1ATDGkA68Hva29oBeUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "930358040441-6spcsr1enhfa1d2bls6q0ni16prei53p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appsums.hh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
