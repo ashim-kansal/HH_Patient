@@ -85,7 +85,11 @@ class _LibraryPageState extends State<LibraryPage> {
                                   ,SizedBox(height: 5,),
                                   InkWell(
                                     onTap: (){
+                                      if(snapshot.data.result[index].document.endsWith('.mp3') || snapshot.data.result[index].document.endsWith('.mp4')){
+                                        showFileInDialog(snapshot.data.result[index].document);
+                                      }else{
                                       Navigator.push( context, MaterialPageRoute( builder: (context) => ViewerPage(url: snapshot.data.result[index].document,)));
+                                      }
                                     },
                                     child: Card(child: Container(
                                     height: 30,
@@ -126,6 +130,41 @@ class _LibraryPageState extends State<LibraryPage> {
 
         ));
   }
+
+  void showFileInDialog(String document) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return videoView(document);
+        });
+  }
+
+  Widget videoView(String document) {
+    return Center(child: NativeVideoView(
+      keepAspectRatio: true,
+      showMediaController: true,
+      onCreated: (controller) {
+        controller.setVideoSource(
+          document,
+          sourceType: VideoSourceType.network,
+        );
+      },
+      onPrepared: (controller, info) {
+        controller.play();
+      },
+      onError: (controller, what, extra, message) {
+        print('Player Error ($what | $extra | $message)');
+      },
+      onCompletion: (controller) {
+        print('Video completed');
+      },
+      onProgress: (progress, duration) {
+        print('$progress | $duration');
+      },
+    ),);
+  }
+
 
 
 }

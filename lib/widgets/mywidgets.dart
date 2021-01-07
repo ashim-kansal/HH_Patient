@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_app/utils/DateTimeUtils.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class HHButton extends StatelessWidget {
   var title = "";
@@ -9,12 +13,16 @@ class HHButton extends StatelessWidget {
   final VoidCallback onClick;
   bool isEnable = true;
 
-  HHButton({@required this.title, @required this.type, this.onClick, this.isEnable, this.textSize});
+  HHButton(
+      {@required this.title,
+      @required this.type,
+      this.onClick,
+      this.isEnable,
+      this.textSize});
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-
       minWidth: MediaQuery.of(context).size.width,
       padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
       elevation: 5.0,
@@ -23,15 +31,26 @@ class HHButton extends StatelessWidget {
       //     ? Theme.of(context).primaryColor
       //     : type == 2 ? HH_Colors.orange_FF8A73 : HH_Colors.purpleColor,
       color: type == 1
-          ? (isEnable??false ? Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
-          : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable??false ?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
+          ? (isEnable ?? false
+              ? Theme.of(context).primaryColor
+              : HH_Colors.color_F2EEEE)
+          : type == 2
+              ? HH_Colors.orange_FF8A73
+              : type == 4
+                  ? HH_Colors.purpleColor
+                  : isEnable ?? false
+                      ? Theme.of(context).accentColor
+                      : HH_Colors.color_F2EEEE,
       onPressed: () {
         onClick();
       },
       child: Text(
         title,
-        style: TextStyle(color: isEnable??true ?Colors.white:HH_Colors.color_949494,
-        fontSize: textSize??22, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
+        style: TextStyle(
+            color: isEnable ?? true ? Colors.white : HH_Colors.color_949494,
+            fontSize: textSize ?? 22,
+            fontWeight: FontWeight.w500,
+            fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),
     );
@@ -45,7 +64,12 @@ class HHSmallButton extends StatelessWidget {
   final VoidCallback onClick;
   bool isEnable = true;
 
-  HHSmallButton({@required this.title, @required this.type, this.onClick, this.isEnable, this.textSize});
+  HHSmallButton(
+      {@required this.title,
+      @required this.type,
+      this.onClick,
+      this.isEnable,
+      this.textSize});
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +84,30 @@ class HHSmallButton extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         elevation: 5.0,
         color: type == 1
-            ? (isEnable??false ? Theme.of(context).primaryColor:HH_Colors.color_F2EEEE)
-            : type == 2 ? HH_Colors.orange_FF8A73: type == 4 ? HH_Colors.purpleColor :isEnable??false ?Theme.of(context).accentColor:HH_Colors.color_F2EEEE,
+            ? (isEnable ?? false
+                ? Theme.of(context).primaryColor
+                : HH_Colors.color_F2EEEE)
+            : type == 2
+                ? HH_Colors.orange_FF8A73
+                : type == 4
+                    ? HH_Colors.purpleColor
+                    : isEnable ?? false
+                        ? Theme.of(context).accentColor
+                        : HH_Colors.color_F2EEEE,
         onPressed: () {
           onClick();
         },
         child: Text(
           title,
-          style: TextStyle(color: Colors.white,
-          fontSize: textSize??16, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: textSize ?? 16,
+              fontWeight: FontWeight.w500,
+              fontFamily: "ProximaNova"),
           textAlign: TextAlign.center,
         ),
       ),
     );
-
-
   }
 }
 
@@ -101,7 +134,8 @@ class HHHomeButton extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "ProximaNova"),
+            style: TextStyle(
+                color: Colors.white, fontSize: 18, fontFamily: "ProximaNova"),
             textAlign: TextAlign.start,
           ),
           Container(
@@ -148,7 +182,9 @@ class HHDrawerItem extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                    color: Theme.of(context).accentColor, fontSize: 18, fontFamily: "ProximaNova"),
+                    color: Theme.of(context).accentColor,
+                    fontSize: 18,
+                    fontFamily: "ProximaNova"),
               )
             ],
           ),
@@ -178,7 +214,10 @@ class HHDrawerItem2 extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.start,
-                  style: TextStyle(color: HH_Colors.grey_707070, fontSize: 18, fontFamily: "ProximaNova"),
+                  style: TextStyle(
+                      color: HH_Colors.grey_707070,
+                      fontSize: 18,
+                      fontFamily: "ProximaNova"),
                 )
               ],
             )));
@@ -192,11 +231,22 @@ class HHTextView extends StatelessWidget {
   var alignment = TextAlign.left;
   var textweight = FontWeight.w200;
 
-  HHTextView({@required this.title, @required this.size, @required this.color, this.alignment, this.textweight});
+  HHTextView(
+      {@required this.title,
+      @required this.size,
+      @required this.color,
+      this.alignment,
+      this.textweight});
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontFamily: "ProximaNova", fontWeight: textweight?? FontWeight.w300));
+    return Text(title,
+        textAlign: alignment ?? TextAlign.left,
+        style: TextStyle(
+            color: color,
+            fontSize: size,
+            fontFamily: "ProximaNova",
+            fontWeight: textweight ?? FontWeight.w300));
   }
 }
 
@@ -205,12 +255,12 @@ class HHTextViewBoarder extends StatelessWidget {
   double size;
   var color;
 
-  HHTextViewBoarder({@required this.title, @required this.size, @required this.color});
+  HHTextViewBoarder(
+      {@required this.title, @required this.size, @required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Text(title,
-    style: TextStyle(color: color, fontSize: size));
+    return Text(title, style: TextStyle(color: color, fontSize: size));
   }
 }
 
@@ -233,12 +283,12 @@ class HHEditFormText extends StatefulWidget {
   var enabled = true;
   var showeye = false;
   var textarea = false;
+
   // var controller = null;
   var inputType = TextInputType.text;
   final ValueChanged<String> onSelectAnswer;
 
   final TextInputAction textInputAction;
-
 
   HHEditFormText(
       {Key key,
@@ -269,29 +319,26 @@ class HHEditFormTextState extends State<HHEditFormText> {
 
   void Function() param2;
 
-
   @override
   void initState() {
     super.initState();
     if (widget.minLines == null) widget.minLines = 1;
-    widget.obscureText??false;
+    widget.obscureText ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return TextFormField(
-      textInputAction: widget.textInputAction??TextInputAction.none,
-      enabled: widget.enabled?? true,
+      textInputAction: widget.textInputAction ?? TextInputAction.none,
+      enabled: widget.enabled ?? true,
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,
       controller: widget.controller,
-      minLines: widget.minLines?? 1,
-      maxLength: widget.maxLength??32,
-      maxLines: widget.minLines?? 1,
-      onChanged: (text){
-        if(widget.onSelectAnswer!=null)
-          widget.onSelectAnswer(text);
+      minLines: widget.minLines ?? 1,
+      maxLength: widget.maxLength ?? 32,
+      maxLines: widget.minLines ?? 1,
+      onChanged: (text) {
+        if (widget.onSelectAnswer != null) widget.onSelectAnswer(text);
       },
       onFieldSubmitted: (term) {
         widget.onFieldSubmit();
@@ -299,8 +346,12 @@ class HHEditFormTextState extends State<HHEditFormText> {
       // onEditingComplete: () => widget.onSubmitText(),
       decoration: InputDecoration(
           counterText: "",
-          hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
-          errorText: widget.error != null && widget.error ? widget.errorText : null,
+          hintStyle: TextStyle(
+              fontFamily: "ProximaNova",
+              fontSize: 15,
+              color: Color(0xff707070)),
+          errorText:
+              widget.error != null && widget.error ? widget.errorText : null,
           errorStyle: TextStyle(color: Color(0xffff8a73)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),
@@ -309,13 +360,16 @@ class HHEditFormTextState extends State<HHEditFormText> {
           hintText: widget.hint == null ? "" : widget.hint,
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder(),
-          suffixIcon: widget.showeye??false
-              ?
-              IconButton(
-                icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
-                onPressed: () => widget.onClickEye(),
-              )
-
+          suffixIcon: widget.showeye ?? false
+              ? IconButton(
+                  icon: Icon(
+                      widget.obscureText ?? false
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      size: 20,
+                      color: Color(0xffCBCBCB)),
+                  onPressed: () => widget.onClickEye(),
+                )
               : null),
     );
   }
@@ -339,12 +393,12 @@ class HHEditText extends StatefulWidget {
   var enabled = true;
   var showeye = false;
   var textarea = false;
+
   // var controller = null;
   var inputType = TextInputType.text;
   final ValueChanged<String> onSelectAnswer;
 
   final TextInputAction textInputAction;
-
 
   HHEditText(
       {Key key,
@@ -375,36 +429,39 @@ class HHEditTextState extends State<HHEditText> {
 
   void Function() param2;
 
-
   @override
   void initState() {
     super.initState();
     if (widget.minLines == null) widget.minLines = 1;
-    widget.obscureText??false;
+    widget.obscureText ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return TextField(
-      textInputAction: widget.textInputAction??TextInputAction.none,
-      enabled: widget.enabled?? true,
+      textInputAction: widget.textInputAction ?? TextInputAction.none,
+      enabled: widget.enabled ?? true,
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,
       controller: widget.controller,
-      minLines: widget.minLines?? 1,
-      maxLength: widget.maxLength??32,
-      maxLines: widget.minLines?? 1,
-      onChanged: (text){
-        if(widget.onSelectAnswer!=null)
-          widget.onSelectAnswer(text);
+      minLines: widget.minLines ?? 1,
+      maxLength: widget.maxLength ?? 32,
+      maxLines: widget.minLines ?? 1,
+      onChanged: (text) {
+        if (widget.onSelectAnswer != null) widget.onSelectAnswer(text);
       },
-      onSubmitted: (value){return;},
+      onSubmitted: (value) {
+        return;
+      },
       // onEditingComplete: () => widget.onSubmitText(),
       decoration: InputDecoration(
           counterText: "",
-          hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
-          errorText: widget.error != null && widget.error ? widget.errorText : null,
+          hintStyle: TextStyle(
+              fontFamily: "ProximaNova",
+              fontSize: 15,
+              color: Color(0xff707070)),
+          errorText:
+              widget.error != null && widget.error ? widget.errorText : null,
           errorStyle: TextStyle(color: Color(0xffff8a73)),
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5.0),
@@ -413,13 +470,16 @@ class HHEditTextState extends State<HHEditText> {
           hintText: widget.hint == null ? "" : widget.hint,
           errorBorder: errorOutlineInputBorder(),
           border: normalOutlineInputBorder(),
-          suffixIcon: widget.showeye??false
-              ?
-          IconButton(
-            icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
-            onPressed: () => widget.onClickEye(),
-          )
-
+          suffixIcon: widget.showeye ?? false
+              ? IconButton(
+                  icon: Icon(
+                      widget.obscureText ?? false
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      size: 20,
+                      color: Color(0xffCBCBCB)),
+                  onPressed: () => widget.onClickEye(),
+                )
               : null),
     );
   }
@@ -434,75 +494,160 @@ class UndefinedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Route for $name is not defined', style: TextStyle(fontFamily: "ProximaNova"),),
+        child: Text(
+          'Route for $name is not defined',
+          style: TextStyle(fontFamily: "ProximaNova"),
+        ),
       ),
     );
   }
 }
 
-class CalenderCell extends StatelessWidget{
-
+class CalenderCell extends StatelessWidget {
   var day;
   var date;
 
-      CalenderCell({Key key, this.day, this.date});
+  CalenderCell({Key key, this.day, this.date});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       child: Column(
         children: [
-          Text(day, style: TextStyle(fontSize: 12,color: HH_Colors.grey_585858, fontFamily: "ProximaNova"),),
-          Text(date, style: TextStyle(fontSize: 12, color: HH_Colors.grey_585858, fontFamily: "ProximaNova"),)
+          Text(
+            day,
+            style: TextStyle(
+                fontSize: 12,
+                color: HH_Colors.grey_585858,
+                fontFamily: "ProximaNova"),
+          ),
+          Text(
+            date,
+            style: TextStyle(
+                fontSize: 12,
+                color: HH_Colors.grey_585858,
+                fontFamily: "ProximaNova"),
+          )
         ],
       ),
     );
   }
 }
 
-class DrinkingDiaryCell extends StatelessWidget{
+class DrinkingDiaryCell extends StatelessWidget {
+  Result data;
+  String day;
+  final VoidCallback onClickGoal;
 
-  var day;
-  var date;
+  DrinkingDiaryCell({this.day, this.data, this.onClickGoal});
 
+  bool isToday(String day){
+    String currentDay = Moment.parse(DateTime.now().toString()).format("EEE");
+    return currentDay==day;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-        padding: EdgeInsets.fromLTRB(10,5,10,5),
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
       decoration: BoxDecoration(
-        border: Border.all(color: HH_Colors.borderGrey, width: 0.8),
-        borderRadius: BorderRadius.all(Radius.circular(5.0))
-
-      ),
+          border: Border.all(color: HH_Colors.borderGrey, width: 0.8),
+          borderRadius: BorderRadius.all(Radius.circular(5.0))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Text('Mon', style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: HH_Colors.primaryColor, fontFamily: "ProximaNova"),),
-              SizedBox(width: 10,),
-              Container(
-                padding: EdgeInsets.fromLTRB(5,2 ,5, 2),
-                decoration: BoxDecoration(
-                    color: HH_Colors.color_FFECE8,
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.library_add_check_outlined, color: HH_Colors.color_949494,size: 15,),
-                    SizedBox(width: 10,),
-                    Text('2 units', style: TextStyle(color: HH_Colors.color_949494,fontSize: 14))
-                  ],
-                ),
-
+              Text(
+                day,
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: HH_Colors.primaryColor,
+                    fontFamily: "ProximaNova",),
               ),
-
+              SizedBox(
+                width: 10,
+              ),
+              (data != null && data.setGoal != null)
+                  ? Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: HH_Colors.color_FFECE8,
+                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.library_add_check_outlined,
+                            color: HH_Colors.color_949494,
+                            size: 15,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(((data.setGoal ?? 0) <10?'0'+(data.setGoal ?? 0).toString() :(data.setGoal ?? 0).toString()) + ' units',
+                              style: TextStyle(
+                                  color: HH_Colors.color_949494, fontSize: 14))
+                        ],
+                      ))
+                  : Container(),
+              SizedBox(
+                width: 10,
+              ),
+              (data != null && data.achivedGoal != null)
+                  ? Container(
+                      padding: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          color: HH_Colors.green_3DDB8C,
+                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.library_add_check_outlined,
+                            color: HH_Colors.color_949494,
+                            size: 15,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(((data.achivedGoal ?? 0) <10?'0'+(data.achivedGoal ?? 0).toString() :(data.achivedGoal ?? 0).toString()) + ' units',
+                              style: TextStyle(
+                                  color: HH_Colors.color_949494, fontSize: 14))
+                        ],
+                      ))
+                  : Container(),
             ],
           ),
+          InkWell(
+            onTap: () {
+              isToday(day) ? onClickGoal():null;
 
+            },
+            child:  Row(
+                    children: [
+                      Icon(
+                        Icons.add_circle_outlined,
+                        color: isToday(day)
+                            ? HH_Colors.accentColor
+                            : HH_Colors.color_949494,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        'Goal',
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: (data!= null && data.date != null && data.date.isSameDate(DateTime.now()))
+                                ? HH_Colors.accentColor
+                                : HH_Colors.color_949494,
+                            fontFamily: "ProximaNova"),
+                      )
+                    ],
+                  ),
+          )
         ],
       ),
     );
@@ -517,7 +662,6 @@ class DialogWithImage extends StatelessWidget {
   final List<Widget> actions;
   VoidCallback onClick;
 
-
   DialogWithImage({
     this.title,
     this.content,
@@ -528,40 +672,44 @@ class DialogWithImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0)),
-      child: Container(
-        height: 220,
-        width: 200,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              InkWell(
-                onTap: (){
-                  Navigator.pop(context);
-                  onClick();
-                },
-             child: Container(
-                child: Center(
-                  child: Image.asset("assets/images/thumb.png", height: 80, width: 80,)
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          height: 220,
+          width: 200,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      onClick();
+                    },
+                    child: Container(
+                      child: Center(
+                          child: Image.asset(
+                        "assets/images/thumb.png",
+                        height: 80,
+                        width: 80,
+                      )),
+                    )),
+                SizedBox(
+                  height: 20,
                 ),
-              )),
-              SizedBox(height: 20,),
-              HHTextView(
+                HHTextView(
                   title: title,
                   size: 16,
                   textweight: FontWeight.w300,
                   color: HH_Colors.color_707070,
                   alignment: TextAlign.center,
                 ),
-            ],
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
 
@@ -572,7 +720,6 @@ class DialogWithButtons extends StatelessWidget {
 
   final VoidCallback onLogoutPress;
   final VoidCallback onDenyPress;
-
 
   DialogWithButtons({
     this.title,
@@ -585,67 +732,83 @@ class DialogWithButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0)),
-      child: Container(
-        constraints: BoxConstraints(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          constraints: BoxConstraints(
               minHeight: 150, minWidth: double.infinity, maxHeight: 170),
-        // height: 150,
-        // width: 200,
-        child: Padding(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Column(
-                    children: [
-                      HHTextView(title: "Logout", size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
-                      SizedBox(height: 20),
-                      HHTextView(title: "Are you sure you want to log out of the app ?", size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w300)
-                    ],
-                  )
-              ),
-              SizedBox(height: 20,),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // height: 150,
+          // width: 200,
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: InkWell(
-                        onTap: () => {
-                          onDenyPress(),
-                        },
-                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: InkWell(
-                        onTap: () => {
-                          onLogoutPress()
-                        },
-                        child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400),),
-                    )
+                    HHTextView(
+                        title: "Logout",
+                        size: 22,
+                        color: HH_Colors.color_3D3D3D,
+                        textweight: FontWeight.w600),
+                    SizedBox(height: 20),
+                    HHTextView(
+                        title: "Are you sure you want to log out of the app ?",
+                        size: 16,
+                        color: HH_Colors.color_707070,
+                        alignment: TextAlign.center,
+                        textweight: FontWeight.w300)
                   ],
+                )),
+                SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(
+                              color: HH_Colors.borderGrey, width: 0.5))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                            onTap: () => {
+                                  onDenyPress(),
+                                },
+                            child: HHTextView(
+                                title: "No",
+                                size: 18,
+                                color: HH_Colors.color_707070,
+                                textweight: FontWeight.w400)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                          onTap: () => {onLogoutPress()},
+                          child: HHTextView(
+                              title: "Yes",
+                              size: 18,
+                              color: HH_Colors.color_707070,
+                              textweight: FontWeight.w400),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
-class CancelDialog extends StatelessWidget {
 
+class CancelDialog extends StatelessWidget {
   final VoidCallback onYesPress;
   final VoidCallback onDenyPress;
-
 
   CancelDialog({
     this.onYesPress,
@@ -655,90 +818,109 @@ class CancelDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0)),
-      child: Container(
-        constraints: BoxConstraints(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          constraints: BoxConstraints(
               minHeight: 150, minWidth: double.infinity, maxHeight: 170),
-        // height: 150,
-        // width: 200,
-        child: Padding(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Column(
-                    children: [
-                      HHTextView(title: "Cancel Session", size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
-                      SizedBox(height: 5),
-                      HHTextView(title: "Are you sure you want\n to cancel your session ?", size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w400)
-                    ],
-                  )
-              ),
-              SizedBox(height: 20,),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // height: 150,
+          // width: 200,
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: InkWell(
-                        onTap: () => {
-                          onDenyPress(),
-                        },
-                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: InkWell(
-                        onTap: () => {
-                          onYesPress()
-                        },
-                        child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400),),
-                    )
+                    HHTextView(
+                        title: "Cancel Session",
+                        size: 22,
+                        color: HH_Colors.color_3D3D3D,
+                        textweight: FontWeight.w600),
+                    SizedBox(height: 5),
+                    HHTextView(
+                        title:
+                            "Are you sure you want\n to cancel your session ?",
+                        size: 16,
+                        color: HH_Colors.color_707070,
+                        alignment: TextAlign.center,
+                        textweight: FontWeight.w400)
                   ],
+                )),
+                SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(
+                              color: HH_Colors.borderGrey, width: 0.5))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                            onTap: () => {
+                                  onDenyPress(),
+                                },
+                            child: HHTextView(
+                                title: "No",
+                                size: 18,
+                                color: HH_Colors.color_707070,
+                                textweight: FontWeight.w400)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                          onTap: () => {onYesPress()},
+                          child: HHTextView(
+                              title: "Yes",
+                              size: 18,
+                              color: HH_Colors.color_707070,
+                              textweight: FontWeight.w400),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
 
 class DialogWithField extends StatefulWidget {
   final String date;
   final VoidCallback onClick;
-  int count = 0;
+  int mCount = 0;
+  final ValueChanged<int> count;
 
-  DialogWithField({
-    this.date,
-    this.onClick
-    // this.content,
-    // this.actions = const [],
-  });
+  DialogWithField({this.date, this.onClick, this.count
+      // this.content,
+      // this.actions = const [],
+      });
 
   @override
   State<StatefulWidget> createState() => DialogWithFieldState();
 }
 
-class DialogWithFieldState extends State<DialogWithField>{
-
+class DialogWithFieldState extends State<DialogWithField> {
   @override
   void initState() {
-    widget.count = 0;
+    widget.mCount = 0;
   }
+
   @override
   Widget build(BuildContext context) {
+    var now = new DateTime.now();
+    var formatter = new DateFormat('dd EEEE/MM/yyyy'); //"12th Thursday/10/2020"
+    String formattedDate = formatter.format(now);
     return Dialog(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       child: Container(
         height: 250,
         width: 200,
@@ -750,17 +932,18 @@ class DialogWithFieldState extends State<DialogWithField>{
             children: <Widget>[
               Align(
                 alignment: Alignment.center,
-                child:  HHTextView(
-                  title: "12th Thursday/10/2020",
+                child: HHTextView(
+                  title: formattedDate,
                   size: 15,
                   color: HH_Colors.color_707070,
                 ),
               ),
               SizedBox(
-                height: 10,),
+                height: 10,
+              ),
               Align(
                 alignment: Alignment.center,
-                child:  HHTextView(
+                child: HHTextView(
                   title: "No. of Drinks",
                   size: 22,
                   color: HH_Colors.color_3D3D3D,
@@ -768,64 +951,76 @@ class DialogWithFieldState extends State<DialogWithField>{
                 ),
               ),
               SizedBox(
-                height: 10,),
+                height: 10,
+              ),
               Align(
                 alignment: Alignment.center,
-                child:
-                Container(
+                child: Container(
                   width: 164,
                   decoration: BoxDecoration(
-                    border: Border.fromBorderSide(BorderSide(width: 1, color:  HH_Colors.borderGrey)),
+                    border: Border.fromBorderSide(
+                        BorderSide(width: 1, color: HH_Colors.borderGrey)),
                     borderRadius: BorderRadius.all(Radius.circular(3)),
                     color: Colors.white,
-
                   ),
                   child: Row(
                     children: [
                       InkWell(
                         onTap: () {
                           setState(() {
-                            widget.count = widget.count ==0? 0 : widget.count-1;
+                            widget.mCount =
+                                widget.mCount == 0 ? 0 : widget.mCount - 1;
                           });
                         },
-
-                        child:Container(
+                        child: Container(
                           width: 40,
-                          child:  Center(child: Text(
-                            "-",
-                            style: TextStyle(color: HH_Colors.color_949494, fontSize: 22),
-                          ),),
+                          child: Center(
+                            child: Text(
+                              "-",
+                              style: TextStyle(
+                                  color: HH_Colors.color_949494, fontSize: 22),
+                            ),
+                          ),
                           padding: EdgeInsets.all(15),
                         ),
-
                       ),
-                      SizedBox(width: 1,height:40,child: Container(color: HH_Colors.borderGrey,),),
+                      SizedBox(
+                        width: 1,
+                        height: 40,
+                        child: Container(
+                          color: HH_Colors.borderGrey,
+                        ),
+                      ),
                       Container(
                         width: 80,
-                        child:  Center(child:Text(
-                          widget.count.toString(),
+                        child: Center(
+                            child: Text(
+                          widget.mCount.toString(),
                           style: TextStyle(color: Colors.black, fontSize: 22),
                         )),
-                        padding: EdgeInsets.fromLTRB(20, 10,20,10),
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       ),
-                      SizedBox(width: 1,height:40,child: Container(color: HH_Colors.borderGrey,),),
+                      SizedBox(
+                        width: 1,
+                        height: 40,
+                        child: Container(
+                          color: HH_Colors.borderGrey,
+                        ),
+                      ),
                       InkWell(
-
                         onTap: () {
-                         setState(() {
-                           widget.count = widget.count+1;
-                         });
+                          setState(() {
+                            widget.mCount = widget.mCount + 1;
+                          });
                         },
-
-                        child:Container(
+                        child: Container(
                           width: 40,
-                          child:  Text(
+                          child: Text(
                             "+",
                             style: TextStyle(color: HH_Colors.accentColor),
                           ),
                           padding: EdgeInsets.all(15),
                         ),
-
                       ),
                     ],
                   ),
@@ -839,16 +1034,16 @@ class DialogWithFieldState extends State<DialogWithField>{
                 child: Container(
                   child: Center(
                       child: RaisedButton(
-                        onPressed: () {
-                          widget.onClick();
-                        },
-                        child: Text(
-                          "Save",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: HH_Colors.purpleColor,
-                      )
-                  ),
+                    onPressed: () {
+                      widget.count(widget.mCount);
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Save",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: HH_Colors.purpleColor,
+                  )),
                 ),
               )
             ],
@@ -859,7 +1054,6 @@ class DialogWithFieldState extends State<DialogWithField>{
   }
 }
 
-
 // NOTIFICATION
 
 class NotificationList extends StatelessWidget {
@@ -868,38 +1062,34 @@ class NotificationList extends StatelessWidget {
   final String id;
   VoidCallback onDeleteClick;
 
-
-  NotificationList({
-    @required
-    this.id,
-    @required
-    this.title,
-    @required
-    this.subtitle,
-    this.onDeleteClick
-  });
+  NotificationList(
+      {@required this.id,
+      @required this.title,
+      @required this.subtitle,
+      this.onDeleteClick});
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-      // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+        // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Slidable(
-          actionPane: SlidableDrawerActionPane(),
-          // actionExtentRatio: 0.25,
-          child: new Container(
-            // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-            // height: MediaQuery.of(context).size.width / 4,
-              decoration: BoxDecoration(
-                //  color: HH_Colors.color_F3F3F3,
+      actionPane: SlidableDrawerActionPane(),
+      // actionExtentRatio: 0.25,
+      child: new Container(
+          // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+          // height: MediaQuery.of(context).size.width / 4,
+          decoration: BoxDecoration(
+              //  color: HH_Colors.color_F3F3F3,
               ),
-              child: Column(children: [
-                Container(
-                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    color: HH_Colors.color_F3F3F3,
-                    child: new ListTile(
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+          child: Column(
+            children: [
+              Container(
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  color: HH_Colors.color_F3F3F3,
+                  child: new ListTile(
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         HHTextView(
                           title: this.title,
                           color: HH_Colors.grey_35444D,
@@ -914,25 +1104,23 @@ class NotificationList extends StatelessWidget {
                             size: 14,
                           ),
                         )
-                      ],),
-                    )
-                ),
-              ],)
+                      ],
+                    ),
+                  )),
+            ],
+          )),
+      secondaryActions: <Widget>[
+        Container(
+          // height: MediaQuery.of(context).size.width / 4,
+          // margin: EdgeInsets.only(bottom: 5),
+          child: new IconSlideAction(
+            color: Colors.red,
+            icon: Icons.delete,
+            onTap: () => {onDeleteClick()},
           ),
-          secondaryActions: <Widget>[
-            Container(
-              // height: MediaQuery.of(context).size.width / 4,
-              // margin: EdgeInsets.only(bottom: 5),
-              child: new IconSlideAction(
-
-                color: Colors.red,
-                icon: Icons.delete,
-                onTap: () => {onDeleteClick()},
-              ),
-            )
-          ],
         )
-    );
+      ],
+    ));
   }
 }
 
@@ -942,7 +1130,6 @@ class DialogWithSingleButton extends StatelessWidget {
 
   final VoidCallback onLogoutPress;
   final VoidCallback onDenyPress;
-
 
   DialogWithSingleButton({
     this.title,
@@ -954,63 +1141,75 @@ class DialogWithSingleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0)),
-      child: Container(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
           height: 170,
           width: 170,
-        child: Padding(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Column(
-                    children: [
-                      HHTextView(title: title, size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
-                      SizedBox(height: 20),
-                      HHTextView(title: content, size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w400)
-                    ],
-                  )
-              ),
-              SizedBox(height: 20,),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
+                  children: [
+                    HHTextView(
+                        title: title,
+                        size: 22,
+                        color: HH_Colors.color_3D3D3D,
+                        textweight: FontWeight.w600),
+                    SizedBox(height: 20),
+                    HHTextView(
+                        title: content,
+                        size: 16,
+                        color: HH_Colors.color_707070,
+                        alignment: TextAlign.center,
+                        textweight: FontWeight.w400)
+                  ],
+                )),
+                SizedBox(
+                  height: 20,
                 ),
-                child: Center(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  child: Padding(
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(
+                              color: HH_Colors.borderGrey, width: 0.5))),
+                  child: Center(
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: Padding(
                       padding: EdgeInsets.all(10),
                       child: InkWell(
-                        onTap: () => {
-                          // onDenyPress(),
-                          Navigator.pop(context)
-                        },
-                        child: HHTextView(title: "Ok", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
+                          onTap: () => {
+                                // onDenyPress(),
+                                Navigator.pop(context)
+                              },
+                          child: HHTextView(
+                              title: "Ok",
+                              size: 18,
+                              color: HH_Colors.color_707070,
+                              textweight: FontWeight.w400)),
                     ),
-                ),
-              )
-            ],
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
 
-class ToastMessage extends StatelessWidget{
-  String message ="";
-  String type ="";
+class ToastMessage extends StatelessWidget {
+  String message = "";
+  String type = "";
 
   ToastMessage({@required this.message, @required this.type});
 
-  @override 
-  Widget build(BuildContext context){
-    return Container(
-
-    );
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
@@ -1018,7 +1217,6 @@ OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(5.0)),
     borderSide: BorderSide(color: Color(0xffD9D7D7), width: 0.3),
-
   );
 }
 

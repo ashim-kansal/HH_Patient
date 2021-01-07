@@ -5,10 +5,11 @@ import 'package:flutter_app/utils/colors.dart';
 class CheckBoxQuestion extends StatefulWidget {
   var ques;
   var options;
+  int num;
   final ValueChanged<List<Option>> onSelectAnswers;
 
   CheckBoxQuestion(
-      {Key key, @required this.ques, this.options, this.onSelectAnswers});
+      {Key key, @required this.ques, this.options, this.num, this.onSelectAnswers});
 
   @override
   State<StatefulWidget> createState() => CheckBoxQuestionState();
@@ -26,7 +27,7 @@ class CheckBoxQuestionState extends State<CheckBoxQuestion> {
       children: [
         Row(children: [
           Text(
-            'Q. ',
+            widget.num??1.toString()+'. ',
             style: TextStyle(
                 fontSize: 18,
                 color: HH_Colors.accentColor,

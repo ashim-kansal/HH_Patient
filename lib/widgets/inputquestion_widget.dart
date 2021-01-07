@@ -5,10 +5,11 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 
 class InputBoxQuestion extends StatefulWidget{
   var ques;
+  var num;
   var controller = TextEditingController();
   final ValueChanged<String> onSelectAnswer;
 
-  InputBoxQuestion({Key key, @required this.ques, this.onSelectAnswer});
+  InputBoxQuestion({Key key, @required this.ques, this.onSelectAnswer, this.num});
 
   @override
   State<StatefulWidget> createState() =>InputBoxQuestionState();
@@ -37,7 +38,9 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(children:[
-          Text('Q. ', style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
+          Text(
+            widget.num??1.toString()+'. ',
+            style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
           Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
         ]),
         SizedBox(height: 10,),

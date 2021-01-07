@@ -191,15 +191,15 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem(
-                  title: HHString.my_therapists, icon: 'assets/images/ic_therapists.png', onClick: (){
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('My Therapists',false));
-              },),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
+              // HHDrawerItem(
+              //     title: HHString.my_therapists, icon: 'assets/images/ic_therapists.png', onClick: (){
+              //       Navigator.pop(context);
+              //       Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('My Therapists',false));
+              // },),
+              // Container(
+              //   color: HH_Colors.grey,
+              //   height: 1,
+              // ),
               HHDrawerItem(
                   title: HHString.Support, icon: 'assets/images/ic_support.png'),
               Container(

@@ -101,7 +101,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(question.questionText,
+        Text(index.toString()+'. '+question.questionText,
             textAlign: TextAlign.start,
             overflow: TextOverflow.clip,
             style: TextStyle(
@@ -124,6 +124,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
     return AssessmentQuestionCell(
       title: question.questionText,
       quesType: question.questionType,
+      num: (index+1),
       completed: widget.data.isSubmit,
       onSelectAnswer: (answer){
         widget.data.questions[index].answer = answer;

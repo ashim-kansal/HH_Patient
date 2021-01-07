@@ -35,6 +35,7 @@ class HHString{
   static const String not_data_found = "No Data Found";
   static const String my_programs = "My Programs";
   static const String please_share_thoughts = "Please share your thoughts with us";
+  static const String please_contact_us = "Please use this form to connect us ";
   static const String please_enter_feedback = "Please enter a feedback";
   static const String please_enter_review = "Please enter your review";
   static const String no_record_found = "No Record Found";

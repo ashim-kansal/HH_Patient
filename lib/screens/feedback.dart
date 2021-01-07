@@ -80,7 +80,7 @@ Widget build(BuildContext context) => MyWidget(
         child: Column(children: [
           HHTextView(
             color: HH_Colors.color_707070,
-            title: HHString.please_share_thoughts,
+            title: HHString.please_contact_us,
             size: 16,
               textweight:FontWeight.w600
           ),

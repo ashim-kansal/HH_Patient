@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
+import 'package:flutter_app/model/GetDrinkingDiaryList.dart' as Diary;
 import 'package:flutter_app/utils/colors.dart';
 import 'package:intl/intl.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class GridViewWidget extends StatelessWidget{
 
@@ -117,8 +119,10 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
 }
 
 class DrinkingDiaryDateWidget extends StatefulWidget{
-  var list = [];
+  List<Diary.Result> list;
+  ValueChanged<int> onClickItem;
 
+  DrinkingDiaryDateWidget({this.list, this.onClickItem});
 
   @override
   State<StatefulWidget> createState() => DrinkingDiaryDateWidgetState();
@@ -127,25 +131,26 @@ class DrinkingDiaryDateWidget extends StatefulWidget{
 
 class DrinkingDiaryDateWidgetState extends State<DrinkingDiaryDateWidget>{
 
-  void populateData() {
-    for (int i = 0; i < 10; i++)
-      widget.list.add(ListItem<String>("Mon\n$i"));
-
-    widget.list[0].isSelected = true;
-  }
 
   @override
   void initState() {
     super.initState();
-    widget.list??List();
-
-    populateData();
+    // for(Diary.Result result in widget.list){
+    //   if(result.date.isAtSameMomentAs(DateTime.now())){
+    //     result.isSelected = true;
+    //   }
+    // }
+    print(widget.list.length.toString());
+    if(widget.list.length>0)
+      widget.list[0].isSelected = true;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return ListView.separated(
       scrollDirection: Axis.horizontal,
+      reverse: true,
       itemCount: widget.list.length,
       itemBuilder: (context, index) {
         return GestureDetector(
@@ -158,10 +163,10 @@ class DrinkingDiaryDateWidgetState extends State<DrinkingDiaryDateWidget>{
             padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: Center(
               child: Text(
-                widget.list[index].data,
+                getDateLabel(widget.list[index].date),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: HH_Colors.grey_585858, fontFamily: "ProximaNova",
-                fontWeight: widget.list[index].isSelected? FontWeight.w700: FontWeight.w300),
+                fontWeight: widget.list[index].isSelected??false? FontWeight.w700: FontWeight.w300),
               ),),
           ),
           onTap: (){
@@ -179,6 +184,7 @@ class DrinkingDiaryDateWidgetState extends State<DrinkingDiaryDateWidget>{
   }
 
   void setItemSelected(int index) {
+    widget.onClickItem(index);
     setState(() {
       for (int i = 0; i < widget.list.length; i++){
         if(index == i) {
@@ -188,8 +194,13 @@ class DrinkingDiaryDateWidgetState extends State<DrinkingDiaryDateWidget>{
         }
       }
 
-
     });
+  }
+
+  String getDateLabel(mdate){
+    Moment date = Moment.parse(mdate.toString());
+    return date.format("EEE \n dd");
+
   }
 }
 
