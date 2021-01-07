@@ -29,7 +29,7 @@ class JournalPageState extends State<JournalPage> {
 
   Future journalFuture;
 
-  
+
   @override
   void initState(){
     super.initState();
@@ -67,7 +67,7 @@ class JournalPageState extends State<JournalPage> {
       if(value.responseCode == 200){
         print(value.responseCode),
         setState(() {
-        isSwitched = !isSwitched;
+          isSwitched = !isSwitched;
         })
       }
     });
@@ -75,10 +75,10 @@ class JournalPageState extends State<JournalPage> {
 
   //show Toast
   showToast(String message){
-    Toast.show(message, 
-    context, 
-    duration: Toast.LENGTH_LONG, 
-    gravity:  Toast.BOTTOM);
+    Toast.show(message,
+        context,
+        duration: Toast.LENGTH_LONG,
+        gravity:  Toast.BOTTOM);
   }
 
   @override
@@ -125,15 +125,15 @@ class JournalPageState extends State<JournalPage> {
             ),
             Expanded(
                 child: Container(
-              child: isSwitched ? getNewJournal() : getOldJournal(),
-            )),
+                  child: isSwitched ? getNewJournal() : getOldJournal(),
+                )),
           ],
         ),
       ),
     );
   }
 
-  
+
   Widget getNewJournal() {
 
     return Container(
@@ -159,33 +159,33 @@ class JournalPageState extends State<JournalPage> {
 
                       });
                       return  ListView.separated(
-                        scrollDirection: Axis.vertical,
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 20);
-                        },
-                        
-                        itemCount: snapshot.data.result.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  snapshot.data.result[index].question,
-                                  maxLines: 5,
-                                  overflow: TextOverflow.ellipsis,
-                                  // 'Hi! How are you feeling today ?',
-                                  style: TextStyle(
-                                      color: HH_Colors.grey_707070,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
+                          scrollDirection: Axis.vertical,
+                          separatorBuilder: (context, index) {
+                            return SizedBox(height: 20);
+                          },
+
+                          itemCount: snapshot.data.result.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    snapshot.data.result[index].question,
+                                    maxLines: 5,
+                                    overflow: TextOverflow.ellipsis,
+                                    // 'Hi! How are you feeling today ?',
+                                    style: TextStyle(
+                                        color: HH_Colors.grey_707070,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  margin: EdgeInsets.only(left: 5),
                                 ),
-                                margin: EdgeInsets.only(left: 5),
-                              ),
-                              
-                              SizedBox(
-                                height: 5,
-                              ),
+
+                                SizedBox(
+                                  height: 5,
+                                ),
 
                               HHEditFormText(
                                 minLines: 4,
@@ -213,9 +213,9 @@ class JournalPageState extends State<JournalPage> {
                       );
                     }
                   }
-                ),
-                // )
               ),
+              // )
+            ),
 
             HHButton(
               title: HHString.submit,
@@ -237,46 +237,46 @@ class JournalPageState extends State<JournalPage> {
       child: Column(
         children: [
           Expanded(
-            child: FutureBuilder<OldJournalingList>(
-              future: getOldJournalingList(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
+              child: FutureBuilder<OldJournalingList>(
+                future: getOldJournalingList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
                     if(snapshot.hasError){
                       return Text("Error");
                     }
-                  return ListView.separated(
-                    itemBuilder: (context, index) {
-                      var _date = snapshot.data.result[index].createdAt;
-                      Moment createdDate = Moment.parse('$_date');
-                      return MyExpansionTile(
-                        title: Text(''),
-                        headerBackgroundColor: HH_Colors.color_9ca031,
-                        leading: Text(
-                          createdDate.format("dd/MM/yyyy"),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        children: [
-                          Container(
-                            color: HH_Colors.color_EDEDF8,
-                            width: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.only(
-                                left: 15, top: 15, bottom: 10, right: 10),
-                            child: ExpandableListTile(result:snapshot.data.result[index], date:createdDate.format("hh:mm a"))
-                          )
-                        ],
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider();
-                    },
-                    itemCount: snapshot.data.result.length);
-                }else {
-                  return Container(
-                    child: Center(child: CircularProgressIndicator(),),
-                  );
-                }
-              },
-            )
+                    return ListView.separated(
+                        itemBuilder: (context, index) {
+                          var _date = snapshot.data.result[index].createdAt;
+                          Moment createdDate = Moment.parse('$_date');
+                          return MyExpansionTile(
+                            title: Text(''),
+                            headerBackgroundColor: HH_Colors.color_9ca031,
+                            leading: Text(
+                              createdDate.format("dd/MM/yyyy"),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            children: [
+                              Container(
+                                  color: HH_Colors.color_EDEDF8,
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.only(
+                                      left: 15, top: 15, bottom: 10, right: 10),
+                                  child: ExpandableListTile(result:snapshot.data.result[index], date:createdDate.format("hh:mm a"))
+                              )
+                            ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                        itemCount: snapshot.data.result.length);
+                  }else {
+                    return Container(
+                      child: Center(child: CircularProgressIndicator(),),
+                    );
+                  }
+                },
+              )
           )
         ],
       ),

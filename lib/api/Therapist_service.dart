@@ -27,6 +27,16 @@ Future<GetTherapistsResponse> getAllTherapists() async {
 
 }
 
+Future<String> getAppToken() async {
+
+  var token = await GetStringToSP("token");
+  print('a');
+  print(token);
+
+  return token;
+
+}
+
 Future<GetTherapistsResponse> getAllPhysicians() async {
   var token = await GetStringToSP("token");
 

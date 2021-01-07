@@ -81,6 +81,7 @@ class AssessmentQuestionCell extends StatelessWidget {
   var title = "";
   String quesType;
   var completed = false;
+  int num;
   final VoidCallback onClick;
   final ValueChanged<String> onSelectAnswer;
 
@@ -90,6 +91,7 @@ class AssessmentQuestionCell extends StatelessWidget {
       {@required this.title,
       @required this.quesType,
       this.completed,
+      this.num,
         this.onSelectAnswer,
       this.onClick});
 
@@ -101,18 +103,19 @@ class AssessmentQuestionCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           quesType == 'text'
-              ? InputBoxQuestion(ques:title, onSelectAnswer: onSelectAnswer)
+              ? InputBoxQuestion(num: num??1, ques:title, onSelectAnswer: onSelectAnswer)
               : quesType == 'YESNO'
-                  ? getSingleChoiceQuest(title)
-                  : getMultiChoiceQuest(title),
+                  ? getSingleChoiceQuest(num??1,title)
+                  : getMultiChoiceQuest(num??1,title),
         ],
       ),
     );
   }
 
 
-  Widget getSingleChoiceQuest(String question) {
+  Widget getSingleChoiceQuest(int num, String question) {
     return MySingleChoiceQuesWidget(
+      num: num,
       ques: question??"",
       onPressYes: () {
         print("yes");
@@ -124,18 +127,19 @@ class AssessmentQuestionCell extends StatelessWidget {
       },);
   }
 
-  Widget getMultiChoiceQuest(String question) {
-    return CheckBoxQuestion(ques: question);
+  Widget getMultiChoiceQuest(int num, String question) {
+    return CheckBoxQuestion(num:num,ques: question);
   }
 }
 
 class MySingleChoiceQuesWidget extends StatefulWidget {
 
   var ques;
+  int num;
   VoidCallback onPressNo;
   VoidCallback onPressYes;
 
-  MySingleChoiceQuesWidget({@required this.ques, this.onPressNo, this.onPressYes});
+  MySingleChoiceQuesWidget({@required this.ques, this.onPressNo, this.num, this.onPressYes});
 
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
@@ -169,7 +173,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Text(
-          'Q. ',
+          (widget.num??1).toString()+'. ',
           style: TextStyle(
               fontSize: 18,
               color: HH_Colors.accentColor,
@@ -252,11 +256,12 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
 class MyMultiChoiceQuesWidget extends StatefulWidget {
 
   var ques;
+  var num;
   var ans;
   VoidCallback onPressNo;
   VoidCallback onPressYes;
 
-  MyMultiChoiceQuesWidget({@required this.ques, @required this.ans, this.onPressNo, this.onPressYes});
+  MyMultiChoiceQuesWidget({@required this.ques, @required this.ans, this.onPressNo, this.num, this.onPressYes});
 
   @override
   StatefulWidgetState createState() => StatefulWidgetState();
@@ -290,7 +295,7 @@ class StatefulWidgetState extends State<MyMultiChoiceQuesWidget> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Text(
-          'Q. ',
+          widget.num+'. ',
           style: TextStyle(
               fontSize: 18,
               color: HH_Colors.accentColor,

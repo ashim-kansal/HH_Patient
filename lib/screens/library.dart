@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
@@ -86,7 +85,11 @@ class _LibraryPageState extends State<LibraryPage> {
                                   ,SizedBox(height: 5,),
                                   InkWell(
                                     onTap: (){
+                                      if(snapshot.data.result[index].document.endsWith('.mp3') || snapshot.data.result[index].document.endsWith('.mp4')){
+                                        showFileInDialog(snapshot.data.result[index].document);
+                                      }else{
                                       Navigator.push( context, MaterialPageRoute( builder: (context) => ViewerPage(url: snapshot.data.result[index].document,)));
+                                      }
                                     },
                                     child: Card(child: Container(
                                     height: 30,
@@ -134,6 +137,56 @@ class _LibraryPageState extends State<LibraryPage> {
 
         ));
   }
+
+  void showFileInDialog(String document) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          // return Container(
+          //   height: MediaQuery.of(context).size.height/3,
+          //   child: Stack(
+          //     children: <Widget>[
+          //       videoView(document),
+          //       InkWell(
+          //         onTap: (){
+          //           Navigator.pop(context);
+          //         },
+          //         child: Image.asset('assets/images/ic_cross.png', height: 20, width: 20,),
+          //       )
+          //
+          //     ],
+          //   ),
+          // );
+          return videoView(document);
+        });
+  }
+
+  Widget videoView(String document) {
+    return Center(child: NativeVideoView(
+      keepAspectRatio: true,
+      showMediaController: true,
+      onCreated: (controller) {
+        controller.setVideoSource(
+          document,
+          sourceType: VideoSourceType.network,
+        );
+      },
+      onPrepared: (controller, info) {
+        controller.play();
+      },
+      onError: (controller, what, extra, message) {
+        print('Player Error ($what | $extra | $message)');
+      },
+      onCompletion: (controller) {
+        print('Video completed');
+      },
+      onProgress: (progress, duration) {
+        print('$progress | $duration');
+      },
+    ),);
+  }
+
 
 
 }

@@ -18,9 +18,10 @@ import 'package:simple_moment/simple_moment.dart';
 class HomePage extends StatefulWidget {
   static const String RouteName = '/home';
   final assessments = ['abc', 'def', 'ghi' ];
+  final ValueChanged<String> onUpdateDashboard;
 
   VoidCallback showTherapist;
-  HomePage({this.showTherapist});
+  HomePage({this.onUpdateDashboard});
 
 
   @override
@@ -60,7 +61,7 @@ class HomePageState extends State<HomePage> {
                   Navigator.pushNamed(context, SessionPage.RouteName).then((value){
                     if(value == 'fab' ) {
                       print(value);
-                      widget.showTherapist();
+                      widget.onUpdateDashboard("fab");
                     }
                   });
                 },),

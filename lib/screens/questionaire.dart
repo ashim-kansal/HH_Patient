@@ -77,11 +77,12 @@ class QuestionairePageState extends State<QuestionairePage> {
                         return ListView.separated(
                           itemBuilder: (context, index) {
                             if(snapshot.data.result[0].questions[index].questionType == "text"){
-                              return getQues(InputBoxQuestion(ques: snapshot.data.result[0].questions[index].questionText, onSelectAnswer: (answer){
+                              return getQues(InputBoxQuestion(num: index+1, ques: snapshot.data.result[0].questions[index].questionText, onSelectAnswer: (answer){
                                 widget.result.questions[index].Answer = answer;
                               },));
                             }else if(snapshot.data.result[0].questions[index].questionType == "YESNO"){
                               return getQues(AssessmentQuestionCell(
+                                  num: index+1,
                                   title: snapshot.data.result[0].questions[index].questionText,
                                   onSelectAnswer: (answer){
                                     widget.result.questions[index].Answer = answer;
@@ -91,6 +92,7 @@ class QuestionairePageState extends State<QuestionairePage> {
                               ));
                             }else {
                               return  getQues(CheckBoxQuestion(
+                                num: index+1,
                                 ques: snapshot.data.result[0].questions[index].questionText,
                                 options: snapshot.data.result[0].questions[index].options,
                                 onSelectAnswers: (answer){
