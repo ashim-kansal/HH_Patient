@@ -103,18 +103,19 @@ class AssessmentQuestionCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           quesType == 'text'
-              ? InputBoxQuestion(num: num??0, ques:title, onSelectAnswer: onSelectAnswer)
+              ? InputBoxQuestion(num: num??1, ques:title, onSelectAnswer: onSelectAnswer)
               : quesType == 'YESNO'
-                  ? getSingleChoiceQuest(title)
-                  : getMultiChoiceQuest(title),
+                  ? getSingleChoiceQuest(num??1,title)
+                  : getMultiChoiceQuest(num??1,title),
         ],
       ),
     );
   }
 
 
-  Widget getSingleChoiceQuest(String question) {
+  Widget getSingleChoiceQuest(int num, String question) {
     return MySingleChoiceQuesWidget(
+      num: num,
       ques: question??"",
       onPressYes: () {
         print("yes");
@@ -126,15 +127,15 @@ class AssessmentQuestionCell extends StatelessWidget {
       },);
   }
 
-  Widget getMultiChoiceQuest(String question) {
-    return CheckBoxQuestion(ques: question);
+  Widget getMultiChoiceQuest(int num, String question) {
+    return CheckBoxQuestion(num:num,ques: question);
   }
 }
 
 class MySingleChoiceQuesWidget extends StatefulWidget {
 
   var ques;
-  var num;
+  int num;
   VoidCallback onPressNo;
   VoidCallback onPressYes;
 
@@ -172,7 +173,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [
         Text(
-          widget.num??1.toString()+'. ',
+          (widget.num??1).toString()+'. ',
           style: TextStyle(
               fontSize: 18,
               color: HH_Colors.accentColor,

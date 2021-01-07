@@ -27,7 +27,7 @@ class CheckBoxQuestionState extends State<CheckBoxQuestion> {
       children: [
         Row(children: [
           Text(
-            widget.num??1.toString()+'. ',
+            (widget.num??1).toString()+'. ',
             style: TextStyle(
                 fontSize: 18,
                 color: HH_Colors.accentColor,

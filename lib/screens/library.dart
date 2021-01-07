@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
@@ -136,6 +135,21 @@ class _LibraryPageState extends State<LibraryPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
+          // return Container(
+          //   height: MediaQuery.of(context).size.height/3,
+          //   child: Stack(
+          //     children: <Widget>[
+          //       videoView(document),
+          //       InkWell(
+          //         onTap: (){
+          //           Navigator.pop(context);
+          //         },
+          //         child: Image.asset('assets/images/ic_cross.png', height: 20, width: 20,),
+          //       )
+          //
+          //     ],
+          //   ),
+          // );
           return videoView(document);
         });
   }

@@ -39,7 +39,7 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
       children: [
         Row(children:[
           Text(
-            widget.num??1.toString()+'. ',
+            (widget.num??1).toString()+'. ',
             style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontFamily: "ProximaNova", fontWeight: FontWeight.w500),),
           Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
         ]),

@@ -70,8 +70,8 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                             itemCount: snapshot.data.result.questions.length,
                             itemBuilder: (context, index) {
                               return widget.data.isSubmit
-                                  ? buildContainerForQuestionWithAnswer(index, snapshot.data.result.questions[index])
-                                  : buildAssessmentQuestionCellForAnswer(index, snapshot.data.result.questions[index]);
+                                  ? buildContainerForQuestionWithAnswer(index+1, snapshot.data.result.questions[index])
+                                  : buildAssessmentQuestionCellForAnswer(index+1, snapshot.data.result.questions[index]);
                             },
                             separatorBuilder: (context, index) {
                               return Divider();
@@ -124,7 +124,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
     return AssessmentQuestionCell(
       title: question.questionText,
       quesType: question.questionType,
-      num: (index+1),
+      num: index,
       completed: widget.data.isSubmit,
       onSelectAnswer: (answer){
         widget.data.questions[index].answer = answer;
