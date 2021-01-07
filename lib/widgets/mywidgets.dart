@@ -329,8 +329,6 @@ class HHEditText extends StatefulWidget {
   final VoidCallback onClickEye;
   final VoidCallback onSubmitText;
 
-  final VoidCallback onFieldSubmit;
-
   var minLines = 1;
   var maxLength = 1;
   var error = false;
@@ -342,8 +340,6 @@ class HHEditText extends StatefulWidget {
   // var controller = null;
   var inputType = TextInputType.text;
   final ValueChanged<String> onSelectAnswer;
-
-  final TextInputAction textInputAction;
 
 
   HHEditText(
@@ -361,8 +357,6 @@ class HHEditText extends StatefulWidget {
       this.enabled,
       this.showeye,
       this.onSubmitText,
-      this.onFieldSubmit,
-      this.textInputAction,
       this.onSelectAnswer})
       : super(key: key);
 
@@ -387,7 +381,6 @@ class HHEditTextState extends State<HHEditText> {
   Widget build(BuildContext context) {
 
     return TextField(
-      textInputAction: widget.textInputAction??TextInputAction.none,
       enabled: widget.enabled?? true,
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText ?? false,

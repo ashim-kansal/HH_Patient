@@ -67,8 +67,9 @@ class _LoginPageState extends State<LoginPage> {
       });
   }
 
-  void loginHandler() {
+  void loginHandler() async {
 
+    var deviceToken = await GetStringToSP("deviceToken");
 
     String email = emailController.text;
     String password = passwordController.text;
@@ -109,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
     APIService apiService = new APIService();
     buildShowDialog(context);
 
-    apiService.loginAPIHandler(email, password).then(
+    apiService.loginAPIHandler(email, password, deviceToken).then(
       (value) => {
         Navigator.of(context).pop(),
         Timer(Duration(seconds: 1),

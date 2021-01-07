@@ -29,6 +29,7 @@ import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/screens/map.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart' as upcoming;
 import 'package:flutter_app/splash.dart';
@@ -79,7 +80,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => TherapistPage(title: args.title,));
     case BookSessionPage.RouteName:
       final Result args = settings.arguments;
-
       return MaterialPageRoute(builder: (context) => BookSessionPage(data: args,));
     case MyAssessmentPage.RouteName:
       return MaterialPageRoute(builder: (context) => MyAssessmentPage());
@@ -131,6 +131,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AboutUs.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AboutUs(title: args.title));
+    case MapPage.RouteName:
+      return MaterialPageRoute(builder: (context) => MapPage());
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }

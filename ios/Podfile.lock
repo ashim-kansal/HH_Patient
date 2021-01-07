@@ -50,8 +50,16 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - google_maps_flutter (0.0.1):
+    - Flutter
+    - GoogleMaps (< 3.10)
   - GoogleDataTransport (7.5.1):
     - nanopb (~> 1.30906.0)
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
+    - GoogleMaps/Base
   - GoogleUtilities/AppDelegateSwizzler (6.7.2):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -134,6 +142,7 @@ DEPENDENCIES:
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `6.26.0`)
   - flutter_pdfview (from `Pods/.symlinks/plugins/flutter_pdfview-1.0.4/ios`)
   - flutter_plugin_android_lifecycle (from `Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios`)
+  - google_maps_flutter (from `Pods/.symlinks/plugins/google_maps_flutter-1.0.6/ios`)
   - "image_picker (from `Pods/.symlinks/plugins/image_picker-0.6.7+17/ios`)"
   - import_js_library (from `Pods/.symlinks/plugins/import_js_library-1.0.2/ios`)
   - native_video_view (from `Pods/.symlinks/plugins/native_video_view-0.3.0/ios`)
@@ -168,6 +177,7 @@ SPEC REPOS:
     - Flutter
     - FMDB
     - GoogleDataTransport
+    - GoogleMaps
     - GoogleUtilities
     - nanopb
     - PromisesObjC
@@ -189,6 +199,8 @@ EXTERNAL SOURCES:
     :path: Pods/.symlinks/plugins/flutter_pdfview-1.0.4/ios
   flutter_plugin_android_lifecycle:
     :path: Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios
+  google_maps_flutter:
+    :path: Pods/.symlinks/plugins/google_maps_flutter-1.0.6/ios
   image_picker:
     :path: "Pods/.symlinks/plugins/image_picker-0.6.7+17/ios"
   import_js_library:
@@ -254,7 +266,9 @@ SPEC CHECKSUMS:
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  google_maps_flutter: c7f9c73576de1fbe152a227bfd6e6c4ae8088619
   GoogleDataTransport: f56af7caa4ed338dc8e138a5d7c5973e66440833
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   import_js_library: 1e36c695286e1efded5c9c07583bf1d06ac44065

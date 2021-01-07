@@ -11,15 +11,13 @@ import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class APIService {
-  Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput) async {
+  Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput, String deviceToken) async {
     final url = HHString.baseURL +"/api/v1/user/login";
     print(jsonEncode(<String, String>{
       "email": emailInput,
       "password": passwordInput,
-      "deviceToken": "test"
+      "deviceToken": deviceToken??""
     }));
     
     final response = await http.post(url, 
@@ -27,7 +25,7 @@ class APIService {
       body: jsonEncode(<String, String>{
         "email": emailInput,
         "password": passwordInput,
-        "deviceToken": "test"
+        "deviceToken": deviceToken??""
       })
     );
     
@@ -43,7 +41,8 @@ class APIService {
 
   Future<SignupResponseModel> registerApiHandler(String firstname, String lastname, String email, String location, String password, String number, String country, String state, String countrycode) async {
       final url = HHString.baseURL +"/api/v1/user/signUp";
-       var language = await GetStringToSP("language");
+      var language = await GetStringToSP("language");
+      var deviceToken = await GetStringToSP("deviceToken");
       var params = {
           "appLanguage": "EN",
           "firstName": firstname,
@@ -52,7 +51,7 @@ class APIService {
           "mobileNumber": number,
           "address": location,
           "password": password,
-          "deviceToken": "",
+          "deviceToken": deviceToken??"",
           "countryCode": countrycode,
           "state": state,
           "country": country
@@ -71,7 +70,7 @@ class APIService {
           "mobileNumber": number,
           "address": location,
           "password": password,
-          "deviceToken": "",
+          "deviceToken": deviceToken??"",
           "countryCode": countrycode,
           "state": state,
           "country": country

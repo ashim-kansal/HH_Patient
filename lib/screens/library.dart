@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/screens/ViewerPage.dart';
+import 'package:flutter_app/screens/map.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -120,7 +121,14 @@ class _LibraryPageState extends State<LibraryPage> {
               color: Colors.white,
               padding: EdgeInsets.all(20),
               margin: EdgeInsets.only(left: 20, right: 20),
-              child: HHButton(title: HHString.search_pharma,type: 1,isEnable: true,textSize: 18,),
+              child: HHButton(
+                title: HHString.search_pharma,
+                type: 1,
+                isEnable: true,
+                textSize: 18,
+                onClick: (){
+                  Navigator.pushNamed(context, MapPage.RouteName);
+                },),
             ),
           ],
 
