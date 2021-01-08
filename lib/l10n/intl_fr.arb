@@ -1,7 +1,7 @@
 {
   "@@locale": "fr",
   "@@last_modified": "2021-01-08T06:52:37.130942",
-  "Hey World": "Hey World",
+  "Hey World": "Hey hola",
   "@Hey World": {
     "type": "text",
     "placeholders": {}
@@ -56,7 +56,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "Select Language": "Select Language",
+  "Select Language": "Modifier la langue",
   "@Select Language": {
     "type": "text",
     "placeholders": {}

@@ -38,7 +38,7 @@ dependencies:
   meta: ^1.1.6
   equatable: ^1.0.0
   dson:
-  shared_preferences: ^0.5.12
+  shared_preferences: ^0.5.7+2
   image_picker: ^0.6.7+17
   simple_moment: ^1.0.7
   mime: ^0.9.7

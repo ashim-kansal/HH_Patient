@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 
 class _MyAppState extends State<MyApp> {  // This widget is the root of your application.
-  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('es', 'ES'));
+  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', 'US'));
 
   @override
   Widget build(BuildContext context) {
