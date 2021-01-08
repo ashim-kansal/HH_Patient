@@ -31,4 +31,5 @@ class HH_Colors{
   static const color_707070 = Color(0xff707070);
   static const color_3D3D3D = Color(0xff3D3D3D);
   static const color_32a852 = Color(0xff32a852);
+  static const color_343333 = Color(0xff343333);
 }

@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/MyProgramsProvider.dart';
 import 'package:flutter_app/model/GetProgramsResponse.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
+import 'package:stripe_payment/stripe_payment.dart';
 
 class MyPlans extends StatefulWidget {
   static const String RouteName = '/planwidget';
@@ -23,30 +26,31 @@ class MyPlansState extends State<MyPlans> {
     initialPage: 0,
   );
 
-  // Token _paymentToken;
-  // PaymentMethod _paymentMethod;
-  // String _error;
-  // final String _currentSecret = "sk_test_51HpT2LCqtD4cxQPsXTUC40N2Eloiyw91WdjH09qYPUpxmTt2hiXq0vqI13gNWpJ8lqzbsAgR6XHECWE07shIUWG900UDpAxVn3"; //set this yourself, e.g using curl
-  // PaymentIntentResult _paymentIntent;
-  // Source _source;
+  Token _paymentToken;
+  PaymentMethod _paymentMethod;
+  String _error;
+  final String _currentSecret = "sk_test_51HpT2LCqtD4cxQPsXTUC40N2Eloiyw91WdjH09qYPUpxmTt2hiXq0vqI13gNWpJ8lqzbsAgR6XHECWE07shIUWG900UDpAxVn3"; //set this yourself, e.g using curl
+  PaymentIntentResult _paymentIntent;
+  Source _source;
 
-  // final CreditCard testCard = CreditCard(
-  //   number: '4111111111111111',
-  //   expMonth: 08,
-  //   expYear: 22,
-  // );
+  final CreditCard testCard = CreditCard(
+    number: '4111111111111111',
+    expMonth: 08,
+    expYear: 22,
+  );
 
 
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   @override
   void initState() {
-    // StripePayment.setOptions(
-    //     StripeOptions(
-    //         publishableKey:"pk_test_51HpT2LCqtD4cxQPsFF7QxxGBIrDz3Y9e8Obc1zfdtuZLn3AePI5hbHUKS6zqYxalohLN3TSgrUvUe2tolkH8fuEf00p9PQAOi3",
-    //         //YOUR_PUBLISHABLE_KEY
-    //         merchantId: "Test",//YOUR_MERCHANT_ID
-    //         androidPayMode: 'test'
-    //     ));
+    StripePayment.setOptions(
+        StripeOptions(
+            publishableKey:"pk_test_51HpT2LCqtD4cxQPsFF7QxxGBIrDz3Y9e8Obc1zfdtuZLn3AePI5hbHUKS6zqYxalohLN3TSgrUvUe2tolkH8fuEf00p9PQAOi3",
+            //YOUR_PUBLISHABLE_KEY
+            merchantId: "Test",//YOUR_MERCHANT_ID
+            androidPayMode: 'test'
+        ));
     super.initState();
   }
   @override
@@ -94,7 +98,7 @@ class MyPlansState extends State<MyPlans> {
                   ],
                 );
               } else
-                return                Center(child: CircularProgressIndicator());
+                return Center(child: CircularProgressIndicator());
 
             })
     );
@@ -107,17 +111,46 @@ class MyPlansState extends State<MyPlans> {
     // }).catchError((setError){
     //   print(setError);
     // });
+    const options = {
+      "requiredBillingAddressFields": 'full',
+      "prefilledInformation": {
+        "billingAddress": {
+          "name": 'Gunilla Haugeh',
+          "line1": 'Canary Place',
+          "line2": '3',
+          "city": 'Macon',
+          "state": 'Georgia',
+          "country": 'US',
+          "postalCode": '31217',
+        },
+      },
+    };
 
-     buyPlan(id, paymentAmount).then((value) => {
-      if(value.responseCode == 200){
-        // Navigator.pop(context),
-        // if(!widget.isUpdate){
-        Navigator.pop(context),
-        Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
-        // }
-    
-      }
+    StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest())
+        .then((paymentMethod) {
+        
     });
+
+    // StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest()).then((paymentMethod) {
+    //   print(paymentMethod.id);
+    //   print(JsonEncoder.withIndent('  ').convert(paymentMethod?.toJson() ?? {}));
+    //   print(paymentMethod.card.number);
+    //   // print(paymentMethod.billingDetails.name);
+    //   // print(paymentMethod.customerId);
+    // }).catchError((setError){
+    //   print(setError);
+    // });
+
+    //  buyPlan(id, paymentAmount).then((value) => {
+    //   if(value.responseCode == 200){
+    //     // Navigator.pop(context),
+    //     // if(!widget.isUpdate){
+    //     // Navigator.pop(context),
+    //     // Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+    //     // }
+    
+    //   }
+    // });
    
   }
 

@@ -28,6 +28,10 @@ class _MapState extends State<MapPage> {
 
   Completer<GoogleMapController> _controller = Completer();
 
+  void _onMapCreated(GoogleMapController controller) {
+    _controller.complete(controller);
+  }
+
   final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(43.651070, -79.347015),
     zoom: 14.4746,
@@ -58,9 +62,7 @@ class _MapState extends State<MapPage> {
               child: GoogleMap(
                           mapType: MapType.terrain,
                           initialCameraPosition: _kGooglePlex,
-                          onMapCreated: (GoogleMapController controller) {
-                            _controller.complete(controller);
-                          },
+                          onMapCreated: _onMapCreated,
                         )
                       ),
         ));
