@@ -243,12 +243,6 @@ class _ConferenceButtonBarState extends State<ConferenceButtonBar> with AfterLay
             key: Key('switch-camera-button'),
             onPressed: () => _onPressed(widget.onSwitchCamera),
           ),
-          CircleButton(
-            child: const Icon(Icons.person_add, color: Colors.white),
-            key: Key('add-person-button'),
-            onPressed: () => _onPressed(widget.onPersonAdd),
-            onLongPress: () => _onPressed(widget.onPersonRemove),
-          ),
           if (hasFlash)
             CircleButton(
               child: Icon(flashEnabled ? Icons.highlight_off : Icons.highlight, color: Colors.white),

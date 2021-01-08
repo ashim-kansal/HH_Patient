@@ -40,7 +40,9 @@ class LanguagePageState extends State<LanguagePage> {
     settingAPIService.UpdateLanguage(lang).then((value) => {
       if(value.responseCode == 200){
         showToast(value.responseMessage),
-        AppLocalizations.load(Locale(lang, lang == 'en' ? 'US' : lang == 'es' ? 'AR' : 'fr_FR'))
+        print(lang),
+        print(lang == 'en' ? 'US' : lang == 'es' ? 'AR' : 'fr_FR'),
+        AppLocalizations.load(Locale(lang, ''))
         }
     });
   }
@@ -84,6 +86,7 @@ class LanguagePageState extends State<LanguagePage> {
                         setState(() {
                           selectedLang = "EN";
                         });
+                        AppLocalizations.load(Locale('en', 'US'));
 
                         this.changeLanguage("EN");
 
@@ -124,6 +127,8 @@ class LanguagePageState extends State<LanguagePage> {
                         setState(() {
                           selectedLang = "FR";
                         });
+                        AppLocalizations.load(Locale('fr', 'fr_FR'));
+
                         this.changeLanguage("FR");
                       },
                     ))
@@ -159,6 +164,7 @@ class LanguagePageState extends State<LanguagePage> {
                         setState(() {
                           selectedLang = "ES";
                         });
+                        AppLocalizations.load(Locale('es', 'AR'));
                         this.changeLanguage("ES");
                       },
                     ))

@@ -144,7 +144,7 @@ class BookSessionState extends State<BookSessionPage>{
             (value) => {
 
           print(value.responseCode),
-          if (value.responseCode == 200) {
+          if(value.responseCode == 200) {
             showToast(context, value.responseMessage),
             Navigator.pop(context),
             Navigator.pushNamed(context, Dashboard.RouteName)

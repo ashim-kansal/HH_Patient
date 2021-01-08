@@ -69,6 +69,7 @@ class SettingsPageState extends State<SettingsPage>{
       InkWell(
         onTap: (){
           // Navigator.pop(context);
+          print(language);
           Navigator.pushNamed(context, LanguagePage.RouteName, arguments: LanguageArguments(language));
         },
         child:
