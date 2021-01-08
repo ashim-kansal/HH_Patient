@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/Assessment_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetAssessmentResponse.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
-import 'package:flutter_app/utils/allstrings.dart';
-import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/assessment_cell.dart';
 
 class MyAssessmentPage extends StatefulWidget{
@@ -24,7 +23,7 @@ class MyAssessmentState extends State<MyAssessmentPage>{
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              return Center(child: Text(HHString.error),);
+              return Center(child: Text(AppLocalizations.of(context).error),);
             }
             return Container(
               child: ListView.separated(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/StaticContent.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -30,7 +31,7 @@ class _TermsState extends State<TermsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(HHString.tems_condi, style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).tems_condi, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -61,7 +62,7 @@ class _TermsState extends State<TermsPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState == ConnectionState.done) {
                               if(snapshot.hasError){
-                                return Center(child: Text(HHString.error),);
+                                return Center(child: Text(AppLocalizations.of(context).error),);
                               }
                               return  Container(
                                 // height: MediaQuery.of(context).size.height,

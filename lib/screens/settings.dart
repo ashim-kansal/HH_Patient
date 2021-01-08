@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
@@ -63,7 +64,7 @@ class SettingsPageState extends State<SettingsPage>{
   }
 
   @override
-  Widget build(BuildContext context) => MyWidget(title: HHString.settings, child: Column(
+  Widget build(BuildContext context) => MyWidget(title: AppLocalizations.of(context).settings, child: Column(
     children: [
       InkWell(
         onTap: (){
@@ -78,7 +79,7 @@ class SettingsPageState extends State<SettingsPage>{
               children: [
                 Image.asset('assets/images/ic_change_language.png', height: 20, width: 20, color: HH_Colors.color_949494,),
                 SizedBox(width: 10,),
-                Text(HHString.change_language, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                Text(AppLocalizations.of(context).change_language, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
               ],
             ),
             Container(
@@ -100,7 +101,7 @@ class SettingsPageState extends State<SettingsPage>{
                 children: [
                   Image.asset('assets/images/ic_password.png',height: 20, width: 20, color: HH_Colors.color_949494),
                   SizedBox(width: 10,),
-                  Text(HHString.change_password, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                  Text(AppLocalizations.of(context).change_password, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
                 ],
               ),
               Container(
@@ -120,7 +121,7 @@ class SettingsPageState extends State<SettingsPage>{
               children: [
                 Icon(Icons.notifications_on_outlined, size: 20, color: HH_Colors.color_949494,),
                 SizedBox(width: 10,),
-                Text(HHString.Notifications, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                Text(AppLocalizations.of(context).Notifications, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
               ],
             ),
             Container(
@@ -151,7 +152,7 @@ class SettingsPageState extends State<SettingsPage>{
               children: [
                 Image.asset('assets/images/ic_programs.png',height: 20, width: 20, color: HH_Colors.color_949494),
                 SizedBox(width: 10,),
-                Text(HHString.program_, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                Text(AppLocalizations.of(context).program_, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
               ],
             ),
             Container(

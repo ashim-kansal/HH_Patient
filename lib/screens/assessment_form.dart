@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/Assessment_services.dart';
 import 'package:flutter_app/model/GetAssessmentResponse.dart' as Response;
 import 'package:flutter_app/model/SubmittedAssessmentResponse.dart';
@@ -42,7 +43,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
-                    return Center(child: Text(HHString.error),);
+                    return Center(child: Text(AppLocalizations.of(context).error),);
                   }
 
                   SchedulerBinding.instance.addPostFrameCallback((_){
@@ -83,7 +84,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                       widget.data.isSubmit
                           ? Container()
                           : HHButton(
-                          title: HHString.submit, type: 2, isEnable: true, onClick: () {submitForm();
+                          title: AppLocalizations.of(context).submit, type: 2, isEnable: true, onClick: () {submitForm();
                       }),
                     ],
                   );

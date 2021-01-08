@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/JournalingListModel.dart' as NewJournal;
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
@@ -84,7 +85,7 @@ class JournalPageState extends State<JournalPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-      title: HHString.Journaling,
+      title: AppLocalizations.of(context).Journaling,
       child: Container(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -94,7 +95,7 @@ class JournalPageState extends State<JournalPage> {
               children: [
                 Flexible(
                   child: HHButton(
-                    title: HHString.NewJournal,
+                    title: AppLocalizations.of(context).NewJournal,
                     type: 3,
                     textSize: 18,
                     isEnable: isSwitched,
@@ -108,7 +109,7 @@ class JournalPageState extends State<JournalPage> {
                 ),
                 Flexible(
                   child: HHButton(
-                    title: HHString.oldJournal,
+                    title: AppLocalizations.of(context).oldJournal,
                     type: 3,
                     textSize: 18,
                     isEnable: !isSwitched,
@@ -148,7 +149,7 @@ class JournalPageState extends State<JournalPage> {
                   builder: (builder, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       if(snapshot.hasError){
-                        return HHTextView(title: HHString.no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                        return HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                       }
 
                       SchedulerBinding.instance.addPostFrameCallback((_){
@@ -218,7 +219,7 @@ class JournalPageState extends State<JournalPage> {
             ),
 
             HHButton(
-              title: HHString.submit,
+              title: AppLocalizations.of(context).submit,
               type: 4,
               isEnable: true,
               onClick: (){

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/screens/ViewerPage.dart';
@@ -45,7 +46,7 @@ class _LibraryPageState extends State<LibraryPage> {
                 builder: (builder, snapshot){
                   if (snapshot.connectionState == ConnectionState.done) {
                     if(snapshot.hasError){
-                      return Center(child: Text(HHString.error),);
+                      return Center(child: Text(AppLocalizations.of(context).error),);
                     }
                     return GridView.builder(
                     // Create a grid with 2 columns. If you change the scrollDirection to
@@ -95,7 +96,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                     height: 30,
                                     width: 100,
                                     child: Center(
-                                      child: Text(HHString.open, style: TextStyle(fontSize: 16,
+                                      child: Text(AppLocalizations.of(context).open, style: TextStyle(fontSize: 16,
                                           fontFamily: "ProximaNova", color: Colors.white),),
                                     ),
                                     decoration: BoxDecoration(
@@ -125,7 +126,7 @@ class _LibraryPageState extends State<LibraryPage> {
               padding: EdgeInsets.all(20),
               margin: EdgeInsets.only(left: 20, right: 20),
               child: HHButton(
-                title: HHString.search_pharma,
+                title: AppLocalizations.of(context).search_pharma,
                 type: 1,
                 isEnable: true,
                 textSize: 18,

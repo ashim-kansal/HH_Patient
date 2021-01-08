@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/model/NotificationListRepsonse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -31,17 +32,17 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
 
-    return MyWidget( title: HHString.Notification,
+    return MyWidget( title: AppLocalizations.of(context).Notification,
         child:FutureBuilder<NotificationListRepsonse>(
             future: getNotifications() ,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return Center(child: Text(HHString.not_data_found),);
+                  return Center(child: Text(AppLocalizations.of(context).not_data_found),);
                 }
 
                 if(snapshot.data.result.length == 0){
-                  return Center(child: Text(HHString.no_record_found),);
+                  return Center(child: Text(AppLocalizations.of(context).no_record_found),);
                 }
 
                 // setState(() {

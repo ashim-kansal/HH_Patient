@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/login.dart';
@@ -82,7 +83,7 @@ class DashboardState extends State<Dashboard> {
       Scaffold(
         
         appBar: AppBar(
-          title: Text(HHString.dashboard, style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).dashboard, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -165,7 +166,7 @@ class DashboardState extends State<Dashboard> {
                
               ),
               HHDrawerItem(
-                  title: HHString.mychat, icon: 'assets/images/ic_chat.png', onClick: (){
+                  title: AppLocalizations.of(context).mychat, icon: 'assets/images/ic_chat.png', onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, ChatListPage.RouteName);
               },),
@@ -174,7 +175,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: HHString.my_programs, icon: 'assets/images/ic_prgrams.png', onClick: (){
+                  title: AppLocalizations.of(context).my_programs, icon: 'assets/images/ic_prgrams.png', onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, CurrentPlansPage.RouteName);
               }),
@@ -183,7 +184,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: HHString.Settings, icon: 'assets/images/ic_settings.png', onClick: (){
+                  title: AppLocalizations.of(context).Settings, icon: 'assets/images/ic_settings.png', onClick: (){
                     Navigator.pop(context);
                     Navigator.pushNamed(context, SettingsPage.RouteName);
               },),
@@ -201,12 +202,12 @@ class DashboardState extends State<Dashboard> {
               //   height: 1,
               // ),
               HHDrawerItem(
-                  title: HHString.Support, icon: 'assets/images/ic_support.png'),
+                  title: AppLocalizations.of(context).Support, icon: 'assets/images/ic_support.png'),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: HHString.Contact_Us, onClick: (){
+              HHDrawerItem2(title: AppLocalizations.of(context).Contact_Us, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, FeedbackPage.RouteName);
               },),
@@ -214,7 +215,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: HHString.FAQ, onClick: (){
+              HHDrawerItem2(title: AppLocalizations.of(context).FAQ, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, FaqPage.RouteName);
               }),
@@ -223,12 +224,12 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: HHString.more_info, icon: 'assets/images/ic_info.png'),
+                  title: AppLocalizations.of(context).more_info, icon: 'assets/images/ic_info.png'),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: HHString.about_us, onClick: (){
+              HHDrawerItem2(title: AppLocalizations.of(context).about_us, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('About Us',false ));
               },),
@@ -236,7 +237,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: HHString.tnc, onClick: (){
+              HHDrawerItem2(title: AppLocalizations.of(context).tnc, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, TermsPage.RouteName, arguments: ScreenArguments('Terms & Conditions',false ));
               }),
@@ -244,7 +245,7 @@ class DashboardState extends State<Dashboard> {
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: HHString.privacy, onClick: (){
+              HHDrawerItem2(title: AppLocalizations.of(context).privacy, onClick: (){
                 Navigator.pop(context);
                 Navigator.pushNamed(context, PrivacyPolicy.RouteName, arguments: ScreenArguments('Privacy Policy',false ));
               }),
@@ -253,7 +254,7 @@ class DashboardState extends State<Dashboard> {
                 height: 1,
               ),
               HHDrawerItem(
-                  title: HHString.logout, icon: 'assets/images/ic_logout.png',
+                  title: AppLocalizations.of(context).logout, icon: 'assets/images/ic_logout.png',
                   onClick: (){
                     showDialog(context: context,
                        builder: (BuildContext dialogContext) {
@@ -296,20 +297,20 @@ class DashboardState extends State<Dashboard> {
             items: [
               BottomNavigationBarItem(
                   icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
-                title: Text(HHString.home),
+                title: Text(AppLocalizations.of(context).home),
 
   ),
               BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 25, width: 25,),
-                title: Text(HHString.library),
+                title: Text(AppLocalizations.of(context).library),
 
               ),
               BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 25, width: 25,),
-                title: Text(HHString.assessment),
+                title: Text(AppLocalizations.of(context).assessment),
               ),BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 3?'assets/images/ic_therapists_select.png':'assets/images/ic_therapists.png' , height: 25, width: 25,),
-                title: Text(HHString.therapists),
+                title: Text(AppLocalizations.of(context).therapists),
               ),
             ]
         ),

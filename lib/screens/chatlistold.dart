@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
@@ -33,7 +34,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(HHString.mychat, style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).mychat, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -58,7 +59,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     if(snapshot.hasError){
                       return Container(
                         child: Center(
-                          child: HHTextView(title: HHString.no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                          child: HHTextView(title: AppLocalizations.of(context).no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                         ),
                       );
                     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -34,7 +35,7 @@ class ReviewState extends State<ReviewPage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return new MyWidget(
-      title: HHString.share_reviews,
+      title: AppLocalizations.of(context).share_reviews,
       child: new Container(
         child: new Column(
           children: <Widget>[
@@ -159,7 +160,7 @@ class ReviewState extends State<ReviewPage> {
                         controller: reviewController,
                         error: widget.error,
                         errorText:
-                        HHString.please_enter_review,
+                        AppLocalizations.of(context).please_enter_review,
                         textarea: true,
                         minLines: 4,
                       ),
@@ -175,7 +176,7 @@ class ReviewState extends State<ReviewPage> {
                 padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                 child: HHButton(
                   isEnable: true,
-                  title: HHString.submit,
+                  title: AppLocalizations.of(context).submit,
                   type: 4,
                   onClick: () {
                     

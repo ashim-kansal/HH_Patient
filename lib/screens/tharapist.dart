@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
@@ -39,11 +40,11 @@ class _TherapistState extends State<TherapistPage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
-                      return Center(child: Text(HHString.error),);
+                      return Center(child: Text(AppLocalizations.of(context).error),);
                     }
 
                     if(snapshot.data.result.length == 0){
-                      return Center(child: Text(HHString.no_record_found),);
+                      return Center(child: Text(AppLocalizations.of(context).no_record_found),);
                     }
 
                     // setState(() {
@@ -155,17 +156,17 @@ class TherapistOptionsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-         TherapistOptionItem(title: HHString.Therapist, image: 'assets/images/ic_therapist.png', onClick: (){
+         TherapistOptionItem(title: AppLocalizations.of(context).Therapist, image: 'assets/images/ic_therapist.png', onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
           },),
           SizedBox(height: 50,),
-          TherapistOptionItem(title: HHString.Physician, image: 'assets/images/ic_physician.png', onClick: (){
+          TherapistOptionItem(title: AppLocalizations.of(context).Physician, image: 'assets/images/ic_physician.png', onClick: (){
             Navigator.pop(context);
             Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Physician',false));
           },),
           SizedBox(height: 50,),
-         TherapistOptionItem(title: HHString.case_manager, image: 'assets/images/ic_case_manager.png', onClick: (){
+         TherapistOptionItem(title: AppLocalizations.of(context).case_manager, image: 'assets/images/ic_case_manager.png', onClick: (){
 
            Navigator.pop(context);
            Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Case manager',false));
