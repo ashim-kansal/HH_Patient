@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -50,7 +51,7 @@ class FeedbackPageState extends State<FeedbackPage> {
           context: context,
           builder: (BuildContext dialogContext) {
             return DialogWithImage(
-              title: value.responseMsg,
+              content: value.responseMsg,
               onClick: (){
                 Navigator.pop(context);
               }
@@ -71,7 +72,7 @@ class FeedbackPageState extends State<FeedbackPage> {
 
 @override
 Widget build(BuildContext context) => MyWidget(
-  title: HHString.Contact_Us,
+  title: AppLocalizations.of(context).Contact_Us,
   child: Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -80,7 +81,7 @@ Widget build(BuildContext context) => MyWidget(
         child: Column(children: [
           HHTextView(
             color: HH_Colors.color_707070,
-            title: HHString.please_contact_us,
+            title: AppLocalizations.of(context).please_contact_us,
             size: 16,
               textweight:FontWeight.w600
           ),
@@ -91,12 +92,12 @@ Widget build(BuildContext context) => MyWidget(
             minLines: 5,
             controller: feedbackController,
             error: error,
-            errorText: HHString.please_enter_feedback,
+            errorText: AppLocalizations.of(context).please_enter_feedback,
           ),
       ])),
       Container(
         margin: EdgeInsets.only(left: 20, right: 30),
-        child:       HHButton(title: HHString.send, type: 4, onClick: () => {
+        child:       HHButton(title: AppLocalizations.of(context).send, type: 4, onClick: () => {
           _feedbackHandler()
         },)
       )

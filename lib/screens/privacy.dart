@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/StaticContent.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -30,7 +31,7 @@ class _TermsState extends State<PrivacyPolicy> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(HHString.privacy, style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).privacy, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

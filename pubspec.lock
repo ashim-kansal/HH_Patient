@@ -50,20 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-  boolean_selector:
-    dependency: transitive
-    description:
-      name: boolean_selector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.0-nullsafety.1"
   build:
     dependency: transitive
     description:
       name: build
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.0"
+    version: "1.6.1"
   built_mirrors:
     dependency: transitive
     description:
@@ -197,13 +190,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.5"
-  fake_async:
-    dependency: transitive
-    description:
-      name: fake_async
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0-nullsafety.1"
   ffi:
     dependency: transitive
     description:
@@ -312,11 +298,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.19.1"
-  flutter_test:
-    dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -393,14 +374,14 @@ packages:
     source: hosted
     version: "1.0.2"
   intl:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.17.0-nullsafety.2"
+    version: "0.16.1"
   intl_translation:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: intl_translation
       url: "https://pub.dartlang.org"
@@ -468,7 +449,7 @@ packages:
       name: node_io
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   open_file:
     dependency: "direct main"
     description:
@@ -712,14 +693,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0-nullsafety.1"
-  stream_channel:
-    dependency: transitive
-    description:
-      name: stream_channel
-      url: "https://pub.dartlang.org"
-    source: hosted
-<<<<<<< HEAD
-    version: "2.1.0-nullsafety.3"
   stream_transform:
     dependency: transitive
     description:
@@ -727,9 +700,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-=======
-    version: "2.1.0-nullsafety.1"
->>>>>>> 20d0f81836ae78c6c4aff55820bc798dccbe102f
   string_scanner:
     dependency: transitive
     description:
@@ -758,13 +728,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0-nullsafety.1"
-  test_api:
-    dependency: transitive
-    description:
-      name: test_api
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.19-nullsafety.2"
   toast:
     dependency: "direct main"
     description:

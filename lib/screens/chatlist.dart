@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/ChatList.dart';
@@ -27,7 +28,7 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: HHString.mychat, child: Container(
+    return MyWidget(title: AppLocalizations.of(context).mychat, child: Container(
       child: FutureBuilder<GetChatUsers>(
         future: getChatList(""),
         builder: (context, snapshot) {
@@ -36,7 +37,7 @@ class _ChatListPageState extends State<ChatListPage> {
             if(snapshot.hasError){
               return Container(
                 child: Center(
-                  child: HHTextView(title: HHString.no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                  child: HHTextView(title: AppLocalizations.of(context).no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                 ),
               );
             }

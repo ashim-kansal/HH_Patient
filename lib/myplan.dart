@@ -2,10 +2,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/MyProgramsProvider.dart';
 import 'package:flutter_app/model/GetProgramsResponse.dart';
+import 'package:flutter_app/screens/payment.dart';
 import 'package:flutter_app/screens/questionaire.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
 import 'package:stripe_payment/stripe_payment.dart';
@@ -56,13 +57,13 @@ class MyPlansState extends State<MyPlans> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: HHString.hh,
+        title: AppLocalizations.of(context).hh,
         child: FutureBuilder<GetProgramsResponse>(
             future: getAllPrograms(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return Center(child: Text(HHString.error),);
+                  return Center(child: Text(AppLocalizations.of(context).error),);
                 }
 
                 return Column(
@@ -87,9 +88,8 @@ class MyPlansState extends State<MyPlans> {
                                desc: snapshot.data.result[position].description,
                                price: snapshot.data.result[position].amount,
                                onClick: () {
-                                 buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
-
-
+                                 Navigator.pushNamed(context, Payment.RouteName, arguments: PaymentArguments(snapshot.data.result[position]));
+                                //  buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
                                },
                              );
                            },

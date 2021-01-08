@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -111,7 +112,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
 
   @override
   Widget build(BuildContext context) => MyWidget(
-      title: HHString.change_password,
+      title: AppLocalizations.of(context).change_password,
       child: Container(
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.all(20),
@@ -121,7 +122,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
             Column(
               children: [
                 HHEditText(
-                    hint: HHString.old_password,
+                    hint: AppLocalizations.of(context).old_password,
                     obscureText: secureOld,
                     controller: oldPasswordController,
                     error: errorOld,
@@ -136,7 +137,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: HHString.new_password,
+                    hint: AppLocalizations.of(context).new_password,
                     obscureText: secureNew,
                     controller: newPasswordController,
                     error: errorNew,
@@ -151,7 +152,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: HHString.confirm_password,
+                    hint: AppLocalizations.of(context).confirm_password,
                     obscureText: secureConfirm,
                     controller: cPasswordController,
                     error: errorConfirm,
@@ -166,7 +167,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 )
               ],
             ),
-            HHButton(title: HHString.save, type: 4, isEnable: true,
+            HHButton(title: AppLocalizations.of(context).save, type: 4, isEnable: true,
             onClick: (){ passwordHandler();},)
           ],
         ),

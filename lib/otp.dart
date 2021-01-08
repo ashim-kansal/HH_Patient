@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/myplan.dart';
@@ -322,7 +323,7 @@ class _OtpState extends State<OtpPage> {
     
 
     return MyWidget(
-      title: HHString.otp_verification,
+      title: AppLocalizations.of(context).otp_verification,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -348,7 +349,7 @@ class _OtpState extends State<OtpPage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                         child: Text(
-                          HHString.pls_enter_reg_email,
+    AppLocalizations.of(context).pls_enter_reg_email,
                           style: TextStyle(color: Color(0xff8d8d8d)),
                           textAlign: TextAlign.center,
                         ),
@@ -383,7 +384,7 @@ class _OtpState extends State<OtpPage> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(HHString.resend_code+' $_start'),
+                            Text(AppLocalizations.of(context).resend_code+' $_start'),
                             RaisedButton(
 
                                 child: Icon(Icons.arrow_right_alt_rounded,
@@ -417,7 +418,7 @@ class _OtpState extends State<OtpPage> {
                                   text: '',
                                   style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                                   children: <TextSpan>[
-                                    TextSpan(text: HHString.Resend_OTP,
+                                    TextSpan(text: AppLocalizations.of(context).Resend_OTP,
                                       style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () => {

@@ -40,13 +40,80 @@ class SessionCard extends StatelessWidget {
           },
           child:  Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child:Column(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10,),
+                Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                SizedBox(height: 15,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                    data.therapistId.profilePic == ""?
+                    Image.asset(
+                      'assets/images/ic_avatar.png',
+                      height: 18,
+                      width: 18,
+                    ) : CircleAvatar(
+                      backgroundImage: NetworkImage(data.therapistId.profilePic),
+                      radius: 18,
+                    ),
+                    SizedBox(width: 10,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
+                        Text(data.therapistId.role??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ButtonTheme(
+                              height: 40,
+                              minWidth: 40,
+                              child: FlatButton(
+                                color: Colors.white,
+                                child: Icon(Icons.chat
+                                  , color: HH_Colors.primaryColor, size: 20,),
+                                onPressed: (){
+                                  print('receiverId  : '+data.therapistId.id);
+                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
+                                },
+                                shape: CircleBorder(                            side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                              ),
+                            ),
+                            ButtonTheme(
+                                height: 40,
+                                minWidth: 40,
+                                child: FlatButton(
+                                  color: Colors.white,
+                                  child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 20,),
+                                  onPressed: (){
+                                    onClickVideo();
+                                  },
+                                  shape: CircleBorder(                            side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                                )),
+
+                          ],
+                        )
+
+                      ],
+                    )
+                  ],
+                ),
+
+              ],
+            ),
+                Column(
+                  children: [
                     HHOptionButton(onClickCancel: (){
                       showDialog(context: context,
                         builder: (BuildContext dialogContext) {
@@ -74,79 +141,10 @@ class SessionCard extends StatelessWidget {
                       );
                     }, onClickReSchedule: (){
                       Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
-                    },)
-                  ],
+                    },),],
                 ),
-                // SizedBox(height: 5,),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    data.therapistId.profilePic == ""?
-                    Image.asset(
-                      'assets/images/ic_avatar.png',
-                      height: 18,
-                      width: 18,
-                    ) : CircleAvatar(
-                      backgroundImage: NetworkImage(data.therapistId.profilePic),
-                      radius: 18,
-                      // Image.network(profileImage,
-                      // height: 50,
-                      // width: 50,),
-                    ),
-                    SizedBox(width: 10,),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        Row(
-                            children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
-                            ]),
-                        Row(
-                            children: [Text(data.therapistId.role??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
-                            ]),
-                        Row(
-                          children: [
-                            ButtonTheme(
-                              height: 40,
-                              minWidth: 40,
-                              child: RaisedButton(
-                                color: Colors.white,
-                                child: Icon(Icons.chat
-                                  , color: HH_Colors.primaryColor, size: 18,),
-                                onPressed: (){
-                                  print('receiverId  : '+data.therapistId.id);
-                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
-                                },
-                                shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
-                              ),
-                            ),
-
-                            ButtonTheme(
-                                height: 40,
-                                minWidth: 40,
-                                child: RaisedButton(
-                                  color: Colors.white,
-                                  child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                                  onPressed: (){
-                                    onClickVideo();
-                                  },
-                                  shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
-                                )),
-
-                          ],
-                        )
-
-                      ],
-                    )
-                  ],
-                ),
-
-
-
-
               ],
-            ),
+            )
           ),
         )
         ));
@@ -326,13 +324,13 @@ class UpcomingSessionItem extends StatelessWidget {
                       ButtonTheme(
                         height: 35,
                         minWidth: 35,
-                        child: RaisedButton(
+                        child: FlatButton(
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
                             Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
                           },
-                          shape: CircleBorder( side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
+                          shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
 
                         ),
                       ),
@@ -340,14 +338,14 @@ class UpcomingSessionItem extends StatelessWidget {
                       ButtonTheme(
                           height: 35,
                           minWidth: 35,
-                          child: RaisedButton(
+                          child: FlatButton(
 
                               color: Colors.white,
                               child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                               onPressed: (){
                                 Navigator.pushNamed(context, ReviewPage.RouteName);
                               },
-                            shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
+                            shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){
                         showDialog(context: context,

@@ -653,6 +653,7 @@ class DrinkingDiaryCell extends StatelessWidget {
 class DialogWithImage extends StatelessWidget {
   final String title;
   final String content;
+  final String imageSrc;
   final List<Widget> actions;
   VoidCallback onClick;
 
@@ -660,6 +661,7 @@ class DialogWithImage extends StatelessWidget {
     this.title,
     this.content,
     this.onClick,
+    this.imageSrc,
     this.actions = const [],
   });
 
@@ -671,36 +673,52 @@ class DialogWithImage extends StatelessWidget {
         child: Container(
           height: 220,
           width: 200,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                      onClick();
-                    },
-                    child: Container(
-                      child: Center(
+          child: new GestureDetector(
+            onTap: (){
+              onClick();
+            },
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  InkWell(
+                      onTap: () {
+                        // Navigator.pop(context);
+                        // onClick();
+                      },
+                      child: Container(
+                        child: Center(
                           child: Image.asset(
-                        "assets/images/thumb.png",
-                        height: 80,
-                        width: 80,
+                            imageSrc??"assets/images/thumb.png",
+                            height: 80,
+                            width: 80,
+                          )
+                        ),
                       )),
-                    )),
-                SizedBox(
-                  height: 20,
-                ),
-                HHTextView(
-                  title: title,
-                  size: 16,
-                  textweight: FontWeight.w300,
-                  color: HH_Colors.color_707070,
-                  alignment: TextAlign.center,
-                ),
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  HHTextView(
+                    title: title??"",
+                    size: 18,
+                    textweight: FontWeight.w600,
+                    color: HH_Colors.color_3D3D3D,
+                    alignment: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  HHTextView(
+                    title: content,
+                    size: 16,
+                    textweight: FontWeight.w300,
+                    color: HH_Colors.color_707070,
+                    alignment: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
         ));

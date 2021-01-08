@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/MyProgramsProvider.dart';
 import 'package:flutter_app/model/MyPlanResponse.dart';
 import 'package:flutter_app/myplan.dart';
@@ -19,13 +20,13 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-      title: HHString.hh,
+      title: AppLocalizations.of(context).hh,
       child: FutureBuilder<MyPlanResponse>(
           future: getMyPrograms(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
-                return Center(child: Text(HHString.error),);
+                return Center(child: Text(AppLocalizations.of(context).error),);
               }
 
               return Column(
@@ -121,7 +122,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
 
                   ),
                   HHButton(
-                    title: HHString.UpgradeNow,
+                    title: AppLocalizations.of(context).UpgradeNow,
                     type: 1,
                     isEnable: true,
                     onClick: () {
@@ -151,13 +152,13 @@ class CancelPlansPageState extends State<CancelPlansPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: HHString.hh,
+        title: AppLocalizations.of(context).hh,
         child:FutureBuilder<MyPlanResponse>(
             future: getMyPrograms(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return Center(child: Text(HHString.error),);
+                  return Center(child: Text(AppLocalizations.of(context).error),);
                 }
 
                 return Column(
@@ -240,7 +241,7 @@ class CancelPlansPageState extends State<CancelPlansPage> {
 
                     ),
                     HHButton(
-                      title: HHString.cancel,
+                      title: AppLocalizations.of(context).cancel,
                       type: 1,
                       isEnable: true,
                       onClick: () {

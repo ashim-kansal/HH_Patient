@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -49,15 +50,15 @@ class HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(20, 40,20,40),
             child: Column(
               children: [
-                HHHomeButton(title: HHString.drinking_diary, type: 2, onClick: (){
+                HHHomeButton(title: AppLocalizations.of(context).drinking_diary, type: 2, onClick: (){
                   Navigator.pushNamed(context, DrinkingDiaryPage.RouteName);
                 },),
                 SizedBox(height: 15),
-                HHHomeButton(title: HHString.dailyjournaling, type: 2, onClick: (){
+                HHHomeButton(title: AppLocalizations.of(context).dailyjournaling, type: 2, onClick: (){
                   Navigator.pushNamed(context, JournalPage.RouteName);
                 },),
                 SizedBox(height: 15),
-                HHHomeButton(title: HHString.mysession, type: 2, onClick: (){
+                HHHomeButton(title: AppLocalizations.of(context).mysession, type: 2, onClick: (){
                   Navigator.pushNamed(context, SessionPage.RouteName).then((value){
                     if(value == 'fab' ) {
                       print(value);
@@ -73,12 +74,12 @@ class HomePageState extends State<HomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(HHString.upcoming_sessions, style: TextStyle(fontSize: 22, color: HH_Colors.grey_3d3d3d),),
+            Text(AppLocalizations.of(context).upcoming_sessions, style: TextStyle(fontSize: 22, color: HH_Colors.grey_3d3d3d),),
             new GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, SessionPage.RouteName);
               },
-              child: Text(HHString.viewall, style: TextStyle(color: HH_Colors.accentColor, fontSize: 15, ), ),
+              child: Text(AppLocalizations.of(context).viewall, style: TextStyle(color: HH_Colors.accentColor, fontSize: 15, ), ),
             ),
             
             ],
@@ -92,7 +93,7 @@ class HomePageState extends State<HomePage> {
             builder: (builder, snapshot){
             if (snapshot.connectionState == ConnectionState.done) {
               if(snapshot.hasError){
-                return HHTextView(title: HHString.no_up_sessions, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                return HHTextView(title: AppLocalizations.of(context).no_up_sessions, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
               }
               return ListView.separated(
                 scrollDirection: Axis.horizontal,

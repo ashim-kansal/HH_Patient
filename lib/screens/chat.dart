@@ -1,6 +1,7 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/ChatList.dart';
@@ -50,7 +51,7 @@ class _ChatPageState extends State<ChatPage> {
     String formattedDate = DateFormat('yyyy-MM-dd hh:mm').format(time);
 
     return new MyWidget(
-      title: HHString.chat,
+      title: AppLocalizations.of(context).chat,
         child: new Container(
             width: double.infinity,
             height: double.infinity,
@@ -64,7 +65,7 @@ class _ChatPageState extends State<ChatPage> {
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
-                          return  Expanded(child: Center(child: HHTextView(title: HHString.no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),));
+                          return  Expanded(child: Center(child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),));
                         }
                         var item = snapshot.data.result;
                         return  new Flexible(
@@ -111,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
                                   child: new TextField(
                                     controller: _textController,
                                     decoration: new InputDecoration.collapsed(
-                                        hintText: HHString.enter_msg
+                                        hintText: AppLocalizations.of(context).enter_msg
                                     ),
                                   ),
                                 ),

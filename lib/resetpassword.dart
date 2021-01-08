@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/model/AuthModel.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -122,7 +119,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text(HHString.reset_password, style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).reset_password, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

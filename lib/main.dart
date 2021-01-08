@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/navigation/router.dart' as router;
-// import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
 
 import 'widgets/mywidgets.dart';
 
@@ -9,28 +11,46 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+
+}
+
+
+
+class _MyAppState extends State<MyApp> {  // This widget is the root of your application.
+  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', 'US'));
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
         onGenerateRoute: router.generateRoute,
         initialRoute: Splash.RouteName,
+
         localizationsDelegates: [
-          // ... app-specific localization delegate[s] here
-          // AppLocalizations.delegate,
-          // GlobalMaterialLocalizations.delegate,
-          // GlobalWidgetsLocalizations.delegate,
-          // GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          _localeOverrideDelegate
         ],
 
         supportedLocales: [
-          const Locale('en', ''), // English, no country code
-          const Locale('fr', ''), // Arabic, no country code
-          const Locale('es', ''), // Arabic, no country code
+          const Locale('en', 'US'), // English, no country code
+          const Locale('fr', 'FR'), // Arabic, no country code
+          const Locale('es', 'ES'), // Arabic, no country code
           // ... other locales the app supports
         ],
+        // localeResolutionCallback: (locale, supportedLocales){
+        //   for(var supportedLocale in supportedLocales){
+        //     if(supportedLocale.languageCode == locale.languageCode &&
+        //         supportedLocale.countryCode == locale.countryCode){
+        //       return supportedLocale;
+        //     }
+        //   }
+        //   return supportedLocales.first;
+        // },
         onUnknownRoute: (settings) => MaterialPageRoute(
             builder: (context) => UndefinedView(
               name: settings.name,

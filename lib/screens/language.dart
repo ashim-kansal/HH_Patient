@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
@@ -37,8 +38,10 @@ class LanguagePageState extends State<LanguagePage> {
     SettingAPIService settingAPIService = new SettingAPIService();
 
     settingAPIService.UpdateLanguage(lang).then((value) => {
-      if(value.responseCode == 200)
-        showToast(value.responseMessage)
+      if(value.responseCode == 200){
+        showToast(value.responseMessage),
+        AppLocalizations.load(Locale(lang, lang == 'en' ? 'US' : lang == 'es' ? 'AR' : 'fr_FR'))
+        }
     });
   }
 
@@ -52,7 +55,7 @@ class LanguagePageState extends State<LanguagePage> {
 
   @override
   Widget build(BuildContext context) => MyWidget(
-      title: HHString.select_language,
+      title: AppLocalizations.of(context).select_language,
       child: Column(
         children: [
           InkWell(

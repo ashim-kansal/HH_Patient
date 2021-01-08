@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
@@ -88,7 +89,7 @@ class _CreateAccountState extends State<EditProfilePage> {
     return WillPopScope(
         onWillPop: _onBackPressed,
         child: MyWidget(
-          title: HHString.edit_profile,
+          title: AppLocalizations.of(context).edit_profile,
           child: Container(
               height: MediaQuery.of(context).size.height,
 
@@ -175,7 +176,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 25, 5, 10),
                                     child: HHEditText(
-                                      hint: HHString.fname,
+                                      hint: AppLocalizations.of(context).fname,
                                       obscureText: false,
                                       controller: fname,
                                       error: widget.error,
@@ -185,7 +186,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: HHString.lname,
+                                      hint: AppLocalizations.of(context).lname,
                                       obscureText: false,
                                       controller: lname,
                                       error: widget.error,
@@ -195,7 +196,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: HHString.email,
+                                      hint: AppLocalizations.of(context).email,
                                       obscureText: false,
                                       enabled: false,
                                       controller: email,
@@ -207,7 +208,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: HHString.phone_number,
+                                      hint: AppLocalizations.of(context).phone_number,
                                       obscureText: false,
                                       controller: number,
                                       error: widget.error,
@@ -217,7 +218,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                     child: HHEditText(
-                                      hint: HHString.address,
+                                      hint: AppLocalizations.of(context).address,
                                       obscureText: false,
                                       controller: address,
                                       error: widget.error,
@@ -231,7 +232,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                           EdgeInsets.fromLTRB(5, 50, 5, 15),
                                       child: HHButton(
                                         isEnable: true,
-                                        title: HHString.save,
+                                        title: AppLocalizations.of(context).save,
                                         type: 4,
                                         onClick: () {
                                           updateProfile();

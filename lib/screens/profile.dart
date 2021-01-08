@@ -1,19 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api/SettingService.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
-import 'package:flutter_app/myplan.dart';
-import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/screens/editProfile.dart';
-import 'package:flutter_app/signup.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
 
@@ -87,7 +81,7 @@ class _CreateAccountState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return MyWidget(
-        title: HHString.Profile,
+        title: AppLocalizations.of(context).Profile,
         child:  SingleChildScrollView(
           child: Column(
             children: [
@@ -141,7 +135,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                         alignment: Alignment.topLeft,
                                         padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                         child: HHTextView(
-                                            title: HHString.name,
+                                            title: AppLocalizations.of(context).name,
                                             size: 18,
                                             textweight: FontWeight.w500,
                                             color: Color(0xff777CEA)
@@ -174,7 +168,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                         alignment: Alignment.topLeft,
                                         padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                         child: HHTextView(
-                                            title: HHString.email,
+                                            title: AppLocalizations.of(context).email,
                                             size: 18,
                                             textweight: FontWeight.w500,
                                             color: Color(0xff777CEA)
@@ -207,7 +201,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                         alignment: Alignment.topLeft,
                                         padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                         child: HHTextView(
-                                            title: HHString.phone_number,
+                                            title: AppLocalizations.of(context).phone_number,
                                             size: 18,
                                             textweight: FontWeight.w500,
                                             color: Color(0xff777CEA)
@@ -240,7 +234,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                         alignment: Alignment.topLeft,
                                         padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                         child: HHTextView(
-                                            title: HHString.address,
+                                            title: AppLocalizations.of(context).address,
                                             size: 18,
                                             textweight: FontWeight.w500,
                                             color: Color(0xff777CEA)
@@ -266,7 +260,7 @@ class _CreateAccountState extends State<ProfilePage> {
                               padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                               child: HHButton(
                                 isEnable: true,
-                                title: HHString.edit,
+                                title: AppLocalizations.of(context).edit,
                                 type: 4,
                                 onClick: () {
                                   Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), )

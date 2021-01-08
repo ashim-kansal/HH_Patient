@@ -77,7 +77,7 @@ class SplashState extends State<Splash>{
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
               // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
-              Navigator.pushNamed(context, Payment.RouteName)
+              Navigator.pushNamed(context, SelectLanguage.RouteName)
             },
       }
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
@@ -36,14 +37,14 @@ class QuestionairePageState extends State<QuestionairePage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: HHString.Questionaire,
+        title: AppLocalizations.of(context).Questionaire,
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                HHString.sample_ques,
+              AppLocalizations.of(context).sample_ques,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: HH_Colors.grey_707070, fontSize: 16),
               ),
@@ -65,7 +66,7 @@ class QuestionairePageState extends State<QuestionairePage> {
                     builder: (builder, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if(snapshot.hasError){
-                          return Center(child: Text(HHString.error),);
+                          return Center(child: Text(AppLocalizations.of(context).error),);
                         }
                         SchedulerBinding.instance.addPostFrameCallback((_){
 
@@ -120,7 +121,7 @@ class QuestionairePageState extends State<QuestionairePage> {
               ),
               SizedBox(height: 10),
               HHButton(
-                title: HHString.submit_proceed,
+                title: AppLocalizations.of(context).submit_proceed,
                 type: 4,
                 isEnable: true,
                 onClick: () {

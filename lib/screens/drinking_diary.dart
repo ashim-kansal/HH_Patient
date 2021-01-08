@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -44,7 +45,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
-                return Center(child: Text(HHString.error),);
+                return Center(child: Text(AppLocalizations.of(context).error),);
               }
 
               SchedulerBinding.instance.addPostFrameCallback((_){

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
+import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/SettingModel.dart';
 import 'package:flutter_app/model/StateModel.dart';
@@ -186,7 +187,38 @@ class APIService {
         throw Exception('Failed to load data!');
       }
     }
+  
+  // buy plan API
+  Future<CommonResponse> buyPlanAPIHandler(String tokenId, String planId, String amount) async {
 
+    var token = await GetStringToSP("token");
+
+    print(
+      jsonEncode(<String, String>{
+        "tokenId": tokenId,
+        "programId": planId,
+        "amount": amount
+      })
+    );
+    final url = HHString.baseURL +"/api/v1/user/payment";  
+    final response = await http.post(url, 
+    headers: {
+      "Content-Type": "application/json",
+      "token": token??HHString.token},
+      body: jsonEncode(<String, String>{
+        "tokenId": tokenId,
+        "programId": planId,
+        "amount": amount
+      })
+    );
+    
+    var res = json.decode(response.body);
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(res);
+    }else {
+      throw Exception('Failed to load data!');
+    }
+  }
 }
 
  Future<CountryList> getAllCountry() async {

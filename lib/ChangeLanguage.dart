@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
-import 'package:flutter_app/screens/notification.dart';
-import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/utils/allstrings.dart';
-import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';
@@ -107,11 +102,15 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-                          child: HHButton(title: HHString.get_started,
+                          child: HHButton(title: AppLocalizations.of(context).selectLang,
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
                             SetStringToSP("language", dropdownValue);
+                            String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'Es';
+                            print(lang);
+                            String countryCode = lang == 'en' ? 'US' : lang == 'es' ? 'AR' : 'fr_FR';
+                            AppLocalizations.load(Locale(lang, countryCode));
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),

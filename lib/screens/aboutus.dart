@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/StaticContent.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/StaticContentModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -57,11 +59,11 @@ class _TermsState extends State<AboutUs> {
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         color: Colors.white,
                         child: FutureBuilder<StaticContent>(
-                          future: getStaticContent(HHString.ABOUT_US),
+                          future: getStaticContent(AppLocalizations.of(context).ABOUT_US),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState == ConnectionState.done) {
                               if(snapshot.hasError){
-                                return Text(HHString.error);
+                                return Text(AppLocalizations.of(context).error);
                               }
                               return  Container(
                                 // height: MediaQuery.of(context).size.height,
