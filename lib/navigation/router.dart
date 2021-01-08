@@ -94,7 +94,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ChatListPage());
     case VideoCallPage.RouteName:
       VideoPageArgument args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity,));
+      return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity));
     case JournalPage.RouteName:
       return MaterialPageRoute(builder: (context) => JournalPage());
     case CreateAccountPage.RouteName:

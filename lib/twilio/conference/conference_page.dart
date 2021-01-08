@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/twilio/conference/conference_button_bar.dart';
 import 'package:flutter_app/twilio/conference/conference_room.dart';
-import 'package:flutter_app/twilio/conference/draggable_publisher.dart';
 import 'package:flutter_app/twilio/conference/participant_widget.dart';
 import 'package:flutter_app/twilio/debug.dart';
 import 'package:flutter_app/twilio/widget/noise_box.dart';
 import 'package:flutter_app/twilio/widget/platform_alert_dialog.dart';
 import 'package:wakelock/wakelock.dart';
+
+import 'draggable_publisher.dart';
 
 
 class VideoCallPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class VideoCallPage extends StatefulWidget {
   String token='';
   String identity='';
 
-  VideoCallPage({Key key, this.token, this.identity, this.roomName}) : super(key: key);
+  VideoCallPage({this.token, this.identity, this.roomName});
 
   @override
   _ConferencePageState createState() => _ConferencePageState();
@@ -130,8 +131,6 @@ class _ConferencePageState extends State<VideoCallPage> {
               onHangup: _onHangup,
               onSwitchCamera: _conferenceRoom.switchCamera,
               toggleFlashlight: _conferenceRoom.toggleFlashlight,
-              onPersonAdd: _onPersonAdd,
-              onPersonRemove: _onPersonRemove,
               onHeight: _onHeightBar,
               onShow: _onShowBar,
               onHide: _onHideBar,
