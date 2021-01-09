@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -18,7 +20,8 @@ class SessionPage extends StatefulWidget{
 
 class SessionPageState extends State<SessionPage>{
   bool isSwitched = true;
-  
+  String searchText = "";
+
   @override
   Widget build(BuildContext context) {
     return MyWidget(title: AppLocalizations.of(context).mysession, child: Container(
@@ -30,6 +33,8 @@ class SessionPageState extends State<SessionPage>{
             elevation: 10,
             margin: EdgeInsets.only(left: 10, right: 10),
             child: TextField(
+              onChanged: onSearchTextChanged,
+
               decoration: InputDecoration(
               border: InputBorder.none,
               hintText: 'Search',
@@ -73,6 +78,11 @@ class SessionPageState extends State<SessionPage>{
     );
   }
 
+  onSearchTextChanged(String text) async {
+    searchText = text;
+    setState(() {});
+  }
+
   Widget getCompleteList(){
     return FutureBuilder<UpcomingSession>(
       future: completedSessoins(),
@@ -81,15 +91,29 @@ class SessionPageState extends State<SessionPage>{
           if (snapshot.hasError) {
             return HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
           }
+          List<Result> mList = snapshot.data.result;
+          List<Result> searchList = List();
+
+          if (searchText.length == 0){
+            searchList.clear();
+            searchList.addAll(mList);
+          }else {
+            searchList.clear();
+            for (Result res in mList) {
+              if (res.therapistId.firstName.toLowerCase().contains(searchText.toLowerCase()))
+                searchList.add(res);
+            }
+          }
+
           return ListView.separated(
-            itemCount: snapshot.data.result.length,
+            itemCount: searchList.length,
             itemBuilder: (context, index){
-            var _date = snapshot.data.result[index].createdAt;
+            var _date = searchList[index].createdAt;
             Moment createdDt = Moment.parse('$_date');
             return UpcomingSessionItem(
-              name: snapshot.data.result[index].programName, 
-              data: snapshot.data.result[index],
-              drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
+              name: searchList[index].programName,
+              data: searchList[index],
+              drname: searchList[index].therapistId.firstName+" "+searchList[index].therapistId.lastName,
               sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
               role: '', onClick: (){}, completed: !isSwitched,);
           },
@@ -113,22 +137,39 @@ class SessionPageState extends State<SessionPage>{
             if (snapshot.hasError) {
               return HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
             }
+            List<Result> mList = snapshot.data.result;
+            List<Result> searchList = List();
+
+            if (searchText.length == 0){
+              searchList.clear();
+              searchList.addAll(mList);
+            }else {
+              searchList.clear();
+              for (Result res in mList) {
+                if (res.therapistId.firstName.toLowerCase().contains(searchText.toLowerCase()))
+                  searchList.add(res);
+              }
+            }
+
             return ListView.separated(
-              itemCount: snapshot.data.result.length,
+              itemCount: searchList.length,
               itemBuilder: (context, index){
-              var _date = snapshot.data.result[index].date;
+              var _date = searchList[index].date;
               Moment createdDt = Moment.parse('$_date');
               return UpcomingSessionItem(
-                name: snapshot.data.result[index].programName, 
-                data: snapshot.data.result[index],
-                drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
-                sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
+                name: searchList[index].programName,
+                data: searchList[index],
+                drname: searchList[index].therapistId.firstName+" "+searchList[index].therapistId.lastName,
+                sdate: createdDt.format("dd MMM, yyyy")+' '+searchList[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,
                   onClickCancel: (){
                 setState(() {
 
                 });
-              });
+              },
+                  onVideoCancel: (){
+                    getToken(searchList[index].id, searchList[index].patientId);
+                  });
             },
                 separatorBuilder: (context, index) {
                   return Divider();
@@ -142,6 +183,19 @@ class SessionPageState extends State<SessionPage>{
         });
 
   }
+
+  void getToken(sessionId, patientId) {
+    String roomName = 'room_'+sessionId;
+    getTwilioToken(roomName, patientId).then(
+            (value) => {
+          if (value.responseCode == '200') {
+            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt)),
+          }
+        });
+
+
+  }
+
 
 }
 

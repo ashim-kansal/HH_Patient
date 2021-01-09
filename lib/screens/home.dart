@@ -110,7 +110,7 @@ class HomePageState extends State<HomePage> {
                       });
                     },
                       onClickVideo: (){
-                        getToken(snapshot.data.result[index].therapistId.id, snapshot.data.result[index].patientId);
+                        getToken(snapshot.data.result[index].id, snapshot.data.result[index].patientId);
                       },
                     onClickCancel: (){
                       setState(() {
@@ -149,8 +149,8 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void getToken(therapistId, patientId) {
-    String roomName = 'room_'+therapistId+'_'+patientId;
+  void getToken(sessionId, patientId) {
+    String roomName = 'room_'+sessionId;
       getTwilioToken(roomName, patientId).then(
               (value) => {
                 if (value.responseCode == '200') {
