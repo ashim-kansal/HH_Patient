@@ -22,6 +22,7 @@ import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/myplan.dart';
+import 'package:flutter_app/screens/payment.dart';
 import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/screens/ReScheduleSession.dart';
@@ -133,6 +134,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AboutUs(title: args.title));
     case MapPage.RouteName:
       return MaterialPageRoute(builder: (context) => MapPage());
+    case Payment.RouteName:
+      final PaymentArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => Payment(plan: args.plan));
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }

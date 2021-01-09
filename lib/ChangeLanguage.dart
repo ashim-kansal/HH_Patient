@@ -108,7 +108,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-                          child: HHButton(title: AppLocalizations.of(context).heyWorld,
+                          child: HHButton(title: AppLocalizations.of(context).selectLang,
                           type: 2, 
                           isEnable: true,
                           onClick: () async {

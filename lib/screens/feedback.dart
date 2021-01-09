@@ -51,7 +51,7 @@ class FeedbackPageState extends State<FeedbackPage> {
           context: context,
           builder: (BuildContext dialogContext) {
             return DialogWithImage(
-              title: value.responseMsg,
+              content: value.responseMsg,
               onClick: (){
                 Navigator.pop(context);
               }

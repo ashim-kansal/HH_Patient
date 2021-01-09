@@ -5,8 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app/screens/payment.dart';
 
 class Splash extends StatefulWidget{
 
@@ -74,6 +76,7 @@ class SplashState extends State<Splash>{
             if (token != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
+              // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
               Navigator.pushNamed(context, SelectLanguage.RouteName)
             },
       }
