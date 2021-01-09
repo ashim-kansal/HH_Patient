@@ -3,6 +3,7 @@ import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -168,7 +169,7 @@ class SessionPageState extends State<SessionPage>{
                 });
               },
                   onVideoCancel: (){
-                    getToken(searchList[index].id, searchList[index].patientId);
+                    getToken(searchList[index].id, searchList[index].patientId,searchList[index]);
                   });
             },
                 separatorBuilder: (context, index) {
@@ -184,12 +185,15 @@ class SessionPageState extends State<SessionPage>{
 
   }
 
-  void getToken(sessionId, patientId) {
+  void getToken(sessionId, patientId, result) {
     String roomName = 'room_'+sessionId;
     getTwilioToken(roomName, patientId).then(
             (value) => {
           if (value.responseCode == '200') {
-            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt)),
+            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt))
+        .then((value) => {
+      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: result)
+    }),
           }
         });
 

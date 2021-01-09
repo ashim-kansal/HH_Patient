@@ -23,7 +23,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
   bool errorNew = false;
   bool errorConfirm = false;
 
-  String confPasswordErrorMsg = "Please enter a confirm password";
+  String confPasswordErrorMsg;
 
   bool secureOld = true;
   bool secureNew = true;
@@ -75,7 +75,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
 
     if(confpassword != newpassword){
       setState(() {
-        confPasswordErrorMsg = "Please enter a confirm password."; 
+        confPasswordErrorMsg = AppLocalizations.of(context).confPasswordErrorMsg;
         errorOld = false;
         errorNew = false;
         errorConfirm = true;    
@@ -83,7 +83,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
     }
 
     setState(() {
-        confPasswordErrorMsg = "Passwords do not matched."; 
+        confPasswordErrorMsg = AppLocalizations.of(context).password_donotmatch;
         errorOld = false;
         errorNew = false;
         errorConfirm = true;    
@@ -141,7 +141,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     obscureText: secureNew,
                     controller: newPasswordController,
                     error: errorNew,
-                    errorText: 'Please enter a valid password',
+                    errorText: AppLocalizations.of(context).pass_validation_msg,
                     showeye: true,
                     onClickEye: () {
                       print("Count was selected.");
@@ -156,7 +156,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     obscureText: secureConfirm,
                     controller: cPasswordController,
                     error: errorConfirm,
-                    errorText: confPasswordErrorMsg,
+                    errorText: confPasswordErrorMsg??AppLocalizations.of(context).confPasswordErrorMsg,
                     showeye: true,
                     onClickEye: () {
                       print("Count was selected.");

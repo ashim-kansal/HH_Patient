@@ -3,6 +3,32 @@ import 'package:intl/intl.dart';
 import 'package:flutter_app/l10n/messages_all.dart';
 
 class AppLocalizations {
+  String get next => Intl.message('Next');
+  String get done => Intl.message('Done');
+  String get choose_goal => Intl.message('Choose your goal');
+  String get video_session => Intl.message('Video Session');
+  String get Welcome_back => Intl.message('Welcome back');
+  String get login => Intl.message('Login');
+  String get enter_password => Intl.message('Enter Password');
+  String get pass_validation_msg => Intl.message('Password containes be alpha-numeric with 1 Small, Capital and Special character');
+  String get enter_valid_email => Intl.message('Please enter a valid email address');
+  String get login_to_existing => Intl.message('Login into your existing account');
+  String get forgot_password_ => Intl.message('Forgot Password?');
+  String get terms_service => Intl.message('Terms of Service ');
+  String get agree_desc => Intl.message('By continuing, you agree to our ');
+  String get do_have_acc => Intl.message('Do you have an account ');
+  String get signup => Intl.message('Sign Up');
+  String get pls_enter_new_pass => Intl.message('Please enter a new password');
+  String get enter_new_pass_below => Intl.message('Enter your new password below.');
+  String get enter_new_pass => Intl.message('Enter New Password');
+  String get drinking_diary_progress => Intl.message('Daily drinking diary to track your progress');
+  String get join_therapist_direct => Intl.message('Join your therapist directly from your phone');
+  String get to_help_triggers => Intl.message('To help you understand your triggers');
+  String get valid_confirm_pass => Intl.message('Please enter a valid confirm password');
+  String get valid_otp_msg => Intl.message('Please enter the valid OTP');
+  String get reset => Intl.message('Reset');
+  String get alert => Intl.message('Alert');
+  String get password_donotmatch => Intl.message('Passwords do not matched.');
 
   static Future<AppLocalizations> load(Locale locale) {
     final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
@@ -12,13 +38,14 @@ class AppLocalizations {
       return AppLocalizations();
     });
   }
-  Map<String, String> _localizedString;
 
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
   String get heyWorld => Intl.message('Hey World');
-  String get abc => Intl.message('abc');
+  String get abc => Intl.message('abc',
+      name: 'abc',
+      desc: 'Simpel word for greeting ');
   String get selectLang => Intl.message('Select Language');
   String get hh => Intl.message('Heal@Home Programs');
   String get pls_enter_reg_email => Intl.message('Please enter you registered email address. We will help you retrieve your password.');
@@ -114,9 +141,6 @@ class AppLocalizations {
   String get confirm_password => Intl.message("Confirm Password");
   String get enter_msg => Intl.message("Enter message");
   String get confPasswordErrorMsg => Intl.message("Please enter a confirm password");
-
-
-
 
 }
 

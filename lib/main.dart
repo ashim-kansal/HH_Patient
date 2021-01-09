@@ -3,7 +3,6 @@ import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/navigation/router.dart' as router;
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 
 import 'widgets/mywidgets.dart';
 
@@ -21,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 
 class _MyAppState extends State<MyApp> {  // This widget is the root of your application.
-  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', 'US'));
+  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', ''));
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +36,9 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
         ],
 
         supportedLocales: [
-          const Locale('en', 'US'), // English, no country code
-          const Locale('fr', 'FR'), // Arabic, no country code
-          const Locale('es', 'ES'), // Arabic, no country code
+          const Locale('en', ''), // English, no country code
+          const Locale('fr', ''), // Arabic, no country code
+          const Locale('es', ''), // Arabic, no country code
           // ... other locales the app supports
         ],
         // localeResolutionCallback: (locale, supportedLocales){

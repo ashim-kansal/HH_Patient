@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -13,7 +14,7 @@ class MyGoals extends StatefulWidget {
 
 class MyGoalsState extends State<MyGoals> {
   String dropdownValue = 'English';
-  String name = 'Get Started';
+  String name;
   int count = 0;
   var pagerController;
 
@@ -81,7 +82,7 @@ class MyGoalsState extends State<MyGoals> {
 
                       count == 0
                           ? Text(
-                        "Choose your goal",
+                        AppLocalizations.of(context).choose_goal,
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -91,7 +92,7 @@ class MyGoalsState extends State<MyGoals> {
                       )
                           : count == 1
                           ? Text(
-                        "Video Session",
+                        AppLocalizations.of(context).video_session,
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -100,7 +101,7 @@ class MyGoalsState extends State<MyGoals> {
                             fontFamily: "ProximaNova"),
                       )
                           : Text(
-                        "Daily Journaling",
+                        AppLocalizations.of(context).dailyjournaling,
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -113,7 +114,7 @@ class MyGoalsState extends State<MyGoals> {
                       ),
                       count == 0
                           ? Text(
-                        "Daily drinking diary to track your progress",
+                        AppLocalizations.of(context).drinking_diary_progress,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
@@ -123,7 +124,7 @@ class MyGoalsState extends State<MyGoals> {
                       )
                           : count == 1
                           ? Text(
-                        "Join your therapist directly from your phone",
+                        AppLocalizations.of(context).join_therapist_direct,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
@@ -132,7 +133,7 @@ class MyGoalsState extends State<MyGoals> {
                             fontFamily: "ProximaNova"),
                       )
                           : Text(
-                        "To help you understand your triggers",
+                        AppLocalizations.of(context).to_help_triggers,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
@@ -189,7 +190,7 @@ class MyGoalsState extends State<MyGoals> {
                             margin: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             child: HHButton(
-                                title: name,
+                                title:     name??AppLocalizations.of(context).get_started,
                                 type: 4,
                                 isEnable: true,
                                 onClick: () {
@@ -210,9 +211,9 @@ class MyGoalsState extends State<MyGoals> {
   void onClickNext(BuildContext context) {
     setState(() {
       if (count == 0) {
-        name = "Next";
+        name = AppLocalizations.of(context).next;
       } else if (count == 1) {
-        name = "Done";
+        name = AppLocalizations.of(context).done;
       } else {
         naviagteToLogin(context);
       }

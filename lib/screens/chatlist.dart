@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
-import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
-import 'package:flutter_app/model/ChatList.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ChatUsers.dart';
-import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';

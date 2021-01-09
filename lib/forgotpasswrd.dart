@@ -1,17 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
-import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/otp.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:toast/toast.dart';
-
-import 'package:http/http.dart' as http;
 
 class ForgotPasswordPage extends StatefulWidget {
   static const String RouteName = '/forgot_password';
@@ -158,7 +153,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                     controller: emailController,
                                     error: widget.error,
                                     errorText:
-                                        'Please enter a valid email address',
+                                        AppLocalizations.of(context).enter_valid_email,
                                   ),
                                 ),
                                 Padding(
