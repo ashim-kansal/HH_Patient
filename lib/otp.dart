@@ -281,8 +281,8 @@ class _OtpState extends State<OtpPage> {
         context: context,
         builder: (BuildContext dialogContext) {
           return DialogWithSingleButton(
-            title: "Alert",
-            content: "Please enter the valid OTP.",
+            title: AppLocalizations.of(context).alert,
+            content: AppLocalizations.of(context).valid_otp_msg,
           );
         },
       );

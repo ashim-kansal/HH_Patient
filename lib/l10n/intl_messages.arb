@@ -1,5 +1,135 @@
 {
-  "@@last_modified": "2021-01-08T07:06:30.384526",
+  "@@last_modified": "2021-01-09T21:58:38.867751",
+  "Next": "Next",
+  "@Next": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Done": "Done",
+  "@Done": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Choose your goal": "Choose your goal",
+  "@Choose your goal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Video Session": "Video Session",
+  "@Video Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Welcome back": "Welcome back",
+  "@Welcome back": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Login": "Login",
+  "@Login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter Password": "Enter Password",
+  "@Enter Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Password containes be alpha-numeric with 1 Small, Capital and Special character": "Password containes be alpha-numeric with 1 Small, Capital and Special character",
+  "@Password containes be alpha-numeric with 1 Small, Capital and Special character": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid email address": "Please enter a valid email address",
+  "@Please enter a valid email address": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Login into your existing account": "Login into your existing account",
+  "@Login into your existing account": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Forgot Password?": "Forgot Password?",
+  "@Forgot Password?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Terms of Service ": "Terms of Service ",
+  "@Terms of Service ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "By continuing, you agree to our ": "By continuing, you agree to our ",
+  "@By continuing, you agree to our ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Do you have an account ": "Do you have an account ",
+  "@Do you have an account ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sign Up": "Sign Up",
+  "@Sign Up": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a new password": "Please enter a new password",
+  "@Please enter a new password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter your new password below.": "Enter your new password below.",
+  "@Enter your new password below.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter New Password": "Enter New Password",
+  "@Enter New Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Daily drinking diary to track your progress": "Daily drinking diary to track your progress",
+  "@Daily drinking diary to track your progress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Join your therapist directly from your phone": "Join your therapist directly from your phone",
+  "@Join your therapist directly from your phone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "To help you understand your triggers": "To help you understand your triggers",
+  "@To help you understand your triggers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid confirm password": "Please enter a valid confirm password",
+  "@Please enter a valid confirm password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter the valid OTP": "Please enter the valid OTP",
+  "@Please enter the valid OTP": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Reset": "Reset",
+  "@Reset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Alert": "Alert",
+  "@Alert": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Passwords do not matched.": "Passwords do not matched.",
+  "@Passwords do not matched.": {
+    "type": "text",
+    "placeholders": {}
+  },
   "Hey World": "Hey World",
   "@Hey World": {
     "type": "text",
@@ -7,6 +137,12 @@
   },
   "abc": "abc",
   "@abc": {
+    "description": "Simpel word for greeting ",
+    "type": "text",
+    "placeholders": {}
+  },
+  "Select Language": "Select Language",
+  "@Select Language": {
     "type": "text",
     "placeholders": {}
   },
@@ -52,11 +188,6 @@
   },
   "Enter Email": "Enter Email",
   "@Enter Email": {
-    "type": "text",
-    "placeholders": {}
-  },
-  "Select Language": "Select Language",
-  "@Select Language": {
     "type": "text",
     "placeholders": {}
   },

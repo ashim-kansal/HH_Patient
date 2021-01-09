@@ -37,7 +37,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'Drinking Diary',
+    return MyWidget(title: AppLocalizations.of(context).drinking_diary,
         child: Container(
           height: MediaQuery.of(context).size.height,
           child:      FutureBuilder<GetDrinkingDiaryList>(

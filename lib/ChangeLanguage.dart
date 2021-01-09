@@ -108,17 +108,17 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-                          child: HHButton(title: AppLocalizations.of(context).selectLang,
+                          child: HHButton(title: AppLocalizations.of(context).get_started,
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
                             SetStringToSP("language", dropdownValue);
-                            Navigator.pop(context);
                             String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
                             print(lang);
-                            String countryCode = lang == 'en' ? 'US' : lang == 'es' ? 'ES' : 'FR';
-                            AppLocalizations.load(Locale(lang, countryCode));
-                            print(AppLocalizations.of(context).heyWorld);
+                            setState(() {
+                              AppLocalizations.load(Locale(lang, ''));
+                            });
+                            Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),
                         ))),

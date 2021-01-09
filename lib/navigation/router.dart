@@ -105,7 +105,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ProfilePage.RouteName:
       return MaterialPageRoute(builder: (context) => ProfilePage());
     case ReviewPage.RouteName:
-      return MaterialPageRoute(builder: (context) => ReviewPage());
+      final upcoming.Result result = settings.arguments;
+      return MaterialPageRoute(builder: (context) => ReviewPage(data:result));
     case SettingsPage.RouteName:
       return MaterialPageRoute(builder: (context) => SettingsPage());
     case LanguagePage.RouteName:

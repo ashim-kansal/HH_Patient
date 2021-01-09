@@ -1,11 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -29,9 +28,6 @@ class EditProfilePage extends StatefulWidget {
 class _CreateAccountState extends State<EditProfilePage> {
   File _image;
   final picker = ImagePicker();
-
-  String stateDropdown = 'Select Province';
-  String countryDropdown = 'Select Country';
 
   String countryCode;
   String profileImage;
@@ -71,8 +67,6 @@ class _CreateAccountState extends State<EditProfilePage> {
               if (value.responseCode == 200)
                 {
                   Navigator.pop(context),
-                  // Navigator.pushNamed(context, ProfilePage.RouteName),
-
                 }
             });
   }
@@ -124,8 +118,6 @@ class _CreateAccountState extends State<EditProfilePage> {
                                           backgroundColor:
                                               HH_Colors.color_F2EEEE,
                                           child:
-                                          // _image !=null ? FileImage(_image):
-                                          //   (profileImage.startsWith('http')) ?
                                             CircleAvatar(
                                             backgroundImage:
                                                 NetworkImage(profileImage) ,
