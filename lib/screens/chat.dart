@@ -36,14 +36,19 @@ class _ChatPageState extends State<ChatPage> {
   // of the TextField!
   final _textController = TextEditingController();
 
-   @override
+  @override
   void initState() {
     super.initState();
+    messagesList = getChat();
   }
 
-  getChat() async{
-    return await getChatList(widget.chatId);
+  getChat() async {
+    return await getChatList(widget.chatId, widget.senderId);
   }
+
+  // getChat() async{
+  //   return await getChatList(widget.chatId);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +65,8 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  FutureBuilder<GetChatUsers>(
-                    future: getChatList(widget.chatId),
+                  FutureBuilder(
+                    future: messagesList,
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
@@ -71,7 +76,7 @@ class _ChatPageState extends State<ChatPage> {
                         return  new Flexible(
                           child: new ListView.builder(
                             padding: new EdgeInsets.all(8.0),
-                            reverse: true,
+                            // reverse: true,
                             itemBuilder: (context, int index) {
                               receiverId = item[0].senderId.id;
                               // return ListView.builder(itemBuilder: (context, qindex){
@@ -173,11 +178,13 @@ class _ChatPageState extends State<ChatPage> {
       InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
       inAppAPIServices.sendMessage(widget.chatId, msg).then((value) => {
+        // ignore: sdk_version_ui_as_code
         if(value.responseCode == 200){
           _textController.clear(),
           // messagesList = getChat(),
           // Navigator.pop(context)
            setState(() {
+             messagesList = getChat();
             // messageWidget.insert(0, messageWidget);
           })
         }

@@ -30,7 +30,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     return MyWidget(title: AppLocalizations.of(context).mychat, child: Container(
       child: FutureBuilder<GetChatUsers>(
-        future: getChatList(""),
+        future: getChatList(null, null),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
 
@@ -54,7 +54,7 @@ class _ChatListPageState extends State<ChatListPage> {
                   time: createdDt.format("hh:mm a"),
                   online: true,
                   onClick: () {
-                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.id, item.senderId.id));
+                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.senderId.id, item.receiverId.id));
                   },
                 );
               },
