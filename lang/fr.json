@@ -18,7 +18,7 @@
   "reset_password": "Réinitialiser le mot de passe",
 
   "change_language": "Modifier la Langue",
-  "emailExist":  ",Courriel existe déjà",
+  "emailExist":  "Courriel existe déjà",
   "emailExistDesc": "Nous avons trouvé un compte avec ce courriel, voulez-vous vous connecter?",
 
   "feedbackTitle":  "Commentaires",
@@ -89,8 +89,8 @@
   "my_therapists": "Mes thérapeutes",
   "otp_verification": "OTP vérification",
   "resend_code": "Renvoyez le code",
-  "Therapist": "Therapist",
-  "Resend_OTP": "Resend OTP",
+  "Therapist": "thérapeute",
+  "Resend_OTP": "Renvoyez le  OTP",
   "get_started": "Commencer",
   "Physician": "Docteur",
   "case_manager": "Manager de Cas",

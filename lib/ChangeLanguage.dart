@@ -112,9 +112,8 @@ class SelectLanguageState extends State<StatefulWidget> {
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
-                            SetStringToSP("language", dropdownValue);
                             String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
-                            print(lang);
+                            SetStringToSP("language", lang.toLowerCase());
                             setState(() {
                               AppLocalizations.load(Locale(lang, ''));
                             });

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/FaqPage.dart';
 import 'package:flutter_app/screens/aboutus.dart';
@@ -19,7 +19,6 @@ import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
