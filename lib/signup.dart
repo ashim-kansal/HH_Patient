@@ -58,7 +58,9 @@ class _SignupPageState extends State<SignUpPage> {
   bool isChecked = true;
   bool countrySelected = false;
   String countryCode = "";
-  void signupHandler(BuildContext context){
+
+
+  void signupHandler(BuildContext context) async {
 
     String fname = fnameController.text;
     String lname = lnameController.text;
@@ -421,7 +423,7 @@ class _SignupPageState extends State<SignUpPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 20, 5, 10),
                               child: HHButton(title: AppLocalizations.of(context).signup, type: 4, isEnable: true,onClick: (){
-                                signupHandler();
+                                signupHandler(context);
                               },),
                             ),
                           ]),
