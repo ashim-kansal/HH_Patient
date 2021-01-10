@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/colors.dart';
 
 class RadioGroup extends StatefulWidget {
@@ -44,7 +45,7 @@ class RadioGroupWidget extends State {
               groupValue: _radioValue1,
             ),
             new Text(
-              'Yes',
+              AppLocalizations.of(context).yes,
               style: new TextStyle(fontSize: 16.0),
             ),
             new Radio(
@@ -52,7 +53,7 @@ class RadioGroupWidget extends State {
               groupValue: _radioValue1,
             ),
             new Text(
-              'No',
+              AppLocalizations.of(context).no,
               style: new TextStyle(
                 fontSize: 16.0,
               ),

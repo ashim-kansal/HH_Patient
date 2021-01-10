@@ -53,7 +53,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                               color: Colors.white,
                               child: Column(children: [
                                 Text(
-                                  "Select Language",
+                                  AppLocalizations.of(context).selectLang,
                                   style: TextStyle(color: Color(0xff949494), fontSize: 16,
                                     fontFamily:"ProximaNova"
                                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/colors.dart';
 
 class TharapistCell extends StatelessWidget {
@@ -53,7 +54,7 @@ class TharapistCell extends StatelessWidget {
                 shape: BoxShape.rectangle,
                 border: Border.all(color: HH_Colors.grey),
                 borderRadius: BorderRadius.all(Radius.circular(5.0))),
-            child: Text('Book Session', style: TextStyle(color: HH_Colors.accentColor),),
+            child: Text(AppLocalizations.of(context).bookSession, style: TextStyle(color: HH_Colors.accentColor),),
           ) ,
           onTap: (){
             onClick();

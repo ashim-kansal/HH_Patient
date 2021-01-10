@@ -67,7 +67,7 @@ class SessionPageState extends State<SessionPage> {
                 ),
                 Flexible(
                   child: HHButton(
-                    title: AppLocalizations.of(context).Completed,
+                    title: AppLocalizations.of(context).completed,
                     textSize: 18,
                     type: 3,
                     isEnable: !isSwitched,

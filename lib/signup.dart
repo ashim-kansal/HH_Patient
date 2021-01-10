@@ -5,20 +5,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
-import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/StateModel.dart';
-import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
-import 'package:flutter_app/screens/dashboard.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:toast/toast.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:flutter_app/app_localization.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -113,11 +106,11 @@ class _SignupPageState extends State<SignUpPage> {
     }
 
     setState(() {
-      pwdValidation = "Please enter a valid password";
+      pwdValidation = AppLocalizations.of(context).valid_pwd;
     });
 
     if(!isChecked){
-      showToast("Please agree with terms & conditions");
+      showToast(AppLocalizations.of(context).acceptTerms);
       return;
     }
 
@@ -130,17 +123,18 @@ class _SignupPageState extends State<SignUpPage> {
           showToast(value.responseMsg),
       }),
       //  showToast(value.responseMsg),
-       if(value.responseCode == 200){
-         SetStringToSP("userID", value.userID),
-         SetStringToSP("token", value.token),
-         Timer(Duration(seconds: 2),
-            ()=>{
-                  Navigator.pop(context),
-                  // arguments: OTPArguements("forgot")
-                  // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
-                  Navigator.pushNamed(context, OtpPage.RouteName, arguments: OTPArguements("signup")),
-            }
-          ),
+      // ignore: sdk_version_ui_as_code
+      if(value.responseCode == 200){
+        SetStringToSP("userID", value.userID),
+        SetStringToSP("token", value.token),
+        Timer(Duration(seconds: 2),
+          ()=>{
+            Navigator.pop(context),
+            // arguments: OTPArguements("forgot")
+            // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+            Navigator.pushNamed(context, OtpPage.RouteName, arguments: OTPArguements("signup")),
+          }
+        ),
        }
      });
     // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false));
@@ -220,7 +214,7 @@ class _SignupPageState extends State<SignUpPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
                             child: Text(
-                              'Sign up for an account to unlock all features.',
+                              AppLocalizations.of(context).signupTitle,
                               style: TextStyle(color: Color(0xff8d8d8d)),
                             ),
                           )
@@ -236,7 +230,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: false,
                                 controller: fnameController,
                                 error: widget.fnameError,
-                                errorText: 'Please enter your first name',
+                                errorText: AppLocalizations.of(context).enterFirstName,
                               ),
                             ),
                             Padding(
@@ -246,7 +240,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: false,
                                 controller: lnameController,
                                 error: widget.lnameError,
-                                errorText: 'Please enter your last name',
+                                errorText: AppLocalizations.of(context).enterLastName,
                               ),
                             ),
                              Padding(
@@ -256,13 +250,13 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: false,
                                 controller: emailController,
                                 error: widget.emailError,
-                                errorText: 'Please enter a valid email address',
+                                errorText: AppLocalizations.of(context).enter_valid_email,
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                               child: HHEditText(
-                                hint: "Create Password",
+                                hint: AppLocalizations.of(context).createPwd,
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: widget.pwdError,
@@ -284,7 +278,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 controller: phoneController,
                                 error: widget.numberError,
                                 errorText:
-                                'Please enter a phone number',
+                                AppLocalizations.of(context).enterPhone,
                               ),
                             ),
                             // Padding(
@@ -343,7 +337,7 @@ class _SignupPageState extends State<SignUpPage> {
                                           setState(() {
                                             countryDropdown = newValue;
                                             countryCode = obj.phoneCode;
-                                            stateDropdown= "Select Province";
+                                            stateDropdown= AppLocalizations.of(context).selectProvince;
                                           });
                                         },
                                       );
@@ -372,7 +366,7 @@ class _SignupPageState extends State<SignUpPage> {
                                    if (snapshot.connectionState == ConnectionState.done) {
                                       if(snapshot.hasError){
                                         return new DropdownButton<String>(
-                                          value: "No Data Found",
+                                          value: AppLocalizations.of(context).not_data_found,
                                           isExpanded: true,
                                           icon: Icon(Icons.arrow_drop_down),
                                           iconEnabledColor: Color(0xffC5C4C4),
@@ -381,8 +375,8 @@ class _SignupPageState extends State<SignUpPage> {
                                           style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
                                         );
                                       }
-                                      // if(stateDropdown == "Select Province"){
-                                        snapshot.data.result[0].states.add("Select Province");
+                                      // if(stateDropdown == AppLocalizations.of(context).selectProvince){
+                                        snapshot.data.result[0].states.add(AppLocalizations.of(context).selectProvince);
                                       // }
                                       // else {
                                           // stateDropdown = snapshot.data.result[0].states.length == 0 ? "No Record Found": stateDropdown

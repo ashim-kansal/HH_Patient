@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/MyPlanResponse.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -53,7 +54,7 @@ class _PaymentState extends State<Payment> {
     super.initState();
   }
   
-  void payNowHandler() async {
+  void payNowHandler(BuildContext context) async {
     var nameoncard = nameController.text;
     var cardnum = cardController.text;
     var month = mmController.text;
@@ -94,8 +95,8 @@ class _PaymentState extends State<Payment> {
                 context: context,
                 builder: (BuildContext dialogContext) {
                   return DialogWithImage(
-                    title: "Payment Done!",
-                    content: "You have successfully subscribed with "+widget.plan.title,
+                    title: AppLocalizations.of(context).paymentDone,
+                    content: AppLocalizations.of(context).paymentDoneMsg+" "+widget.plan.title,
                     imageSrc: "assets/images/success.png",
                     onClick: (){
                       Navigator.pop(context);
@@ -150,7 +151,7 @@ class _PaymentState extends State<Payment> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Payment', style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).paymentTitle, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -190,7 +191,7 @@ class _PaymentState extends State<Payment> {
                                           Container(
                                             alignment: Alignment.topLeft,
                                             child: HHTextView(
-                                              title: "Total payable amount",
+                                              title: AppLocalizations.of(context).totalPayable,
                                               size: 19,
                                               textweight: FontWeight.w800,
                                               color: HH_Colors.color_3D3D3D,
@@ -224,7 +225,7 @@ class _PaymentState extends State<Payment> {
                                       padding: EdgeInsets.only(top: 15),
                                       alignment: Alignment.topLeft,
                                       child:  HHTextView(
-                                        title: "Name on Card", 
+                                        title: AppLocalizations.of(context).nameOnCard, 
                                         textweight: FontWeight.w600, 
                                         size: 16,
                                         color: HH_Colors.color_343333,
@@ -237,7 +238,7 @@ class _PaymentState extends State<Payment> {
                                         controller: nameController,
                                         error: nameerr,
                                         errorText:
-                                            'Please enter a name on card',
+                                            AppLocalizations.of(context).enterCardName,
                                       ),
                                     ),
                                   ],
@@ -248,7 +249,7 @@ class _PaymentState extends State<Payment> {
                                       padding: EdgeInsets.only(top: 15),
                                       alignment: Alignment.topLeft,
                                       child:  HHTextView(
-                                          title: "Card Number", 
+                                          title: AppLocalizations.of(context).cardNumber, 
                                           textweight: FontWeight.w600, 
                                           size: 16,
                                           color: HH_Colors.color_343333,
@@ -261,8 +262,9 @@ class _PaymentState extends State<Payment> {
                                         controller: cardController,
                                         error: cardnumerr,
                                         maxLength: 20,
+                                        
                                         errorText:
-                                            'Please enter a valid card number',
+                                            AppLocalizations.of(context).enterCardNumber,
                                       ),
                                     ),
                                   ],
@@ -274,7 +276,7 @@ class _PaymentState extends State<Payment> {
                                       padding: EdgeInsets.only(top: 15, bottom: 10),
                                       alignment: Alignment.topLeft,
                                       child:  HHTextView(
-                                          title: "Expiration Date", 
+                                          title: AppLocalizations.of(context).expiryDate, 
                                           textweight: FontWeight.w600, 
                                           size: 16,
                                           color: HH_Colors.color_343333,
@@ -291,7 +293,7 @@ class _PaymentState extends State<Payment> {
                                             error: mmerr,
                                             maxLength: 2,
                                             errorText:
-                                                'Please enter expiry month',
+                                                AppLocalizations.of(context).enterExpiryMonth,
                                           ),
                                         ),
                                         SizedBox(
@@ -306,7 +308,7 @@ class _PaymentState extends State<Payment> {
                                             error: yyerr,
                                             maxLength: 2,
                                             errorText:
-                                                'Please enter a expiry year',
+                                                AppLocalizations.of(context).enterExpiryYear,
                                           ),
                                         ),
                                       ],
@@ -342,11 +344,11 @@ class _PaymentState extends State<Payment> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(2, 30, 2, 15),
                                   child: HHButton(
-                                    title: "Pay Now",
+                                    title: AppLocalizations.of(context).payNow,
                                     isEnable: true,
                                     type: 4,
                                     onClick: () {
-                                      payNowHandler();
+                                      payNowHandler(context);
                                     },
                                   ),
                                 ),

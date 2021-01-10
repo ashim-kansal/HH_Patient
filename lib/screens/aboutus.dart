@@ -32,7 +32,7 @@ class _TermsState extends State<AboutUs> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('About Us', style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).about_us, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

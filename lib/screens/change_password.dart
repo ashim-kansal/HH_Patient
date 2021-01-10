@@ -126,7 +126,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     obscureText: secureOld,
                     controller: oldPasswordController,
                     error: errorOld,
-                    errorText: 'Please enter correct old password',
+                    errorText: AppLocalizations.of(context).enterOldPwd,
                     showeye: true,
                     onClickEye: () {
                       print("Count was selected.");

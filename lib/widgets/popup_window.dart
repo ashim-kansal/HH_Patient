@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/colors.dart';
 /// An arbitrary widget that lives in a popup menu
 class PopupMenuWidget<T> extends PopupMenuEntry<T> {
@@ -65,7 +66,7 @@ class HHOptionButton extends StatelessWidget{
                       child:  Column(
                         children: [
                           InkWell(
-                            child: Text('cancel'),
+                            child: Text(AppLocalizations.of(context).cancel),
                             onTap: (){ Navigator.pop(context, 'cancel');
                             onClickCancel();
                             },
@@ -78,7 +79,7 @@ class HHOptionButton extends StatelessWidget{
                           ),
                           SizedBox(height: 5,),
                           InkWell(
-                            child: Text('re-schedule'),
+                            child: Text(AppLocalizations.of(context).reschedule),
                             onTap: (){ Navigator.pop(context, 're-schedule');
                             onClickReSchedule();
                             },

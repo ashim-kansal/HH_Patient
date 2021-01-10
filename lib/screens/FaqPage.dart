@@ -27,7 +27,7 @@ class _FaqPageState extends State<FaqPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-          title: 'FAQ',
+          title: AppLocalizations.of(context).FAQ,
       child: FutureBuilder<FaqResponse>(
         future: getFaqs(),
         builder: (context, snapshot) {

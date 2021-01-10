@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 
 class PlanWidget extends StatefulWidget {
@@ -59,7 +60,7 @@ class PlanWidgetState extends State<PlanWidget> {
               SizedBox.fromSize(size: Size(8, 20),),
 
               widget.enable ?? true ? RaisedButton(
-                  child: Text( widget.price.compareTo('0') == 1 ? 'Buy Now':'Free', style: TextStyle(color: Colors.white),),
+                  child: Text( widget.price.compareTo('0') == 1 ? AppLocalizations.of(context).buyNow : AppLocalizations.of(context).free, style: TextStyle(color: Colors.white),),
                   onPressed: (){
                     widget.onClick();
                   },

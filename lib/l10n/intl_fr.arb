@@ -11,6 +11,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "Please enter a valid password": "Entrer un mot de passe valide s'il vous plait",
+  "@Please enter a valid password": {
+    "type": "text",
+    "placeholders": {}
+  },
   "Done": "Terminé",
   "@Done": {
     "type": "text",
@@ -603,6 +608,186 @@
   },
   "Please enter a confirm password": "Veuillez entrer le mot de passe",
   "@Please enter a confirm password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please agree with terms & conditions": "Veuillez accepter les termes et conditions",
+  "@Please agree with terms & conditions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sign up for an account to unlock all features.": "Créez un compte pour déverrouiller toutes les fonctionnalités.",
+  "@Sign up for an account to unlock all features.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter your first name": "Entrez votre prénom s'il vous plait",
+  "@Please enter your first name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter your last name": "Veuillez entrer votre nom de famille",
+  "@Please enter your last name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Create Password": "Créer un mot de passe",
+  "@Create Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a phone number": "Veuillez saisir un numéro de téléphone",
+  "@Please enter a phone number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Select Province": "Sélectionnez la province",
+  "@Select Province": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Total payable amount": "Montant total à payer",
+  "@Total payable amount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Name on Card": "Nom sur la carte",
+  "@Name on Card": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a name on card": "Veuillez saisir un nom sur la carte",
+  "@Please enter a name on card": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Card Number": "Card Number",
+  "@Card Number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid card number": "S'il vous plaît entrez un numéro de carte valide",
+  "@Please enter a valid card number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Expiration Date": "Date d'expiration",
+  "@Expiration Date": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a expiry month": "Veuillez saisir un mois d'expiration",
+  "@Please enter a expiry month": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a expiry year": "Veuillez saisir une année d'expiration",
+  "@Please enter a expiry year": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Pay Now": "Payez maintenant",
+  "@Pay Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Payment Done!": "Paiement effectué!",
+  "@Payment Done!": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "You have successfully subscribed with ": "Vous vous êtes abonné avec succès avec ",
+  "@You have successfully subscribed with ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Payment": "Paiement",
+  "@Payment": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Log Now": "Connectez-vous maintenant",
+  "@Log Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "View": "Vue",
+  "@View": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Submitted": "Soumise",
+  "@Submitted": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Pending": "En attente",
+  "@Pending": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No": "Non",
+  "@No": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Yes": "Oui",
+  "@Yes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Buy Now": "Acheter maintenant",
+  "@Buy Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Free": "Libre",
+  "@Free": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Book Session": "Réserver une session",
+  "@Book Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Goal": "Objectif",
+  "@Goal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Are you sure you want to log out of the app?": "Voulez-vous vraiment vous déconnecter de l'application?",
+  "@Are you sure you want to log out of the app?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Cancel Session": "Annuler la session",
+  "@Cancel Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Are you sure you want\n to cancel your session ?": "Êtes-vous sûr de vouloir \n annuler votre session?",
+  "@Are you sure you want\n to cancel your session ?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No. of Drinks": "Nbre de boissons",
+  "@No. of Drinks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Ok": "D'accord",
+  "@Ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter correct old password": "Ingrese la contraseña anterior correcta",
+  "@Please enter correct old password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Pharmacies": "Pharmacies",
+  "@Pharmacies": {
     "type": "text",
     "placeholders": {}
   }
