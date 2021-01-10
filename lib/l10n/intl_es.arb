@@ -570,7 +570,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "Case manager": "Administrador del caso",
+  "Case manager": "gerente del caso",
   "@Case manager": {
     "type": "text",
     "placeholders": {}

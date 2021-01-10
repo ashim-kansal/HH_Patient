@@ -195,6 +195,7 @@ class InAppAPIServices {
           "receiverId": receiverId,
           "message": msg
         }));
+    print(response.body);
 
     return sendMessageResponseFromJson(response.body);
   }

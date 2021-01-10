@@ -42,7 +42,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   getChat() async{
-    return await getChatList(widget.chatId);
+    return await getChatList(widget.senderId);
   }
 
   @override
@@ -61,7 +61,7 @@ class _ChatPageState extends State<ChatPage> {
                 children: <Widget>[
                   //Chat list
                   FutureBuilder<GetChatUsers>(
-                    future: getChatList(widget.chatId),
+                    future: getChatList(widget.senderId),
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
@@ -172,7 +172,7 @@ class _ChatPageState extends State<ChatPage> {
 
       InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-      inAppAPIServices.sendMessage(widget.chatId, msg).then((value) => {
+      inAppAPIServices.sendMessage(widget.senderId, msg).then((value) => {
         if(value.responseCode == 200){
           _textController.clear(),
           // messagesList = getChat(),
