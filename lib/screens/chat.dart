@@ -176,9 +176,8 @@ class _ChatPageState extends State<ChatPage> {
       // );
 
       InAppAPIServices inAppAPIServices = new InAppAPIServices();
-
-      inAppAPIServices.sendMessage(widget.chatId, msg).then((value) => {
-        // ignore: sdk_version_ui_as_code
+      // inAppAPIServices.sendMessage(widget.chatId, msg).then((value) => {
+      inAppAPIServices.sendMessage(widget.senderId, msg).then((value) => {
         if(value.responseCode == 200){
           _textController.clear(),
           // messagesList = getChat(),

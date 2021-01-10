@@ -15,6 +15,8 @@ import 'dart:convert';
 class APIService {
   Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput, String deviceToken) async {
     final url = HHString.baseURL +"/api/v1/user/login";
+    var language = await GetStringToSP("language");
+
     print(jsonEncode(<String, String>{
       "email": emailInput,
       "password": passwordInput,
@@ -26,7 +28,9 @@ class APIService {
       body: jsonEncode(<String, String>{
         "email": emailInput,
         "password": passwordInput,
-        "deviceToken": deviceToken??""
+        "deviceToken": deviceToken??"",
+        "appLanguage": language,
+
       })
     );
     

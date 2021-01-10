@@ -40,9 +40,9 @@ class LanguagePageState extends State<LanguagePage> {
     settingAPIService.UpdateLanguage(lang).then((value) => {
       if(value.responseCode == 200){
         showToast(value.responseMessage),
-        print(lang),
-        print(lang == 'en' ? 'US' : lang == 'es' ? 'AR' : 'fr_FR'),
-        AppLocalizations.load(Locale(lang, ''))
+        setState((){
+          AppLocalizations.load(Locale(lang, ''));
+        })
         }
     });
   }

@@ -151,7 +151,6 @@ Future<ReviewResponse> submitSessionReview(sessionId, comments) async {
       body:  jsonEncode({
         "sessionId": sessionId,
         "feedback": comments,
-        "rating": 1,
       })
   );
 
@@ -196,6 +195,7 @@ class InAppAPIServices {
           "receiverId": receiverId,
           "message": msg
         }));
+    print(response.body);
 
     return sendMessageResponseFromJson(response.body);
   }

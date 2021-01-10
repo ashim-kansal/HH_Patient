@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/FaqPage.dart';
 import 'package:flutter_app/screens/aboutus.dart';
@@ -19,7 +19,6 @@ import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,8 +83,8 @@ class DashboardState extends State<Dashboard> {
         
         appBar: AppBar(
           title: Text(
-              tabIndex == 0?? AppLocalizations.of(context).dashboard
-              ? tabIndex == 1 ?? AppLocalizations.of(context).library
+              tabIndex == 0 ? AppLocalizations.of(context).dashboard
+              : tabIndex == 1 ? AppLocalizations.of(context).library
               : AppLocalizations.of(context).assessment
               , style: TextStyle(color: Colors.white)),
           centerTitle: true,

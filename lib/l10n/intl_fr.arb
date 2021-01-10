@@ -1,132 +1,132 @@
 {
   "@@last_modified": "2021-01-08T06:52:37.130942",
 
-  "Next": "Next",
+  "Next": "Prochaine",
   "@Next": {
     "type": "text",
     "placeholders": {}
   },
-  "Done": "Done",
+  "Done": "Terminé",
   "@Done": {
     "type": "text",
     "placeholders": {}
   },
-  "Choose your goal": "Choose your goal",
+  "Choose your goal": "Choisissez votre objectif",
   "@Choose your goal": {
     "type": "text",
     "placeholders": {}
   },
-  "Video Session": "Video Session",
+  "Video Session": "Session vidéo",
   "@Video Session": {
     "type": "text",
     "placeholders": {}
   },
-  "Welcome back": "Welcome back",
+  "Welcome back": "Nous saluons le retour",
   "@Welcome back": {
     "type": "text",
     "placeholders": {}
   },
-  "Login": "Login",
+  "Login": "Connecter",
   "@Login": {
     "type": "text",
     "placeholders": {}
   },
-  "Enter Password": "Enter Password",
+  "Enter Password": "Entrer le mot de passe",
   "@Enter Password": {
     "type": "text",
     "placeholders": {}
   },
-  "Password containes be alpha-numeric with 1 Small, Capital and Special character": "Password containes be alpha-numeric with 1 Small, Capital and Special character",
+  "Password containes be alpha-numeric with 1 Small, Capital and Special character": "Le mot de passe doit être alphanumérique avec 1 petit, majuscule et caractère spécial",
   "@Password containes be alpha-numeric with 1 Small, Capital and Special character": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter a valid email address": "Please enter a valid email address",
+  "Please enter a valid email address": "S'il vous plaît, mettez une adresse email valide",
   "@Please enter a valid email address": {
     "type": "text",
     "placeholders": {}
   },
-  "Login into your existing account": "Login into your existing account",
+  "Login into your existing account": "Connectez-vous à votre compte existant",
   "@Login into your existing account": {
     "type": "text",
     "placeholders": {}
   },
-  "Forgot Password?": "Forgot Password?",
+  "Forgot Password?": "Mot de passe oublié?",
   "@Forgot Password?": {
     "type": "text",
     "placeholders": {}
   },
-  "Terms of Service ": "Terms of Service ",
+  "Terms of Service ": "Conditions d'utilisation ",
   "@Terms of Service ": {
     "type": "text",
     "placeholders": {}
   },
-  "By continuing, you agree to our ": "By continuing, you agree to our ",
+  "By continuing, you agree to our ": "En continuant, vous acceptez notre ",
   "@By continuing, you agree to our ": {
     "type": "text",
     "placeholders": {}
   },
-  "Do you have an account ": "Do you have an account ",
+  "Do you have an account ": "Avez-vous un compte ",
   "@Do you have an account ": {
     "type": "text",
     "placeholders": {}
   },
-  "Sign Up": "Sign Up",
+  "Sign Up": "S'inscrire",
   "@Sign Up": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter a new password": "Please enter a new password",
+  "Please enter a new password": "Veuillez saisir un nouveau mot de passe",
   "@Please enter a new password": {
     "type": "text",
     "placeholders": {}
   },
-  "Enter your new password below.": "Enter your new password below.",
+  "Enter your new password below.": "Entrez votre nouveau mot de passe ci-dessous.",
   "@Enter your new password below.": {
     "type": "text",
     "placeholders": {}
   },
-  "Enter New Password": "Enter New Password",
+  "Enter New Password": "Entrez un nouveau mot de passe",
   "@Enter New Password": {
     "type": "text",
     "placeholders": {}
   },
-  "Daily drinking diary to track your progress": "Daily drinking diary to track your progress",
+  "Daily drinking diary to track your progress": "Journal quotidien d'alcool pour suivre vos progrès",
   "@Daily drinking diary to track your progress": {
     "type": "text",
     "placeholders": {}
   },
-  "Join your therapist directly from your phone": "Join your therapist directly from your phone",
+  "Join your therapist directly from your phone": "Rejoignez votre thérapeute directement depuis votre téléphone",
   "@Join your therapist directly from your phone": {
     "type": "text",
     "placeholders": {}
   },
-  "To help you understand your triggers": "To help you understand your triggers",
+  "To help you understand your triggers": "Pour vous aider à comprendre vos déclencheurs",
   "@To help you understand your triggers": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter a valid confirm password": "Please enter a valid confirm password",
+  "Please enter a valid confirm password": "Veuillez saisir un mot de passe de confirmation valide",
   "@Please enter a valid confirm password": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter the valid OTP": "Please enter the valid OTP",
+  "Please enter the valid OTP": "Veuillez saisir l'OTP valide",
   "@Please enter the valid OTP": {
     "type": "text",
     "placeholders": {}
   },
-  "Reset": "Reset",
+  "Reset": "Réinitialiser",
   "@Reset": {
     "type": "text",
     "placeholders": {}
   },
-  "Alert": "Alert",
+  "Alert": "Alerte",
   "@Alert": {
     "type": "text",
     "placeholders": {}
   },
-  "Passwords do not matched.": "Passwords do not matched.",
+  "Passwords do not matched.": "Les mots de passe ne correspondent pas.",
   "@Passwords do not matched.": {
     "type": "text",
     "placeholders": {}
@@ -136,17 +136,12 @@
     "type": "text",
     "placeholders": {}
   },
-  "abc": "frrrr",
-  "@abc": {
-    "type": "frrrrr",
-    "placeholders": {}
-  },
   "Heal@Home Programs": "Heal@Home Programs",
   "@Heal@Home Programs": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter you registered email address. We will help you retrieve your password.": "Please enter you registered email address. We will help you retrieve your password.",
+  "Please enter you registered email address. We will help you retrieve your password.": "Veuillez inscrire le courriel enregistré, nous vous aiderons a retrouver votre mot de passe",
   "@Please enter you registered email address. We will help you retrieve your password.": {
     "type": "text",
     "placeholders": {}
@@ -156,32 +151,32 @@
     "type": "text",
     "placeholders": {}
   },
-  "Alcohol Management Program": "Alcohol Management Program",
+  "Alcohol Management Program": "Programme de gestion de la consummation d’alcool",
   "@Alcohol Management Program": {
     "type": "text",
     "placeholders": {}
   },
-  "6 MONTH PROGRAM": "6 MONTH PROGRAM",
+  "6 MONTH PROGRAM": "Programme de 6 mois",
   "@6 MONTH PROGRAM": {
     "type": "text",
     "placeholders": {}
   },
-  "Program": "Program",
+  "Program": "Programme",
   "@Program": {
     "type": "text",
     "placeholders": {}
   },
-  "Proceed": "Proceed",
+  "Proceed": "Poursuivre",
   "@Proceed": {
     "type": "text",
     "placeholders": {}
   },
-  "Settings": "Settings",
+  "Settings": "Paramètres",
   "@Settings": {
     "type": "text",
     "placeholders": {}
   },
-  "Enter Email": "Enter Email",
+  "Enter Email": "Addresse Courriel",
   "@Enter Email": {
     "type": "text",
     "placeholders": {}
@@ -191,32 +186,32 @@
     "type": "text",
     "placeholders": {}
   },
-  "Change Password": "Change Password",
+  "Change Password": "Changer le mot de passe",
   "@Change Password": {
     "type": "text",
     "placeholders": {}
   },
-  "Forgot Password": "Forgot Password",
+  "Forgot Password": "Mot de passe oublié",
   "@Forgot Password": {
     "type": "text",
     "placeholders": {}
   },
-  "Reset Password": "Reset Password",
+  "Reset Password": "Réinitialiser le mot de passe",
   "@Reset Password": {
     "type": "text",
     "placeholders": {}
   },
-  "Change Language": "Change Language",
+  "Change Language": "Modifier la Langue",
   "@Change Language": {
     "type": "text",
     "placeholders": {}
   },
-  "Email already exist!": "Email already exist!",
+  "Email already exist!": "Courriel existe déjà",
   "@Email already exist!": {
     "type": "text",
     "placeholders": {}
   },
-  "We found an account with this email, do you want to login?": "We found an account with this email, do you want to login?",
+  "We found an account with this email, do you want to login?": "Nous avons trouvé un compte avec ce courriel, voulez-vous vous connecter??",
   "@We found an account with this email, do you want to login?": {
     "type": "text",
     "placeholders": {}
@@ -226,27 +221,27 @@
     "type": "text",
     "placeholders": {}
   },
-  "Feedback": "Feedback",
+  "Feedback": "Commentaires",
   "@Feedback": {
     "type": "text",
     "placeholders": {}
   },
-  "ABOUT_US": "ABOUT_US",
+  "ABOUT_US": "A Propos",
   "@ABOUT_US": {
     "type": "text",
     "placeholders": {}
   },
-  "Error": "Error",
+  "Error": "Erreur",
   "@Error": {
     "type": "text",
     "placeholders": {}
   },
-  "Submit": "Submit",
+  "Submit": "Soumettre",
   "@Submit": {
     "type": "text",
     "placeholders": {}
   },
-  "save": "save",
+  "save": "Sauvegarder",
   "@save": {
     "type": "text",
     "placeholders": {}
@@ -256,342 +251,342 @@
     "type": "text",
     "placeholders": {}
   },
-  "My Chats": "My Chats",
+  "My Chats": "Mes Chats",
   "@My Chats": {
     "type": "text",
     "placeholders": {}
   },
-  "Dashboard": "Dashboard",
+  "Dashboard": "Tableau de Bord",
   "@Dashboard": {
     "type": "text",
     "placeholders": {}
   },
-  "No New Messages": "No New Messages",
+  "No New Messages": "Pas de nouveaux messages",
   "@No New Messages": {
     "type": "text",
     "placeholders": {}
   },
-  "Not Found": "Not Found",
+  "Not Found": "Introuvable",
   "@Not Found": {
     "type": "text",
     "placeholders": {}
   },
-  "No Data Found": "No Data Found",
+  "No Data Found": "Aucune donnée disponible",
   "@No Data Found": {
     "type": "text",
     "placeholders": {}
   },
-  "My Programs": "My Programs",
+  "My Programs": "Mes programmes",
   "@My Programs": {
     "type": "text",
     "placeholders": {}
   },
-  "Please share your thoughts with us": "Please share your thoughts with us",
+  "Please share your thoughts with us": "Veuillez partager vos remarques ",
   "@Please share your thoughts with us": {
     "type": "text",
     "placeholders": {}
   },
-  "Please use this form to connect us ": "Please use this form to connect us ",
+  "Please use this form to connect us ": "Veuillez utiliser ce formulaire pour nous connecter ",
   "@Please use this form to connect us ": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter a feedback": "Please enter a feedback",
+  "Please enter a feedback": "Veuillez nous faire part de vos commentaires",
   "@Please enter a feedback": {
     "type": "text",
     "placeholders": {}
   },
-  "Please enter your review": "Please enter your review",
+  "Please enter your review": "Veuillez nous faire part de vos commentaires",
   "@Please enter your review": {
     "type": "text",
     "placeholders": {}
   },
-  "No Record Found": "No Record Found",
+  "No Record Found": "Aucun dossier trouvé",
   "@No Record Found": {
     "type": "text",
     "placeholders": {}
   },
-  "Schedule": "Schedule",
+  "Schedule": "Calendrier",
   "@Schedule": {
     "type": "text",
     "placeholders": {}
   },
-  "Upcoming": "Upcoming",
+  "Upcoming": "A venir",
   "@Upcoming": {
     "type": "text",
     "placeholders": {}
   },
-  "Completed": "Completed",
+  "Completed": "Terminé",
   "@Completed": {
     "type": "text",
     "placeholders": {}
   },
-  "Send": "Send",
+  "Send": "Envoyer",
   "@Send": {
     "type": "text",
     "placeholders": {}
   },
-  "No Upcoming Sessions": "No Upcoming Sessions",
+  "No Upcoming Sessions": "Aucune session à venir",
   "@No Upcoming Sessions": {
     "type": "text",
     "placeholders": {}
   },
-  "View All": "View All",
+  "View All": "Tout voir",
   "@View All": {
     "type": "text",
     "placeholders": {}
   },
-  "Drinking Diary": "Drinking Diary",
+  "Drinking Diary": "Journal de consommation",
   "@Drinking Diary": {
     "type": "text",
     "placeholders": {}
   },
-  "Daily Journaling": "Daily Journaling",
+  "Daily Journaling": "Journal quotidien",
   "@Daily Journaling": {
     "type": "text",
     "placeholders": {}
   },
-  "My Session": "My Session",
+  "My Session": "Mes Session",
   "@My Session": {
     "type": "text",
     "placeholders": {}
   },
-  "Upcoming Sessions": "Upcoming Sessions",
+  "Upcoming Sessions": "Sessions à venir",
   "@Upcoming Sessions": {
     "type": "text",
     "placeholders": {}
   },
-  "Search Nearest Pharmacies": "Search Nearest Pharmacies",
+  "Search Nearest Pharmacies": "Rechercher la pharmacie la plus proche",
   "@Search Nearest Pharmacies": {
     "type": "text",
     "placeholders": {}
   },
-  "Open": "Open",
+  "Open": "Ouvert",
   "@Open": {
     "type": "text",
     "placeholders": {}
   },
-  "Cancel": "Cancel",
+  "Cancel": "Annuler",
   "@Cancel": {
     "type": "text",
     "placeholders": {}
   },
-  "Notification": "Notification",
+  "Notification": "Alerte",
   "@Notification": {
     "type": "text",
     "placeholders": {}
   },
-  "Notifications": "Notifications",
+  "Notifications": "Alertes",
   "@Notifications": {
     "type": "text",
     "placeholders": {}
   },
-  "Upgrade Now": "Upgrade Now",
+  "Upgrade Now": "Mettre a jour",
   "@Upgrade Now": {
     "type": "text",
     "placeholders": {}
   },
-  "Journaling": "Journaling",
+  "Journaling": "Journal",
   "@Journaling": {
     "type": "text",
     "placeholders": {}
   },
-  "New Journal": "New Journal",
+  "New Journal": "Entrée recente",
   "@New Journal": {
     "type": "text",
     "placeholders": {}
   },
-  "Old Journal": "Old Journal",
+  "Old Journal": "Ancienne Entrée",
   "@Old Journal": {
     "type": "text",
     "placeholders": {}
   },
-  "Support": "Support",
+  "Support": "Soutien",
   "@Support": {
     "type": "text",
     "placeholders": {}
   },
-  "Home": "Home",
+  "Home": "Accueil",
   "@Home": {
     "type": "text",
     "placeholders": {}
   },
-  "Library": "Library",
+  "Library": "Bibliothèque",
   "@Library": {
     "type": "text",
     "placeholders": {}
   },
-  "Assessment": "Assessment",
+  "Assessment": "Évaluation",
   "@Assessment": {
     "type": "text",
     "placeholders": {}
   },
-  "Therapists": "Therapists",
+  "Therapists": "Thérapeutes",
   "@Therapists": {
     "type": "text",
     "placeholders": {}
   },
-  "Address": "Address",
+  "Address": "Addresse",
   "@Address": {
     "type": "text",
     "placeholders": {}
   },
-  "First Name": "First Name",
+  "First Name": "Prénom",
   "@First Name": {
     "type": "text",
     "placeholders": {}
   },
-  "Last Name": "Last Name",
+  "Last Name": "Nom de Famille",
   "@Last Name": {
     "type": "text",
     "placeholders": {}
   },
-  "Name": "Name",
+  "Name": "Nom",
   "@Name": {
     "type": "text",
     "placeholders": {}
   },
-  "Edit": "Edit",
+  "Edit": "Éditer",
   "@Edit": {
     "type": "text",
     "placeholders": {}
   },
-  "Submit & Proceed": "Submit & Proceed",
+  "Submit & Proceed": "Soumettre et proceder",
   "@Submit & Proceed": {
     "type": "text",
     "placeholders": {}
   },
-  "Phone Number": "Phone Number",
+  "Phone Number": "Téléphone",
   "@Phone Number": {
     "type": "text",
     "placeholders": {}
   },
-  "Email": "Email",
+  "Email": "Courriel",
   "@Email": {
     "type": "text",
     "placeholders": {}
   },
-  "Update": "Update",
+  "Update": "Mise a jour",
   "@Update": {
     "type": "text",
     "placeholders": {}
   },
-  "Share Your Reviews": "Share Your Reviews",
+  "Share Your Reviews": "Partagerz vos commentaires",
   "@Share Your Reviews": {
     "type": "text",
     "placeholders": {}
   },
-  "Questionaire": "Questionaire",
+  "Questionaire": "Questionnaire",
   "@Questionaire": {
     "type": "text",
     "placeholders": {}
   },
-  "Profile": "Profile",
+  "Profile": "Profil",
   "@Profile": {
     "type": "text",
     "placeholders": {}
   },
-  "FAQ's": "FAQ's",
+  "FAQ's": "QFA's",
   "@FAQ's": {
     "type": "text",
     "placeholders": {}
   },
-  "Edit Profile": "Edit Profile",
+  "Edit Profile": "Editer le profil",
   "@Edit Profile": {
     "type": "text",
     "placeholders": {}
   },
-  "Contact Us": "Contact Us",
+  "Contact Us": "Contactez-nous",
   "@Contact Us": {
     "type": "text",
     "placeholders": {}
   },
-  "More Information": "More Information",
+  "More Information": "Plus d Informations",
   "@More Information": {
     "type": "text",
     "placeholders": {}
   },
-  "About Us": "About Us",
+  "About Us": "A propos",
   "@About Us": {
     "type": "text",
     "placeholders": {}
   },
-  "Terms & Conditions": "Terms & Conditions",
+  "Terms & Conditions": "Termes et conditions",
   "@Terms & Conditions": {
     "type": "text",
     "placeholders": {}
   },
-  "Privacy Policy": "Privacy Policy",
+  "Privacy Policy": "Politique de confidentialité",
   "@Privacy Policy": {
     "type": "text",
     "placeholders": {}
   },
-  "Log Out": "Log Out",
+  "Log Out": "Se déconnecter",
   "@Log Out": {
     "type": "text",
     "placeholders": {}
   },
-  "Terms & Condition": "Terms & Condition",
+  "Terms & Condition": "Termes et conditions",
   "@Terms & Condition": {
     "type": "text",
     "placeholders": {}
   },
-  "My Therapists": "My Therapists",
+  "My Therapists": "Mes thérapeutes",
   "@My Therapists": {
     "type": "text",
     "placeholders": {}
   },
-  "OTP Verification": "OTP Verification",
+  "OTP Verification": "OTP vérification",
   "@OTP Verification": {
     "type": "text",
     "placeholders": {}
   },
-  "Resend code in:": "Resend code in:",
+  "Resend code in:": "Renvoyez le code:",
   "@Resend code in:": {
     "type": "text",
     "placeholders": {}
   },
-  "Therapist": "Therapist",
+  "Therapist": "Thérapeute",
   "@Therapist": {
     "type": "text",
     "placeholders": {}
   },
-  "Resend OTP": "Resend OTP",
+  "Resend OTP": "Renvoyez le OTP",
   "@Resend OTP": {
     "type": "text",
     "placeholders": {}
   },
-  "Get Started": "Get Started",
+  "Get Started": "Commencer",
   "@Get Started": {
     "type": "text",
     "placeholders": {}
   },
-  "Physician": "Physician",
+  "Physician": "Docteur",
   "@Physician": {
     "type": "text",
     "placeholders": {}
   },
-  "Case manager": "Case manager",
+  "Case manager": "Manager de Cas",
   "@Case manager": {
     "type": "text",
     "placeholders": {}
   },
-  "Re-Schedule": "Re-Schedule",
+  "Re-Schedule": "Reporter",
   "@Re-Schedule": {
     "type": "text",
     "placeholders": {}
   },
-  "Old Password": "Old Password",
+  "Old Password": "ancien mot de passe",
   "@Old Password": {
     "type": "text",
     "placeholders": {}
   },
-  "New Password": "New Password",
+  "New Password": "nouveau mot de passe",
   "@New Password": {
     "type": "text",
     "placeholders": {}
   },
-  "Confirm Password": "Confirm Password",
+  "Confirm Password": "Confirmez le mot de passe",
   "@Confirm Password": {
     "type": "text",
     "placeholders": {}
