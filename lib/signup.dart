@@ -19,6 +19,7 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:toast/toast.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:flutter_app/app_localization.dart';
 
 class SignUpPage extends StatefulWidget {
   static const String RouteName = '/signup';
@@ -57,12 +58,12 @@ class _SignupPageState extends State<SignUpPage> {
   bool isChecked = true;
   bool countrySelected = false;
   String countryCode = "";
-  void signupHandler(){
+  void signupHandler(BuildContext context){
 
     String fname = fnameController.text;
     String lname = lnameController.text;
     String email = emailController.text;
-    String location = locationController.text;
+    // String location = locationController.text;
     String password = passwordController.text;
     var number = phoneController.text;
     String country = countryDropdown;
@@ -73,8 +74,7 @@ class _SignupPageState extends State<SignUpPage> {
     var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
 
 
-    if(fname.trim().length == 0 && lname.trim().length == 0 && email.trim().length == 0 && 
-    location.trim().length == 0 && password.trim().length == 0 && number.trim().length == 0){
+    if(fname.trim().length == 0 && lname.trim().length == 0 && email.trim().length == 0){
       
       setState(() {
         widget.fnameError = true;
@@ -82,7 +82,6 @@ class _SignupPageState extends State<SignUpPage> {
         widget.emailError = true;
         widget.pwdError = true;
         widget.numberError = true;
-        widget.locationError = true;
       });
       
       return;
@@ -95,7 +94,6 @@ class _SignupPageState extends State<SignUpPage> {
         widget.emailError = true;
         widget.pwdError = false;
         widget.numberError = false;
-        widget.locationError = false;
       });
       return;
     }
@@ -107,8 +105,7 @@ class _SignupPageState extends State<SignUpPage> {
         widget.emailError = false;
         widget.pwdError = true;
         widget.numberError = false;
-        widget.locationError = false;
-        pwdValidation = "Password should be alpha-numeric with 1 Small, Capital and Special character.as";
+        pwdValidation = AppLocalizations.of(context).pass_validation_msg;
       });
       return;
     }
@@ -124,7 +121,7 @@ class _SignupPageState extends State<SignUpPage> {
 
     buildShowDialog(context);
     APIService apiService = new APIService();
-     apiService.registerApiHandler(fname, lname, email, location, password, number, country, state, countryCode).then((value) => {
+     apiService.registerApiHandler(fname, lname, email, password, number, country, state, countryCode).then((value) => {
       Navigator.of(context).pop(),
       Timer(Duration(seconds: 1),
         ()=> {
@@ -209,7 +206,7 @@ class _SignupPageState extends State<SignUpPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                             child: Text(
-                              "Lets get started!",
+                              AppLocalizations.of(context).lets_started,
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Color(0xff5c5c5c),
@@ -233,7 +230,7 @@ class _SignupPageState extends State<SignUpPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
                               child: HHEditText(
-                                hint: "First Name",
+                                hint: AppLocalizations.of(context).fname,
                                 obscureText: false,
                                 controller: fnameController,
                                 error: widget.fnameError,
@@ -243,7 +240,7 @@ class _SignupPageState extends State<SignUpPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                               child: HHEditText(
-                                hint: "Last Name",
+                                hint: AppLocalizations.of(context).lname,
                                 obscureText: false,
                                 controller: lnameController,
                                 error: widget.lnameError,
@@ -253,7 +250,7 @@ class _SignupPageState extends State<SignUpPage> {
                              Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                               child: HHEditText(
-                                hint: "Email Address",
+                                hint: AppLocalizations.of(context).email,
                                 obscureText: false,
                                 controller: emailController,
                                 error: widget.emailError,
@@ -280,7 +277,7 @@ class _SignupPageState extends State<SignUpPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
                               child: HHEditText(
-                                hint: "Phone Number",
+                                hint: AppLocalizations.of(context).phone_number,
                                 obscureText: false,
                                 controller: phoneController,
                                 error: widget.numberError,
@@ -288,16 +285,16 @@ class _SignupPageState extends State<SignUpPage> {
                                 'Please enter a phone number',
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
-                              child: HHEditText(
-                                hint: "Enter Your Location",
-                                obscureText: false,
-                                controller: locationController,
-                                error: widget.locationError,
-                                errorText: 'Please enter your location',
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                            //   child: HHEditText(
+                            //     hint: "Enter Your Location",
+                            //     obscureText: false,
+                            //     controller: locationController,
+                            //     error: widget.locationError,
+                            //     errorText: 'Please enter your location',
+                            //   ),
+                            // ),
 
                             Container(
                               margin: EdgeInsets.only(top: 0, bottom: 10, left: 15, right: 15),
@@ -313,7 +310,7 @@ class _SignupPageState extends State<SignUpPage> {
                                    if (snapshot.connectionState == ConnectionState.done) {
                                       if(snapshot.hasError){
                                         return new DropdownButton<String>(
-                                          value: "No Data Found",
+                                          value: AppLocalizations.of(context).not_data_found,
                                           isExpanded: true,
                                           icon: Icon(Icons.arrow_drop_down),
                                           iconEnabledColor: Color(0xffC5C4C4),
@@ -423,7 +420,7 @@ class _SignupPageState extends State<SignUpPage> {
 
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 20, 5, 10),
-                              child: HHButton(title: "Sign Up", type: 4, isEnable: true,onClick: (){
+                              child: HHButton(title: AppLocalizations.of(context).signup, type: 4, isEnable: true,onClick: (){
                                 signupHandler();
                               },),
                             ),
@@ -461,12 +458,12 @@ class _SignupPageState extends State<SignUpPage> {
                     child: Center(child: 
                       RichText(
                         text: TextSpan(
-                          text: 'By continuing, you agree to our ',
+                          text: AppLocalizations.of(context).agree_desc,
                           style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
                           children: <TextSpan>[
-                            TextSpan(text: 'Terms of Service ', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                            TextSpan(text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
                             TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14)),
-                            TextSpan(text: 'Privacy Policy', style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                            TextSpan(text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
                           ],
                         ),
                       )
@@ -490,7 +487,7 @@ class _SignupPageState extends State<SignUpPage> {
                       text: 'Back to ',
                       style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                       children: <TextSpan>[
-                        TextSpan(text: 'Login', 
+                        TextSpan(text: AppLocalizations.of(context).login,
                           style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => {

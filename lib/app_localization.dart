@@ -4,6 +4,7 @@ import 'package:flutter_app/l10n/messages_all.dart';
 
 class AppLocalizations {
   String get next => Intl.message('Next');
+  String get lets_started => Intl.message('Lets get started!');
   String get done => Intl.message('Done');
   String get choose_goal => Intl.message('Choose your goal');
   String get video_session => Intl.message('Video Session');

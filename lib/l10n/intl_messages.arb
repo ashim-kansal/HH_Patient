@@ -1,7 +1,12 @@
 {
-  "@@last_modified": "2021-01-09T21:58:38.867751",
+  "@@last_modified": "2021-01-10T15:48:33.927349",
   "Next": "Next",
   "@Next": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Lets get started!": "Lets get started!",
+  "@Lets get started!": {
     "type": "text",
     "placeholders": {}
   },

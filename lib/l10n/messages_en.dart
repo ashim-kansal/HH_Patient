@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Join your therapist directly from your phone" : MessageLookupByLibrary.simpleMessage("Join your therapist directly from your phone"),
     "Journaling" : MessageLookupByLibrary.simpleMessage("Journaling"),
     "Last Name" : MessageLookupByLibrary.simpleMessage("Last Name"),
+    "Lets get started!" : MessageLookupByLibrary.simpleMessage("Lets get started!"),
     "Library" : MessageLookupByLibrary.simpleMessage("Library"),
     "Log Out" : MessageLookupByLibrary.simpleMessage("Log Out"),
     "Login" : MessageLookupByLibrary.simpleMessage("Login"),
