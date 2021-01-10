@@ -44,7 +44,7 @@ class APIService {
     }
   }
 
-  Future<SignupResponseModel> registerApiHandler(String firstname, String lastname, String email, String location, String password, String number, String country, String state, String countrycode) async {
+  Future<SignupResponseModel> registerApiHandler(String firstname, String lastname, String email, String password, String number, String country, String state, String countrycode) async {
       final url = HHString.baseURL +"/api/v1/user/signUp";
       var language = await GetStringToSP("language");
       var deviceToken = await GetStringToSP("deviceToken");
@@ -54,7 +54,6 @@ class APIService {
           "lastName": lastname,
           "email": email,
           "mobileNumber": number,
-          "address": location,
           "password": password,
           "deviceToken": deviceToken??"",
           "countryCode": countrycode,
@@ -73,7 +72,6 @@ class APIService {
           "lastName": lastname,
           "email": email,
           "mobileNumber": number,
-          "address": location,
           "password": password,
           "deviceToken": deviceToken??"",
           "countryCode": countrycode,
