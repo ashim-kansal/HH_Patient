@@ -100,7 +100,8 @@ class SessionCard extends StatelessWidget {
                                   onPressed: (){
                                     onClickVideo();
                                   },
-                                  shape: CircleBorder(                            side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                                  shape: CircleBorder( 
+                                    side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                                 )),
 
                           ],
