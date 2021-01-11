@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _MapState extends State<MapPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Pharmacies", style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).pharmacies, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

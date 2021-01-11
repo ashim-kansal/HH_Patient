@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -631,7 +632,7 @@ class DrinkingDiaryCell extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        'Goal',
+                        AppLocalizations.of(context).goal,
                         style: TextStyle(
                             fontSize: 14,
                             color: (data!= null && data.date != null && data.date.isSameDate(DateTime.now()))
@@ -763,13 +764,13 @@ class DialogWithButtons extends StatelessWidget {
                     child: Column(
                   children: [
                     HHTextView(
-                        title: "Logout",
+                        title: AppLocalizations.of(context).logout,
                         size: 22,
                         color: HH_Colors.color_3D3D3D,
                         textweight: FontWeight.w600),
                     SizedBox(height: 20),
                     HHTextView(
-                        title: "Are you sure you want to log out of the app ?",
+                        title: AppLocalizations.of(context).logoutDesc,
                         size: 16,
                         color: HH_Colors.color_707070,
                         alignment: TextAlign.center,
@@ -794,7 +795,7 @@ class DialogWithButtons extends StatelessWidget {
                                   onDenyPress(),
                                 },
                             child: HHTextView(
-                                title: "No",
+                                title: AppLocalizations.of(context).no,
                                 size: 18,
                                 color: HH_Colors.color_707070,
                                 textweight: FontWeight.w400)),
@@ -804,7 +805,7 @@ class DialogWithButtons extends StatelessWidget {
                         child: InkWell(
                           onTap: () => {onLogoutPress()},
                           child: HHTextView(
-                              title: "Yes",
+                              title: AppLocalizations.of(context).yes,
                               size: 18,
                               color: HH_Colors.color_707070,
                               textweight: FontWeight.w400),
@@ -849,14 +850,14 @@ class CancelDialog extends StatelessWidget {
                     child: Column(
                   children: [
                     HHTextView(
-                        title: "Cancel Session",
+                        title: AppLocalizations.of(context).cancelSession,
                         size: 22,
                         color: HH_Colors.color_3D3D3D,
                         textweight: FontWeight.w600),
                     SizedBox(height: 5),
                     HHTextView(
                         title:
-                            "Are you sure you want\n to cancel your session ?",
+                            AppLocalizations.of(context).cancelSessionDesc,
                         size: 16,
                         color: HH_Colors.color_707070,
                         alignment: TextAlign.center,
@@ -881,7 +882,7 @@ class CancelDialog extends StatelessWidget {
                                   onDenyPress(),
                                 },
                             child: HHTextView(
-                                title: "No",
+                                title: AppLocalizations.of(context).no,
                                 size: 18,
                                 color: HH_Colors.color_707070,
                                 textweight: FontWeight.w400)),
@@ -891,7 +892,7 @@ class CancelDialog extends StatelessWidget {
                         child: InkWell(
                           onTap: () => {onYesPress()},
                           child: HHTextView(
-                              title: "Yes",
+                              title: AppLocalizations.of(context).yes,
                               size: 18,
                               color: HH_Colors.color_707070,
                               textweight: FontWeight.w400),
@@ -958,7 +959,7 @@ class DialogWithFieldState extends State<DialogWithField> {
               Align(
                 alignment: Alignment.center,
                 child: HHTextView(
-                  title: "No. of Drinks",
+                  title: AppLocalizations.of(context).noOfDrinks,
                   size: 22,
                   color: HH_Colors.color_3D3D3D,
                   textweight: FontWeight.w600,
@@ -1053,7 +1054,7 @@ class DialogWithFieldState extends State<DialogWithField> {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      "Save",
+                      AppLocalizations.of(context).save,
                       style: TextStyle(color: Colors.white),
                     ),
                     color: HH_Colors.purpleColor,
@@ -1201,7 +1202,7 @@ class DialogWithSingleButton extends StatelessWidget {
                                 Navigator.pop(context)
                               },
                           child: HHTextView(
-                              title: "Ok",
+                              title: AppLocalizations.of(context).ok,
                               size: 18,
                               color: HH_Colors.color_707070,
                               textweight: FontWeight.w400)),

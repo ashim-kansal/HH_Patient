@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/checkbox_widget.dart';
@@ -51,7 +52,7 @@ class AssessmentCell extends StatelessWidget {
                           borderRadius:
                               BorderRadius.all(Radius.circular(12.0))),
                       child: Text(
-                        completed ? 'View' : 'Log Now',
+                        completed ? AppLocalizations.of(context).view : AppLocalizations.of(context).logNow,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: HH_Colors.accentColor),
                       ),
@@ -63,7 +64,7 @@ class AssessmentCell extends StatelessWidget {
                 ],
               ),
               Text(
-                completed ? 'Submitted' : 'Pending',
+                completed ? AppLocalizations.of(context).submitted : AppLocalizations.of(context).pending,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                     fontSize: 15,
@@ -192,7 +193,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
             width: 120,
             height: 30,
             child: RadioListTile<int>(
-              title: Text("Yes"),
+              title: Text(AppLocalizations.of(context).yes),
               dense: true,
               // <= here it is !
               value: 1,
@@ -208,7 +209,7 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
             width: 120,
             height: 30,
             child: RadioListTile<int>(
-              title: Text("No"),
+              title: Text(AppLocalizations.of(context).no),
               dense: true,
               // <= here it is !
               value: 2,

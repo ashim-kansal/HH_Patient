@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2021-01-10T15:48:33.927349",
+  "@@last_modified": "2021-01-11T00:31:48.172659",
   "Next": "Next",
   "@Next": {
     "type": "text",
@@ -7,6 +7,11 @@
   },
   "Lets get started!": "Lets get started!",
   "@Lets get started!": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid password": "Please enter a valid password",
+  "@Please enter a valid password": {
     "type": "text",
     "placeholders": {}
   },
@@ -608,6 +613,186 @@
   },
   "Please enter a confirm password": "Please enter a confirm password",
   "@Please enter a confirm password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please agree with terms & conditions": "Please agree with terms & conditions",
+  "@Please agree with terms & conditions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sign up for an account to unlock all features.": "Sign up for an account to unlock all features.",
+  "@Sign up for an account to unlock all features.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter your first name": "Please enter your first name",
+  "@Please enter your first name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter your last name": "Please enter your last name",
+  "@Please enter your last name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Create Password": "Create Password",
+  "@Create Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a phone number": "Please enter a phone number",
+  "@Please enter a phone number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Select Province": "Select Province",
+  "@Select Province": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Total payable amount": "Total payable amount",
+  "@Total payable amount": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Name on Card": "Name on Card",
+  "@Name on Card": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a name on card": "Please enter a name on card",
+  "@Please enter a name on card": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Card Number": "Card Number",
+  "@Card Number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid card number": "Please enter a valid card number",
+  "@Please enter a valid card number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Expiration Date": "Expiration Date",
+  "@Expiration Date": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a expiry month": "Please enter a expiry month",
+  "@Please enter a expiry month": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a expiry year": "Please enter a expiry year",
+  "@Please enter a expiry year": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Pay Now": "Pay Now",
+  "@Pay Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Payment Done!": "Payment Done!",
+  "@Payment Done!": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "You have successfully subscribed with ": "You have successfully subscribed with ",
+  "@You have successfully subscribed with ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Payment": "Payment",
+  "@Payment": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Log Now": "Log Now",
+  "@Log Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "View": "View",
+  "@View": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Submitted": "Submitted",
+  "@Submitted": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Pending": "Pending",
+  "@Pending": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No": "No",
+  "@No": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Yes": "Yes",
+  "@Yes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Buy Now": "Buy Now",
+  "@Buy Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Free": "Free",
+  "@Free": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Book Session": "Book Session",
+  "@Book Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Goal": "Goal",
+  "@Goal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Are you sure you want to log out of the app?": "Are you sure you want to log out of the app?",
+  "@Are you sure you want to log out of the app?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Cancel Session": "Cancel Session",
+  "@Cancel Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Are you sure you want\n to cancel your session ?": "Are you sure you want\n to cancel your session ?",
+  "@Are you sure you want\n to cancel your session ?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No. of Drinks": "No. of Drinks",
+  "@No. of Drinks": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Ok": "Ok",
+  "@Ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter correct old password": "Please enter correct old password",
+  "@Please enter correct old password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Pharmacies": "Pharmacies",
+  "@Pharmacies": {
     "type": "text",
     "placeholders": {}
   }

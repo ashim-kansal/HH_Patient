@@ -5,6 +5,7 @@ import 'package:flutter_app/l10n/messages_all.dart';
 class AppLocalizations {
   String get next => Intl.message('Next');
   String get lets_started => Intl.message('Lets get started!');
+  String get valid_pwd => Intl.message("Please enter a valid password");
   String get done => Intl.message('Done');
   String get choose_goal => Intl.message('Choose your goal');
   String get video_session => Intl.message('Video Session');
@@ -84,7 +85,7 @@ class AppLocalizations {
   String get no_record_found => Intl.message("No Record Found");
   String get schedule => Intl.message("Schedule");
   String get Upcoming => Intl.message("Upcoming");
-  String get Completed => Intl.message("Completed");
+  String get completed => Intl.message("Completed");
   String get send => Intl.message("Send");
   String get no_up_sessions => Intl.message("No Upcoming Sessions");
   String get viewall => Intl.message("View All");
@@ -142,10 +143,43 @@ class AppLocalizations {
   String get confirm_password => Intl.message("Confirm Password");
   String get enter_msg => Intl.message("Enter message");
   String get confPasswordErrorMsg => Intl.message("Please enter a confirm password");
-
+  String get acceptTerms => Intl.message("Please agree with terms & conditions");
+  String get signupTitle => Intl.message("Sign up for an account to unlock all features.");
+  String get enterFirstName => Intl.message("Please enter your first name");
+  String get enterLastName => Intl.message("Please enter your last name");
+  String get createPwd => Intl.message("Create Password");
+  String get enterPhone => Intl.message("Please enter a phone number");
+  String get selectProvince => Intl.message("Select Province");
+  String get totalPayable => Intl.message("Total payable amount");
+  String get nameOnCard => Intl.message("Name on Card");
+  String get enterCardName => Intl.message("Please enter a name on card");
+  String get cardNumber => Intl.message("Card Number");
+  String get enterCardNumber => Intl.message("Please enter a valid card number");
+  String get expiryDate => Intl.message("Expiration Date");
+  String get enterExpiryMonth => Intl.message("Please enter a expiry month"); 
+  String get enterExpiryYear => Intl.message("Please enter a expiry year");
+  String get payNow => Intl.message("Pay Now");
+  String get paymentDone => Intl.message("Payment Done!");
+  String get paymentDoneMsg => Intl.message("You have successfully subscribed with ");
+  String get paymentTitle => Intl.message("Payment");
+  String get logNow => Intl.message("Log Now");
+  String get view => Intl.message("View");
+  String get submitted => Intl.message("Submitted");
+  String get pending => Intl.message("Pending");
+  String get no => Intl.message("No");
+  String get yes => Intl.message("Yes");
+  String get buyNow => Intl.message("Buy Now");
+  String get free => Intl.message("Free");
+  String get bookSession => Intl.message("Book Session");
+  String get goal => Intl.message("Goal");
+  String get logoutDesc => Intl.message("Are you sure you want to log out of the app?");
+  String get cancelSession => Intl.message("Cancel Session");
+  String get cancelSessionDesc => Intl.message("Are you sure you want\n to cancel your session ?");
+  String get noOfDrinks => Intl.message("No. of Drinks");
+  String get ok => Intl.message("Ok");
+  String get enterOldPwd => Intl.message("Please enter correct old password");
+  String get pharmacies => Intl.message("Pharmacies");
 }
-
-
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations>{
 

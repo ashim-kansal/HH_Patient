@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/ReScheduleSession.dart';
 import 'package:flutter_app/screens/chat.dart';
@@ -99,7 +100,8 @@ class SessionCard extends StatelessWidget {
                                   onPressed: (){
                                     onClickVideo();
                                   },
-                                  shape: CircleBorder(                            side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                                  shape: CircleBorder( 
+                                    side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                                 )),
 
                           ],
@@ -315,7 +317,7 @@ class UpcomingSessionItem extends StatelessWidget {
                       Row(
                         children: [
                           Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
-                          Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
+                          Text(AppLocalizations.of(context).completed, style: TextStyle(color: HH_Colors.color_17AB35),)
 
                         ],
                       )
@@ -381,8 +383,8 @@ class UpcomingSessionItem extends StatelessWidget {
                 ],
 
               ),
-
-
-            )));
+            )
+          )
+        );
   }
 }

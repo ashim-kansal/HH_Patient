@@ -112,7 +112,7 @@ class UserAPIServices {
 }
 
 // fetch chat listing
-Future<GetChatUsers> getChatList(chatId) async {
+Future<GetChatUsers> getChatList(chatId, senderid) async {
   var token = await GetStringToSP("token");
     print(token);
     print(chatId);
@@ -122,8 +122,13 @@ Future<GetChatUsers> getChatList(chatId) async {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token??HHString.token
       },
-       body:  chatId ==null ? null :  jsonEncode({
-      "receiverId": chatId})
+      body:  jsonEncode({
+      // "chatId": chatId??"",
+      "chatId": "",
+      "receiverId": senderid??""
+      })
+      //  body:  chatId ==null ? null :  jsonEncode({
+      // "receiverId": chatId})
       );
       // print(response.body);
   return getChatUsersFromJson(response.body);

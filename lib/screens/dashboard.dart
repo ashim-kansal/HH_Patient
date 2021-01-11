@@ -83,7 +83,7 @@ class DashboardState extends State<Dashboard> {
         
         appBar: AppBar(
           title: Text(
-              tabIndex == 0? AppLocalizations.of(context).dashboard
+              tabIndex == 0 ? AppLocalizations.of(context).dashboard
               : tabIndex == 1 ? AppLocalizations.of(context).library
               : AppLocalizations.of(context).assessment
               , style: TextStyle(color: Colors.white)),
