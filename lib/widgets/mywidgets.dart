@@ -624,7 +624,7 @@ class DrinkingDiaryCell extends StatelessWidget {
                       Icon(
                         Icons.add_circle_outlined,
                         color: isToday(day)
-                            ? HH_Colors.accentColor
+                            ? HH_Colors.primaryColor
                             : HH_Colors.color_949494,
                       ),
                       SizedBox(
@@ -637,7 +637,9 @@ class DrinkingDiaryCell extends StatelessWidget {
                             color: (data!= null && data.date != null && data.date.isSameDate(DateTime.now()))
                                 ? HH_Colors.accentColor
                                 : HH_Colors.color_949494,
-                            fontFamily: "ProximaNova"),
+                            fontFamily: "ProximaNova",
+                          fontWeight: FontWeight.w600
+                        ),
                       )
                     ],
                   ),

@@ -421,7 +421,7 @@ class _SignupPageState extends State<SignUpPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 20, 5, 10),
                               child: HHButton(title: AppLocalizations.of(context).signup, type: 4, isEnable: true,onClick: (){
-                                signupHandler();
+                                signupHandler(context);
                               },),
                             ),
                           ]),

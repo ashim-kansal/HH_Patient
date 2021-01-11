@@ -85,7 +85,7 @@ class SessionCard extends StatelessWidget {
                                   , color: HH_Colors.primaryColor, size: 20,),
                                 onPressed: (){
                                   print('receiverId  : '+data.therapistId.id);
-                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
+                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
                                 },
                                 shape: CircleBorder(                            side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                               ),
@@ -329,7 +329,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
-                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.patientId));
+                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
                           },
                           shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
 

@@ -18,9 +18,8 @@ import 'package:simple_moment/simple_moment.dart';
 class ChatPage extends StatefulWidget {
   static const String RouteName = '/chat';
 
-  String chatId;
   String senderId;
-  ChatPage({Key key, this.title, this.chatId, this.senderId}) : super(key: key);
+  ChatPage({Key key, this.title, this.senderId}) : super(key: key);
   String title;
 
   @override
@@ -199,8 +198,7 @@ class _ChatPageState extends State<ChatPage> {
 }
 
 class ChatArguments {
-  final String chatId;
   final String senderId;
 
-  ChatArguments(this.chatId, this.senderId);
+  ChatArguments(this.senderId);
 }

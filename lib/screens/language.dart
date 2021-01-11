@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/SettingService.dart';
+import 'package:flutter_app/main.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -34,7 +35,7 @@ class LanguagePageState extends State<LanguagePage> {
     // spanish = true;
   }
 
-  void changeLanguage (String lang){
+  void changeLanguage (String lang, BuildContext context){
     SettingAPIService settingAPIService = new SettingAPIService();
 
     settingAPIService.UpdateLanguage(lang).then((value) => {
@@ -42,8 +43,10 @@ class LanguagePageState extends State<LanguagePage> {
         showToast(value.responseMessage),
         setState((){
           AppLocalizations.load(Locale(lang, ''));
-        })
-        }
+        }),
+    RestartWidget.restartApp(context)
+
+    }
     });
   }
 
@@ -88,7 +91,7 @@ class LanguagePageState extends State<LanguagePage> {
                         });
                         AppLocalizations.load(Locale('en', 'US'));
 
-                        this.changeLanguage("EN");
+                        this.changeLanguage("EN",context);
 
                       },
                     ))
@@ -129,7 +132,7 @@ class LanguagePageState extends State<LanguagePage> {
                         });
                         AppLocalizations.load(Locale('fr', 'fr_FR'));
 
-                        this.changeLanguage("FR");
+                        this.changeLanguage("FR",context);
                       },
                     ))
               ],
@@ -165,7 +168,7 @@ class LanguagePageState extends State<LanguagePage> {
                           selectedLang = "ES";
                         });
                         AppLocalizations.load(Locale('es', 'AR'));
-                        this.changeLanguage("ES");
+                        this.changeLanguage("ES",context);
                       },
                     ))
               ],
