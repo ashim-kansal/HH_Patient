@@ -80,7 +80,12 @@ class _LibraryPageState extends State<LibraryPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.asset('assets/images/ic_doc.png', height: 30, width: 40,),
+                                  Image.asset(
+                                    snapshot.data.result[index].document.endsWith('.mp3') ? 'assets/images/audion.png' :
+                                    snapshot.data.result[index].document.endsWith('.mp4') ? 'assets/images/video.png' :
+                                    snapshot.data.result[index].document.endsWith('.pdf') ? 'assets/images/pdf.png' :
+                                     'assets/images/ic_doc.png'
+                                    , height: 30, width: 40,),
                                   Text(snapshot.data.result[index].title, textAlign: TextAlign.center,style: TextStyle(fontSize:13,color: HH_Colors.grey_585858, fontFamily: "ProximaNova", fontWeight: FontWeight.bold),)
                                   ,Text('By '+ snapshot.data.result[index].uploadBy +" "+ createdDate.format("dd/MM/yyyy HH:mm a"), textAlign: TextAlign.center, style: TextStyle(fontSize:12,color: HH_Colors.accentColor),)
                                   ,SizedBox(height: 5,),
@@ -144,47 +149,54 @@ class _LibraryPageState extends State<LibraryPage> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          // return Container(
-          //   height: MediaQuery.of(context).size.height/3,
-          //   child: Stack(
-          //     children: <Widget>[
-          //       videoView(document),
-          //       InkWell(
-          //         onTap: (){
-          //           Navigator.pop(context);
-          //         },
-          //         child: Image.asset('assets/images/ic_cross.png', height: 20, width: 20,),
-          //       )
-          //
-          //     ],
-          //   ),
-          // );
-          return videoView(document);
+          return Scaffold(
+            body: Container(
+              height: MediaQuery.of(context).size.height/3,
+              width: MediaQuery.of(context).size.width,
+              child: Stack(
+                children: <Widget>[
+                  videoView(document),
+                  Material(
+                    child:InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Image.asset('assets/images/ic_cross.png', height: 20, width: 20,),
+                    ),
+                  )
+
+                ],
+              ),
+            ),
+          );
+          // return videoView(document);
         });
   }
 
   Widget videoView(String document) {
-    return Center(child: NativeVideoView(
-      keepAspectRatio: true,
-      showMediaController: true,
-      onCreated: (controller) {
-        controller.setVideoSource(
-          document,
-          sourceType: VideoSourceType.network,
-        );
-      },
-      onPrepared: (controller, info) {
-        controller.play();
-      },
-      onError: (controller, what, extra, message) {
-        print('Player Error ($what | $extra | $message)');
-      },
-      onCompletion: (controller) {
-        print('Video completed');
-      },
-      onProgress: (progress, duration) {
-        print('$progress | $duration');
-      },
+    return Center(child: Material(
+      child: NativeVideoView(
+        keepAspectRatio: true,
+        showMediaController: true,
+        onCreated: (controller) {
+          controller.setVideoSource(
+            document,
+            sourceType: VideoSourceType.network,
+          );
+        },
+        onPrepared: (controller, info) {
+          controller.play();
+        },
+        onError: (controller, what, extra, message) {
+          print('Player Error ($what | $extra | $message)');
+        },
+        onCompletion: (controller) {
+          print('Video completed');
+        },
+        onProgress: (progress, duration) {
+          print('$progress | $duration');
+        },
+      ),
     ),);
   }
 

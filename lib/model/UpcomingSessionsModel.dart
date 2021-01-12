@@ -75,6 +75,7 @@ class Result {
         this.therapistId,
         this.startTime,
         this.endTime,
+        this.slotDuration,
         this.programName,
         this.slotId,
         this.createdAt,
@@ -95,6 +96,7 @@ class Result {
     String slotId;
     DateTime createdAt;
     DateTime updatedAt;
+    int slotDuration;
     int v;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -112,6 +114,7 @@ class Result {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        slotDuration: json["slotDuration"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -120,6 +123,7 @@ class Result {
         // "library": List<dynamic>.from(resultLibrary.map((x) => x)),
         "session_Status": sessionStatus,
         "_id": id,
+        "slotDuration": slotDuration,
         "patientId": patientId,
         "therapistId": therapistId.toJson(),
         "startTime": startTime,

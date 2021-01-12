@@ -34,6 +34,8 @@ class AssessmentFormState extends State<AssessmentFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    showScoreDialog();
+
     return MyWidget(
         title: widget.data.title,
         child: Container(
@@ -109,7 +111,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                 fontSize: 16,
                 color: HH_Colors.grey_707070,
                 fontFamily: "ProximaNova")),
-        Text(question.answer,
+        Text(question.answer??'',
             textAlign: TextAlign.start,
             overflow: TextOverflow.clip,
             style: TextStyle(
@@ -147,6 +149,20 @@ class AssessmentFormState extends State<AssessmentFormPage> {
             Navigator.pop(context),
           }
         });
+  }
+
+  void showScoreDialog() {
+    if(widget.data.isSubmit){
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return ScoreDialog(
+            title: 'Score',
+            content: 'widget.data.',
+          );
+        },
+      );
+    }
   }
 }
 

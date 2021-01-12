@@ -72,6 +72,7 @@ class SessionCard extends StatelessWidget {
                       children: [
                         Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                         Text(data.therapistId.role??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                        Text("Duration: "+data.slotDuration.toString() ,textAlign:TextAlign.start,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +84,7 @@ class SessionCard extends StatelessWidget {
                               child: FlatButton(
                                 color: Colors.white,
                                 child: Icon(Icons.chat
-                                  , color: HH_Colors.primaryColor, size: 20,),
+                                  , color: HH_Colors.accentColor, size: 20,),
                                 onPressed: (){
                                   print('receiverId  : '+data.therapistId.id);
                                   Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
@@ -292,6 +293,8 @@ class UpcomingSessionItem extends StatelessWidget {
                       SizedBox(width: 10,),
 
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(children: [
                             Text(
@@ -307,6 +310,9 @@ class UpcomingSessionItem extends StatelessWidget {
                           ]),
                           Row(children: [
                             Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
+                          ]),
+                          Row(children: [
+                            Text('Duration: '+data.slotDuration.toString(), textAlign:TextAlign.start,style: TextStyle(fontSize: 12, color: HH_Colors.grey_707070),),
                           ]),
                         ],
                       )
@@ -329,7 +335,7 @@ class UpcomingSessionItem extends StatelessWidget {
                         minWidth: 35,
                         child: FlatButton(
                           color: Colors.white,
-                          child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
+                          child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
                           onPressed: (){
                             Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
                           },

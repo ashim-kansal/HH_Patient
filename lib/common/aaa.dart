@@ -31,13 +31,13 @@ List<Widget> _buildExpandableContent(Result result,String _date, BuildContext co
             ques.question,
             style: TextStyle(
                 color: HH_Colors.grey_585858,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold),
           ),
           Text(
             ques.answer,
             style: TextStyle(
-                color: HH_Colors.grey_707070, fontSize: 15),
+                color: HH_Colors.grey_707070, fontSize: 16),
           ),
 
           SizedBox(height: 5,),

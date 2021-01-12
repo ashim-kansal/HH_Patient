@@ -1,17 +1,13 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/User_service.dart';
-import 'package:flutter_app/model/ChatList.dart';
-import 'package:flutter_app/model/ChatUsers.dart';
-import 'package:flutter_app/utils/allstrings.dart';
-import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/app_localization.dart';
+import 'package:flutter_app/model/ChatUsers.dart'  as ChatUser;
+import 'package:flutter_app/utils/Utils.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
-import 'package:flutter_app/widgets/message.dart';
 import 'package:flutter_app/widgets/message_widget.dart';
-import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_moment/simple_moment.dart';
 
@@ -28,6 +24,9 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   // final List<Message> _messages = <Message>[];
+  final ScrollController _scrollController = ScrollController();
+  List<ChatUser.Message> message;
+  ChatUser.Result _user;
 
   Future messagesList;
   String receiverId;
@@ -42,17 +41,31 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   getChat() async {
-    return await getChatList(widget.chatId, widget.senderId);
+    return await getChatList(null,widget.senderId).then((value) => {
+      if(value.responseCode == 200){
+        setState((){
+          _user = value.result.length > 0 ? value.result[0] : null;
+          message = value.result[0].message;
+        })
+      }
+    });
   }
 
   // getChat() async{
   //   return await getChatList(widget.chatId);
   // }
-
+  _scrollToEnd() async {
+    if(_scrollController.hasClients)
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+  }
   @override
   Widget build(BuildContext context) {
+
+
     DateTime time = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd hh:mm').format(time);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());
 
     return new MyWidget(
       title: AppLocalizations.of(context).chat,
@@ -63,43 +76,29 @@ class _ChatPageState extends State<ChatPage> {
             child: new Container(
               child: new Column(
                 children: <Widget>[
-                  //Chat list
-                  FutureBuilder(
-                    future: messagesList,
-                    builder: (context, snapshot){
-                      if(snapshot.connectionState == ConnectionState.done){
-                        if(snapshot.hasError){
-                          return  Expanded(child: Center(child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),));
-                        }
-                        var item = snapshot.data.result;
-                        return  new Flexible(
-                          child: new ListView.builder(
-                            padding: new EdgeInsets.all(8.0),
-                            // reverse: true,
-                            itemBuilder: (context, int index) {
-                              receiverId = item[0].senderId.id;
-                              // return ListView.builder(itemBuilder: (context, qindex){
-                                var _date = item[0].message[index].createdAt;
-                                Moment createdDt = Moment.parse('$_date');
-                                return MessageWidget(
-                                  msg: item[0].message[index].message,
-                                  direction: item[0].message[index].senderId == widget.senderId ? "right" : "left",
-                                  dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
-                                );
-                              // });
-                            },
-                            itemCount: item[0].message.length,
-                          ),
-                        );
-                      }else {
-                        return Container(
-                          child: Expanded(child: Center(child: CircularProgressIndicator()),),
-                        );
-                      }
-                    },
-                  ),
-                 
-                  new Divider(height: 1.0),
+
+              new Flexible(
+              child: (message??List()).length > 0 ? new ListView.builder(
+                controller: _scrollController,
+                padding: new EdgeInsets.all(8.0),
+                // reverse: true,
+                itemBuilder: (context, int index) {
+                  receiverId = _user.senderId.id;
+                  // return ListView.builder(itemBuilder: (context, qindex){
+                  var _date = message[index].createdAt;
+                  Moment createdDt = Moment.parse('$_date');
+                  return MessageWidget(
+                    msg: message[index].message,
+                    direction: message[index].senderId == widget.senderId ? "right" : "left",
+                    dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
+                  );
+                  // });
+                },
+                itemCount: (message??List()).length,
+              )
+                : Center(child: Text(AppLocalizations.of(context).no_msg),),
+            ),
+            new Divider(height: 1.0),
                   new Container(
                       decoration:
                       new BoxDecoration(color: Theme.of(context).cardColor),
@@ -126,29 +125,13 @@ class _ChatPageState extends State<ChatPage> {
                                   child: new IconButton(
                                       icon: Image.asset(
                                           "assets/images/ic_chat_send.png"),
-                                      onPressed: () => _sendMsg(
+                                      onPressed: () => _sendMsg(context,
                                           _textController.text,
                                           'right',
                                           formattedDate)),
                                 ),
 
-                                //Enter Text message here
 
-                                //right send button
-
-                                // new Container(
-                                //   margin:
-                                //   new EdgeInsets.symmetric(horizontal: 2.0),
-                                //   width: 48.0,
-                                //   height: 48.0,
-                                //   child: new IconButton(
-                                //       icon: Image.asset(
-                                //           "assets/images/send_out.png"),
-                                //       onPressed: () => _sendMsg(
-                                //           _textController.text,
-                                //           'right',
-                                //           formattedDate)),
-                                // ),
                               ],
                             ),
                           ))),
@@ -157,15 +140,12 @@ class _ChatPageState extends State<ChatPage> {
             )));
   }
 
-  void _sendMsg( String msg, String messageDirection, String date) {
+  void _sendMsg( BuildContext context,String msg, String messageDirection, String date) {
     if (msg.trim().length == 0) {
+
+      showToast(context,
+          "Please Enter Message");
       return;
-      // Fluttertoast.showToast(
-      //     msg: "Please Enter Message",
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.BOTTOM,
-      //     timeInSecForIos: 1,
-      //     backgroundColor: Colors.blue);
     } else {
       //
       // MessageWidget messageWidget = new MessageWidget(
@@ -182,9 +162,11 @@ class _ChatPageState extends State<ChatPage> {
           // messagesList = getChat(),
           // Navigator.pop(context)
            setState(() {
-             messagesList = getChat();
+             message = value.result.message;
+             _user = value.result;
             // messageWidget.insert(0, messageWidget);
-          })
+          }),
+          _scrollToEnd()
         }
       });
      

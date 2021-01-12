@@ -115,7 +115,9 @@ class UserAPIServices {
 Future<GetChatUsers> getChatList(chatId, senderid) async {
   var token = await GetStringToSP("token");
     print(token);
-    print(chatId);
+    print(jsonEncode({
+      "receiverId": senderid??""
+    }));
   final url = HHString.baseURL +"/api/v1/chat/chatHistory";
   final response = await http.post(url,
       headers: {
@@ -123,13 +125,11 @@ Future<GetChatUsers> getChatList(chatId, senderid) async {
         "token": token??HHString.token
       },
       body:  jsonEncode({
-      // "chatId": chatId??"",
-      "chatId": "",
       "receiverId": senderid??""
       })
       //  body:  chatId ==null ? null :  jsonEncode({
       // "receiverId": chatId})
       );
-      // print(response.body);
+      print(response.body);
   return getChatUsersFromJson(response.body);
 }

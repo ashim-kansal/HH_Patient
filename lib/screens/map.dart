@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+
 
 class MapPage extends StatefulWidget {
   static const String RouteName = '/map';
@@ -17,6 +19,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapState extends State<MapPage> {
+  // GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
 
   @override

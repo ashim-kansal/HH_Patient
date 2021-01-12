@@ -91,6 +91,7 @@ Widget build(BuildContext context) => MyWidget(
           HHEditText(
             minLines: 5,
             controller: feedbackController,
+            hint: 'Please connect with us',
             error: error,
             errorText: AppLocalizations.of(context).please_enter_feedback,
           ),
