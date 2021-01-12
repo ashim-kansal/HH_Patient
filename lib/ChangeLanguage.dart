@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/callkit.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/screens/notification.dart';
@@ -9,7 +12,9 @@ import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:callkeep/callkeep.dart';
+import 'package:uuid/uuid.dart';
+
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';
@@ -18,8 +23,37 @@ class SelectLanguage extends StatefulWidget {
   State<StatefulWidget> createState() => SelectLanguageState();
 }
 
+class Call {
+  Call(this.number);
+  String number;
+  bool held = false;
+  bool muted = false;
+}
+
 class SelectLanguageState extends State<StatefulWidget> {
   String dropdownValue = 'English';
+
+  final FlutterCallkeep _callKeep = FlutterCallkeep();
+  Map<String, Call> calls = {};
+  String newUUID() => Uuid().v4();
+
+  void initState(){
+    super.initState();
+  }
+
+  
+  // Future<void> displayIncomingCall(BuildContext context) async {
+
+  //   await CallKeep.setup();
+  //   await CallKeep.askForPermissionsIfNeeded(context);
+  //   final callUUID = '0783a8e5-8353-4802-9448-c6211109af51';
+  //   final number = '+46 70 123 45 67';
+
+  //   await CallKeep.displayIncomingCall(
+  //       callUUID, number, number, HandleType.number, false);
+  // }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +146,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
+                            CallKit callKit = new CallKit();
                             String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
                             SetStringToSP("language", lang.toLowerCase());
                             setState(() {

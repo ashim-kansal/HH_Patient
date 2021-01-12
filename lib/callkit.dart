@@ -1,14 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_app/ChangeLanguage.dart';
-import 'package:flutter_app/common/SharedPreferences.dart';
-import 'package:flutter_app/api/Therapist_service.dart';
-import 'package:flutter_app/myplan.dart';
-import 'package:flutter_app/screens/dashboard.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_app/screens/payment.dart';
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -63,7 +54,21 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
   _callKeep.displayIncomingCall(callUUID, callerId,
       localizedCallerName: callerNmae, hasVideo: hasVideo);
   _callKeep.backToForeground();
+  /*
 
+  if (message.containsKey('data')) {
+    // Handle data message
+    final dynamic data = message['data'];
+  }
+
+  if (message.containsKey('notification')) {
+    // Handle notification message
+    final dynamic notification = message['notification'];
+    print('notification => ${notification.toString()}');
+  }
+
+  // Or do other work.
+  */
   return null;
 }
 
@@ -74,51 +79,22 @@ class Call {
   bool muted = false;
 }
 
-class Splash extends StatefulWidget{
-
-  static const String RouteName = '/';
+class CallKit extends StatefulWidget {
+  static const String RouteName = '/language';
 
   @override
-  State<StatefulWidget> createState() =>SplashState();
+  State<StatefulWidget> createState() => CallKitState();
 }
 
-class SplashState extends State<Splash>{
-
-  String data = "";
-  String nameKey = "_key_name";
-  String token;
-  String _message = '';
+class CallKitState extends State<StatefulWidget> {
+  String dropdownValue = 'English';
 
   final FlutterCallkeep _callKeep = FlutterCallkeep();
   Map<String, Call> calls = {};
   String newUUID() => Uuid().v4();
 
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-
-  _register() {
-    _firebaseMessaging.getToken().then((fcmtoken) => {
-      SetStringToSP("deviceToken", fcmtoken),
-      print(fcmtoken)
-    });
-  }
-
-  getToken() {
-    getAppToken().then((value) =>setState(() {
-      token = value;
-    }));
-
-    // setState(() {
-    //   token = userToken;
-    // });
-    // token = userToken;
-    print(token);
-  }
-
-  @override
-  void initState() {
+  void initState(){
     super.initState();
-
-    //callkit
     _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
     _callKeep.on(CallKeepPerformAnswerCallAction(), answerCall);
     _callKeep.on(CallKeepDidPerformDTMFAction(), didPerformDTMFAction);
@@ -142,23 +118,6 @@ class SplashState extends State<Splash>{
         'okButton': 'ok',
       },
     });
-    //end callkit
-
-    getToken();
-    _register();
-    getMessage();
-
-    const MethodChannel('plugins.flutter.io/shared_preferences')
-      .setMockMethodCallHandler(
-      (MethodCall methodcall) async {
-        if (methodcall.method == 'getAll') {
-          return {"flutter." + nameKey: "[ No Name Saved ]"};
-        }
-        return null;
-      },
-    );
-
-    checkIfUserLoggedIn();
   }
 
   void removeCall(String callUUID) {
@@ -229,7 +188,7 @@ class SplashState extends State<Splash>{
     setCallMuted(event.callUUID, event.muted);
   }
 
-   Future<void> didToggleHoldCallAction(
+  Future<void> didToggleHoldCallAction(
       CallKeepDidToggleHoldAction event) async {
     final String number = calls[event.callUUID].number;
     print(
@@ -279,9 +238,9 @@ class SplashState extends State<Splash>{
 
   Future<void> displayIncomingCall(String number) async {
     final String callUUID = newUUID();
-    // setState(() {
+    setState(() {
       calls[callUUID] = Call(number);
-    // });
+    });
     print('Display incoming call now');
     final bool hasPhoneAccount = await _callKeep.hasPhoneAccount();
     if (!hasPhoneAccount) {
@@ -312,58 +271,51 @@ class SplashState extends State<Splash>{
     print('[onPushKitToken] token => ${event.token}');
   }
 
-  void checkIfUserLoggedIn () async {
-  
-     Timer(Duration(seconds: 4),
-      ()=>{
-            Navigator.pop(context),
-            if (token != null) {
-              Navigator.pushNamed(context, Dashboard.RouteName)
-            }else{
-              // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
-              Navigator.pushNamed(context, SelectLanguage.RouteName)
-            },
-      }
-    );
-  }
-
-  void getMessage(){
-    _firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) async {
-      print('on message $message');
-
-      print(message["type"]);
-      if(message["type"] == "incomingcall"){
-        displayIncomingCall("10086");
-      }
-      // setState(() => _message = message["notification"]["title"]);
-    }, onResume: (Map<String, dynamic> message) async {
-      print('on resume $message');
-      if(message["type"] == "incomingcall"){
-        displayIncomingCall("10086");
-      }
-      // setState(() => _message = message["notification"]["title"]);
-    }, onLaunch: (Map<String, dynamic> message) async {
-      print('on launch $message');
-      setState(() => _message = message["notification"]["title"]);
-    });
+  Widget buildCallingWidgets() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: calls.entries
+          .map((MapEntry<String, Call> item) =>
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Text('number: ${item.value.number}'),
+                Text('uuid: ${item.key}'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                      onPressed: () async {
+                        setOnHold(item.key, !item.value.held);
+                      },
+                      child: Text(item.value.held ? 'Unhold' : 'Hold'),
+                    ),
+                    RaisedButton(
+                      onPressed: () async {
+                        updateDisplay(item.key);
+                      },
+                      child: const Text('Display'),
+                    ),
+                    RaisedButton(
+                      onPressed: () async {
+                        setMutedCall(item.key, !item.value.muted);
+                      },
+                      child: Text(item.value.muted ? 'Unmute' : 'Mute'),
+                    ),
+                    RaisedButton(
+                      onPressed: () async {
+                        hangup(item.key);
+                      },
+                      child: const Text('Hangup'),
+                    ),
+                  ],
+                )
+              ]))
+          .toList());
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-      Container(
-        color: Color(0xff777CEA),
-        child: Center(
-          child: Image.asset('assets/images/ic_appicon_white.png',
-          height: 100,
-          width: 150,
-        ),
-        )
-        
-
-    );
+    // TODO: implement build
+    throw UnimplementedError();
   }
+
 }
-
-
