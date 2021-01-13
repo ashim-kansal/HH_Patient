@@ -1273,10 +1273,7 @@ class ScoreDialog extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       child: InkWell(
                           onTap: () => {
-<<<<<<< HEAD
                             // Navigator.pop(context)
-=======
->>>>>>> 9cc894e829fcfbb5b0221042153425e650b4cc2b
                             onPressOk()
                           },
                           child: HHTextView(
