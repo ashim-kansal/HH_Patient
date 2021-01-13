@@ -26,7 +26,7 @@ class _ChatPageState extends State<ChatPage> {
   // final List<Message> _messages = <Message>[];
   final ScrollController _scrollController = ScrollController();
   List<ChatUser.Message> message;
-  ChatUser.Result _user;
+  // ChatUser.Result _user;
 
   Future messagesList;
   String receiverId;
@@ -44,7 +44,7 @@ class _ChatPageState extends State<ChatPage> {
     return await getChatList(null,widget.senderId).then((value) => {
       if(value.responseCode == 200){
         setState((){
-          _user = value.result.length > 0 ? value.result[0] : null;
+          // _user = value.result.length > 0 ? value.result[0] : null;
           message = value.result[0].message;
         })
       }
@@ -83,7 +83,7 @@ class _ChatPageState extends State<ChatPage> {
                 padding: new EdgeInsets.all(8.0),
                 // reverse: true,
                 itemBuilder: (context, int index) {
-                  receiverId = _user.senderId.id;
+                  // receiverId = _user.senderId.id;
                   // return ListView.builder(itemBuilder: (context, qindex){
                   var _date = message[index].createdAt;
                   Moment createdDt = Moment.parse('$_date');
@@ -163,7 +163,7 @@ class _ChatPageState extends State<ChatPage> {
           // Navigator.pop(context)
            setState(() {
              message = value.result.message;
-             _user = value.result;
+             // _user = value.result;
             // messageWidget.insert(0, messageWidget);
           }),
           _scrollToEnd()

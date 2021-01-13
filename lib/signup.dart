@@ -240,6 +240,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: false,
                                 controller: lnameController,
                                 error: widget.lnameError,
+                                maxLength: 16,
                                 errorText: AppLocalizations.of(context).enterLastName,
                               ),
                             ),
@@ -250,6 +251,8 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: false,
                                 controller: emailController,
                                 error: widget.emailError,
+                                maxLength: 32,
+                                inputType: TextInputType.emailAddress,
                                 errorText: AppLocalizations.of(context).enter_valid_email,
                               ),
                             ),
@@ -261,6 +264,7 @@ class _SignupPageState extends State<SignUpPage> {
                                 controller: passwordController,
                                 error: widget.pwdError,
                                 errorText: pwdValidation,
+                                maxLength: 16,
                                 showeye: true,
                                 onClickEye: () {
                                   print("clickable");
@@ -277,6 +281,8 @@ class _SignupPageState extends State<SignUpPage> {
                                 obscureText: false,
                                 controller: phoneController,
                                 error: widget.numberError,
+                                maxLength: 12,
+                                inputType: TextInputType.number,
                                 errorText:
                                 AppLocalizations.of(context).enterPhone,
                               ),

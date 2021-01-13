@@ -11,6 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_app/screens/payment.dart';
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/utils/Helper.dart';
 import 'package:uuid/uuid.dart';
 
 final FlutterCallkeep _callKeep = FlutterCallkeep();
@@ -96,8 +97,10 @@ class SplashState extends State<Splash>{
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   _register() {
+    
     _firebaseMessaging.getToken().then((fcmtoken) => {
       SetStringToSP("deviceToken", fcmtoken),
+      // HelperFunction.saveAuthorizationToken(fcmtoken),
       print(fcmtoken)
     });
   }
@@ -351,7 +354,11 @@ class SplashState extends State<Splash>{
 
   @override
   Widget build(BuildContext context) {
-    return 
+    // HelperFunction.getAuthorizationToken(context).then((value) => {
+    // print('mtttttttt  :'+value)
+    //
+    // });
+    return
       Container(
         color: Color(0xff777CEA),
         child: Center(

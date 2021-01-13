@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'HH Patient',
         onGenerateRoute: router.generateRoute,
         initialRoute: Splash.RouteName,
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/Assessment_services.dart';
@@ -25,16 +26,19 @@ class AssessmentFormPage extends StatefulWidget {
 class AssessmentFormState extends State<AssessmentFormPage> {
   Result mFormData;
   Future<SubmittedAssessmentResponse> apiCall;
+  bool showScore = false;
 
   @override
   void initState() {
     super.initState();
     apiCall = widget.data.isSubmit ? getSubmittedAssessmentForm(widget.data.formId): getAssessmentForm(widget.data.formId);
+    if(showScore){
+      showScoreDialog(mFormData.correctMarks.toString()??''+'/'+mFormData.correctMarks.toString()??'');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    showScoreDialog();
 
     return MyWidget(
         title: widget.data.title,
@@ -51,7 +55,10 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                   SchedulerBinding.instance.addPostFrameCallback((_){
                     setState(() {
                       mFormData = snapshot.data.result;
+                      showScore = widget.data.isSubmit;
                     });
+                  });
+                  Future.delayed(Duration.zero, () {
                   });
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -151,14 +158,23 @@ class AssessmentFormState extends State<AssessmentFormPage> {
         });
   }
 
-  void showScoreDialog() {
+  void showScoreDialog(String score) {
+    print('111111');
     if(widget.data.isSubmit){
       showDialog(
         context: context,
         builder: (BuildContext dialogContext) {
           return ScoreDialog(
             title: 'Score',
-            content: 'widget.data.',
+            content: score??"",
+              onPressOk: (){
+              print('onnnnnnnnnnnnnnnn');
+              Navigator.pop(context);
+              setState(() {
+                showScore = false;
+              });
+
+              }
           );
         },
       );

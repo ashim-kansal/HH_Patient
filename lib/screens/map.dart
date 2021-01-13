@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+// import 'data/place_reposne';
 
 
 class MapPage extends StatefulWidget {
@@ -20,7 +23,14 @@ class MapPage extends StatefulWidget {
 
 class _MapState extends State<MapPage> {
   // GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
+  List<Marker> markers = <Marker>[];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
+    searchNearby();
+  }
 
   @override
   void dispose() {
@@ -67,8 +77,48 @@ class _MapState extends State<MapPage> {
                           mapType: MapType.terrain,
                           initialCameraPosition: _kGooglePlex,
                           onMapCreated: _onMapCreated,
-                        )
+                markers: Set<Marker>.of(markers),
+
+              )
                       ),
         ));
   }
+
+  void searchNearby() async {
+    setState(() {
+      markers.clear(); // 2
+    });
+    // 3
+    String url =
+        'https://maps.googleapis.com/maps/api/place/findplacefromtext/output?key=AIzaSyBgj9olJajssax5PritKjU4oy0li4UYJ5I&location=43.651070,-79.347015&radius=10000&keyword=pharmacies';
+    print(url);
+    // 4
+    final response = await http.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print(response.body);
+      // setState(() {
+      //   places = PlaceResponse.parseResults(data['results']);
+      //   for (int i = 0; i < places.length; i++) {
+      //     markers.add(
+      //       Marker(
+      //         markerId: MarkerId(places[i].placeId),
+      //         position: LatLng(places[i].geometry.location.lat,
+      //             places[i].geometry.location.long),
+      //         infoWindow: InfoWindow(
+      //             title: places[i].name, snippet: places[i].vicinity),
+      //         onTap: () {},
+      //       ),
+      //     );
+      //   }
+      // });
+    } else {
+      throw Exception('An error occurred getting places nearby');
+    }
+    // setState(() {
+    //   searching = false; // 6
+    // });
+  }
+
 }

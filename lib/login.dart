@@ -227,6 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                                 hint: AppLocalizations.of(context).enter_email,
                                 controller: emailController,
                                 error: emailerror,
+                                inputType: TextInputType.emailAddress,
                                 errorText: AppLocalizations.of(context).enter_valid_email,
                               ),
                             ),
