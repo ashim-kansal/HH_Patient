@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
@@ -48,6 +49,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
 
   void showPwd(){
     // print("action");
@@ -71,6 +74,8 @@ class _LoginPageState extends State<LoginPage> {
   void loginHandler() async {
 
     var deviceToken = await GetStringToSP("deviceToken");
+
+    var voipToken = await GetStringToSP("voipToken");
 
     String email = emailController.text;
     String password = passwordController.text;
@@ -110,28 +115,29 @@ class _LoginPageState extends State<LoginPage> {
 
     APIService apiService = new APIService();
     buildShowDialog(context);
+    _firebaseMessaging.getToken().then((fcmtoken) => {
+      apiService.loginAPIHandler(email, password, fcmtoken, voipToken).then(
+        (value) => {
+          Navigator.of(context).pop(),
+          Timer(Duration(seconds: 1),
+          ()=> {
+            showToast(value.responseMsg),
+          }),
+          
+          print(value.responseCode),
+          // ignore: unrelated_type_equality_checks
+          // ignore: sdk_version_ui_as_code
+          if (value.responseCode == 200) {
+            SetStringToSP("token", value.token),
 
-    apiService.loginAPIHandler(email, password, deviceToken).then(
-      (value) => {
-        Navigator.of(context).pop(),
-        Timer(Duration(seconds: 1),
-        ()=> {
-          showToast(value.responseMsg),
+            Timer(Duration(seconds: 2),
+              ()=>{
+                    Navigator.pop(context),
+                    Navigator.pushNamed(context, Dashboard.RouteName)
+              }
+            ),
+          }
         }),
-        
-        print(value.responseCode),
-        // ignore: unrelated_type_equality_checks
-        // ignore: sdk_version_ui_as_code
-        if (value.responseCode == 200) {
-          SetStringToSP("token", value.token),
-
-          Timer(Duration(seconds: 2),
-            ()=>{
-                  Navigator.pop(context),
-                  Navigator.pushNamed(context, Dashboard.RouteName)
-            }
-          ),
-        }
       });
     // loginModel(email, password);
    

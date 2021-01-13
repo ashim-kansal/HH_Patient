@@ -16,7 +16,7 @@ Future<GetAssessmentResponse> getAllAssessments() async {
   final response = await http.get(url+"/get_Assessment_List",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : token
+        'token' : token??HHString.token
       });
   print(response.body);
   return getAssessmentResponseFromJson(response.body);
@@ -29,7 +29,7 @@ Future<SubmittedAssessmentResponse> getAssessmentForm(formId) async {
   final response = await http.get(url+"/get_Assessment_details?formId="+formId,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : token
+        'token' : token??HHString.token
       });
   print(response.body);
   return submittedAssessmentResponseFromJson(response.body);
@@ -42,7 +42,7 @@ Future<SubmittedAssessmentResponse> getSubmittedAssessmentForm(formId) async {
   final response = await http.get(url+"/view_submitted_assessmentForm?formId="+formId,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : token
+        'token' : token??HHString.token
       });
   print(response.body);
   return submittedAssessmentResponseFromJson(response.body);
@@ -55,7 +55,7 @@ Future<SubmitAssessmentResponse> submitAssessments(result) async {
   final response = await http.post(url+"/submit_AssessmentForm",
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
-        'token' : token
+        'token' : token??HHString.token
       },
       body:json.encode(result)
   );

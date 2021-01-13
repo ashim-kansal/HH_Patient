@@ -309,6 +309,7 @@ class SplashState extends State<Splash>{
   }
 
   void onPushKitToken(CallKeepPushKitToken event) {
+    SetStringToSP("voipToken", event.token);
     print('[onPushKitToken] token => ${event.token}');
   }
 

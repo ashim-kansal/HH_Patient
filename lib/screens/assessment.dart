@@ -29,7 +29,8 @@ class MyAssessmentState extends State<MyAssessmentPage>{
               child: ListView.separated(
                 itemCount: snapshot.data.results.length,
                 itemBuilder: (context, index) {
-                  return AssessmentCell(name: snapshot.data.results[index].title, completed: snapshot.data.results[index].isSubmit, onClick: (){
+                  return AssessmentCell(name: snapshot.data.results[index].title, completed: snapshot.data.results[index].isSubmit, 
+                  onClick: (){
                     Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: AssessmentArguments(
                         snapshot.data.results[index]
                     )).then((value)=>{

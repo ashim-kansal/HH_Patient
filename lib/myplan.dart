@@ -1,7 +1,9 @@
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/MyProgramsProvider.dart';
 import 'package:flutter_app/model/GetProgramsResponse.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
 import 'package:stripe_payment/stripe_payment.dart';
+import 'package:toast/toast.dart';
 
 class MyPlans extends StatefulWidget {
   static const String RouteName = '/planwidget';
@@ -88,6 +91,10 @@ class MyPlansState extends State<MyPlans> {
                             desc: snapshot.data.result[position].description,
                             price: snapshot.data.result[position].amount,
                             onClick: () {
+                              if(snapshot.data.result[position].amount.compareTo('0') != 1){
+                                buyNewPlan(snapshot.data.result[position].id, snapshot.data.result[position].amount);
+                                return;
+                              }
                               Navigator.pushNamed(context, Payment.RouteName, arguments: PaymentArguments(snapshot.data.result[position]));
                             //  buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
                             },
@@ -106,52 +113,37 @@ class MyPlansState extends State<MyPlans> {
 
   void buyNewPlan(String id, String paymentAmount) {
 
-    // StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest()).then((paymentMethod) {
-    //   print(paymentMethod);
-    // }).catchError((setError){
-    //   print(setError);
-    // });
-    const options = {
-      "requiredBillingAddressFields": 'full',
-      "prefilledInformation": {
-        "billingAddress": {
-          "name": 'Gunilla Haugeh',
-          "line1": 'Canary Place',
-          "line2": '3',
-          "city": 'Macon',
-          "state": 'Georgia',
-          "country": 'US',
-          "postalCode": '31217',
-        },
-      },
-    };
+    buildShowDialog(context);
 
-    StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest())
-        .then((paymentMethod) {
-        
+    APIService apiService = new APIService();
+    // ignore: sdk_version_set_literal
+      apiService.buyPlanAPIHandler("", id, paymentAmount).then((value) => {
+        Navigator.of(context).pop(),
+        Timer(Duration(seconds: 1), ()=> {
+          showToast(value.responseMsg),
+
+          Navigator.pop(context),
+          Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+        }),
+      });
+  }
+
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
     });
+  }
 
-    // StripePayment.paymentRequestWithCardForm(CardFormPaymentRequest()).then((paymentMethod) {
-    //   print(paymentMethod.id);
-    //   print(JsonEncoder.withIndent('  ').convert(paymentMethod?.toJson() ?? {}));
-    //   print(paymentMethod.card.number);
-    //   // print(paymentMethod.billingDetails.name);
-    //   // print(paymentMethod.customerId);
-    // }).catchError((setError){
-    //   print(setError);
-    // });
-
-    //  buyPlan(id, paymentAmount).then((value) => {
-    //   if(value.responseCode == 200){
-    //     // Navigator.pop(context),
-    //     // if(!widget.isUpdate){
-    //     // Navigator.pop(context),
-    //     // Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
-    //     // }
-    
-    //   }
-    // });
-   
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
 }

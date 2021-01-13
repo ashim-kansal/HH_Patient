@@ -34,7 +34,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    showScoreDialog();
+    // showScoreDialog(context);
 
     return MyWidget(
         title: widget.data.title,
@@ -49,14 +49,26 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                   }
 
                   SchedulerBinding.instance.addPostFrameCallback((_){
-                    setState(() {
-                      mFormData = snapshot.data.result;
-                    });
+                    // setState(() {
+                    //   mFormData = snapshot.data.result;
+                    // });
                   });
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
+                      widget.data.isSubmit ?
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("Score", style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w800)),
+                            Spacer(),
+                            Text(snapshot.data.result.correctMarks.toString()+ "/"+ snapshot.data.result.totalMarks.toString(), style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
+                          ],
+                        ): "",
+                        SizedBox(height: 15,),
+                      
                       Text(
                         snapshot.data.result.title,
                         style: TextStyle(
@@ -151,14 +163,18 @@ class AssessmentFormState extends State<AssessmentFormPage> {
         });
   }
 
-  void showScoreDialog() {
+  void showScoreDialog(BuildContext context) {
+    
     if(widget.data.isSubmit){
       showDialog(
         context: context,
-        builder: (BuildContext dialogContext) {
+        builder: (BuildContext context) {
           return ScoreDialog(
             title: 'Score',
             content: 'widget.data.',
+            onPressOk: (){
+              Navigator.pop(context);
+            },
           );
         },
       );
