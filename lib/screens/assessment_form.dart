@@ -32,17 +32,14 @@ class AssessmentFormState extends State<AssessmentFormPage> {
   void initState() {
     super.initState();
     apiCall = widget.data.isSubmit ? getSubmittedAssessmentForm(widget.data.formId): getAssessmentForm(widget.data.formId);
-    if(showScore){
-      showScoreDialog(mFormData.correctMarks.toString()??''+'/'+mFormData.correctMarks.toString()??'');
-    }
+    // if(showScore){
+    //   showScoreDialog(mFormData.correctMarks.toString()??''+'/'+mFormData.correctMarks.toString()??'');
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     // showScoreDialog(context);
-=======
->>>>>>> 9cc894e829fcfbb5b0221042153425e650b4cc2b
 
     return MyWidget(
         title: widget.data.title,
@@ -57,16 +54,9 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                   }
 
                   SchedulerBinding.instance.addPostFrameCallback((_){
-<<<<<<< HEAD
                     // setState(() {
                     //   mFormData = snapshot.data.result;
                     // });
-=======
-                    setState(() {
-                      mFormData = snapshot.data.result;
-                      showScore = widget.data.isSubmit;
-                    });
->>>>>>> 9cc894e829fcfbb5b0221042153425e650b4cc2b
                   });
                   Future.delayed(Duration.zero, () {
                   });
@@ -180,35 +170,18 @@ class AssessmentFormState extends State<AssessmentFormPage> {
         });
   }
 
-<<<<<<< HEAD
   void showScoreDialog(BuildContext context) {
     
-=======
-  void showScoreDialog(String score) {
-    print('111111');
->>>>>>> 9cc894e829fcfbb5b0221042153425e650b4cc2b
     if(widget.data.isSubmit){
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return ScoreDialog(
             title: 'Score',
-<<<<<<< HEAD
             content: 'widget.data.',
             onPressOk: (){
               Navigator.pop(context);
             },
-=======
-            content: score??"",
-              onPressOk: (){
-              print('onnnnnnnnnnnnnnnn');
-              Navigator.pop(context);
-              setState(() {
-                showScore = false;
-              });
-
-              }
->>>>>>> 9cc894e829fcfbb5b0221042153425e650b4cc2b
           );
         },
       );
