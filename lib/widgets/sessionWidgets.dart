@@ -72,7 +72,7 @@ class SessionCard extends StatelessWidget {
                       children: [
                         Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                         Text(data.therapistId.role??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
-                        Text("Duration: "+data.slotDuration.toString() ,textAlign:TextAlign.start,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
+                        Text("Duration: "+data.slotDuration.toString()+' mins' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -312,7 +312,7 @@ class UpcomingSessionItem extends StatelessWidget {
                             Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
                           ]),
                           Row(children: [
-                            Text('Duration: '+data.slotDuration.toString(), textAlign:TextAlign.start,style: TextStyle(fontSize: 12, color: HH_Colors.grey_707070),),
+                            Text('Duration: '+data.slotDuration.toString()+' mins', textAlign:TextAlign.start,style: TextStyle(fontSize: 12, color: HH_Colors.grey_707070),),
                           ]),
                         ],
                       )

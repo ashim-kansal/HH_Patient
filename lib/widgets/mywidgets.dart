@@ -442,6 +442,7 @@ class HHEditTextState extends State<HHEditText> {
       minLines: widget.minLines ?? 1,
       maxLength: widget.maxLength ?? 32,
       maxLines: widget.minLines ?? 1,
+      keyboardType: widget.inputType??TextInputType.text,
       onChanged: (text) {
         if (widget.onSelectAnswer != null) widget.onSelectAnswer(text);
       },
@@ -1268,12 +1269,14 @@ class ScoreDialog extends StatelessWidget {
                           top: BorderSide(
                               color: HH_Colors.borderGrey, width: 0.5))),
                   child: Center(
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: InkWell(
                           onTap: () => {
+<<<<<<< HEAD
                             // Navigator.pop(context)
+=======
+>>>>>>> 9cc894e829fcfbb5b0221042153425e650b4cc2b
                             onPressOk()
                           },
                           child: HHTextView(
