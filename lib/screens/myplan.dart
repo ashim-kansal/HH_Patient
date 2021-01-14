@@ -8,6 +8,8 @@ import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/planwidget.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 
 class CurrentPlansPage extends StatefulWidget {
   static const String RouteName = '/current_plan';
@@ -26,7 +28,9 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
-                return Center(child: Text(AppLocalizations.of(context).error),);
+                return Center(
+                  child: Text(AppLocalizations.of(context).error),
+                );
               }
 
               return Column(
@@ -34,7 +38,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                   Container(
                     padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                     child: Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                      '',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Color(0xff707070), fontSize: 16),
                     ),
@@ -42,9 +46,10 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                   SizedBox(height: 10),
                   Expanded(
                     child: SingleChildScrollView(
-                      child:                   Container(
+                      child: Container(
                           padding: EdgeInsets.only(left: 10),
-                          margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          margin:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 20),
                           child: Container(
                             padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                             child: Container(
@@ -52,44 +57,73 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                                   shape: BoxShape.rectangle,
                                   color: Theme.of(context).accentColor,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
+                                      BorderRadius.all(Radius.circular(10.0))),
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      snapshot.data.result.programSubscription.title,
-                                      style:
-                                      TextStyle(color: Colors.white, fontSize: 22),
+                                      snapshot.data.result.programSubscription
+                                          .title,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 22),
                                     ),
                                     SizedBox.fromSize(
                                       size: Size(8, 8),
                                     ),
                                     Text(
-                                      snapshot.data.result.programSubscription.programType,
+                                      snapshot.data.result.programSubscription
+                                          .programType,
                                       textAlign: TextAlign.start,
-                                      style:
-                                      TextStyle(color: Colors.white, fontSize: 15),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
                                     ),
                                     SizedBox.fromSize(
                                       size: Size(8, 8),
                                     ),
                                     Text(
-                                      '\$'+snapshot.data.result.programSubscription.amount,
+                                      '\$' +
+                                          snapshot.data.result
+                                              .programSubscription.amount,
                                       textAlign: TextAlign.start,
-                                      style:
-                                      TextStyle(color: Colors.white, fontSize: 44),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 44),
                                     ),
                                     SizedBox.fromSize(
                                       size: Size(8, 8),
                                     ),
-                                    Text(
-                                      snapshot.data.result.programSubscription.description ,
-                                      textAlign: TextAlign.start,
-                                      style:
-                                      TextStyle(color: Colors.white, fontSize: 16),
-                                    ),
+
+                                    snapshot.data.result.programSubscription
+                                            .description
+                                            .contains("div")
+                                        ? Html(
+                                            data: snapshot
+                                                .data
+                                                .result
+                                                .programSubscription
+                                                .description,
+                                            // style: {
+                                            //   "div": Style(
+                                            //       color: HH_Colors.color_707070,
+                                            //       fontSize: FontSize(15.0)),
+                                            //   "p": Style(
+                                            //       color: HH_Colors.color_707070,
+                                            //       fontSize: FontSize(15.0))
+                                            // },
+                                            // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
+                                          )
+                                        : Text(
+                                            snapshot
+                                                .data
+                                                .result
+                                                .programSubscription
+                                                .description,
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          ),
                                     // new Expanded(
                                     //   flex: 1,
                                     //   child: new SingleChildScrollView(
@@ -102,13 +136,14 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                                     Container(
                                         child: Text(
                                           'Free',
-                                          style:
-                                          TextStyle(color: HH_Colors.grey_585858),
+                                          style: TextStyle(
+                                              color: HH_Colors.grey_585858),
                                         ),
-                                        padding: EdgeInsets.fromLTRB(70, 20, 70, 20),
+                                        padding:
+                                            EdgeInsets.fromLTRB(70, 20, 70, 20),
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            new BorderRadius.circular(10.0),
+                                                new BorderRadius.circular(10.0),
                                             color: Colors.white)),
                                     SizedBox.fromSize(
                                       size: Size(8, 15),
@@ -119,7 +154,6 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                             ),
                           )),
                     ),
-
                   ),
                   HHButton(
                     title: AppLocalizations.of(context).UpgradeNow,
@@ -136,7 +170,6 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
             } else
               return Center(child: CircularProgressIndicator());
           }),
-
     );
   }
 }
@@ -152,117 +185,147 @@ class CancelPlansPageState extends State<CancelPlansPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: AppLocalizations.of(context).hh,
-        child:FutureBuilder<MyPlanResponse>(
-            future: getMyPrograms(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return Center(child: Text(AppLocalizations.of(context).error),);
-                }
+      title: AppLocalizations.of(context).hh,
+      child: FutureBuilder<MyPlanResponse>(
+          future: getMyPrograms(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(AppLocalizations.of(context).error),
+                );
+              }
 
-                return Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Color(0xff707070), fontSize: 16),
-                      ),
+              return Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: Text(
+                      '',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xff707070), fontSize: 16),
                     ),
-                    SizedBox(height: 10),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child:                   Container(
-                            padding: EdgeInsets.only(left: 10),
-                            margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                  ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Container(
+                          padding: EdgeInsets.only(left: 10),
+                          margin:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                             child: Container(
-                              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Theme.of(context).accentColor,
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0))),
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        snapshot.data.result.programSubscription.title,
-                                        style:
-                                        TextStyle(color: Colors.white, fontSize: 22),
-                                      ),
-                                      SizedBox.fromSize(
-                                        size: Size(8, 8),
-                                      ),
-                                      Text(
-                                        snapshot.data.result.programSubscription.programType,
-                                        textAlign: TextAlign.start,
-                                        style:
-                                        TextStyle(color: Colors.white, fontSize: 15),
-                                      ),
-                                      SizedBox.fromSize(
-                                        size: Size(8, 8),
-                                      ),
-                                      Text(
-                                        '\$'+snapshot.data.result.programSubscription.amount,
-                                        textAlign: TextAlign.start,
-                                        style:
-                                        TextStyle(color: Colors.white, fontSize: 44),
-                                      ),
-                                      SizedBox.fromSize(
-                                        size: Size(8, 8),
-                                      ),
-                                      Text(
-                                        snapshot.data.result.programSubscription.description ,
-                                        textAlign: TextAlign.start,
-                                        style:
-                                        TextStyle(color: Colors.white, fontSize: 16),
-                                      ),
-                                      // new Expanded(
-                                      //   flex: 1,
-                                      //   child: new SingleChildScrollView(
-                                      //       scrollDirection: Axis.vertical,
-                                      //   child:                                ,
-                                      //       )),
-                                      SizedBox.fromSize(
-                                        size: Size(8, 20),
-                                      ),
-
-                                    ],
-                                  ),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: Theme.of(context).accentColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.0))),
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      snapshot.data.result.programSubscription
+                                          .title,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 22),
+                                    ),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 8),
+                                    ),
+                                    Text(
+                                      snapshot.data.result.programSubscription
+                                          .programType,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 15),
+                                    ),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 8),
+                                    ),
+                                    Text(
+                                      '\$' +
+                                          snapshot.data.result
+                                              .programSubscription.amount,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 44),
+                                    ),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 8),
+                                    ),
+                                    snapshot.data.result.programSubscription
+                                            .description
+                                            .contains("div")
+                                        ? Html(
+                                            data: snapshot
+                                                .data
+                                                .result
+                                                .programSubscription
+                                                .description,
+                                            // style: {
+                                            //   "div": Style(
+                                            //       color: HH_Colors.color_707070,
+                                            //       fontSize: FontSize(15.0)),
+                                            //   "p": Style(
+                                            //       color: HH_Colors.color_707070,
+                                            //       fontSize: FontSize(15.0))
+                                            // },
+                                            // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
+                                          )
+                                        : Text(
+                                            snapshot
+                                                .data
+                                                .result
+                                                .programSubscription
+                                                .description,
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          ),
+                                    // new Expanded(
+                                    //   flex: 1,
+                                    //   child: new SingleChildScrollView(
+                                    //       scrollDirection: Axis.vertical,
+                                    //   child:                                ,
+                                    //       )),
+                                    SizedBox.fromSize(
+                                      size: Size(8, 20),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            )),
-                      ),
-
+                            ),
+                          )),
                     ),
-                    HHButton(
-                      title: AppLocalizations.of(context).cancel,
-                      type: 1,
-                      isEnable: true,
-                      onClick: () {
-                        cancelProgram();
-                      },
-                    )
-                  ],
-                );
-              } else
-                return Center(child: CircularProgressIndicator());
-            }),
+                  ),
+                  HHButton(
+                    title: AppLocalizations.of(context).cancel,
+                    type: 1,
+                    isEnable: true,
+                    onClick: () {
+                      cancelProgram();
+                    },
+                  )
+                ],
+              );
+            } else
+              return Center(child: CircularProgressIndicator());
+          }),
     );
   }
 
   void cancelProgram() {
     cancelPrograms().then((value) => {
-      if(value.responseCode == 200){
-        Navigator.pop(context),
-        Navigator.pushNamed(context, MyPlans.RouteName,
-            arguments: MyPlansArguments(true))
-      }
-    });
+          if (value.responseCode == 200)
+            {
+              Navigator.pop(context),
+              Navigator.pushNamed(context, MyPlans.RouteName,
+                  arguments: MyPlansArguments(true))
+            }
+        });
   }
 }

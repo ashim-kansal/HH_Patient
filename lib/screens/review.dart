@@ -66,7 +66,7 @@ class ReviewState extends State<ReviewPage> {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                       alignment: Alignment.topLeft,
                       child:HHTextView(
-                        title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                        title: "",
                         size: 14,
                         color: Color(0xff707070)
                       ),

@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/allstrings.dart';
+import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 
 class PlanWidget extends StatefulWidget {
 
@@ -53,8 +56,27 @@ class PlanWidgetState extends State<PlanWidget> {
               SizedBox.fromSize(size: Size(8, 8),),
 
               Expanded(child: SingleChildScrollView(
-                child:               Text(widget.desc, textAlign: TextAlign.start,
-                  style: TextStyle(color: Colors.white, fontSize: 16),),
+                child:
+                // widget.desc.contains("div") ?
+                Html(
+
+                  data:widget.desc,
+                  // style: {
+                  //   "div": Style(
+                  //       color: HH_Colors.color_white,
+                  //       fontSize: FontSize(15.0)
+                  //   ),"p": Style(
+                  //       color: HH_Colors.color_white,
+                  //       fontSize: FontSize(15.0)
+                  //   )
+                  // },
+                  // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
+                )
+                  //     : Text(widget.desc, style: TextStyle(
+                  // color: HH_Colors.color_707070,
+                  // fontSize: 15,)),
+                // textAlign: TextAlign.start,
+                  // style: TextStyle(color: Colors.white, fontSize: 16),),
 
               )),
               SizedBox.fromSize(size: Size(8, 20),),

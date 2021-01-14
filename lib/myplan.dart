@@ -74,7 +74,7 @@ class MyPlansState extends State<MyPlans> {
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: Text(
-                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                        '',
                         textAlign: TextAlign.center,
                         style:
                             TextStyle(color: Color(0xff707070), fontSize: 16),
