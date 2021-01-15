@@ -338,8 +338,8 @@ class SplashState extends State<Splash>{
         onMessage: (Map<String, dynamic> message) async {
       print('on message $message');
 
-      print(message["type"]);
-      if(message["type"] == "incoming_call"){
+      print(message["data"]);
+      if(message["data"]["type"].toString() == "incoming_call"){
         displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
