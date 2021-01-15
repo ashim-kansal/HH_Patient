@@ -8,9 +8,11 @@ import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/payment.dart';
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/Helper.dart';
 import 'package:uuid/uuid.dart';
@@ -90,6 +92,7 @@ class SplashState extends State<Splash>{
   String nameKey = "_key_name";
   String token;
   String _message = '';
+  var sessionObj = {};
 
   final FlutterCallkeep _callKeep = FlutterCallkeep();
   Map<String, Call> calls = {};
@@ -186,12 +189,19 @@ class SplashState extends State<Splash>{
   Future<void> answerCall(CallKeepPerformAnswerCallAction event) async {
     final String callUUID = event.callUUID;
     final String number = calls[callUUID].number;
+    
     print('[answerCall] $callUUID, number: $number');
 
     // Navigator.push(context, VideoCallPage.RouteName)
     _callKeep.startCall(event.callUUID, number, number);
     Timer(const Duration(seconds: 1), () {
       print('[setCurrentCallActive] $callUUID, number: $number');
+      print(sessionObj);
+      Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
+          .then((value) => {
+            Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
+      });
+
       _callKeep.setCurrentCallActive(callUUID);
     });
   }
@@ -340,6 +350,9 @@ class SplashState extends State<Splash>{
 
       print(message["type"]);
       if(message["type"] == "incoming_call"){
+        setState(() {
+          sessionObj = message;
+        });
         displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
@@ -347,6 +360,9 @@ class SplashState extends State<Splash>{
       print('on resume $message');
       if(message["type"] == "incoming_call"){
         var token = message["accesstoken"];
+        setState(() {
+          sessionObj = message;
+        });
         // Navigator.pushNamed(context, routeName)
         displayIncomingCall("10086");
       }
