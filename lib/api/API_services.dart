@@ -84,12 +84,17 @@ Future<OldJournalingList> getOldJournalingList() async {
 Future<QuestionarieList> getQuestionaire(programId) async {
   var token = await GetStringToSP("token");
 
+  print(token);
+  print(programId);
+
   final url = HHString.baseURL +"/api/v1/user/getQuestionnaire?programId="+programId;
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token?? HHString.token
       },);
+
+  print(response.body);
   return questionarieListFromJson(response.body);
 }
 

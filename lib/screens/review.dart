@@ -12,9 +12,9 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 class ReviewPage extends StatefulWidget {
   static const String RouteName = '/review';
 
-  final Result data;
-
-  ReviewPage({Key key, this.data}) : super(key: key);
+  final String id;
+  final String programName;
+  ReviewPage({Key key, this.programName, this.id}) : super(key: key);
 
   var error = false;
 
@@ -56,7 +56,7 @@ class ReviewState extends State<ReviewPage> {
                       alignment: Alignment.topLeft,
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                       child: HHTextView(
-                        title: widget.data.programName,
+                        title: widget.programName,
                         size: 16,
                         color: HH_Colors.accentColor,
                         textweight: FontWeight.w400,
@@ -111,7 +111,7 @@ class ReviewState extends State<ReviewPage> {
                   title: AppLocalizations.of(context).submit,
                   type: 4,
                   onClick: () {
-                    submitReview(widget.data.id, comments);
+                    submitReview(widget.id, comments);
                   },
                 ),
               ),
