@@ -80,6 +80,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
         errorNew = false;
         errorConfirm = true;    
       });
+      return;
     }
 
     setState(() {
@@ -93,11 +94,14 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
 
       settingAPIService.changePassword(oldpwd, newpassword, confpassword).then((value) => {
         showToast(value.responseMsg),
-        if(value.responseCode == 200){
-          oldpwd = '',
-          newpassword = '',
-          confpassword = ''
-        }
+
+        Navigator.pop(context),
+        // if(value.responseCode == 200){
+        //   oldpwd = '',
+        //   newpassword = '',
+        //   confpassword = ''
+        // }
+
       });
 
   }
