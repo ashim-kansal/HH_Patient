@@ -11,6 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_app/screens/payment.dart';
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/Helper.dart';
 import 'package:uuid/uuid.dart';
 
@@ -187,6 +188,7 @@ class SplashState extends State<Splash>{
     final String number = calls[callUUID].number;
     print('[answerCall] $callUUID, number: $number');
 
+    // Navigator.push(context, VideoCallPage.RouteName)
     _callKeep.startCall(event.callUUID, number, number);
     Timer(const Duration(seconds: 1), () {
       print('[setCurrentCallActive] $callUUID, number: $number');
@@ -344,6 +346,8 @@ class SplashState extends State<Splash>{
     }, onResume: (Map<String, dynamic> message) async {
       print('on resume $message');
       if(message["type"] == "incoming_call"){
+        var token = message["accesstoken"];
+        // Navigator.pushNamed(context, routeName)
         displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
