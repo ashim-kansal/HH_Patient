@@ -337,13 +337,13 @@ class SplashState extends State<Splash>{
       print('on message $message');
 
       print(message["type"]);
-      if(message["type"] == "incomingcall"){
+      if(message["type"] == "incoming_call"){
         displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
     }, onResume: (Map<String, dynamic> message) async {
       print('on resume $message');
-      if(message["type"] == "incomingcall"){
+      if(message["type"] == "incoming_call"){
         displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
