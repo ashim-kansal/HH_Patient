@@ -239,9 +239,9 @@ class SessionPageState extends State<SessionPage> {
                       arguments:
                           VideoPageArgument(patientId, roomName, value.jwt))
                   .then((value) => {
-                        Navigator.pushNamed(context, ReviewPage.RouteName,
-                            arguments: result)
-                      }),
+                Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+
+              }),
             }
         });
   }

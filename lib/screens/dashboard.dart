@@ -268,7 +268,7 @@ class DashboardState extends State<Dashboard> {
                             pref.remove("token");
 
                             Navigator.pop(context);
-                            Navigator.pushNamed(context, SelectLanguage.RouteName);
+                            Navigator.pushNamed(context, LoginPage.RouteName);
                           },
                           onDenyPress: (){
                             Navigator.pop(context);

@@ -57,8 +57,10 @@ class SettingAPIService {
         "confirmPassword": confirmPassword
       })
     );
-    
+
+    print(response.body);
     var res = json.decode(response.body);
+
 
     if(response.statusCode == 200){
       if(res["responseCode"] == 200){

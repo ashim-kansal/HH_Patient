@@ -157,7 +157,7 @@ class HomePageState extends State<HomePage> {
                 if (value.responseCode == '200') {
                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt))
                     .then((value) => {
-                      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: result)
+                      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
                 }),
             }
           });
@@ -175,4 +175,11 @@ class VideoPageArgument{
   String identity;
 
   VideoPageArgument(this.identity, this.roomName, this.token);
+}
+
+class ReviewPageArgument{
+
+  String id;
+  String name;
+  ReviewPageArgument(this.id, this.name);
 }
