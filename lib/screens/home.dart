@@ -152,7 +152,7 @@ class HomePageState extends State<HomePage> {
 
   void getToken(sessionId, patientId, Result result ) {
     String roomName = 'room_'+sessionId;
-      getTwilioToken(roomName, patientId, result.therapistId.id).then(
+      getTwilioToken(roomName, patientId, result.therapistId.id, result.programName).then(
               (value) => {
                 if (value.responseCode == '200') {
                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt))
