@@ -260,14 +260,14 @@ class _CreateAccountState extends State<ProfilePage> {
                                         title: AppLocalizations.of(context).edit,
                                         type: 4,
                                         onClick: () {
-                                          Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: snapshot.data.result)), )
-                                              .then((value){
-                                            // setState(() {
-                                           setState(() {
+                                          Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: snapshot.data.result)), );
+                                          //     .then((value){
+                                          //   // setState(() {
+                                          //  setState(() {
 
-                                           });
-                                            // });
-                                          });
+                                          //  });
+                                          //   // });
+                                          // });
 
 
                                           // Navigator.pushNamed(context, EditProfilePage.RouteName, arguments: ProfileArguments(userData)).whenComplete(getprofile());
