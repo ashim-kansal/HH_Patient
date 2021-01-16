@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -154,34 +153,6 @@ class SplashState extends State<Splash>{
       },
     });
     //end callkit
-
-    if (Platform.isAndroid) {
-      //if (isIOS) iOS_Permission();
-      //  _firebaseMessaging.requestNotificationPermissions();
-
-      _firebaseMessaging.getToken().then((token) {
-        print('[FCM] token => ' + token);
-      });
-
-      _firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) async {
-          print('onMessage: $message');
-          if (message.containsKey('data')) {
-            // Handle data message
-            final dynamic data = message['data'];
-            var number = data['body'] as String;
-            await displayIncomingCall(number);
-          }
-        },
-        onBackgroundMessage: myBackgroundMessageHandler,
-        onLaunch: (Map<String, dynamic> message) async {
-          print('onLaunch: $message');
-        },
-        onResume: (Map<String, dynamic> message) async {
-          print('onResume: $message');
-        },
-      );
-    }
 
     getToken();
     _register();
