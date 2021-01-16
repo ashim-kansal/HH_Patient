@@ -253,6 +253,9 @@ class _OtpState extends State<OtpPage> {
             keyboardType: TextInputType.number,
             controller: controller4,
             autofocus: false,
+            onSubmitted: (String str){
+              otpVerifyHandler();
+            },
             focusNode: fourthinput,
             enabled: true,
             // maxLength: 1,
@@ -264,65 +267,7 @@ class _OtpState extends State<OtpPage> {
 
 
   // show circular 
-  buildShowDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Center(
-          child:CircularProgressIndicator(),
-        );
-    });
-  }
-
-  void otpVerifyHandler() {
-    if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
-      showDialog(
-        context: context,
-        builder: (BuildContext dialogContext) {
-          return DialogWithSingleButton(
-            title: AppLocalizations.of(context).alert,
-            content: AppLocalizations.of(context).valid_otp_msg,
-          );
-        },
-      );
-      return;
-    }
-    print("from");
-    print(widget.from);
-    String otp = controller1.text+controller2.text+controller3.text+controller4.text;
-    
-    //show circular bar
-    buildShowDialog(context);
-    // _otpAPIHandler(otp);
-    APIService apiService = new APIService();
-
-    apiService.otpAPIHandler(otp).then((value) => {
-      Navigator.of(context).pop(),
-      Timer(Duration(seconds: 1),
-        ()=> {
-          
-          showToast(value.responseMsg),
-      }),
-      
-      if(value.responseCode == 200){
-        Timer(Duration(seconds: 2),
-          ()=>{
-          Navigator.pop(context),
-          if(widget.from == "forgot"){
-            Navigator.pushNamed(context, ResetPasswordPage.RouteName),
-          }else {
-            Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
-          }
-          
-        })
-      }
-    });
-  }
-
-    
-
-    return MyWidget(
+      return MyWidget(
       title: AppLocalizations.of(context).otp_verification,
       child: SingleChildScrollView(
         child: Column(
@@ -502,6 +447,63 @@ class _OtpState extends State<OtpPage> {
       currController = controller3;
     }
   }
+
+  void otpVerifyHandler() {
+    if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return DialogWithSingleButton(
+            title: AppLocalizations.of(context).alert,
+            content: AppLocalizations.of(context).valid_otp_msg,
+          );
+        },
+      );
+      return;
+    }
+    print("from");
+    print(widget.from);
+    String otp = controller1.text+controller2.text+controller3.text+controller4.text;
+
+    //show circular bar
+    buildShowDialog(context);
+    // _otpAPIHandler(otp);
+    APIService apiService = new APIService();
+
+    apiService.otpAPIHandler(otp).then((value) => {
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+              ()=> {
+
+            showToast(value.responseMsg),
+          }),
+
+      if(value.responseCode == 200){
+        Timer(Duration(seconds: 2),
+                ()=>{
+              Navigator.pop(context),
+              if(widget.from == "forgot"){
+                Navigator.pushNamed(context, ResetPasswordPage.RouteName),
+              }else {
+                Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+              }
+
+            })
+      }
+    });
+  }
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child:CircularProgressIndicator(),
+          );
+        });
+  }
+
+
 }
 
 class OTPArguements {
