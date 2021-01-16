@@ -13,6 +13,7 @@ import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/payment.dart';
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/Helper.dart';
@@ -337,7 +338,8 @@ class SplashState extends State<Splash>{
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
               // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
-              Navigator.pushNamed(context, SelectLanguage.RouteName)
+              // Navigator.pushNamed(context, SelectLanguage.RouteName)
+              Navigator.pushNamed(context, ProfilePage.RouteName)
             },
       }
     );
