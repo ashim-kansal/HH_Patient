@@ -351,28 +351,27 @@ class SplashState extends State<Splash>{
       print(message["type"]);
       if(message["type"] == "incoming_call"){
        
-        if(mounted){
-          setState(() {
-            sessionObj = message;
-          });
-        }
+        // if(mounted){
+        //   setState(() {
+        //     sessionObj = message;
+        //   });
+        // }
         
-        displayIncomingCall("10086");
+        // displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
     }, onResume: (Map<String, dynamic> message) async {
       print('on resume $message');
       if(message["type"] == "incoming_call"){
-        var token = message["accesstoken"];
         
         // Navigator.pushNamed(context, routeName)
-        if(mounted){
-          setState(() {
-            sessionObj = message;
-          });
-        }
+        // if(mounted){
+        //   setState(() {
+        //     sessionObj = message;
+        //   });
+        // }
         
-        displayIncomingCall("10086");
+        // displayIncomingCall("10086");
       
       }
       // setState(() => _message = message["notification"]["title"]);
