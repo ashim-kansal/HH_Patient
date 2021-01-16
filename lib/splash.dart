@@ -348,31 +348,17 @@ class SplashState extends State<Splash>{
         onMessage: (Map<String, dynamic> message) async {
       print('on message $message');
 
-      print(message["type"]);
-      if(message["type"] == "incoming_call"){
-       
-        // if(mounted){
-        //   setState(() {
-        //     sessionObj = message;
-        //   });
-        // }
-        
-        // displayIncomingCall("10086");
+      print(message["data"]);
+      if(message["data"]["type"].toString() == "incoming_call"){
+        displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
     }, onResume: (Map<String, dynamic> message) async {
       print('on resume $message');
       if(message["type"] == "incoming_call"){
-        
+        var token = message["accesstoken"];
         // Navigator.pushNamed(context, routeName)
-        // if(mounted){
-        //   setState(() {
-        //     sessionObj = message;
-        //   });
-        // }
-        
-        // displayIncomingCall("10086");
-      
+        displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
     }, onLaunch: (Map<String, dynamic> message) async {
@@ -394,7 +380,6 @@ class SplashState extends State<Splash>{
     // print('mtttttttt  :'+value)
     //
     // });
-    SplashState.mContext = context;
     return
       Container(
         color: Color(0xff777CEA),
