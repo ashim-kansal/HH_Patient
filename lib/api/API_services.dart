@@ -124,13 +124,13 @@ Future<QuestionarieList> getdrinkingDairyDetails() async {
   return questionarieListFromJson(response.body);
 }
 
-Future<GetTokenResponse> getTwilioToken(roomName, identity, reciverId) async {
+Future<GetTokenResponse> getTwilioToken(roomName, identity, reciverId,programName) async {
   var token = await GetStringToSP("token");
   print(token);
   print(roomName);
   print(identity);
   print("rc  : "+reciverId);
-  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName+"&receiverId="+reciverId;
+  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName+"&receiverId="+reciverId+"&programName="+programName;
   print(url);
   final response = await http.get(url,
       headers: {

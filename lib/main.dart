@@ -11,6 +11,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  static BuildContext myContext;
 
   @override
   State<StatefulWidget> createState() => _MyAppState();
@@ -32,6 +33,11 @@ class RestartWidget extends StatefulWidget {
 
 class _RestartWidgetState extends State<RestartWidget> {
   Key key = UniqueKey();
+
+  void initState(){
+    super.initState();
+      
+  }
 
   void restartApp() {
     setState(() {
@@ -55,6 +61,8 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
 
   @override
   Widget build(BuildContext context) {
+
+    MyApp.myContext = context;
     return MaterialApp(
         title: 'HH Patient',
         onGenerateRoute: router.generateRoute,

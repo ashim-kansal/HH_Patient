@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/main.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -121,6 +122,8 @@ class SplashState extends State<Splash>{
     print(token);
   }
 
+  static BuildContext mContext; 
+
   @override
   void initState() {
     super.initState();
@@ -197,10 +200,7 @@ class SplashState extends State<Splash>{
     Timer(const Duration(seconds: 1), () {
       print('[setCurrentCallActive] $callUUID, number: $number');
       print(sessionObj);
-      Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
-          .then((value) => {
-            Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
-      });
+      navigateH(context, sessionObj);
 
       _callKeep.setCurrentCallActive(callUUID);
     });
@@ -350,9 +350,13 @@ class SplashState extends State<Splash>{
 
       print(message["type"]);
       if(message["type"] == "incoming_call"){
-        setState(() {
-          sessionObj = message;
-        });
+       
+        if(mounted){
+          setState(() {
+            sessionObj = message;
+          });
+        }
+        
         displayIncomingCall("10086");
       }
       // setState(() => _message = message["notification"]["title"]);
@@ -360,11 +364,16 @@ class SplashState extends State<Splash>{
       print('on resume $message');
       if(message["type"] == "incoming_call"){
         var token = message["accesstoken"];
-        setState(() {
-          sessionObj = message;
-        });
+        
         // Navigator.pushNamed(context, routeName)
+        if(mounted){
+          setState(() {
+            sessionObj = message;
+          });
+        }
+        
         displayIncomingCall("10086");
+      
       }
       // setState(() => _message = message["notification"]["title"]);
     }, onLaunch: (Map<String, dynamic> message) async {
@@ -373,12 +382,20 @@ class SplashState extends State<Splash>{
     });
   }
 
+  void navigateH(BuildContext context, sessionObj) {
+    Navigator.pushNamed(mContext, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
+          .then((value) => {
+            Navigator.pushNamed(mContext, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     // HelperFunction.getAuthorizationToken(context).then((value) => {
     // print('mtttttttt  :'+value)
     //
     // });
+    SplashState.mContext = context;
     return
       Container(
         color: Color(0xff777CEA),
