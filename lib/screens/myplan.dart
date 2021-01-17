@@ -94,10 +94,10 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                                       size: Size(8, 8),
                                     ),
 
-                                    snapshot.data.result.programSubscription
-                                            .description
-                                            .contains("div")
-                                        ? Html(
+                                    // snapshot.data.result.programSubscription
+                                    //         .description
+                                    //         .contains("div")
+                                        Html(
                                             data: snapshot
                                                 .data
                                                 .result
@@ -113,24 +113,24 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                                             // },
                                             // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
                                           )
-                                        : Text(
-                                            snapshot
-                                                .data
-                                                .result
-                                                .programSubscription
-                                                .description,
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16),
-                                          ),
+                                        // : Text(
+                                        //     snapshot
+                                        //         .data
+                                        //         .result
+                                        //         .programSubscription
+                                        //         .description,
+                                        //     textAlign: TextAlign.start,
+                                        //     style: TextStyle(
+                                        //         color: Colors.white,
+                                        //         fontSize: 16),
+                                        //   ),
                                     // new Expanded(
                                     //   flex: 1,
                                     //   child: new SingleChildScrollView(
                                     //       scrollDirection: Axis.vertical,
                                     //   child:                                ,
                                     //       )),
-                                    SizedBox.fromSize(
+                                    ,SizedBox.fromSize(
                                       size: Size(8, 20),
                                     ),
                                     Container(
@@ -256,10 +256,11 @@ class CancelPlansPageState extends State<CancelPlansPage> {
                                     SizedBox.fromSize(
                                       size: Size(8, 8),
                                     ),
-                                    snapshot.data.result.programSubscription
-                                            .description
-                                            .contains("div")
-                                        ? Html(
+                                    // snapshot.data.result.programSubscription
+                                    //         .description
+                                    //         .contains("div")
+                                    //     ?
+                                    Html(
                                             data: snapshot
                                                 .data
                                                 .result
@@ -275,24 +276,24 @@ class CancelPlansPageState extends State<CancelPlansPage> {
                                             // },
                                             // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
                                           )
-                                        : Text(
-                                            snapshot
-                                                .data
-                                                .result
-                                                .programSubscription
-                                                .description,
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16),
-                                          ),
+                                        // : Text(
+                                        //     snapshot
+                                        //         .data
+                                        //         .result
+                                        //         .programSubscription
+                                        //         .description,
+                                        //     textAlign: TextAlign.start,
+                                        //     style: TextStyle(
+                                        //         color: Colors.white,
+                                        //         fontSize: 16),
+                                        //   ),
                                     // new Expanded(
                                     //   flex: 1,
                                     //   child: new SingleChildScrollView(
                                     //       scrollDirection: Axis.vertical,
                                     //   child:                                ,
                                     //       )),
-                                    SizedBox.fromSize(
+                                    ,SizedBox.fromSize(
                                       size: Size(8, 20),
                                     ),
                                   ],
