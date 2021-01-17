@@ -9,6 +9,7 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -152,6 +153,9 @@ class SelectLanguageState extends State<StatefulWidget> {
                             setState(() {
                               AppLocalizations.load(Locale(lang, ''));
                             });
+
+                              Client rnd = Client(firstName: 'aa', lastName: 'ssss');
+                              await DBProvider.db.newClient(rnd);
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),

@@ -18,6 +18,7 @@ import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/Helper.dart';
 import 'package:flutter_launcher_icons/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -170,6 +171,11 @@ class SplashState extends State<Splash>{
       },
     });
     //end callkit
+
+  DBProvider.db.getAllClients().then((value) => {
+    print(clientToJson(value).toString())
+    });
+
 
     getToken();
     _register();
