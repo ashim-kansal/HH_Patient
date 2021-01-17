@@ -199,22 +199,17 @@ class _PaymentState extends State<Payment> {
                                           ),
                                           Container(
                                             alignment: Alignment.bottomLeft,
-                                            child: HHTextView(
-                                              title: widget.plan.amount,
-                                              size: 19,
-                                              textweight: FontWeight.w800,
-                                              color: HH_Colors.purpleColor,
-                                            ),
+
                                           )
                                         ],
                                       ),
                                       Container(
-                                        child: new GestureDetector(
-                                          child: Image.asset('assets/images/penciledit.png', height: 20, width: 20, ),
-                                          onTap: (){
-                                            Navigator.pop(context);
-                                          },
-                                        )
+                                        child: HHTextView(
+                                          title: widget.plan.amount,
+                                          size: 19,
+                                          textweight: FontWeight.w800,
+                                          color: HH_Colors.purpleColor,
+                                        ),
                                       )
                                     ],
                                   )
@@ -259,6 +254,7 @@ class _PaymentState extends State<Payment> {
                                       child: HHEditText(
                                         hint: "0000 0000 0000 0000",
                                         obscureText: false,
+                                        inputType: TextInputType.number,
                                         controller: cardController,
                                         error: cardnumerr,
                                         maxLength: 20,
@@ -315,32 +311,7 @@ class _PaymentState extends State<Payment> {
                                     ),
                                   ],
                                 ),
-                                // Column(
-                                //   children: [
-                                //     Container(
-                                //     padding: EdgeInsets.only(top: 15),
-                                //     alignment: Alignment.topLeft,
-                                //     child:  HHTextView(
-                                //         title: "Security Code", 
-                                //         textweight: FontWeight.w600, 
-                                //         size: 16,
-                                //         color: HH_Colors.color_343333,
-                                //         alignment: TextAlign.left),),
-                                    
-                                //     Padding(
-                                //       padding: EdgeInsets.fromLTRB(2, 10, 2, 0),
-                                //       child: HHEditText(
-                                //         hint: "Security Code",
-                                //         obscureText: false,
-                                //         controller: cvvController,
-                                //         error: cvverr,
-                                //         errorText:
-                                //             'Please enter a security code',
-                                //       ),
-                                //     )
 
-                                //   ],
-                                // ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(2, 30, 2, 15),
                                   child: HHButton(
