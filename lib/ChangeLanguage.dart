@@ -153,9 +153,6 @@ class SelectLanguageState extends State<StatefulWidget> {
                             setState(() {
                               AppLocalizations.load(Locale(lang, ''));
                             });
-
-                              Client rnd = Client(firstName: 'aa', lastName: 'ssss');
-                              await DBProvider.db.newClient(rnd);
                             Navigator.pop(context);
                             Navigator.pushNamed(context, MyGoals.RouteName);
                           }),
