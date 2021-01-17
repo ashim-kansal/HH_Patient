@@ -32,9 +32,10 @@ class DBProvider {
     }, onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Client ("
           "id INTEGER PRIMARY KEY,"
-          "first_name TEXT,"
-          "last_name TEXT,"
-          "blocked BIT"
+          "token TEXT,"
+          "identity TEXT,"
+          "roomname TEXT,"
+          "programname TEXT"
           ")");
     });
   }
@@ -50,7 +51,7 @@ class DBProvider {
     var res = await db.query("Client");
     List<Client> list =
     res.isNotEmpty ? res.map((c) => Client.fromMap(c)).toList() : [];
-    return list.first??Client();
+    return list.last??Client();
   }
 
 }
@@ -68,107 +69,32 @@ String clientToJson(Client data) {
 
 class Client {
   int id;
-  String firstName;
-  String lastName;
-  bool blocked;
+  String token;
+  String identity;
+  String roomname;
+  String programname;
 
   Client({
     this.id,
-    this.firstName,
-    this.lastName,
-    this.blocked,
+    this.token,
+    this.identity,
+    this.roomname,
+    this.programname,
   });
 
   factory Client.fromMap(Map<String, dynamic> json) => new Client(
     id: json["id"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    blocked: json["blocked"] == 1,
+    token: json["token"],
+    identity: json["identity"],
+    roomname: json["roomname"],
+    programname: json["programname"],
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
-    "first_name": firstName,
-    "last_name": lastName,
-    "blocked": blocked,
+    "token": token,
+    "identity": identity,
+    "roomname": roomname,
+    "programname": programname,
   };
-}
-
-class Todo {
-  int _Id;
-  String _userId;
-  String _roomName;
-  String _accessToken;
-
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      id: _Id,
-      userId: _userId,
-      roomName: _roomName,
-      accessToken: _accessToken,
-    };
-
-    return map;
-  }
-
-  Todo();
-
-  Todo.fromMap(Map<String, dynamic> map) {
-    _userId = map[userId];
-    _Id = map[id];
-    _roomName = map[roomName];
-    _accessToken = map[accessToken];
-  }
-}
-
-class TodoProvider {
-  Database db;
-
-  Future open(String path) async {
-    db = await openDatabase(path, version: 1,
-        onCreate: (Database db, int version) async {
-          await db.execute('''
-create table $table ( 
-  $id integer primary key autoincrement, 
-  $userId text not null,
-  $roomName text not null,
-  $accessToken text not null)
-''');
-        });
-  }
-
-  Future<Todo> insert(Todo todo) async {
-    todo._Id = await db.insert(table, todo.toMap());
-    return todo;
-  }
-
-  Future<Todo> getTodo(int mId) async {
-    List<Map> maps = await db.query(table,
-        columns: [id, userId, roomName, accessToken],
-        where: '$id = ?',
-        whereArgs: [mId]);
-    if (maps.length > 0) {
-      return Todo.fromMap(maps.first);
-    }
-    return null;
-  }
-
-  Future<Todo> getTodos() async {
-    List<Map> maps = await db.query(table);
-    if (maps.length > 0) {
-      return Todo.fromMap(maps.first);
-    }
-    return null;
-  }
-
-  Future<int> delete(int id) async {
-    return await db.delete(table, where: '$id = ?', whereArgs: [id]);
-  }
-
-  Future<int> update(Todo todo) async {
-    return await db.update(table, todo.toMap(),
-        where: '$id = ?', whereArgs: [todo._Id]);
-  }
-
-  Future close() async => db.close();
 }
