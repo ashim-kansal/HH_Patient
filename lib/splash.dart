@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -230,9 +231,7 @@ class SplashState extends State<Splash>{
     _callKeep.endAllCalls();
     try{
       navigateH();
-      NavigationService.instance.navigateToRoute(MaterialPageRoute(
-        builder: (context) => MyGoals(),
-      ));
+     
     }catch (err){
       print('push to new route error ${err.toString()}');
     }
@@ -394,15 +393,7 @@ class SplashState extends State<Splash>{
 
         print(message["type"]);
         if(message["type"].toString() == "incoming_call"){
-          // setState(() {
-
-          SetStringToSP("sMsg", message);
-          //   sessionObj = message;
-          // });
-          // DBProvider.db.getAllClients().then((value) => {
-          //   print(clientToJson(value).toString())
-          // });
-          Client rnd = Client(identity: 'aa', programname: 'ssss', roomname: '', token: "");
+          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
           await DBProvider.db.newClient(rnd);
           Timer(Duration(seconds: 1),
           ()=>{
@@ -412,22 +403,44 @@ class SplashState extends State<Splash>{
         // setState(() => _message = message["notification"]["title"]);
       }, onResume: (Map<String, dynamic> message) async {
         print('on resume $message');
-        // if(message["type"] == "incoming_call"){
-        //   var token = message["accesstoken"];
-        //   // Navigator.pushNamed(context, routeName)
-        //   displayIncomingCall("10086");
-        // }
-        // setState(() => _message = message["notification"]["title"]);
+        if(message["type"].toString() == "incoming_call"){
+          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+          await DBProvider.db.newClient(rnd);
+          Timer(Duration(seconds: 1),
+          ()=>{
+            displayIncomingCall("10086")
+          });
+        }
       }, onLaunch: (Map<String, dynamic> message) async {
         print('on launch $message');
+        if(message["type"].toString() == "incoming_call"){
+          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+          await DBProvider.db.newClient(rnd);
+          Timer(Duration(seconds: 1),
+          ()=>{
+            displayIncomingCall("10086")
+          });
+        }
         // setState(() => _message = message["notification"]["title"]);
       }
     );
   }
 
   void navigateH() async {
+    var storageRes; 
     var sessionObj = await GetStringToSP("sMsg");
     print('object in msg $sessionObj');
+
+    DBProvider.db.getAllClients().then((value) => {
+      // storageRes = clientToJson(value),
+      storageRes = value,
+      print("clientRes11" +value.identity),
+      // print("clientRes" +storageRes.toString()),
+
+      NavigationService.instance.navigateToRoute(MaterialPageRoute(
+        builder: (context) => VideoCallPage(identity: value.identity, roomName: value.roomname, token: value.token),
+      )),
+    });
     // Navigator.pushNamed(mContext, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
     //       .then((value) => {
     //         Navigator.pushNamed(mContext, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
