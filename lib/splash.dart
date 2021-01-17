@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/main.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
@@ -15,12 +16,20 @@ import 'package:callkeep/callkeep.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/Helper.dart';
+import 'package:flutter_launcher_icons/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+
+import 'goals.dart';
 
 final FlutterCallkeep _callKeep = FlutterCallkeep();
 bool _callKeepInited = false;
+
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
   print('backgroundMessage: message => ${message.toString()}');
@@ -79,6 +88,13 @@ class Call {
   bool held = false;
   bool muted = false;
 }
+
+
+
+// @override
+// void setupLocator() {
+//   locator.registerLazySingleton(() => NavigationService());
+// }
 
 class Splash extends StatefulWidget{
 
@@ -164,7 +180,7 @@ class SplashState extends State<Splash>{
       (MethodCall methodcall) async {
         if (methodcall.method == 'getAll') {
           return {"flutter." + nameKey: "[ No Name Saved ]"};
-        }
+        } 
         return null;
       },
     );
@@ -173,38 +189,50 @@ class SplashState extends State<Splash>{
   }
 
   void removeCall(String callUUID) {
-    setState(() {
-      calls.remove(callUUID);
-    });
+    // setState(() {
+    //   calls.remove(callUUID);
+    // });
   }
 
   void setCallHeld(String callUUID, bool held) {
-    setState(() {
-      calls[callUUID].held = held;
-    });
+    // setState(() {
+    //   calls[callUUID].held = held;
+    // });
   }
 
   void setCallMuted(String callUUID, bool muted) {
-    setState(() {
-      calls[callUUID].muted = muted;
-    });
+    // setState(() {
+    //   calls[callUUID].muted = muted;
+    // });
   }
 
   Future<void> answerCall(CallKeepPerformAnswerCallAction event) async {
+    
+    
     final String callUUID = event.callUUID;
     final String number = calls[callUUID].number;
     
     print('[answerCall] $callUUID, number: $number');
+    print("objSess $sessionObj");
+    _callKeep.backToForeground();
+    _callKeep.endAllCalls();
+    try{
+      navigateH();
+      NavigationService.instance.navigateToRoute(MaterialPageRoute(
+        builder: (context) => MyGoals(),
+      ));
+    }catch (err){
+      print('push to new route error ${err.toString()}');
+    }
+  //  return;
 
-    // Navigator.push(context, VideoCallPage.RouteName)
-    _callKeep.startCall(event.callUUID, number, number);
-    Timer(const Duration(seconds: 1), () {
-      print('[setCurrentCallActive] $callUUID, number: $number');
-      print(sessionObj);
-      navigateH(context, sessionObj);
+    // _callKeep.startCall(event.callUUID, number, number);
+    // Timer(const Duration(seconds: 1), () {
+    //   print('[setCurrentCallActive] $callUUID, number: $number');
+    //   print(sessionObj);
 
-      _callKeep.setCurrentCallActive(callUUID);
-    });
+    //   _callKeep.setCurrentCallActive(callUUID);
+    // });
   }
 
   Future<void> endCall(CallKeepPerformEndCallAction event) async {
@@ -223,9 +251,9 @@ class SplashState extends State<Splash>{
       return;
     }
     final String callUUID = event.callUUID ?? newUUID();
-    setState(() {
-      calls[callUUID] = Call(event.handle);
-    });
+    // setState(() {
+    //   calls[callUUID] = Call(event.handle);
+    // });
     print('[didReceiveStartCallAction] $callUUID, number: ${event.handle}');
 
     _callKeep.startCall(callUUID, event.handle, event.handle);
@@ -319,9 +347,9 @@ class SplashState extends State<Splash>{
     var callUUID = event.callUUID;
     var number = event.handle;
     print('[displayIncomingCall] $callUUID number: $number');
-    setState(() {
-      calls[callUUID] = Call(number);
-    });
+    // setState(() {
+    //   calls[callUUID] = Call(number);
+    // });
   }
 
   void onPushKitToken(CallKeepPushKitToken event) {
@@ -329,12 +357,15 @@ class SplashState extends State<Splash>{
     print('[onPushKitToken] token => ${event.token}');
   }
 
-  void checkIfUserLoggedIn () async {
-  
+  Future checkIfUserLoggedIn()async {
+    
+    var accessToken = await GetStringToSP("token");
+    print("accessToken for app $accessToken");
      Timer(Duration(seconds: 4),
       ()=>{
+        print("accessToken for app22 $accessToken"),
             Navigator.pop(context),
-            if (token != null) {
+            if (accessToken != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
               // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
@@ -346,33 +377,43 @@ class SplashState extends State<Splash>{
 
   void getMessage(){
     _firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) async {
-      print('on message $message');
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
 
-      // print(message["data"]);
-      // if(message["data"]["type"].toString() == "incoming_call"){
-      //   displayIncomingCall("10086");
-      // }
-      // setState(() => _message = message["notification"]["title"]);
-    }, onResume: (Map<String, dynamic> message) async {
-      print('on resume $message');
-      // if(message["type"] == "incoming_call"){
-      //   var token = message["accesstoken"];
-      //   // Navigator.pushNamed(context, routeName)
-      //   displayIncomingCall("10086");
-      // }
-      // setState(() => _message = message["notification"]["title"]);
-    }, onLaunch: (Map<String, dynamic> message) async {
-      print('on launch $message');
-      setState(() => _message = message["notification"]["title"]);
-    });
+        print(message["type"]);
+        if(message["type"].toString() == "incoming_call"){
+          // setState(() {
+          SetStringToSP("sMsg", message);
+          //   sessionObj = message;
+          // });
+          Timer(Duration(seconds: 1),
+          ()=>{
+            displayIncomingCall("10086")
+          });
+        }
+        // setState(() => _message = message["notification"]["title"]);
+      }, onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+        // if(message["type"] == "incoming_call"){
+        //   var token = message["accesstoken"];
+        //   // Navigator.pushNamed(context, routeName)
+        //   displayIncomingCall("10086");
+        // }
+        // setState(() => _message = message["notification"]["title"]);
+      }, onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+        // setState(() => _message = message["notification"]["title"]);
+      }
+    );
   }
 
-  void navigateH(BuildContext context, sessionObj) {
-    Navigator.pushNamed(mContext, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
-          .then((value) => {
-            Navigator.pushNamed(mContext, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
-      });
+  void navigateH() async {
+    var sessionObj = await GetStringToSP("sMsg");
+    print('object in msg $sessionObj');
+    // Navigator.pushNamed(mContext, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
+    //       .then((value) => {
+    //         Navigator.pushNamed(mContext, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
+    //   });
   }
 
   @override
@@ -381,8 +422,8 @@ class SplashState extends State<Splash>{
     // print('mtttttttt  :'+value)
     //
     // });
-    return
-      Container(
+    return MaterialApp(
+      home: Container(
         color: Color(0xff777CEA),
         child: Center(
           child: Image.asset('assets/images/ic_appicon_white.png',
@@ -390,9 +431,10 @@ class SplashState extends State<Splash>{
           width: 150,
         ),
         )
-        
-
+      ),
+      navigatorKey: navigatorKey,
     );
+      
   }
 }
 

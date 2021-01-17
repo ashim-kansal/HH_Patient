@@ -114,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     APIService apiService = new APIService();
+
     buildShowDialog(context);
     _firebaseMessaging.getToken().then((fcmtoken) => {
       apiService.loginAPIHandler(email, password, fcmtoken, voipToken).then(
