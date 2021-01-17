@@ -172,9 +172,7 @@ class SplashState extends State<Splash>{
     });
     //end callkit
 
-  DBProvider.db.getAllClients().then((value) => {
-    print(clientToJson(value).toString())
-    });
+
 
 
     getToken();
@@ -389,9 +387,15 @@ class SplashState extends State<Splash>{
         print(message["type"]);
         if(message["type"].toString() == "incoming_call"){
           // setState(() {
+
           SetStringToSP("sMsg", message);
           //   sessionObj = message;
           // });
+          // DBProvider.db.getAllClients().then((value) => {
+          //   print(clientToJson(value).toString())
+          // });
+          Client rnd = Client(identity: 'aa', programname: 'ssss', roomname: '', token: "");
+          await DBProvider.db.newClient(rnd);
           Timer(Duration(seconds: 1),
           ()=>{
             displayIncomingCall("10086")
