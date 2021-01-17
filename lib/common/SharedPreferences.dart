@@ -1,18 +1,17 @@
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-void SetStringToSP (key, value) async {
+Future<String> SetStringToSP(key, value)async {
  
   SharedPreferences prefs = await SharedPreferences.getInstance();
   
-  prefs.setString(key, value);
+  await prefs.setString(key, value);
 }
 
 Future<String> GetStringToSP(key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //Return String
-  String stringValue = prefs.getString(key);
-  return stringValue;
+  return prefs.getString(key);
 }
 
 // ignore: non_constant_identifier_names
