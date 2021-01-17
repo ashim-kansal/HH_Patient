@@ -118,6 +118,13 @@ class SplashState extends State<Splash>{
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
+  Future<bool> showLoginPage() async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    String user = sharedPreferences.getString('token');
+
+    print('user Token $user');
+  }
+
   _register() {
     
     _firebaseMessaging.getToken().then((fcmtoken) => {
@@ -144,7 +151,8 @@ class SplashState extends State<Splash>{
   @override
   void initState() {
     super.initState();
-
+    showLoginPage();
+    
     //callkit
     _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
     _callKeep.on(CallKeepPerformAnswerCallAction(), answerCall);
