@@ -176,7 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "We found an account with this email, do you want to login?" : MessageLookupByLibrary.simpleMessage("Nous avons trouvé un compte avec ce courriel, voulez-vous vous connecter??"),
     "Welcome back" : MessageLookupByLibrary.simpleMessage("Nous saluons le retour"),
     "Yes" : MessageLookupByLibrary.simpleMessage("Oui"),
-    "You have successfully subscribed with " : MessageLookupByLibrary.simpleMessage("Vous vous êtes abonné avec succès avec "),
+    "You have successfully subscribed " : MessageLookupByLibrary.simpleMessage("Vous vous êtes abonné avec succès "),
     "save" : MessageLookupByLibrary.simpleMessage("Sauvegarder")
   };
 }

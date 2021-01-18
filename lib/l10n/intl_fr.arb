@@ -696,8 +696,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "You have successfully subscribed with ": "Vous vous êtes abonné avec succès avec ",
-  "@You have successfully subscribed with ": {
+  "You have successfully subscribed ": "Vous vous êtes enregistré avec succès ",
+  "@You have successfully subscribed ": {
     "type": "text",
     "placeholders": {}
   },

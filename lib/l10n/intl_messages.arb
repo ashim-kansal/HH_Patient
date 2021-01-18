@@ -701,8 +701,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "You have successfully subscribed with ": "You have successfully subscribed with ",
-  "@You have successfully subscribed with ": {
+  "You have successfully subscribed ": "You have successfully subscribed ",
+  "@You have successfully subscribed ": {
     "type": "text",
     "placeholders": {}
   },

@@ -160,7 +160,7 @@ class AppLocalizations {
   String get enterExpiryYear => Intl.message("Please enter a expiry year");
   String get payNow => Intl.message("Pay Now");
   String get paymentDone => Intl.message("Payment Done!");
-  String get paymentDoneMsg => Intl.message("You have successfully subscribed with ");
+  String get paymentDoneMsg => Intl.message("You have successfully subscribed ");
   String get paymentTitle => Intl.message("Payment");
   String get logNow => Intl.message("Log Now");
   String get view => Intl.message("View");

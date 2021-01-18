@@ -700,8 +700,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "You have successfully subscribed with ": "Te has suscrito correctamente a ",
-  "@You have successfully subscribed with ": {
+  "You have successfully subscribed ": "Te has suscripto satisfactoriamente ",
+  "@You have successfully subscribed ": {
     "type": "text",
     "placeholders": {}
   },
