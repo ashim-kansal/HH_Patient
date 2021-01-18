@@ -9,6 +9,7 @@ import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/model/AuthModel.dart';
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -134,7 +135,10 @@ class _LoginPageState extends State<LoginPage> {
             Timer(Duration(seconds: 2),
               ()=>{
                     Navigator.pop(context),
+                if(value.programSubscribed)
                     Navigator.pushNamed(context, Dashboard.RouteName)
+                else
+                  Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
               }
             ),
           }

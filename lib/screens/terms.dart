@@ -31,7 +31,7 @@ class _TermsState extends State<TermsPage> {
   @override
   Widget build(BuildContext context) {
     return 
-    MyWidget(title: AppLocalizations.of(context).tems_condi, 
+    MyWidget(title: AppLocalizations.of(context).tnc,
       child: SingleChildScrollView(
         child: FutureBuilder<StaticContent>(
                           future: getStaticContent("TERMS"),

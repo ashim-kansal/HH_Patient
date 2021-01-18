@@ -45,15 +45,15 @@ class _TermsState extends State<AboutUs> {
                     child: Html(
 
                       data:snapshot.data.result.description,
-                      style: {
-                        "div": Style(
-                          color: HH_Colors.color_707070,
-                          fontSize: FontSize(15.0)
-                        ),"p": Style(
-                          color: HH_Colors.color_707070,
-                          fontSize: FontSize(15.0)
-                        ),
-                      },
+                      // style: {
+                      //   "div": Style(
+                      //     color: HH_Colors.color_707070,
+                      //     fontSize: FontSize(15.0)
+                      //   ),"p": Style(
+                      //     color: HH_Colors.color_707070,
+                      //     fontSize: FontSize(15.0)
+                      //   ),
+                      // },
                       // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
                     )
                         
