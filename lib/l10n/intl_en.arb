@@ -486,7 +486,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "Questionaire": "Questionaire",
+  "Questionaire": "Questionnaire",
   "@Questionaire": {
     "type": "text",
     "placeholders": {}
