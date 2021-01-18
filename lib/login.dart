@@ -11,6 +11,8 @@ import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/privacy.dart';
+import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -42,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   var emailerror = false;
   var pwderror = false;
   bool securepwd = true;
-  bool isChecked = true;
+  bool isChecked = false;
   bool isApiCallProcess = false;
 
   String token = "";
@@ -114,6 +116,11 @@ class _LoginPageState extends State<LoginPage> {
       pwderror = false;
     });
 
+    if(!isChecked){
+      showToast(AppLocalizations.of(context).acceptTerms);
+      return;
+    }
+
     APIService apiService = new APIService();
 
     buildShowDialog(context);
@@ -134,7 +141,8 @@ class _LoginPageState extends State<LoginPage> {
 
             Timer(Duration(seconds: 2),
               ()=>{
-                    Navigator.pop(context),
+                Navigator.pop(context),
+                print(value.programSubscribed.toString() + " progrm"),
                 if(value.programSubscribed)
                     Navigator.pushNamed(context, Dashboard.RouteName)
                 else
@@ -318,9 +326,19 @@ class _LoginPageState extends State<LoginPage> {
                             text: AppLocalizations.of(context).agree_desc,
                             style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                             children: <TextSpan>[
-                              TextSpan(text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                              TextSpan(
+                                recognizer: TapGestureRecognizer()..onTap = () {
+                                  Navigator.pushNamed(context, TermsPage.RouteName);
+                                },
+                                text: AppLocalizations.of(context).terms_service, 
+                                style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")
+                              ),
                               TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14, fontFamily: "ProximaNova")),
-                              TextSpan(text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                              TextSpan(
+                                recognizer: TapGestureRecognizer()..onTap = () {
+                                  Navigator.pushNamed(context, PrivacyPolicy.RouteName);
+                                },
+                                text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
                             ],
                           ),
                         )

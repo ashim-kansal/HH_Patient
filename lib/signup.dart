@@ -9,6 +9,8 @@ import 'package:flutter_app/login.dart';
 import 'package:flutter_app/model/CountryResponse.dart';
 import 'package:flutter_app/model/StateModel.dart';
 import 'package:flutter_app/otp.dart';
+import 'package:flutter_app/screens/privacy.dart';
+import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:toast/toast.dart';
@@ -48,7 +50,7 @@ class _SignupPageState extends State<SignUpPage> {
   String countryDropdown = "Albania";
   String pwdValidation = "Please enter a valid password";
   bool securepwd = true;
-  bool isChecked = true;
+  bool isChecked = false;
   bool countrySelected = false;
   String countryCode = "";
 
@@ -463,9 +465,17 @@ class _SignupPageState extends State<SignUpPage> {
                           text: AppLocalizations.of(context).agree_desc,
                           style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070)),
                           children: <TextSpan>[
-                            TextSpan(text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                            TextSpan(
+                              recognizer: TapGestureRecognizer()..onTap = () {
+                                Navigator.pushNamed(context, TermsPage.RouteName);
+                              },
+                              text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
                             TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14)),
-                            TextSpan(text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
+                            TextSpan(
+                              recognizer: TapGestureRecognizer()..onTap = () {
+                                Navigator.pushNamed(context, PrivacyPolicy.RouteName);
+                              },
+                              text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14)),
                           ],
                         ),
                       )

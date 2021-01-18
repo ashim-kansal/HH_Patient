@@ -24,6 +24,7 @@ class LoginResponseModel {
       deviceToken: json.containsKey("result") ? json["result"]["deviceToken"]?? "" : "",
       appLanguage: json.containsKey("result") ? json["result"]["appLanguage"]?? "" : "",
       notificationStatus: json.containsKey("result") ? json["result"]["notificationStatus"]?? false : false,
+      programSubscribed: json.containsKey("result")? json["result"]["programSubscribed"] : false,
       responseMsg: json["responseMessage"]?? "Some error occured. Please try again.",
       responseCode: json["responseCode"]?? 404
     );
