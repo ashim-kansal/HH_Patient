@@ -1,9 +1,11 @@
+import 'package:callkeep/callkeep.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/callkit.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
@@ -111,6 +113,8 @@ class HomePageState extends State<HomePage> {
                       });
                     },
                       onClickVideo: (){
+                        final FlutterCallkeep _callKeep = FlutterCallkeep();
+
                         getToken(snapshot.data.result[index].id, snapshot.data.result[index].patientId,snapshot.data.result[index]);
                       },
                     onClickCancel: (){
