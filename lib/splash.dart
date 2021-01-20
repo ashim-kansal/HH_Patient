@@ -63,7 +63,7 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
   if (!_callKeepInited) {
     _callKeep.setup(<String, dynamic>{
       'ios': {
-        'appName': 'CallKeepDemo',
+        'appName': 'HHPatient',
       },
       'android': {
         'alertTitle': 'Permissions required',
@@ -114,18 +114,20 @@ class SplashState extends State<Splash>{
   String _message = '';
   var sessionObj = {};
 
+  
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   final FlutterCallkeep _callKeep = FlutterCallkeep();
   Map<String, Call> calls = {};
   String newUUID() => Uuid().v4();
 
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  // Future<bool> showLoginPage() async {
+  //   var sharedPreferences = await SharedPreferences.getInstance();
+  //   String user = sharedPreferences.getString('token');
 
-  Future<bool> showLoginPage() async {
-    var sharedPreferences = await SharedPreferences.getInstance();
-    String user = sharedPreferences.getString('token');
-
-    print('user Token $user');
-  }
+  //   print('user Token $user');
+  // }
 
   _register() {
     
@@ -153,7 +155,7 @@ class SplashState extends State<Splash>{
   @override
   void initState() {
     super.initState();
-    showLoginPage();
+    // showLoginPage();
     
     //callkit
     _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
@@ -169,7 +171,7 @@ class SplashState extends State<Splash>{
 
     _callKeep.setup(<String, dynamic>{
       'ios': {
-        'appName': 'CallKeepDemo',
+        'appName': 'HHPatient',
       },
       'android': {
         'alertTitle': 'Permissions required',
@@ -202,21 +204,21 @@ class SplashState extends State<Splash>{
   }
 
   void removeCall(String callUUID) {
-    // setState(() {
-    //   calls.remove(callUUID);
-    // });
+    setState(() {
+      calls.remove(callUUID);
+    });
   }
 
   void setCallHeld(String callUUID, bool held) {
-    // setState(() {
-    //   calls[callUUID].held = held;
-    // });
+    setState(() {
+      calls[callUUID].held = held;
+    });
   }
 
   void setCallMuted(String callUUID, bool muted) {
-    // setState(() {
-    //   calls[callUUID].muted = muted;
-    // });
+    setState(() {
+      calls[callUUID].muted = muted;
+    });
   }
 
   Future<void> answerCall(CallKeepPerformAnswerCallAction event) async {

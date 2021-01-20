@@ -35,7 +35,9 @@ class APIService {
     );
     
     var res = json.decode(response.body);
+    
     if(response.statusCode == 200){
+      print("resss "+ response.body);
       // if(res["responseCode"] == 200){
         return LoginResponseModel.fromJson(res);
       // }

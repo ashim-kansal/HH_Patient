@@ -15,7 +15,7 @@ class LoginResponseModel {
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     print(json["responseMessage"]);
     if(json.containsKey("result")){
-      SetStringToSP("uToken", json["result"]["token"]?? "");
+      SetStringToSP("Token", json["result"]["token"]?? "");
       SetStringToSP("userId", json["result"]["_id"]?? "");
     }
     
