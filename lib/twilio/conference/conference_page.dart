@@ -267,26 +267,21 @@ class _ConferencePageState extends State<VideoCallPage> {
     if (participants.length == 1) {
       children.add(_buildNoiseBox());
     } else {
-      final remoteParticipant = participants.firstWhere((
-          ParticipantWidget participant) => participant.isRemote,
-          orElse: () => null);
-      if (remoteParticipant != null) {
-        children.add(remoteParticipant);
-      }
+      participants.forEach((element) {
+        if(!element.isRemote){
+          children.add(DraggablePublisher(
+            key: Key('publisher'),
+            child: element,
+            availableScreenSize: size,
+            onButtonBarVisible: _onButtonBarVisibleStreamController.stream,
+            onButtonBarHeight: _onButtonBarHeightStreamController.stream,
+          ));
 
+        }else{
+          children.add(element);
+        }
+      });
 
-      final localParticipant = participants.firstWhere((
-          ParticipantWidget participant) => !participant.isRemote,
-          orElse: () => null);
-      if (localParticipant != null) {
-        children.add(DraggablePublisher(
-          key: Key('publisher'),
-          child: localParticipant,
-          availableScreenSize: size,
-          onButtonBarVisible: _onButtonBarVisibleStreamController.stream,
-          onButtonBarHeight: _onButtonBarHeightStreamController.stream,
-        ));
-      }
     }
   }
 
