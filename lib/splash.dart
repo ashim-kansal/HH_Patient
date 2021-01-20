@@ -388,7 +388,10 @@ class SplashState extends State<Splash>{
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall("10086")
+                  displayIncomingCall("10086"),
+                  Timer(Duration(seconds: 30),()=>{
+                    _callKeep.endAllCalls()
+                  })
                 });
           }
         }else{
@@ -398,7 +401,10 @@ class SplashState extends State<Splash>{
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall("10086")
+                  displayIncomingCall("10086"),
+                  Timer(Duration(seconds: 30),()=>{
+                    _callKeep.endAllCalls()
+                  })
                 });
           }
         }
