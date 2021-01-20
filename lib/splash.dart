@@ -1,31 +1,19 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
+import 'package:callkeep/callkeep.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
-import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
-import 'package:flutter_app/login.dart';
-import 'package:flutter_app/main.dart';
-import 'package:flutter_app/myplan.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/screens/dashboard.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_app/screens/home.dart';
-import 'package:flutter_app/screens/payment.dart';
-import 'package:callkeep/callkeep.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/profile.dart';
-import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/DBHelper.dart';
-import 'package:flutter_app/utils/Helper.dart';
-import 'package:flutter_launcher_icons/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-
-import 'goals.dart';
 
 final FlutterCallkeep _callKeep = FlutterCallkeep();
 bool _callKeepInited = false;
@@ -186,7 +174,7 @@ class SplashState extends State<Splash>{
 
     getToken();
     _register();
-    getMessage();
+    // getMessage();
 
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
@@ -391,14 +379,26 @@ class SplashState extends State<Splash>{
       onMessage: (Map<String, dynamic> message) async {
         print('on message $message');
 
-        print(message["type"]);
-        if(message["type"].toString() == "incoming_call"){
-          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
-          await DBProvider.db.newClient(rnd);
-          Timer(Duration(seconds: 1),
-          ()=>{
-            displayIncomingCall("10086")
-          });
+        if(Platform.isAndroid){
+          print(message["data"]["type"]);
+          if(message["data"]["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["programName"], roomname: message["data"]["room"], token: message["data"]["AccessToken"]);
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall("10086")
+                });
+          }
+        }else{
+          print(message["type"]);
+          if(message["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall("10086")
+                });
+          }
         }
         // setState(() => _message = message["notification"]["title"]);
       }, onResume: (Map<String, dynamic> message) async {
