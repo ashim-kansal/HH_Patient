@@ -31,6 +31,9 @@ class ConferenceRoom with ChangeNotifier {
   final List<RemoteDataTrack> _dataTracks = [];
   final List<String> _messages = [];
 
+  Stream<RoomParticipantConnectedEvent> onParticipantConnected;
+  Stream<RoomParticipantDisconnectedEvent> onParticipantDisconnected;
+
   CameraCapturer _cameraCapturer;
   Room _room;
   Timer _timer;
@@ -238,7 +241,8 @@ class ConferenceRoom with ChangeNotifier {
 
   void _onConnected(Room room) {
     Debug.log('ConferenceRoom._onConnected => state: ${room.state}');
-
+    onParticipantConnected = _room.onParticipantConnected;
+    onParticipantDisconnected = _room.onParticipantDisconnected;
     // When connected for the first time, add remote participant listeners
     _streamSubscriptions.add(_room.onParticipantConnected.listen(_onParticipantConnected));
     _streamSubscriptions.add(_room.onParticipantDisconnected.listen(_onParticipantDisconnected));
