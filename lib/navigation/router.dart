@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
@@ -138,6 +140,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Payment.RouteName:
       final PaymentArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => Payment(plan: args.plan));
+    case Calling.RouteName:
+      return MaterialPageRoute(builder: (context) => Calling());
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }

@@ -264,10 +264,7 @@ class HomePageState extends State<HomePage> {
             // _callKeep.startCall(sessionId, 88008, '88008');
           }
         });
-
   }
-
-
 }
 
 class VideoPageArgument{

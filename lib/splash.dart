@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
@@ -364,7 +365,7 @@ class SplashState extends State<Splash>{
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
               // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
-              Navigator.pushNamed(context, SelectLanguage.RouteName)
+              Navigator.pushNamed(context, Calling.RouteName)
             },
       }
     );

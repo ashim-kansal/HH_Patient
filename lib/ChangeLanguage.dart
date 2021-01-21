@@ -15,6 +15,7 @@ import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:callkeep/callkeep.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_incall_manager/flutter_incall_manager.dart';
 
 
 class SelectLanguage extends StatefulWidget {
@@ -32,6 +33,7 @@ class Call {
 }
 
 class SelectLanguageState extends State<StatefulWidget> {
+  IncallManager incallManager = new IncallManager();
   String dropdownValue = 'English';
 
   final FlutterCallkeep _callKeep = FlutterCallkeep();
@@ -138,25 +140,27 @@ class SelectLanguageState extends State<StatefulWidget> {
                       )),
                 ),
                 Flexible(
-                    flex: 1,
-                    child: Container(
-                        width: 340,
-                        padding: EdgeInsets.all(20.0),
-                        child: Center(
-                          child: HHButton(title: AppLocalizations.of(context).get_started,
-                          type: 2, 
-                          isEnable: true,
-                          onClick: () async {
-                            CallKit callKit = new CallKit();
-                            String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
-                            SetStringToSP("language", lang.toLowerCase());
-                            setState(() {
-                              AppLocalizations.load(Locale(lang, ''));
-                            });
-                            Navigator.pop(context);
-                            Navigator.pushNamed(context, MyGoals.RouteName);
-                          }),
-                        ))),
+                  flex: 1,
+                  child: Container(
+                      width: 340,
+                      padding: EdgeInsets.all(20.0),
+                      child: Center(
+                        child: HHButton(title: AppLocalizations.of(context).get_started,
+                        type: 2, 
+                        isEnable: true,
+                        onClick: () async {
+                          // incallManager.startRingtone(RingtoneUriType.DEFAULT, 'default', 30);
+                          String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
+                          SetStringToSP("language", lang.toLowerCase());
+                          setState(() {
+                            AppLocalizations.load(Locale(lang, ''));
+                          });
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, MyGoals.RouteName);
+                        }),
+                      )
+                    )
+                  ),
               ],
             )
         )
