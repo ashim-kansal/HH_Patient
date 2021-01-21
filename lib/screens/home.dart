@@ -9,6 +9,7 @@ import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/callkit.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
@@ -167,10 +168,7 @@ class HomePageState extends State<HomePage> {
               (value) => {
                 if (value.responseCode == '200') {
 
-    // Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt))
-    //                 .then((value) => {
-    //                   Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-    //             }),
+ 
 
             }
           });
@@ -183,10 +181,12 @@ class HomePageState extends State<HomePage> {
         (value)=>{
           print(value.responseMessage),
           if(value.responseCode == '200'){
-            incallManager.start(
-                media: MediaType.AUDIO, auto: false, ringback: '_DEFAULT_').then((value) => {
-
-            })
+            Navigator.pushNamed(context, Calling.RouteName).then((value) {
+                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+                    .then((value) => {
+                      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+                });
+            }),
           }
         });
   }

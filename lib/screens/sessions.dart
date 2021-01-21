@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
@@ -211,7 +212,7 @@ class SessionPageState extends State<SessionPage> {
                     },
                     onVideoCancel: () {
                       // if(DateTime.now().isSameDate(searchList[index].date))
-                        getToken(searchList[index].id,
+                        callParticipent(searchList[index].id,
                             searchList[index].patientId, searchList[index]);
                       // else
                       //   showToast(context, 'Session will start soon');
@@ -243,6 +244,21 @@ class SessionPageState extends State<SessionPage> {
 
               }),
             }
+        });
+  }
+
+    void callParticipent(String sessionId, String patientId, Result result) {
+    createCall(sessionId, result.therapistId.id).then(
+        (value)=>{
+          print(value.responseMessage),
+          if(value.responseCode == '200'){
+            Navigator.pushNamed(context, Calling.RouteName).then((value) {
+                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+                    .then((value) => {
+                      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+                });
+            }),
+          }
         });
   }
 }
