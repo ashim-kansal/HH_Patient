@@ -30,6 +30,7 @@ dependencies:
   firebase_messaging: ^7.0.3
   google_maps_flutter: ^1.0.6
   flutter_google_places: ^0.2.3
+  flutter_incall: ^1.0.0
   flutter_localizations: # Add this line
     sdk: flutter
 

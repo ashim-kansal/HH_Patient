@@ -160,6 +160,19 @@ Future<GetTokenResponse> createCall(sessionId, reciverId) async {
   return getTokenResponseFromJson(response.body);
 }
 
+Future<GetTokenResponse> callConnected(reciverId, status) async {
+  print("rc  : "+reciverId);
+  final url = HHString.baseURL +"/api/v1/video/CallConnected?receiverId="+reciverId+"status="+status;
+  print(url);
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      });
+
+  print(response.body);
+  return getTokenResponseFromJson(response.body);
+}
+
 Future<ReviewResponse> submitSessionReview(sessionId, comments) async {
   var token = await GetStringToSP("token");
   print(token);
