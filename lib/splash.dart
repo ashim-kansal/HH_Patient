@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/screens/callingscreen.dart';
@@ -105,13 +106,6 @@ class SplashState extends State<Splash>{
   Map<String, Call> calls = {};
   String newUUID() => Uuid().v4();
 
-  // Future<bool> showLoginPage() async {
-  //   var sharedPreferences = await SharedPreferences.getInstance();
-  //   String user = sharedPreferences.getString('token');
-
-  //   print('user Token $user');
-  // }
-
   _register() {
     
     _firebaseMessaging.getToken().then((fcmtoken) => {
@@ -171,7 +165,7 @@ class SplashState extends State<Splash>{
 
     getToken();
     _register();
-    // getMessage();
+    getMessage();
 
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
@@ -215,8 +209,20 @@ class SplashState extends State<Splash>{
     _callKeep.backToForeground();
     _callKeep.endAllCalls();
     try{
-      navigateH();
-     
+      DBProvider.db.getAllClients().then((value) =>
+      {
+        print("clientRes11" + value.identity),
+        callConnected(value.programname, 'Accepted').then((value1) =>
+        {
+          if(value1.responseCode == '200'){
+            NavigationService.instance.navigateToRoute(MaterialPageRoute(
+              builder: (context) =>
+                  VideoCallPage(identity: value.identity ?? "",
+                      roomName: value.roomname ?? ""),
+            )),
+          }
+        })
+      });
     }catch (err){
       print('push to new route error ${err.toString()}');
     }
@@ -233,6 +239,18 @@ class SplashState extends State<Splash>{
 
   Future<void> endCall(CallKeepPerformEndCallAction event) async {
     print('endCall: ${event.callUUID}');
+    DBProvider.db.getAllClients().then((value) => {
+      print("clientRes11" +value.identity),
+      callConnected(value.programname,'Rejected').then((value1) => {
+        if(value1.responseCode=='200'){
+          // NavigationService.instance.navigateToRoute(MaterialPageRoute(
+          //   builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??"", token: value.token??""),
+          // )),
+        }
+      })
+
+
+    });
     removeCall(event.callUUID);
   }
 
@@ -379,11 +397,11 @@ class SplashState extends State<Splash>{
         if(Platform.isAndroid){
           print(message["data"]["type"]);
           if(message["data"]["type"].toString() == "incoming_call"){
-            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["programName"], roomname: message["data"]["room"], token: message["data"]["AccessToken"]);
-            await DBProvider.db.newClient(rnd);
+            // Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["programName"], roomname: message["data"]["room"], token: message["data"]["AccessToken"]);
+            // await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall("10086"),
+                  displayIncomingCall(message["data"]["name"]),
                   Timer(Duration(seconds: 30),()=>{
                     _callKeep.endAllCalls()
                   })
@@ -396,7 +414,7 @@ class SplashState extends State<Splash>{
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall("10086"),
+                      displayIncomingCall(message["name"]),
                   Timer(Duration(seconds: 30),()=>{
                     _callKeep.endAllCalls()
                   })

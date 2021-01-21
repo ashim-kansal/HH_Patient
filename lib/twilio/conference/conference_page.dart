@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/twilio/conference/conference_button_bar.dart';
@@ -27,12 +28,12 @@ class VideoCallPage extends StatefulWidget {
 }
 
 class _ConferencePageState extends State<VideoCallPage> {
-  Timer timer;
-
+  // Timer timer;
   final StreamController<bool> _onButtonBarVisibleStreamController = StreamController<bool>.broadcast();
   final StreamController<double> _onButtonBarHeightStreamController = StreamController<double>.broadcast();
   ConferenceRoom _conferenceRoom;
   StreamSubscription _onConferenceRoomException;
+
 
   @override
   void initState() {
@@ -41,19 +42,24 @@ class _ConferencePageState extends State<VideoCallPage> {
     // widget.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyLTE2MDk3ODc5NDUiLCJpc3MiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyIiwic3ViIjoiQUMxODA1YTNlYzQ0ZGNiZmQyZGEyYjRhYzkzMWEzNjdiMyIsImV4cCI6MTYwOTc5MTU0NSwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidXNlciIsInZpZGVvIjp7InJvb20iOiJhYmMifX19.dOBZ9j6Kffw4G7e46kuanhg0jtCJOciokcIOnXIQY2o";
     // widget.identity = "user";
     _lockInPortrait();
-    _connectToRoom();
-    _wakeLock(true);
-    timer = Timer(const Duration(seconds: 30), () {
-      _onHangup();
+    getTwilioToken(widget.roomName, widget.identity, "", "").then((value) => {
+      if(value.responseCode == '200'){
+        _connectToRoom(widget.roomName, value.jwt, widget.identity),
+        _wakeLock(true)
+      }
     });
+
+    // timer = Timer(const Duration(seconds: 30), () {
+    //     _onHangup();
+    // });
   }
 
-  void _connectToRoom() async {
+  void _connectToRoom(roomName, _token, identity) async {
     try {
       final conferenceRoom = ConferenceRoom(
-        name: widget.roomName,
-        token: widget.token,
-        identity: widget.identity,
+        name: roomName,
+        token: _token,
+        identity: identity,
       );
       await conferenceRoom.connect();
       setState(() {
@@ -71,9 +77,9 @@ class _ConferencePageState extends State<VideoCallPage> {
         });
         _conferenceRoom.onParticipantConnected.listen((err) {
           print('participant connected');
-          setState(() {
-            timer !=null ? timer.cancel() : null;
-          });
+          // setState(() {
+          //   timer !=null ? timer.cancel() : null;
+          // });
         });
         _conferenceRoom.addListener(_conferenceRoomUpdated);
       });
@@ -267,32 +273,35 @@ class _ConferencePageState extends State<VideoCallPage> {
     if (participants.length == 1) {
       children.add(_buildNoiseBox());
     } else {
-      participants.forEach((element) {
-        if(!element.isRemote){
-          children.add(DraggablePublisher(
-            key: Key('publisher'),
-            child: element,
-            availableScreenSize: size,
-            onButtonBarVisible: _onButtonBarVisibleStreamController.stream,
-            onButtonBarHeight: _onButtonBarHeightStreamController.stream,
-          ));
+      print(participants.length);
+      final localParticipant = participants.firstWhere((ParticipantWidget participant) => !participant.isRemote, orElse: () => null);
+      if (localParticipant != null) {
+        children.add(DraggablePublisher(
+          key: Key('publisher'),
+          child: localParticipant,
+          availableScreenSize: size,
+          onButtonBarVisible: _onButtonBarVisibleStreamController.stream,
+          onButtonBarHeight: _onButtonBarHeightStreamController.stream,
+        ));
+      }
 
-        }else{
-          children.add(element);
-        }
-      });
-
+      final remoteParticipant = participants.firstWhere((ParticipantWidget participant) => participant.isRemote, orElse: () => null);
+      if (remoteParticipant != null) {
+        children.add(remoteParticipant);
+      }
     }
+
+
   }
 
   void _buildLayoutInGrid(
-    BuildContext context,
-    Size size,
-    List<Widget> children, {
-    bool removeLocalBeforeChunking = false,
-    bool moveLastOfEachRowToNextRow = false,
-    int columns = 2,
-  }) {
+      BuildContext context,
+      Size size,
+      List<Widget> children, {
+        bool removeLocalBeforeChunking = false,
+        bool moveLastOfEachRowToNextRow = false,
+        int columns = 2,
+      }) {
     final participants = _conferenceRoom.participants;
     ParticipantWidget localParticipant;
     if (removeLocalBeforeChunking) {
