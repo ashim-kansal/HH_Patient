@@ -80,12 +80,6 @@ class Call {
 }
 
 
-
-// @override
-// void setupLocator() {
-//   locator.registerLazySingleton(() => NavigationService());
-// }
-
 class Splash extends StatefulWidget{
 
   static const String RouteName = '/';

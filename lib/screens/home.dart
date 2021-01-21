@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
+import 'package:uuid/uuid.dart';
 
 class HomePage extends StatefulWidget {
   static const String RouteName = '/home';
@@ -33,7 +36,76 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  
+  FlutterCallkeep _callKeep = new FlutterCallkeep();
+
+  bool _callKeepInited = false;
+
+/*
+{
+    "uuid": "xxxxx-xxxxx-xxxxx-xxxxx",
+    "caller_id": "+8618612345678",
+    "caller_name": "hello",
+    "caller_id_type": "number",
+    "has_video": false,
+
+    "extra": {
+        "foo": "bar",
+        "key": "value",
+    }
+}
+*/
+
+  Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
+    print('backgroundMessage: message => ${message.toString()}');
+    var payload = message['data'];
+    var callerId = payload['caller_id'] as String;
+    var callerNmae = payload['caller_name'] as String;
+    var uuid = payload['uuid'] as String;
+    var hasVideo = payload['has_video'] == "true";
+
+    final callUUID = uuid ?? Uuid().v4();
+    _callKeep.on(CallKeepPerformAnswerCallAction(),
+            (CallKeepPerformAnswerCallAction event) {
+          print(
+              'backgroundMessage: CallKeepPerformAnswerCallAction ${event.callUUID}');
+          _callKeep.startCall(event.callUUID, callerId, callerNmae);
+
+          Timer(const Duration(seconds: 1), () {
+            print(
+                '[setCurrentCallActive] $callUUID, callerId: $callerId, callerName: $callerNmae');
+            _callKeep.setCurrentCallActive(callUUID);
+          });
+          //_callKeep.endCall(event.callUUID);
+        });
+
+    _callKeep.on(CallKeepPerformEndCallAction(),
+            (CallKeepPerformEndCallAction event) {
+          print('backgroundMessage: CallKeepPerformEndCallAction ${event.callUUID}');
+        });
+    if (!_callKeepInited) {
+      _callKeep.setup(<String, dynamic>{
+        'ios': {
+          'appName': 'CallKeepDemo',
+        },
+        'android': {
+          'alertTitle': 'Permissions required',
+          'alertDescription':
+          'This application needs to access your phone accounts',
+          'cancelButton': 'Cancel',
+          'okButton': 'ok',
+        },
+      });
+      _callKeepInited = true;
+    }
+
+    print('backgroundMessage: displayIncomingCall ($callerId)');
+    _callKeep.displayIncomingCall(callUUID, callerId,
+        localizedCallerName: callerNmae, hasVideo: hasVideo);
+    _callKeep.backToForeground();
+
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -115,7 +187,7 @@ class HomePageState extends State<HomePage> {
                       onClickVideo: (){
                         final FlutterCallkeep _callKeep = FlutterCallkeep();
 
-                        getToken(snapshot.data.result[index].id, snapshot.data.result[index].patientId,snapshot.data.result[index]);
+                        callParticipent(snapshot.data.result[index].id, snapshot.data.result[index].patientId,snapshot.data.result[index]);
                       },
                     onClickCancel: (){
                       setState(() {
@@ -160,13 +232,38 @@ class HomePageState extends State<HomePage> {
               (value) => {
                 if (value.responseCode == '200') {
 
-    Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt))
-                    .then((value) => {
-                      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-                }),
+    // Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, roomName, value.jwt))
+    //                 .then((value) => {
+    //                   Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+    //             }),
+
             }
           });
 
+
+  }
+
+  void callParticipent(String sessionId, String patientId, Result result) {
+    createCall(sessionId, result.therapistId.id).then(
+        (value)=>{
+          print(value.responseMessage),
+          if(value.responseCode == '200'){
+        _callKeep.setup(<String, dynamic>{
+      'ios': {
+        'appName': 'HHPatient',
+      },
+      'android': {
+        'alertTitle': 'Permissions required',
+        'alertDescription':
+        'This application needs to access your phone accounts',
+        'cancelButton': 'Cancel',
+        'okButton': 'ok',
+      },
+    }),
+
+            // _callKeep.startCall(sessionId, 88008, '88008');
+          }
+        });
 
   }
 

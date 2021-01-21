@@ -130,7 +130,25 @@ Future<GetTokenResponse> getTwilioToken(roomName, identity, reciverId,programNam
   print(roomName);
   print(identity);
   print("rc  : "+reciverId);
-  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName+"&receiverId="+reciverId+"&programName="+programName;
+  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName;
+  print(url);
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      });
+
+  print(response.body);
+  return getTokenResponseFromJson(response.body);
+}
+
+
+Future<GetTokenResponse> createCall(sessionId, reciverId) async {
+  var token = await GetStringToSP("token");
+  print(token);
+  print(sessionId);
+  print("rc  : "+reciverId);
+  final url = HHString.baseURL +"/api/v1/video/createCall?receiverId="+reciverId+"&room=room_"+sessionId+"&sessionId="+sessionId;
   print(url);
   final response = await http.get(url,
       headers: {
