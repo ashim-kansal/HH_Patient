@@ -253,7 +253,8 @@ class SessionPageState extends State<SessionPage> {
           print(value.responseMessage),
           if(value.responseCode == '200'){
             Navigator.pushNamed(context, Calling.RouteName).then((value) {
-                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+              if(value == 'Accepted')
+                Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
                     .then((value) => {
                       Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
                 });

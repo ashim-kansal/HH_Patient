@@ -38,7 +38,7 @@ class ReviewState extends State<ReviewPage> {
     final _formKey = GlobalKey<FormState>();
     return new MyWidget(
       title: AppLocalizations.of(context).share_reviews,
-      child: new SingleChildScrollView(
+      child: new Container(
         child: new Column(
           children: <Widget>[
 

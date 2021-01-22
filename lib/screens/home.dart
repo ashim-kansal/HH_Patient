@@ -1,28 +1,21 @@
-import 'dart:async';
 
 import 'package:callkeep/callkeep.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
-import 'package:flutter_app/api/enroll_service.dart';
-import 'package:flutter_app/callkit.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/callingscreen.dart';
-import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
-import 'package:uuid/uuid.dart';
-import 'package:flutter_incall/flutter_incall.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -39,8 +32,6 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  FlutterCallkeep _callKeep = new FlutterCallkeep();
-  IncallManager incallManager = new IncallManager();
 
   @override
   void initState() {
@@ -121,8 +112,6 @@ class HomePageState extends State<HomePage> {
                       });
                     },
                       onClickVideo: (){
-                        final FlutterCallkeep _callKeep = FlutterCallkeep();
-
                         callParticipent(snapshot.data.result[index].id, snapshot.data.result[index].patientId,snapshot.data.result[index]);
                       },
                     onClickCancel: (){
@@ -162,27 +151,17 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void getToken(sessionId, patientId, Result result ) {
-    String roomName = 'room_'+sessionId;
-      getTwilioToken(roomName, patientId, result.therapistId.id, result.programName).then(
-              (value) => {
-                if (value.responseCode == '200') {
-
- 
-
-            }
-          });
-
-
-  }
 
   void callParticipent(String sessionId, String patientId, Result result) {
+    // FlutterCallkeep().displayIncomingCall("callUUID", "hhhuhu",
+    //     handleType: 'number', hasVideo: false);
     createCall(sessionId, result.therapistId.id).then(
         (value)=>{
           print(value.responseMessage),
           if(value.responseCode == '200'){
             Navigator.pushNamed(context, Calling.RouteName).then((value) {
-                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+              if(value == 'Accepted')
+                Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
                     .then((value) => {
                       Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
                 });

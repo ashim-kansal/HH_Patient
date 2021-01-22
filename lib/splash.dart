@@ -95,27 +95,16 @@ class SplashState extends State<Splash>{
   String token;
   String _message = '';
   var sessionObj = {};
-
-  
-
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   final FlutterCallkeep _callKeep = FlutterCallkeep();
   Map<String, Call> calls = {};
   String newUUID() => Uuid().v4();
 
-  // Future<bool> showLoginPage() async {
-  //   var sharedPreferences = await SharedPreferences.getInstance();
-  //   String user = sharedPreferences.getString('token');
-
-  //   print('user Token $user');
-  // }
-
   _register() {
     
     _firebaseMessaging.getToken().then((fcmtoken) => {
       SetStringToSP("deviceToken", fcmtoken),
-      // HelperFunction.saveAuthorizationToken(fcmtoken),
       print(fcmtoken)
     });
   }
@@ -125,10 +114,6 @@ class SplashState extends State<Splash>{
       token = value;
     }));
 
-    // setState(() {
-    //   token = userToken;
-    // });
-    // token = userToken;
     print(token);
   }
 
@@ -138,7 +123,7 @@ class SplashState extends State<Splash>{
   void initState() {
     super.initState();
     // showLoginPage();
-    
+
     //callkit
     _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
     _callKeep.on(CallKeepPerformAnswerCallAction(), answerCall);
@@ -170,19 +155,23 @@ class SplashState extends State<Splash>{
 
     getToken();
     _register();
-    // getMessage();
+    getMessage();
+    SharedPreferences.setMockInitialValues({});
 
+    //
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
       (MethodCall methodcall) async {
         if (methodcall.method == 'getAll') {
           return {"flutter." + nameKey: "[ No Name Saved ]"};
-        } 
+        }
         return null;
       },
     );
 
     checkIfUserLoggedIn();
+
+
   }
 
   void removeCall(String callUUID) {
@@ -383,7 +372,7 @@ class SplashState extends State<Splash>{
             Timer(Duration(seconds: 1),
                     ()=>{
                   displayIncomingCall("10086"),
-                  Timer(Duration(seconds: 30),()=>{
+                  Timer(Duration(seconds: 40),()=>{
                     _callKeep.endAllCalls()
                   })
                 });
@@ -469,6 +458,9 @@ class SplashState extends State<Splash>{
     );
       
   }
+
+
 }
+
 
 
