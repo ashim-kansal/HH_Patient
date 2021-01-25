@@ -66,6 +66,12 @@ class _ConferencePageState extends State<VideoCallPage> {
             defaultActionText: 'OK',
           ).show(context);
         });
+
+        _conferenceRoom.onParticipantDisconnected.listen((err) {
+          print('participant disconnected');
+          _onHangup();
+        });
+
         _conferenceRoom.addListener(_conferenceRoomUpdated);
       });
     } catch (err) {

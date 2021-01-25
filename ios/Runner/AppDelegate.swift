@@ -54,6 +54,9 @@ import flutter_voip_push_notification
       application.registerUserNotificationSettings(settings)
     }
     
+    application.registerForRemoteNotifications();
+    
+
     GMSServices.provideAPIKey("AIzaSyBgj9olJajssax5PritKjU4oy0li4UYJ5I")
     
     GeneratedPluginRegistrant.register(with: self)

@@ -162,7 +162,7 @@ Future<GetTokenResponse> createCall(sessionId, reciverId) async {
 
 Future<GetTokenResponse> callConnected(reciverId, status) async {
   print("rc  : "+reciverId);
-  final url = HHString.baseURL +"/api/v1/video/CallConnected?receiverId="+reciverId+"status="+status;
+  final url = HHString.baseURL +"/api/v1/video/CallConnected?receiverId="+reciverId+"&status="+status;
   print(url);
   final response = await http.get(url,
       headers: {
