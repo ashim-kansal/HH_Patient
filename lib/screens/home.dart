@@ -9,6 +9,7 @@ import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
+import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
@@ -159,8 +160,11 @@ class HomePageState extends State<HomePage> {
         (value)=>{
           print(value.responseMessage),
           if(value.responseCode == '200'){
+            // Navigator.pushNamed(context, PrivacyPolicy.RouteName)
             Navigator.pushNamed(context, Calling.RouteName).then((value) {
-              if(value == 'Accepted')
+              if(value != 'Accepted'){
+                return null;
+              }
                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
                     .then((value) => {
                       Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
