@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/twilio/conference/conference_button_bar.dart';
 import 'package:flutter_app/twilio/conference/conference_room.dart';
 import 'package:flutter_app/twilio/conference/participant_widget.dart';
@@ -170,6 +171,10 @@ class _ConferencePageState extends State<VideoCallPage> {
     );
   }
 
+  Widget showCalling() {
+    return Calling();
+  }
+
   Future<void> _onHangup() async {
     Debug.log('onHangup');
     await _conferenceRoom.disconnect();
@@ -262,7 +267,8 @@ class _ConferencePageState extends State<VideoCallPage> {
   void _buildOverlayLayout(BuildContext context, Size size, List<Widget> children) {
     final participants = _conferenceRoom.participants;
     if (participants.length == 1) {
-      children.add(_buildNoiseBox());
+      //Commented by ashish on 27 jan
+      // children.add(_buildNoiseBox());
     } else {
       final remoteParticipant = participants.firstWhere((ParticipantWidget participant) => participant.isRemote, orElse: () => null);
       if (remoteParticipant != null) {
