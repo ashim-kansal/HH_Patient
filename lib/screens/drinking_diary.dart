@@ -40,7 +40,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
     return MyWidget(title: AppLocalizations.of(context).drinking_diary,
         child: Container(
           height: MediaQuery.of(context).size.height,
-          child:      FutureBuilder<GetDrinkingDiaryList>(
+          child:  FutureBuilder<GetDrinkingDiaryList>(
           future: dataList,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
@@ -97,7 +97,11 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
                         child:             Container(
                           padding: EdgeInsets.all(10),
                           height: MediaQuery.of(context).size.height/3,
-                          child: SimpleLineChart.withData(graphData),
+                          child: mDiaryList.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
+                            title: "No data found.",
+                            color: HH_Colors.purpleColor,
+                            size: 17,
+                          ),
                         )
 
                     ),

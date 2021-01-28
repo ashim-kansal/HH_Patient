@@ -104,22 +104,14 @@ class _PaymentState extends State<Payment> {
                     onClick: (){
                       Navigator.pop(context);
                       Navigator.pop(context);
-                      if(!widget.isUpdate){
-                        Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
-                      }else{
-                        Navigator.pushNamed(context, Dashboard.RouteName);
-                      }
+                      Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
                     }
                   );
                 },
               ).then( (value) {
                 if (value == null) {
                   Navigator.pop(context);
-                   if(!widget.isUpdate){
-                        Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
-                      }else{
-                        Navigator.pushNamed(context, Dashboard.RouteName);
-                      }
+                  Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));   
                   return;
                 }
               },

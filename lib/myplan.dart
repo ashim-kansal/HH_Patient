@@ -124,11 +124,9 @@ class MyPlansState extends State<MyPlans> {
           showToast(value.responseMsg),
 
           Navigator.pop(context),
-          if(widget.isUpdate){
-            Navigator.pushNamed(context, Dashboard.RouteName)
-          }else{
-            Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
-          }
+         
+          Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+          
         }),
       });
   }

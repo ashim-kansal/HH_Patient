@@ -82,6 +82,24 @@ class CallingState extends State<StatefulWidget> {
           }
         }, onResume: (Map<String, dynamic> message) async {
         print('on resume $message');
+
+          String type = "";
+          String status = "";
+
+          if(Platform.isAndroid){
+            type = message["data"]["type"];
+            status = message["data"]["status"];
+          }else{
+            type = message["type"];
+            status = message["status"];
+          }
+          if(type == 'call_status') {
+            incallManager.stopRingtone();
+            timer.cancel();
+            Navigator.pop(context, status);
+          }else if (type == "incoming_call"){
+            messageHandler(message);
+          }
       }, onLaunch: (Map<String, dynamic> message) async {
         print('on launch $message');
         // setState(() => _message = message["notification"]["title"]);
