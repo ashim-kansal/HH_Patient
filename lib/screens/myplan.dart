@@ -26,6 +26,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
       child: FutureBuilder<MyPlanResponse>(
           future: getMyPrograms(),
           builder: (context, snapshot) {
+            //  print("errror in $snapshot");
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Center(
@@ -85,7 +86,7 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                                     Text(
                                       '\$' +
                                           snapshot.data.result
-                                              .programSubscription.amount,
+                                              .programSubscription.amount.toString(),
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 44),
@@ -247,8 +248,7 @@ class CancelPlansPageState extends State<CancelPlansPage> {
                                     ),
                                     Text(
                                       '\$' +
-                                          snapshot.data.result
-                                              .programSubscription.amount,
+                                      snapshot.data.result.programSubscription.amount.toString(),
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 44),
@@ -261,12 +261,12 @@ class CancelPlansPageState extends State<CancelPlansPage> {
                                     //         .contains("div")
                                     //     ?
                                     Html(
-                                            data: snapshot
-                                                .data
-                                                .result
-                                                .programSubscription
-                                                .description,
-                                            // style: {
+                                        data: snapshot
+                                            .data
+                                            .result
+                                            .programSubscription
+                                            .description,
+                                        // style: {
                                             //   "div": Style(
                                             //       color: HH_Colors.color_707070,
                                             //       fontSize: FontSize(15.0)),
@@ -275,7 +275,7 @@ class CancelPlansPageState extends State<CancelPlansPage> {
                                             //       fontSize: FontSize(15.0))
                                             // },
                                             // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
-                                          )
+                                      )
                                         // : Text(
                                         //     snapshot
                                         //         .data

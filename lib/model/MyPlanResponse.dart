@@ -72,7 +72,7 @@ class ProgramSubscription {
   String status;
   String id;
   String title;
-  String amount;
+  int amount;
   int therapistSession;
   int physicianSession;
   int caseManagerSession;
