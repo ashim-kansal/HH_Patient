@@ -139,7 +139,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => MapPage());
     case Payment.RouteName:
       final PaymentArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => Payment(plan: args.plan));
+      return MaterialPageRoute(builder: (context) => Payment(plan: args.plan, isUpdate: args.isUpdate));
     case Calling.RouteName:
       return MaterialPageRoute(builder: (context) => Calling());
     default:

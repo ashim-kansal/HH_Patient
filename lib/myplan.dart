@@ -7,6 +7,7 @@ import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/MyProgramsProvider.dart';
 import 'package:flutter_app/model/GetProgramsResponse.dart';
+import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/payment.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -89,13 +90,13 @@ class MyPlansState extends State<MyPlans> {
                             program_type:
                             snapshot.data.result[position].programType,
                             desc: snapshot.data.result[position].description,
-                            price: snapshot.data.result[position].amount,
+                            price: snapshot.data.result[position].amount.toString(),
                             onClick: () {
-                              if(snapshot.data.result[position].amount.compareTo('0') != 1){
-                                buyNewPlan(snapshot.data.result[position].id, snapshot.data.result[position].amount);
+                              if(snapshot.data.result[position].amount.compareTo(0) != 1){
+                                buyNewPlan(snapshot.data.result[position].id, snapshot.data.result[position].amount.toString());
                                 return;
                               }
-                              Navigator.pushNamed(context, Payment.RouteName, arguments: PaymentArguments(snapshot.data.result[position]));
+                              Navigator.pushNamed(context, Payment.RouteName, arguments: PaymentArguments(snapshot.data.result[position], widget.isUpdate));
                             //  buyNewPlan(snapshot.data.result[position].id,snapshot.data.result[position].amount);
                             },
                           );
@@ -123,7 +124,11 @@ class MyPlansState extends State<MyPlans> {
           showToast(value.responseMsg),
 
           Navigator.pop(context),
-          Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+          if(widget.isUpdate){
+            Navigator.pushNamed(context, Dashboard.RouteName)
+          }else{
+            Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(id))
+          }
         }),
       });
   }

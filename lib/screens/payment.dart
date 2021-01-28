@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/MyPlanResponse.dart';
+import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -15,7 +16,8 @@ class Payment extends StatefulWidget {
   static const String RouteName = '/payment';
 
   var plan;
-  Payment({Key key, this.title, this.plan}) : super(key: key);
+  bool isUpdate;
+  Payment({Key key, this.title, this.plan, this.isUpdate}) : super(key: key);
 
   final String title;
   var error = false;
@@ -85,7 +87,7 @@ class _PaymentState extends State<Payment> {
     // ignore: sdk_version_set_literal
     StripePayment.createTokenWithCard(card).then((value) => {
     
-      apiService.buyPlanAPIHandler(value.tokenId, widget.plan.id, widget.plan.amount).then((value) => {
+      apiService.buyPlanAPIHandler(value.tokenId, widget.plan.id, widget.plan.amount.toString()).then((value) => {
         Navigator.of(context).pop(),
         Timer(Duration(seconds: 1),
         ()=> {
@@ -102,14 +104,22 @@ class _PaymentState extends State<Payment> {
                     onClick: (){
                       Navigator.pop(context);
                       Navigator.pop(context);
-                      Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
+                      if(!widget.isUpdate){
+                        Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
+                      }else{
+                        Navigator.pushNamed(context, Dashboard.RouteName);
+                      }
                     }
                   );
                 },
               ).then( (value) {
                 if (value == null) {
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
+                   if(!widget.isUpdate){
+                        Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(widget.plan.id));
+                      }else{
+                        Navigator.pushNamed(context, Dashboard.RouteName);
+                      }
                   return;
                 }
               },
@@ -181,7 +191,7 @@ class _PaymentState extends State<Payment> {
                     ),
                     Container(
                       child: HHTextView(
-                        title: widget.plan.amount,
+                        title: widget.plan.amount.toString(),
                         size: 19,
                         textweight: FontWeight.w800,
                         color: HH_Colors.purpleColor,
@@ -346,6 +356,7 @@ class _PaymentState extends State<Payment> {
 
 class PaymentArguments {
   var plan;
+  bool isUpdate;
 
-  PaymentArguments(this.plan);
+  PaymentArguments(this.plan, this.isUpdate);
 }
