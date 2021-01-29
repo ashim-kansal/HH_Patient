@@ -12,7 +12,6 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/splash.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -153,9 +152,9 @@ class CallingState extends State<StatefulWidget> {
       _callKeep.endAllCalls(),
       callConnected(value.programname, 'Accepted').then((value1) => {
         if(value1.responseCode=='200'){
-          NavigationService.instance.navigateToRoute(MaterialPageRoute(
-            builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??""),
-          )),
+          // NavigationService.instance.navigateToRoute(MaterialPageRoute(
+          //   builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??""),
+          // )),
         }
       })
     });

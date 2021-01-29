@@ -36,7 +36,7 @@ import 'package:flutter_app/screens/map.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart' as upcoming;
 import 'package:flutter_app/splash.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
+// import 'package:flutter_app/twilio/conference/conference_page.dart';
 // import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/screens/editProfile.dart';
@@ -94,9 +94,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         name: args.therapistId.firstName+' '+args.therapistId.lastName,role: args.therapistId.role, image: args.therapistId.profilePic,));
     case ChatListPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatListPage());
-    case VideoCallPage.RouteName:
-      VideoPageArgument args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity));
+    // case VideoCallPage.RouteName:
+    //   VideoPageArgument args = settings.arguments;
+    //   return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity));
     case JournalPage.RouteName:
       return MaterialPageRoute(builder: (context) => JournalPage());
     case CreateAccountPage.RouteName:

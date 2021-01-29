@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
-import 'package:flutter_app/screens/callingscreen.dart';
-import 'package:flutter_app/screens/home.dart';
-import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
-import 'package:flutter_app/utils/Utils.dart';
-import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -236,13 +230,13 @@ class SessionPageState extends State<SessionPage> {
     String roomName = 'room_' + sessionId;
     getTwilioToken(roomName, patientId, result.therapistId.id, result.programName).then((value) => {
           if (value.responseCode == '200'){
-              Navigator.pushNamed(context, VideoCallPage.RouteName,
-                      arguments:
-                          VideoPageArgument(patientId, roomName, value.jwt))
-                  .then((value) => {
-                Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-
-              }),
+              // Navigator.pushNamed(context, VideoCallPage.RouteName,
+              //         arguments:
+              //             VideoPageArgument(patientId, roomName, value.jwt))
+              //     .then((value) => {
+              //   Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+              //
+              // }),
             }
         });
   }
@@ -252,13 +246,13 @@ class SessionPageState extends State<SessionPage> {
         (value)=>{
           print(value.responseMessage),
           if(value.responseCode == '200'){
-            Navigator.pushNamed(context, Calling.RouteName).then((value) {
-              if(value == 'Accepted')
-                Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
-                    .then((value) => {
-                      Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-                });
-            }),
+            // Navigator.pushNamed(context, Calling.RouteName).then((value) {
+            //   if(value == 'Accepted')
+                // Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+                //     .then((value) => {
+                //       Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+                // });
+            // }),
           }
         });
   }

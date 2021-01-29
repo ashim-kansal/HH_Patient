@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/agora/constants.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
@@ -127,6 +129,8 @@ class _LoginPageState extends State<LoginPage> {
     _firebaseMessaging.getToken().then((fcmtoken) => {
       apiService.loginAPIHandler(email, password, fcmtoken, voipToken).then(
         (value) => {
+
+
           Navigator.of(context).pop(),
           Timer(Duration(seconds: 1),
           ()=> {
@@ -138,6 +142,11 @@ class _LoginPageState extends State<LoginPage> {
           // ignore: sdk_version_ui_as_code
           if (value.responseCode == 200) {
             SetStringToSP("token", value.token),
+
+            FirebaseFirestore.instance
+                .collection(FIRESTORE_USERS)
+                .doc(value.id)
+                .set({"token": fcmtoken}),
 
             Timer(Duration(seconds: 2),
               ()=>{

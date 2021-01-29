@@ -58,6 +58,8 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
               label = getLabel(graphData);
 
 
+
+
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -94,7 +96,8 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        child:             Container(
+                        child:
+                        Container(
                           padding: EdgeInsets.all(10),
                           height: MediaQuery.of(context).size.height/3,
                           child: SimpleLineChart.withData(graphData),

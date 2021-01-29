@@ -10,7 +10,6 @@ Future<String> SetStringToSP(key, value)async {
 
 Future<String> GetStringToSP(key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //Return String
   return prefs.getString(key);
 }
 
