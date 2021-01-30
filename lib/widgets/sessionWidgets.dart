@@ -72,7 +72,7 @@ class SessionCard extends StatelessWidget {
                       children: [
                         Text(
                           data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname,textAlign:TextAlign.start,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
-                        Text(data.therapistId.role??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                        Text(data.therapistId.role.replaceAll("_", " ")??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
                         Text("Duration: "+data.slotDuration.toString()+' mins' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
 
                         Row(

@@ -33,7 +33,9 @@ class _TermsState extends State<AboutUs> {
   Widget build(BuildContext context) {
     return MyWidget(title: AppLocalizations.of(context).about_us, 
       child: SingleChildScrollView(
-        child: FutureBuilder<StaticContent>(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: FutureBuilder<StaticContent>(
               future: getStaticContent(AppLocalizations.of(context).ABOUT_US),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -63,7 +65,7 @@ class _TermsState extends State<AboutUs> {
                     child: Center(child: CircularProgressIndicator(),),
                   );
               },
-            ),
+            )),
       ));
     
     // Scaffold(

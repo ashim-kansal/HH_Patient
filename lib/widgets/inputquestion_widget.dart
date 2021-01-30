@@ -44,7 +44,9 @@ class InputBoxQuestionState extends State<InputBoxQuestion>{
           Flexible(child:Text(widget.ques, textAlign: TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070,  fontSize: 16))),
         ]),
         SizedBox(height: 10,),
-        HHEditText(onSelectAnswer:(text){
+        HHEditText(
+          maxLength: 200,
+          onSelectAnswer:(text){
           widget.onSelectAnswer(text);
         }),
         SizedBox(height: 10,),

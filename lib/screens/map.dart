@@ -49,7 +49,7 @@ class _MapState extends State<MapPage> {
 
   final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(43.651070, -79.347015),
-    zoom: 10,
+    zoom: 12,
   );
 
     return Scaffold(

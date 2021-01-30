@@ -97,7 +97,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
                         child:             Container(
                           padding: EdgeInsets.all(10),
                           height: MediaQuery.of(context).size.height/3,
-                          child: mDiaryList.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
+                          child: mDiaryList != null && mDiaryList.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
                             title: "No data found.",
                             color: HH_Colors.purpleColor,
                             size: 17,
