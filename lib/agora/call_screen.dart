@@ -270,7 +270,7 @@ class _CallScreenState extends State<CallScreen> {
                       ],
                     ),
                     Spacer(flex: 4,),
-                    Container(child: Image.asset('assets/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
+                    Container(child: Image.asset('assets/images/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
                     Spacer(flex: 1,),
                     Text(widget.call.receiverName,style: TextStyle(fontSize: 25,color: Colors.blue),),
 
@@ -398,7 +398,7 @@ class _CallScreenState extends State<CallScreen> {
             onPressed: _onSwitchCamera,
             child: ImageIcon(
 
-              AssetImage('assets/reverse_camera.png'),
+              AssetImage('assets/images/reverse_camera.png'),
               color: Colors.blueAccent,
               size: 35.0,
             ),
@@ -412,7 +412,7 @@ class _CallScreenState extends State<CallScreen> {
             ),
             child: Container(
 
-              child: Image.asset('assets/end_call.png',fit: BoxFit.fill,),
+              child: Image.asset('assets/images/end_call.png',fit: BoxFit.fill,),
               width: 70.0,
             height:70.0
             ),

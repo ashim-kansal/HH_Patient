@@ -78,13 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0"
-  callkeep:
-    dependency: "direct main"
-    description:
-      name: callkeep
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3+1"
   characters:
     dependency: transitive
     description:
@@ -314,15 +307,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
-  flutter_incall_manager:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: d46c8bb225b8a0f6a75cd220a958f46c3537850b
-      url: "git://github.com/kangshaojun/flutter-incall-manager.git"
-    source: git
-    version: "0.1.0"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -522,13 +506,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.7"
-  native_video_view:
-    dependency: "direct main"
-    description:
-      name: native_video_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   nested:
     dependency: transitive
     description:

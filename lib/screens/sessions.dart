@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/agora/call_utilities.dart';
+import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -241,19 +244,30 @@ class SessionPageState extends State<SessionPage> {
         });
   }
 
-    void callParticipent(String sessionId, String patientId, Result result) {
-    createCall(sessionId, result.therapistId.id).then(
-        (value)=>{
-          print(value.responseMessage),
-          if(value.responseCode == '200'){
-            // Navigator.pushNamed(context, Calling.RouteName).then((value) {
-            //   if(value == 'Accepted')
-                // Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
-                //     .then((value) => {
-                //       Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-                // });
-            // }),
-          }
-        });
+  void callParticipent(
+      String sessionId, String patientId, Result result) async {
+    Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
+      CallUtils.dial(
+          from: result.patientId,
+          to: result.therapistId.id,
+          context: context,
+          isVideo: true),
+      FirebaseFirestore.instance
+          .collection("users")
+          .document(result.therapistId.id)
+          .snapshots()
+          .forEach((element) async {
+        if (element.data() != null) {
+          String deviceId = element.data()["token"];
+
+          FirebaseFirestore.instance.collection("notifications").add({
+            "sendby": result.patientId,
+            "message": 'VIDEO Calling',
+            "deviceid": deviceId,
+          });
+        }
+      })
+    });
   }
+
 }

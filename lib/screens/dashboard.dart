@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/agora/pickup_layout.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
@@ -34,6 +35,7 @@ class DashboardState extends State<Dashboard> {
   var tabIndex = 0;
   String title = 'Dashboard';
   String name;
+  String id;
   String email;
   String profileImage = "";
   bool showTherapist = false;
@@ -70,6 +72,7 @@ class DashboardState extends State<Dashboard> {
         setState(() {
           name = value.result.firstName+" "+value.result.lastName;
           email = value.result.email;
+          id = value.result.id;
           profileImage = value.result.profilePic;
         })
       }
@@ -78,8 +81,9 @@ class DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) =>
-
-      Scaffold(
+      PickupLayout(
+          myId: id,
+          scaffold:      Scaffold(
         
         appBar: AppBar(
           title: Text(
@@ -342,7 +346,7 @@ class DashboardState extends State<Dashboard> {
               })
             )
           ),
-      );
+      ));
 
   showTherapistOptions() {
     print(tabIndex);

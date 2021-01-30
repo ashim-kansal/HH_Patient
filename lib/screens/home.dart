@@ -117,7 +117,7 @@ class HomePageState extends State<HomePage> {
                       return ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: snapshot.data.result.length,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (context1, index) {
                           var _date = snapshot.data.result[index].date;
                           Moment createdDt = Moment.parse('$_date');
                           return SessionCard(data: snapshot.data.result[index],
@@ -138,7 +138,7 @@ class HomePageState extends State<HomePage> {
                               onClickVideo: () {
                                 callParticipent(snapshot.data.result[index].id,
                                     snapshot.data.result[index].patientId,
-                                    snapshot.data.result[index]);
+                                    snapshot.data.result[index], context);
                               },
                               onClickCancel: () {
                                 setState(() {
@@ -179,28 +179,29 @@ class HomePageState extends State<HomePage> {
 
 
   void callParticipent(
-      String sessionId, String patientId, Result result) async {
+      String sessionId, String patientId, Result result, BuildContext context) async {
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
               from: result.patientId,
-              to: result.therapistId.id,
+              to: 'Eoey',
               context: context,
-              isVideo: true),
-          FirebaseFirestore.instance
-              .collection("users")
-              .document(result.therapistId.id)
-              .snapshots()
-              .forEach((element) async {
-            if (element.data() != null) {
-              String deviceId = element.data()["token"];
 
-              FirebaseFirestore.instance.collection("notifications").add({
-                "sendby": result.patientId,
-                "message": 'VIDEO Calling',
-                "deviceid": deviceId,
-              });
-            }
-          })
+              isVideo: true),
+          // FirebaseFirestore.instance
+          //     .collection("users")
+          //     .document('Eoey')
+          //     .snapshots()
+          //     .forEach((element) async {
+          //   if (element.data() != null) {
+          //     String deviceId = element.data()["token"];
+          //
+          //     FirebaseFirestore.instance.collection("notifications").add({
+          //       "sendby": result.patientId,
+          //       "message": 'VIDEO Calling',
+          //       "deviceid": deviceId,
+          //     });
+          //   }
+          // })
         });
   }
 }
