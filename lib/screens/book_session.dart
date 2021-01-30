@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/Therapist_service.dart' as service;
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart' as Therapist;
+import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/utils/Utils.dart';
@@ -144,13 +147,18 @@ class BookSessionState extends State<BookSessionPage>{
             (value) => {
 
           print(value.responseCode),
-          // if(value.responseCode == 200) {
-            showToast(context, value.responseMessage),
+          showToast(context, value.responseMessage),
+          if(value.responseCode == 200) {
+
             Navigator.pop(context),
             Navigator.pushNamed(context, Dashboard.RouteName)
-          // }else{
-          //
-          // }
+          }else if(value.responseCode == 402){
+            Timer(Duration(seconds: 2),
+              ()=>{
+                    Navigator.pushNamed(context, MyPlans.RouteName,
+                                  arguments: MyPlansArguments(true))
+              })
+          }
         });
 
   }
