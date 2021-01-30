@@ -79,7 +79,7 @@ class AppLocalizations {
   String get not_data_found => Intl.message("No Data Found");
   String get my_programs => Intl.message("My Programs");
   String get please_share_thoughts => Intl.message("Please share your thoughts with us");
-  String get please_contact_us => Intl.message("Please use this form to connect us ");
+  String get please_contact_us => Intl.message("Please use this form to connect with care team");
   String get please_enter_feedback => Intl.message("Please enter a feedback");
   String get please_enter_review => Intl.message("Please enter your review");
   String get no_record_found => Intl.message("No Record Found");

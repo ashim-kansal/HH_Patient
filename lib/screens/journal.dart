@@ -189,6 +189,7 @@ class JournalPageState extends State<JournalPage> {
                                 ),
 
                               HHEditFormText(
+                                maxLength: 200,
                                 minLines: 4,
                                 onSelectAnswer:(text){
                                   print(text);
