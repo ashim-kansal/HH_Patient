@@ -141,11 +141,12 @@ class _LoginPageState extends State<LoginPage> {
           // ignore: unrelated_type_equality_checks
           // ignore: sdk_version_ui_as_code
           if (value.responseCode == 200) {
+            print("user ID:- "+value.id),
             SetStringToSP("token", value.token),
 
             FirebaseFirestore.instance
                 .collection(FIRESTORE_USERS)
-                .doc(value.id)
+                .doc(value.id??"")
                 .set({"token": fcmtoken}),
 
             Timer(Duration(seconds: 2),
