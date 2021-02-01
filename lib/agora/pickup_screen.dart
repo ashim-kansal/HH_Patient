@@ -82,6 +82,7 @@ class _PickupScreenState extends State<PickupScreen> {
                       onTap: ()  {
                         // await Permissions.cameraAndMicrophonePermissionsGranted()
                         //     ?
+                        Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

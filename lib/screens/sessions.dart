@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/agora/call_utilities.dart';
-import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -246,12 +245,12 @@ class SessionPageState extends State<SessionPage> {
 
   void callParticipent(
       String sessionId, String patientId, Result result) async {
-    Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
+    // Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
       CallUtils.dial(
           from: result.patientId,
           to: result.therapistId.id,
           context: context,
-          isVideo: true),
+          isVideo: true);
       FirebaseFirestore.instance
           .collection("users")
           .document(result.therapistId.id)
@@ -266,7 +265,7 @@ class SessionPageState extends State<SessionPage> {
             "deviceid": deviceId,
           });
         }
-      })
+      // })
     });
   }
 

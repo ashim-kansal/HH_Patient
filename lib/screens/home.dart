@@ -180,29 +180,35 @@ class HomePageState extends State<HomePage> {
 
   void callParticipent(
       String sessionId, String patientId, Result result, BuildContext context) async {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => MyVPage(otherId: result.therapistId.id, myId: result.patientId,),
+    //   ),
+    // );
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
               from: result.patientId,
-              to: 'Eoey',
+              to: result.therapistId.id,
               context: context,
-
               isVideo: true),
-          // FirebaseFirestore.instance
-          //     .collection("users")
-          //     .document('Eoey')
-          //     .snapshots()
-          //     .forEach((element) async {
-          //   if (element.data() != null) {
-          //     String deviceId = element.data()["token"];
-          //
-          //     FirebaseFirestore.instance.collection("notifications").add({
-          //       "sendby": result.patientId,
-          //       "message": 'VIDEO Calling',
-          //       "deviceid": deviceId,
-          //     });
-          //   }
-          // })
+          FirebaseFirestore.instance
+              .collection("users")
+              .document(result.therapistId.id)
+              .snapshots()
+              .forEach((element) async {
+            if (element.data() != null) {
+              String deviceId = element.data()["token"];
+
+              FirebaseFirestore.instance.collection("notifications").add({
+                "sendby": result.patientId,
+                "message": 'VIDEO Calling',
+                "deviceid": deviceId,
+              });
+            }
+          })
         });
+
   }
 }
 class VideoPageArgument{

@@ -54,14 +54,14 @@ android {
 
     }
 
-    splits{
-        abi{
-            reset()
-            enable true
-            universalApk true
-            include "armeabi-v7a","x86", "arm64-v8a"
-        }
-    }
+//    splits{
+//        abi{
+//            reset()
+//            enable true
+//            universalApk true
+//            include "armeabi-v7a","x86", "arm64-v8a"
+//        }
+//    }
 
     signingConfigs {
         release {

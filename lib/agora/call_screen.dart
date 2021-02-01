@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
+
 import 'agora_configs.dart';
 import 'call.dart';
 import 'call_methods.dart';
@@ -73,6 +73,8 @@ class _CallScreenState extends State<CallScreen> {
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
     await AgoraRtcEngine.setParameters(
         '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
+    await AgoraRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
+
     await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
 
 
@@ -102,9 +104,9 @@ class _CallScreenState extends State<CallScreen> {
 
   /// Create agora sdk instance and initialize
   Future<void> _initAgoraRtcEngine() async {
-    await PermissionHandler().requestPermissions(
-      [PermissionGroup.camera, PermissionGroup.microphone],
-    );
+    // await PermissionHandler().requestPermissions(
+    //   [PermissionGroup.camera, PermissionGroup.microphone],
+    // );
     await AgoraRtcEngine.create(APP_ID);
     await AgoraRtcEngine.enableVideo();
     await AgoraRtcEngine.enableAudio();
