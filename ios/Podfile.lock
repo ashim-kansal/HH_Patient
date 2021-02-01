@@ -3,8 +3,6 @@ PODS:
     - AgoraRtcEngine_iOS_Crypto (= 2.9.3)
     - Flutter
   - AgoraRtcEngine_iOS_Crypto (2.9.3)
-  - callkeep (0.0.1):
-    - Flutter
   - cloud_firestore (0.14.3-1):
     - Firebase/CoreOnly (~> 6.33.0)
     - Firebase/Firestore (~> 6.33.0)
@@ -59,8 +57,6 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 6.7)
     - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.22.4)
-  - flutter_incall_manager (0.0.1):
-    - Flutter
   - flutter_pdfview (1.0.2):
     - Flutter
   - flutter_plugin_android_lifecycle (0.0.1):
@@ -108,8 +104,6 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
-  - native_video_view (0.0.1):
-    - Flutter
   - open_file (0.0.1):
     - Flutter
   - path_provider (0.0.1):
@@ -156,7 +150,6 @@ PODS:
 
 DEPENDENCIES:
   - agora_rtc_engine (from `Pods/.symlinks/plugins/agora_rtc_engine-1.0.15/ios`)
-  - "callkeep (from `Pods/.symlinks/plugins/callkeep-0.2.3+1/ios`)"
   - "cloud_firestore (from `Pods/.symlinks/plugins/cloud_firestore-0.14.3+1/ios`)"
   - "cloud_firestore_web (from `Pods/.symlinks/plugins/cloud_firestore_web-0.2.1+2/ios`)"
   - Firebase/Messaging
@@ -164,7 +157,6 @@ DEPENDENCIES:
   - "firebase_core_web (from `Pods/.symlinks/plugins/firebase_core_web-0.2.1+1/ios`)"
   - firebase_messaging (from `Pods/.symlinks/plugins/firebase_messaging-7.0.3/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `6.33.0`)
-  - flutter_incall_manager (from `Pods/.symlinks/plugins/flutter-incall-manager-d46c8bb225b8a0f6a75cd220a958f46c3537850b/ios`)
   - flutter_pdfview (from `Pods/.symlinks/plugins/flutter_pdfview-1.0.4/ios`)
   - flutter_plugin_android_lifecycle (from `Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios`)
   - flutter_ringtone_player (from `Pods/.symlinks/plugins/flutter_ringtone_player-2.0.0/ios`)
@@ -172,7 +164,6 @@ DEPENDENCIES:
   - google_maps_flutter (from `Pods/.symlinks/plugins/google_maps_flutter-1.1.1/ios`)
   - "image_picker (from `Pods/.symlinks/plugins/image_picker-0.6.7+21/ios`)"
   - import_js_library (from `Pods/.symlinks/plugins/import_js_library-1.0.2/ios`)
-  - native_video_view (from `Pods/.symlinks/plugins/native_video_view-0.3.0/ios`)
   - open_file (from `Pods/.symlinks/plugins/open_file-3.0.3/ios`)
   - path_provider (from `Pods/.symlinks/plugins/path_provider-1.6.27/ios`)
   - "path_provider_linux (from `Pods/.symlinks/plugins/path_provider_linux-0.0.1+2/ios`)"
@@ -218,8 +209,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   agora_rtc_engine:
     :path: Pods/.symlinks/plugins/agora_rtc_engine-1.0.15/ios
-  callkeep:
-    :path: "Pods/.symlinks/plugins/callkeep-0.2.3+1/ios"
   cloud_firestore:
     :path: "Pods/.symlinks/plugins/cloud_firestore-0.14.3+1/ios"
   cloud_firestore_web:
@@ -233,8 +222,6 @@ EXTERNAL SOURCES:
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
     :tag: 6.33.0
-  flutter_incall_manager:
-    :path: Pods/.symlinks/plugins/flutter-incall-manager-d46c8bb225b8a0f6a75cd220a958f46c3537850b/ios
   flutter_pdfview:
     :path: Pods/.symlinks/plugins/flutter_pdfview-1.0.4/ios
   flutter_plugin_android_lifecycle:
@@ -249,8 +236,6 @@ EXTERNAL SOURCES:
     :path: "Pods/.symlinks/plugins/image_picker-0.6.7+21/ios"
   import_js_library:
     :path: Pods/.symlinks/plugins/import_js_library-1.0.2/ios
-  native_video_view:
-    :path: Pods/.symlinks/plugins/native_video_view-0.3.0/ios
   open_file:
     :path: Pods/.symlinks/plugins/open_file-3.0.3/ios
   path_provider:
@@ -296,7 +281,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   agora_rtc_engine: 179de4fc456d101c568a532f72a273149013aa39
   AgoraRtcEngine_iOS_Crypto: 642d1e4cf24d837cba62d3b1617844f0737f69c1
-  callkeep: 6b21abbd46786a36e482190816db99b391ada1e3
   cloud_firestore: ff21f96f114720fae096d385b9273087191bd184
   cloud_firestore_web: 9ec3dc7f5f98de5129339802d491c1204462bfec
   Firebase: 8db6f2d1b2c5e2984efba4949a145875a8f65fe5
@@ -310,7 +294,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: bd3ffc24367f901a43c063b36c640b345a4a5dd1
   FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
   Flutter: d466195df8a9933b705cb82c53140202e097ec55
-  flutter_incall_manager: 1a6aea8d37fb46d63aaa30ac7ea225e121704eab
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   flutter_ringtone_player: 15eba85187230b87b2512f0e1b92225618bc03e7
@@ -323,7 +306,6 @@ SPEC CHECKSUMS:
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   import_js_library: 1e36c695286e1efded5c9c07583bf1d06ac44065
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
-  native_video_view: 02756aebe7ec9d0ab00d039b7aa3756548900bc3
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4

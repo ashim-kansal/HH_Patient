@@ -8,7 +8,7 @@ import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-import 'package:native_video_view/native_video_view.dart';
+// import 'package:native_video_view/native_video_view.dart';
 import 'package:simple_moment/simple_moment.dart';
 
 class LibraryPage extends StatefulWidget {
@@ -233,7 +233,7 @@ class _LibraryPageState extends State<LibraryPage> {
                             side: BorderSide(
                                 color: HH_Colors.color_EEDDDD, width: 1)),
                       )),
-                  Expanded(child: videoView(document))
+                  // Expanded(child: videoView(document))
                 ],
               ),
             ),
@@ -242,28 +242,28 @@ class _LibraryPageState extends State<LibraryPage> {
         });
   }
 
-  Widget videoView(String document) {
-    return NativeVideoView(
-      keepAspectRatio: false,
-      showMediaController: true,
-      onCreated: (controller) {
-        controller.setVideoSource(
-          document,
-          sourceType: VideoSourceType.network,
-        );
-      },
-      onPrepared: (controller, info) {
-        controller.play();
-      },
-      onError: (controller, what, extra, message) {
-        print('Player Error ($what | $extra | $message)');
-      },
-      onCompletion: (controller) {
-        print('Video completed');
-      },
-      onProgress: (progress, duration) {
-        print('$progress | $duration');
-      },
-    );
-  }
+  // Widget videoView(String document) {
+  //   return NativeVideoView(
+  //     keepAspectRatio: false,
+  //     showMediaController: true,
+  //     onCreated: (controller) {
+  //       controller.setVideoSource(
+  //         document,
+  //         sourceType: VideoSourceType.network,
+  //       );
+  //     },
+  //     onPrepared: (controller, info) {
+  //       controller.play();
+  //     },
+  //     onError: (controller, what, extra, message) {
+  //       print('Player Error ($what | $extra | $message)');
+  //     },
+  //     onCompletion: (controller) {
+  //       print('Video completed');
+  //     },
+  //     onProgress: (progress, duration) {
+  //       print('$progress | $duration');
+  //     },
+  //   );
+  // }
 }

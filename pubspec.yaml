@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 
 dependencies:
@@ -53,18 +53,14 @@ dependencies:
   after_layout: ^1.0.7
   wakelock: ^0.2.1+1
   flutter_html: ^1.1.0
-  native_video_view: ^0.3.0
+#  native_video_view: ^0.3.0
   flutter_cached_pdfview : ^0.3.4
   path_provider : ^1.6.24
   open_file : ^3.0.3
   uuid: ^2.2.2
   flutter_voip_push_notification: ^0.0.3
-  callkeep: ^0.2.3+1
   get_it: ^5.0.4
   sqflite: ^1.3.0
-  flutter_incall_manager:
-    git:
-      url: git://github.com/kangshaojun/flutter-incall-manager.git
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

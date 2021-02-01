@@ -1,21 +1,10 @@
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
-import 'package:flutter_app/api/API_services.dart';
-import 'package:flutter_app/callkit.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
-import 'package:flutter_app/screens/notification.dart';
-import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/utils/DBHelper.dart';
-import 'package:flutter_app/utils/allstrings.dart';
-import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:callkeep/callkeep.dart';
-import 'package:uuid/uuid.dart';
-import 'package:flutter_incall_manager/flutter_incall_manager.dart';
 
 
 class SelectLanguage extends StatefulWidget {
@@ -33,28 +22,7 @@ class Call {
 }
 
 class SelectLanguageState extends State<StatefulWidget> {
-  IncallManager incallManager = new IncallManager();
   String dropdownValue = 'English';
-
-  final FlutterCallkeep _callKeep = FlutterCallkeep();
-  Map<String, Call> calls = {};
-  String newUUID() => Uuid().v4();
-
-  void initState(){
-    super.initState();
-  }
-
-  
-  // Future<void> displayIncomingCall(BuildContext context) async {
-
-  //   await CallKeep.setup();
-  //   await CallKeep.askForPermissionsIfNeeded(context);
-  //   final callUUID = '0783a8e5-8353-4802-9448-c6211109af51';
-  //   final number = '+46 70 123 45 67';
-
-  //   await CallKeep.displayIncomingCall(
-  //       callUUID, number, number, HandleType.number, false);
-  // }
 
   
 

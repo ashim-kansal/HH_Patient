@@ -35,8 +35,8 @@ class DashboardState extends State<Dashboard> {
   var tabIndex = 0;
   String title = 'Dashboard';
   String name;
-  String email;
   String id;
+  String email;
   String profileImage = "";
   bool showTherapist = false;
 
@@ -72,6 +72,7 @@ class DashboardState extends State<Dashboard> {
         setState(() {
           name = value.result.firstName+" "+value.result.lastName;
           email = value.result.email;
+          id = value.result.id;
           profileImage = value.result.profilePic;
           id = value.result.id;
         })
@@ -83,8 +84,7 @@ class DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) =>
       PickupLayout(
           myId: id,
-          scaffold:  
-      Scaffold(
+          scaffold:      Scaffold(
         
         appBar: AppBar(
           title: Text(
@@ -347,8 +347,8 @@ class DashboardState extends State<Dashboard> {
               })
             )
           ),
-      )
-      );
+      ));
+
   showTherapistOptions() {
     print(tabIndex);
     showDialog(

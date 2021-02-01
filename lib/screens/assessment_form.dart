@@ -73,7 +73,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                             Spacer(),
                             Text(snapshot.data.result.correctMarks.toString()+ "/"+ snapshot.data.result.totalMarks.toString(), style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
                           ],
-                        ): "",
+                        ): Container(),
                         SizedBox(height: 15,),
                       
                       Text(

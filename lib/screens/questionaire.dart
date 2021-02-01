@@ -43,11 +43,11 @@ class QuestionairePageState extends State<QuestionairePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-              AppLocalizations.of(context).sample_ques,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: HH_Colors.grey_707070, fontSize: 16),
-              ),
+              // Text(
+              // AppLocalizations.of(context).sample_ques,
+              //   textAlign: TextAlign.center,
+              //   style: TextStyle(color: HH_Colors.grey_707070, fontSize: 16),
+              // ),
               SizedBox(height: 10),
               Expanded(
                 child: 

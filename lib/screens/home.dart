@@ -117,7 +117,7 @@ class HomePageState extends State<HomePage> {
                       return ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemCount: snapshot.data.result.length,
-                        itemBuilder: (context, index) {
+                        itemBuilder: (context1, index) {
                           var _date = snapshot.data.result[index].date;
                           Moment createdDt = Moment.parse('$_date');
                           return SessionCard(data: snapshot.data.result[index],
@@ -138,7 +138,7 @@ class HomePageState extends State<HomePage> {
                               onClickVideo: () {
                                 callParticipent(snapshot.data.result[index].id,
                                     snapshot.data.result[index].patientId,
-                                    snapshot.data.result[index]);
+                                    snapshot.data.result[index], context);
                               },
                               onClickCancel: () {
                                 setState(() {
@@ -179,7 +179,13 @@ class HomePageState extends State<HomePage> {
 
 
   void callParticipent(
-      String sessionId, String patientId, Result result) async {
+      String sessionId, String patientId, Result result, BuildContext context) async {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => MyVPage(otherId: result.therapistId.id, myId: result.patientId,),
+    //   ),
+    // );
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
               from: result.patientId,
@@ -203,6 +209,7 @@ class HomePageState extends State<HomePage> {
             }
           })
         });
+
   }
 }
 class VideoPageArgument{

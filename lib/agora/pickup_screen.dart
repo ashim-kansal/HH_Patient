@@ -68,7 +68,7 @@ class _PickupScreenState extends State<PickupScreen> {
               ],
             ),
             Spacer(flex: 15,),
-            Container(child: Image.asset('assets/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
+            Container(child: Image.asset('assets/images/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
             Spacer(flex: 8,),
             Text(widget.call.callerName,style: TextStyle(fontSize: 25,color: Colors.blue),),
             Spacer(flex: 8,),
@@ -78,10 +78,11 @@ class _PickupScreenState extends State<PickupScreen> {
                 SizedBox(width: 25),
                 Expanded(
                   child: GestureDetector(
-                      child: Image.asset("assets/accept.png"),
+                      child: Image.asset("assets/images/accept.png"),
                       onTap: ()  {
                         // await Permissions.cameraAndMicrophonePermissionsGranted()
                         //     ?
+                        Navigator.pop(context);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -95,7 +96,7 @@ class _PickupScreenState extends State<PickupScreen> {
                 SizedBox(width: 25),
                 Expanded(
                   child: GestureDetector(
-                      child: Image.asset("assets/decline.png"),
+                      child: Image.asset("assets/images/decline.png"),
                       onTap: () async {
                         isCallMissed = false;
                         await callMethods.endCall(call: widget.call);
