@@ -131,13 +131,13 @@ class SelectLanguageState extends State<StatefulWidget> {
 
                           DBProvider.db.getAllClients().then((value) => {
                             print("val: "+value.isFirst.toString()),
-                            if(value.isFirst??0 == 1){
-                              Navigator.pop(context),
-                              Navigator.pushNamed(context, LoginPage.RouteName),
-                            }else{
-                              Navigator.pop(context),
-                              Navigator.pushNamed(context, MyGoals.RouteName),
-                            }
+                            // if(value.isFirst??0 == 1){
+                            //   Navigator.pop(context),
+                            //   Navigator.pushNamed(context, LoginPage.RouteName),
+                            // }else{
+                            //   Navigator.pop(context),
+                            //   Navigator.pushNamed(context, MyGoals.RouteName),
+                            // }
                           });
 
                           
