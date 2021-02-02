@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
+import 'package:flutter_app/login.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
 
@@ -24,7 +26,11 @@ class Call {
 class SelectLanguageState extends State<StatefulWidget> {
   String dropdownValue = 'English';
 
-  
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,14 +123,24 @@ class SelectLanguageState extends State<StatefulWidget> {
                         type: 2, 
                         isEnable: true,
                         onClick: () async {
-                          // incallManager.startRingtone(RingtoneUriType.DEFAULT, 'default', 30);
                           String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
                           SetStringToSP("language", lang.toLowerCase());
                           setState(() {
                             AppLocalizations.load(Locale(lang, ''));
                           });
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, MyGoals.RouteName);
+
+                          DBProvider.db.getAllClients().then((value) => {
+                            print("val: "+value.isFirst.toString()),
+                            if(value.isFirst??0 == 1){
+                              Navigator.pop(context),
+                              Navigator.pushNamed(context, LoginPage.RouteName),
+                            }else{
+                              Navigator.pop(context),
+                              Navigator.pushNamed(context, MyGoals.RouteName),
+                            }
+                          });
+
+                          
                         }),
                       )
                     )

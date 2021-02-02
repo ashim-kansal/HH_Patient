@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
@@ -24,6 +25,8 @@ class MyGoalsState extends State<MyGoals> {
     pagerController = PageController(
       initialPage: count,
     );
+
+
   }
 
   @override
@@ -208,13 +211,14 @@ class MyGoalsState extends State<MyGoals> {
             ])));
   }
 
-  void onClickNext(BuildContext context) {
+  void onClickNext(BuildContext context) async{
     setState(() {
       if (count == 0) {
         name = AppLocalizations.of(context).next;
       } else if (count == 1) {
         name = AppLocalizations.of(context).done;
       } else {
+        DBProvider.db.newClient(Client(isFirst: 1));
         naviagteToLogin(context);
       }
       count = count + 1;

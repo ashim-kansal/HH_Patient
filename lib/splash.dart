@@ -136,7 +136,7 @@ class SplashState extends State<Splash>{
 
     DBProvider.db.getAllClients().then((value) => {
       // storageRes = clientToJson(value),
-      print("clientRes11" +value.identity),
+      print("clientRes11" +value.toString()),
 
       // NavigationService.instance.navigateToRoute(MaterialPageRoute(
       //   builder: (context) => VideoCallPage(identity: value.identity, roomName: value.roomname, token: value.token),
