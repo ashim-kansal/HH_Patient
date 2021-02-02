@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/api/Therapist_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
@@ -77,7 +78,7 @@ class SplashState extends State<Splash>{
     getToken();
     _registerFCM();
     getMessage();
-
+    Permissions.cameraAndMicrophonePermissionsGranted();
     Firebase.initializeApp();
 
     SharedPreferences.setMockInitialValues({});

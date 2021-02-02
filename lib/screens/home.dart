@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_app/agora/call_utilities.dart';
 import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
@@ -32,10 +33,27 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
 
+  String name = '';
+  String profileImage = '';
+
   @override
   void initState() {
     super.initState();
+    getProfile();
   }
+
+  void getProfile() {
+
+    UserAPIServices().getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          name = value.result.firstName+" "+value.result.lastName;
+          profileImage = value.result.profilePic;
+        })
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -157,20 +175,6 @@ class HomePageState extends State<HomePage> {
                       );
                     }
                   })
-              // ListView.separated(
-              //   scrollDirection: Axis.horizontal,
-              //   itemCount: widget.assessments.length,
-              //   itemBuilder: (context, index) {
-              //     return SessionCard(name: widget.assessments[index], completed: index%2 == 0, onClick: (){
-              //       Navigator.pushNamed(context, SessionPage.RouteName);
-              //     },);
-
-              //   },
-              //   separatorBuilder: (context, index) {
-              //     return SizedBox(height: 20,width: 20,);
-              //   },
-              // )
-              ,
             )
           ],
         )
@@ -180,16 +184,14 @@ class HomePageState extends State<HomePage> {
 
   void callParticipent(
       String sessionId, String patientId, Result result, BuildContext context) async {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => MyVPage(otherId: result.therapistId.id, myId: result.patientId,),
-    //   ),
-    // );
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
               from: result.patientId,
               to: result.therapistId.id,
+              fromName: name,
+              toName: result.therapistId.firstName+' '+result.therapistId.lastName,
+              image: profileImage,
+              toImage: result.therapistId.profilePic,
               context: context,
               isVideo: true),
           FirebaseFirestore.instance
