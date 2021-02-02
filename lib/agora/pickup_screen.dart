@@ -1,6 +1,8 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/agora/permissions.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
 import 'cached_image.dart';
@@ -68,8 +70,8 @@ class _PickupScreenState extends State<PickupScreen> {
               ],
             ),
             Spacer(flex: 15,),
-            Container(child: Image.asset('assets/images/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
-            Spacer(flex: 8,),
+            Container(child:getImageView(widget.call.callerPic??''),
+              margin: EdgeInsets.symmetric(horizontal: 40),),            Spacer(flex: 8,),
             Text(widget.call.callerName,style: TextStyle(fontSize: 25,color: Colors.blue),),
             Spacer(flex: 8,),
             Row(
@@ -82,7 +84,7 @@ class _PickupScreenState extends State<PickupScreen> {
                       onTap: ()  {
                         // await Permissions.cameraAndMicrophonePermissionsGranted()
                         //     ?
-                        Navigator.pop(context);
+                        FlutterRingtonePlayer.stop();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -99,6 +101,7 @@ class _PickupScreenState extends State<PickupScreen> {
                       child: Image.asset("assets/images/decline.png"),
                       onTap: () async {
                         isCallMissed = false;
+                        FlutterRingtonePlayer.stop();
                         await callMethods.endCall(call: widget.call);
                       },),
                 ),
@@ -113,5 +116,20 @@ class _PickupScreenState extends State<PickupScreen> {
         ),
       ),
     );
+  }
+
+  getImageView(String callerPic) {
+    if(callerPic?.isEmpty) {
+      return Image.asset('assets/doctor_image.png');
+    } else {
+      return CircleAvatar(
+        radius: 55,
+        backgroundColor: HH_Colors.color_F2EEEE,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(widget.call.callerPic) ,
+          radius: 52,
+        ),
+      );
+    }
   }
 }

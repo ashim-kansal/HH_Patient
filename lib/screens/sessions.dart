@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/agora/call_utilities.dart';
+import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -20,6 +22,15 @@ class SessionPage extends StatefulWidget {
 class SessionPageState extends State<SessionPage> {
   bool isSwitched = true;
   String searchText = "";
+  String name = "";
+  String profileImage = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -245,12 +256,16 @@ class SessionPageState extends State<SessionPage> {
 
   void callParticipent(
       String sessionId, String patientId, Result result) async {
-    // Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
+    Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
       CallUtils.dial(
           from: result.patientId,
           to: result.therapistId.id,
+          fromName: name,
+          toName: result.therapistId.firstName+' '+result.therapistId.lastName,
+          image: profileImage,
+          toImage: result.therapistId.profilePic,
           context: context,
-          isVideo: true);
+          isVideo: true),
       FirebaseFirestore.instance
           .collection("users")
           .document(result.therapistId.id)
@@ -265,7 +280,20 @@ class SessionPageState extends State<SessionPage> {
             "deviceid": deviceId,
           });
         }
-      // })
+      })
+    });
+  }
+
+
+  void getProfile() {
+
+    UserAPIServices().getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          name = value.result.firstName+" "+value.result.lastName;
+          profileImage = value.result.profilePic;
+        })
+      }
     });
   }
 

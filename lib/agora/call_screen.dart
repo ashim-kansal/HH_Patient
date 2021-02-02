@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'agora_configs.dart';
@@ -29,6 +31,7 @@ class _CallScreenState extends State<CallScreen> {
   final CallMethods callMethods = CallMethods();
 
   StreamSubscription callStreamSubscription;
+  String time = "";
 
   static final _users = <int>[];
   final _infoStrings = <String>[];
@@ -267,12 +270,12 @@ class _CallScreenState extends State<CallScreen> {
                     Column(
                       children: [
                         Text("Dialing",style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,color: Colors.blue),),
-                        Text("00:00",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
+                        Text(time,style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
 
                       ],
                     ),
                     Spacer(flex: 4,),
-                    Container(child: Image.asset('assets/images/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
+                    Container(child: getImageView(widget.call.receiverPic??''),margin: EdgeInsets.symmetric(horizontal: 40),),
                     Spacer(flex: 1,),
                     Text(widget.call.receiverName,style: TextStyle(fontSize: 25,color: Colors.blue),),
 
@@ -475,5 +478,20 @@ class _CallScreenState extends State<CallScreen> {
         ),
       ),
     );
+  }
+
+  getImageView(String callerPic) {
+    if(callerPic?.isEmpty) {
+      return Image.asset('assets/doctor_image.png');
+    } else {
+      return CircleAvatar(
+        radius: 55,
+        backgroundColor: HH_Colors.color_F2EEEE,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(widget.call.callerPic) ,
+          radius: 52,
+        ),
+      );
+    }
   }
 }
