@@ -131,14 +131,16 @@ class SelectLanguageState extends State<StatefulWidget> {
                           });
 
                           DBProvider.db.checkIsFirst().then((value) => {
-                            print("DBValue "+value.toString()),
-                            if(value){
+                            if(!value){
                               Navigator.pop(context),
                               Navigator.pushNamed(context, LoginPage.RouteName),
                             }else{
-                              DBProvider.db.newClient(),
-                              Navigator.pop(context),
-                              Navigator.pushNamed(context, MyGoals.RouteName),
+                              DBProvider.db.newClient().then((value) => {
+                                if(value){
+                                  Navigator.pop(context),
+                                  Navigator.pushNamed(context, MyGoals.RouteName),
+                                }
+                              })
                             }
                           });
                           
