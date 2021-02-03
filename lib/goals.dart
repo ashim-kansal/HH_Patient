@@ -218,7 +218,6 @@ class MyGoalsState extends State<MyGoals> {
       } else if (count == 1) {
         name = AppLocalizations.of(context).done;
       } else {
-        DBProvider.db.newClient(Client(isFirst: 1));
         naviagteToLogin(context);
       }
       count = count + 1;

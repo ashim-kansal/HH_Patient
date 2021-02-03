@@ -37,18 +37,21 @@ class DBProvider {
     });
   }
 
-  newClient(Client newClient) async {
+  newClient() async {
+    Client client = new  Client(isFirst:1, id: 1);
     final db = await database;
-    var res = await db.insert("Client", newClient.toMap());
+    var res = await db.insert("Client", client.toMap());
     return res;
   }
 
-  Future<Client> getAllClients() async {
+  Future<bool> checkIsFirst() async {
     final db = await database;
     var res = await db.query("Client");
-    List<Client> list =
-    res.isNotEmpty ? res.map((c) => Client.fromMap(c)).toList() : [];
-    return list.last??Client();
+    if(res.isNotEmpty)
+      return false;
+    else
+      return true;
+    // return list?.last??null;
   }
 
 }

@@ -110,7 +110,6 @@ class SplashState extends State<Splash>{
             if (accessToken != null) {
               Navigator.pushNamed(context, Dashboard.RouteName)
             }else{
-              // Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false))
               Navigator.pushNamed(context, SelectLanguage.RouteName)
             },
       }
@@ -130,31 +129,9 @@ class SplashState extends State<Splash>{
     );
   }
 
-
-  void navigateH() async {
-    var sessionObj = await GetStringToSP("sMsg");
-    print('object in msg $sessionObj');
-
-    DBProvider.db.getAllClients().then((value) => {
-      // storageRes = clientToJson(value),
-      print("clientRes11" +value.toString()),
-
-      // NavigationService.instance.navigateToRoute(MaterialPageRoute(
-      //   builder: (context) => VideoCallPage(identity: value.identity, roomName: value.roomname, token: value.token),
-      // )),
-    });
-    // Navigator.pushNamed(mContext, VideoCallPage.RouteName, arguments: VideoPageArgument(sessionObj["receiverId"], sessionObj["room"], sessionObj["AccessToken"]))
-    //       .then((value) => {
-    //         Navigator.pushNamed(mContext, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionObj["room"].split("/").last, sessionObj["programName"]))
-    //   });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // HelperFunction.getAuthorizationToken(context).then((value) => {
-    // print('mtttttttt  :'+value)
-    //
-    // });
+
     return MaterialApp(
       home: Container(
         color: Color(0xff777CEA),

@@ -7,6 +7,7 @@ import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:http/http.dart';
 
 
 class SelectLanguage extends StatefulWidget {
@@ -129,17 +130,16 @@ class SelectLanguageState extends State<StatefulWidget> {
                             AppLocalizations.load(Locale(lang, ''));
                           });
 
-                          DBProvider.db.getAllClients().then((value) => {
-                            print("val: "+value.isFirst.toString()),
-                            // if(value.isFirst??0 == 1){
-                            //   Navigator.pop(context),
-                            //   Navigator.pushNamed(context, LoginPage.RouteName),
-                            // }else{
-                            //   Navigator.pop(context),
-                            //   Navigator.pushNamed(context, MyGoals.RouteName),
-                            // }
+                          DBProvider.db.checkIsFirst().then((value) => {
+                            if(value){
+                              Navigator.pop(context),
+                              Navigator.pushNamed(context, LoginPage.RouteName),
+                            }else{
+                              DBProvider.db.newClient(),
+                              Navigator.pop(context),
+                              Navigator.pushNamed(context, MyGoals.RouteName),
+                            }
                           });
-
                           
                         }),
                       )
