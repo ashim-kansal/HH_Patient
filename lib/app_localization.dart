@@ -118,7 +118,7 @@ class AppLocalizations {
   String get email => Intl.message("Email");
   String get Update => Intl.message("Update");
   String get share_reviews => Intl.message("Share Your Reviews");
-  String get Questionaire => Intl.message("Questionaire");
+  String get Questionaire => Intl.message("Questionnaire");
   String get Profile => Intl.message("Profile");
   String get FAQ => Intl.message("FAQ's");
   String get edit_profile => Intl.message("Edit Profile");

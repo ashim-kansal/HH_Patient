@@ -198,6 +198,7 @@ class HomePageState extends State<HomePage> {
               isVideo: true),
           FirebaseFirestore.instance
               .collection("users")
+              // ignore: deprecated_member_use
               .document(result.therapistId.id)
               .snapshots()
               .forEach((element) async {

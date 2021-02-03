@@ -74,6 +74,7 @@ class DashboardState extends State<Dashboard> {
           email = value.result.email;
           id = value.result.id;
           profileImage = value.result.profilePic;
+          id = value.result.id;
         })
       }
     });

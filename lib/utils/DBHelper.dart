@@ -32,10 +32,7 @@ class DBProvider {
     }, onCreate: (Database db, int version) async {
       await db.execute("CREATE TABLE Client ("
           "id INTEGER PRIMARY KEY,"
-          "token TEXT,"
-          "identity TEXT,"
-          "roomname TEXT,"
-          "programname TEXT"
+          "isFirst INTEGER"
           ")");
     });
   }
@@ -69,32 +66,20 @@ String clientToJson(Client data) {
 
 class Client {
   int id;
-  String token;
-  String identity;
-  String roomname;
-  String programname;
+  int isFirst;
 
   Client({
     this.id,
-    this.token,
-    this.identity,
-    this.roomname,
-    this.programname,
+    this.isFirst,
   });
 
   factory Client.fromMap(Map<String, dynamic> json) => new Client(
     id: json["id"],
-    token: json["token"],
-    identity: json["identity"],
-    roomname: json["roomname"],
-    programname: json["programname"],
+    isFirst: json["isFirst"],
   );
 
   Map<String, dynamic> toMap() => {
     "id": id,
-    "token": token,
-    "identity": identity,
-    "roomname": roomname,
-    "programname": programname,
+    "isFirst": isFirst,
   };
 }

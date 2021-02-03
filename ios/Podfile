@@ -38,7 +38,7 @@ target 'Runner' do
   
   # pod 'flutter_incall,' '~>1.0.0'
 
-  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '6.26.0'
+  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '6.33.0'
 
 
   # pod 'Firebase/CoreOnly', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '6.26.0'
