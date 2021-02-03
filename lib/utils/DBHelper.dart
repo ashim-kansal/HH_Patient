@@ -37,11 +37,11 @@ class DBProvider {
     });
   }
 
-  newClient() async {
-    Client client = new  Client(isFirst:1, id: 1);
+  Future<bool> newClient() async {
+    Client client = new  Client(isFirst:1);
     final db = await database;
     var res = await db.insert("Client", client.toMap());
-    return res;
+    return res>0?true:false ;
   }
 
   Future<bool> checkIsFirst() async {
