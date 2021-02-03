@@ -131,6 +131,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                           });
 
                           DBProvider.db.checkIsFirst().then((value) => {
+                            print("DBValue "+value.toString()),
                             if(value){
                               Navigator.pop(context),
                               Navigator.pushNamed(context, LoginPage.RouteName),

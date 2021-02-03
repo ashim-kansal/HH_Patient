@@ -34,7 +34,7 @@ class CallUtils {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CallScreen(call: call, myId: from, callDuration: callDuration),
+          builder: (context) => CallScreen(call: call, myId: from),
         ),
       ).then((value) =>{
         Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionid, programName))

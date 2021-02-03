@@ -41,6 +41,7 @@ class Call {
     callMap["is_video"] = call.isVideo;
     callMap["sessionid"] = call.sessionid;
     callMap["programName"] = call.programName;
+    callMap["callDuration"] = call.callDuration;
     return callMap;
   }
 
@@ -56,5 +57,6 @@ class Call {
     this.isVideo = callMap["is_video"];
     this.sessionid = callMap["sessionid"];
     this.programName = callMap["programName"];
+    this.callDuration = callMap["callDuration"];
   }
 }

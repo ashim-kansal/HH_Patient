@@ -17,12 +17,10 @@ import 'call_methods.dart';
 class CallScreen extends StatefulWidget {
   final Call call;
   final String myId;
-  final int callDuration;
 
   CallScreen({
     @required this.call,
     @required this.myId,
-    @required this.callDuration
   });
 
   @override
@@ -65,14 +63,12 @@ class _CallScreenState extends State<CallScreen> {
 
   void startTimer() {
     var defaultTime = 1;
-    const oneSec = const Duration(seconds: 1);
+    const oneSec = const Duration(minutes: 1);
     _timer = new Timer.periodic(
       oneSec,
       (Timer timer) {
-        if (time >= widget.callDuration * 60) {
-          setState(() {
-            timer.cancel();
-          });
+        if (time >= widget.call.callDuration) {
+          timer.cancel();
           callMethods.endCall(
               call: widget.call,
             );
@@ -318,7 +314,7 @@ class _CallScreenState extends State<CallScreen> {
           children: <Widget>[
             _expandedVideoRow([views[1]]),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.topRight,
               child: Container(
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width / 3,
@@ -454,7 +450,7 @@ class _CallScreenState extends State<CallScreen> {
           RawMaterialButton(
             onPressed: _onToggleMute,
             child: Icon(
-              muted ? Icons.mic : Icons.mic_off,
+              muted ? Icons.mic_off : Icons.mic,
               color: muted ? Colors.white : Colors.blueAccent,
               size: 30.0,
             ),
@@ -473,6 +469,7 @@ class _CallScreenState extends State<CallScreen> {
     // clear users
     //pool.dispose();
     _users.clear();
+    _timer.cancel();
     // destroy sdk
     AgoraRtcEngine.leaveChannel();
     AgoraRtcEngine.destroy();
