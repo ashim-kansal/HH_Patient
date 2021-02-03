@@ -17,10 +17,12 @@ import 'call_methods.dart';
 class CallScreen extends StatefulWidget {
   final Call call;
   final String myId;
+  final int callDuration;
 
   CallScreen({
     @required this.call,
     @required this.myId,
+    @required this.callDuration
   });
 
   @override
@@ -31,11 +33,12 @@ class _CallScreenState extends State<CallScreen> {
   final CallMethods callMethods = CallMethods();
 
   StreamSubscription callStreamSubscription;
-  String time = "";
+  int time = 0;
 
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
+  Timer _timer;
 
   // Soundpool pool = Soundpool(streamType: StreamType.notification);
 
@@ -59,6 +62,29 @@ class _CallScreenState extends State<CallScreen> {
       streamId = await pool.play(soundId);
     }
   }*/
+
+  void startTimer() {
+    var defaultTime = 1;
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (time >= widget.callDuration * 60) {
+          setState(() {
+            timer.cancel();
+          });
+          callMethods.endCall(
+              call: widget.call,
+            );
+
+        } else {
+          setState(() {
+            time++;
+          });
+        }
+      },
+    );
+  }
 
   Future<void> initializeAgora() async {
     if (APP_ID.isEmpty) {
@@ -145,8 +171,8 @@ class _CallScreenState extends State<CallScreen> {
         if(_users.length>0){
           print("BUBUB"+_users.length.toString());
           AgoraRtcEngine.stopEffect(1);
+          startTimer();
        //   pool.stop(streamId);
-
         }
       });
     };
@@ -270,8 +296,7 @@ class _CallScreenState extends State<CallScreen> {
                     Column(
                       children: [
                         Text("Dialing",style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,color: Colors.blue),),
-                        Text(time,style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
-
+                        // Text(time.toString()+":00",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
                       ],
                     ),
                     Spacer(flex: 4,),

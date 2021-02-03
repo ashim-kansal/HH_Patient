@@ -195,6 +195,7 @@ class HomePageState extends State<HomePage> {
               context: context,
               sessionid: result.id,
               programName: result.programName,
+              callDuration: result.slotDuration ,
               isVideo: true),
           FirebaseFirestore.instance
               .collection("users")
