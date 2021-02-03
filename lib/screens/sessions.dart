@@ -267,6 +267,7 @@ class SessionPageState extends State<SessionPage> {
           context: context,
           sessionid: result.id,
           programName: result.programName,
+          callDuration: result.slotDuration,
           isVideo: true),
       FirebaseFirestore.instance
           .collection("users")

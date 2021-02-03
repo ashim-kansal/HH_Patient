@@ -10,6 +10,7 @@ class Call {
   bool isVideo;
   String sessionid;
   String programName;
+  int callDuration;
 
   Call({
     this.callerId,
@@ -22,7 +23,8 @@ class Call {
     this.hasDialled,
     this.isVideo,
     this.sessionid,
-    this.programName
+    this.programName, 
+    this.callDuration
   });
 
   // to map
