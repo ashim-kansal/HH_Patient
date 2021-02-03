@@ -193,6 +193,8 @@ class HomePageState extends State<HomePage> {
               image: profileImage,
               toImage: result.therapistId.profilePic,
               context: context,
+              sessionid: result.id,
+              programName: result.programName,
               isVideo: true),
           FirebaseFirestore.instance
               .collection("users")
