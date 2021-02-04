@@ -176,14 +176,27 @@ class HomePageState extends State<HomePage> {
                     }
                   })
             )
-          ],
+          ,]
         )
     );
   }
 
+  // current date and time 
+  getCurrentDateTime() {
+    var currentDate = new DateTime.now();
+    var day = currentDate.day;
+    var month = currentDate.month;
+    var year = currentDate.year;
+
+
+  }
+  
 
   void callParticipent(
-      String sessionId, String patientId, Result result, BuildContext context) async {
+    String sessionId, String patientId, Result result, BuildContext context) async {
+    
+    // getCurrentDateTime(Date result.date);
+
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
               from: result.patientId,
