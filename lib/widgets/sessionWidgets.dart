@@ -299,7 +299,7 @@ class UpcomingSessionItem extends StatelessWidget {
                         children: [
                           Row(children: [
                             Text(
-                              'Dr. '+drname,
+                              data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname,
                               overflow: TextOverflow.ellipsis,
                               style: new TextStyle(
                                 fontSize: 18.0,

@@ -134,18 +134,18 @@ class CurrentPlansPageState extends State<CurrentPlansPage> {
                                     ,SizedBox.fromSize(
                                       size: Size(8, 20),
                                     ),
-                                    Container(
-                                        child: Text(
-                                          'Free',
-                                          style: TextStyle(
-                                              color: HH_Colors.grey_585858),
-                                        ),
-                                        padding:
-                                            EdgeInsets.fromLTRB(70, 20, 70, 20),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                new BorderRadius.circular(10.0),
-                                            color: Colors.white)),
+                                    // Container(
+                                    //     child: Text(
+                                    //       'Free',
+                                    //       style: TextStyle(
+                                    //           color: HH_Colors.grey_585858),
+                                    //     ),
+                                    //     padding:
+                                    //         EdgeInsets.fromLTRB(70, 20, 70, 20),
+                                    //     decoration: BoxDecoration(
+                                    //         borderRadius:
+                                    //             new BorderRadius.circular(10.0),
+                                    //         color: Colors.white)),
                                     SizedBox.fromSize(
                                       size: Size(8, 15),
                                     ),
