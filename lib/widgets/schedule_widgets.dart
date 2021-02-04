@@ -135,11 +135,6 @@ class DrinkingDiaryDateWidgetState extends State<DrinkingDiaryDateWidget>{
   @override
   void initState() {
     super.initState();
-    // for(Diary.Result result in widget.list){
-    //   if(result.date.isAtSameMomentAs(DateTime.now())){
-    //     result.isSelected = true;
-    //   }
-    // }
     print(widget.list.length.toString());
     if(widget.list.length>0)
       widget.list[0].isSelected = true;

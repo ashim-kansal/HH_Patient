@@ -57,9 +57,6 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
               graphData = getGraphData(snapshot.data.result, pos);
               label = getLabel(graphData);
 
-
-
-
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -209,7 +206,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
       if(result.length > pos+7){
         mList.addAll(result.getRange(pos, pos+7));
       }else{
-        mList.addAll(result.getRange(pos, result.length-1));
+        mList.addAll(result.getRange(pos, result.length));
       }
     }
     return mList;

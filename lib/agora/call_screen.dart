@@ -2,14 +2,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'agora_configs.dart';
 import 'call.dart';
 import 'call_methods.dart';
@@ -17,10 +16,12 @@ import 'call_methods.dart';
 class CallScreen extends StatefulWidget {
   final Call call;
   final String myId;
+  bool callGenerate = false;
 
   CallScreen({
     @required this.call,
     @required this.myId,
+    this.callGenerate
   });
 
   @override
@@ -32,25 +33,30 @@ class _CallScreenState extends State<CallScreen> {
 
   StreamSubscription callStreamSubscription;
   int time = 0;
-
+  int ringTime = 0;
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
-  Timer _timer;
-
+  Timer slotTimer;
+  Timer ringTimer;
   // Soundpool pool = Soundpool(streamType: StreamType.notification);
 
   @override
   void initState() {
 
- //   playTone();
+    //   playTone();
 
     super.initState();
     addPostFrameCallback();
     initializeAgora();
+
+    if(widget.callGenerate){
+      startRingTimer();
+    }
   }
+
   int streamId;
- /* playTone() async {
+  /* playTone() async {
 
     if(pool!=null&& _users.length<2){
 
@@ -61,25 +67,28 @@ class _CallScreenState extends State<CallScreen> {
     }
   }*/
 
-  void startTimer() {
-    var defaultTime = 1;
+  void startSlotTimer() {
+    print("widget.call.callDuration"+ widget.call.callDuration.toString());
     const oneSec = const Duration(minutes: 1);
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (time >= widget.call.callDuration) {
-          timer.cancel();
-          callMethods.endCall(
-              call: widget.call,
-            );
 
-        } else {
-          setState(() {
-            time++;
-          });
-        }
-      },
-    );
+    slotTimer = Timer(Duration(minutes:widget.call.callDuration),(){
+      AgoraRtcEngine.stopEffect(1);
+      callMethods.endCall(
+        call: widget.call,
+      );
+    });
+
+  }
+
+  void startRingTimer() {
+
+    ringTimer = Timer(Duration(seconds:40),(){
+      AgoraRtcEngine.stopEffect(1);
+      callMethods.endCall(
+        call: widget.call,
+      );
+    });
+
   }
 
   Future<void> initializeAgora() async {
@@ -99,7 +108,6 @@ class _CallScreenState extends State<CallScreen> {
     await AgoraRtcEngine.setParameters(
         '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
     await AgoraRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
-
     await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
 
 
@@ -116,7 +124,7 @@ class _CallScreenState extends State<CallScreen> {
         // defining the logic
         switch (ds.data()) {
           case null:
-            // snapshot is null which means that call is hanged and documents are deleted
+          // snapshot is null which means that call is hanged and documents are deleted
             Navigator.pop(context);
             break;
 
@@ -149,10 +157,10 @@ class _CallScreenState extends State<CallScreen> {
 
 
     AgoraRtcEngine.onJoinChannelSuccess = (
-      String channel,
-      int uid,
-      int elapsed,
-    ) {
+        String channel,
+        int uid,
+        int elapsed,
+        ) {
       setState(() {
         final info = 'onJoinChannel: $channel, uid: $uid';
         _infoStrings.add(info);
@@ -167,8 +175,10 @@ class _CallScreenState extends State<CallScreen> {
         if(_users.length>0){
           print("BUBUB"+_users.length.toString());
           AgoraRtcEngine.stopEffect(1);
-          startTimer();
-       //   pool.stop(streamId);
+          startSlotTimer();
+          if(ringTimer != null)
+            ringTimer.cancel();
+
         }
       });
     };
@@ -227,11 +237,11 @@ class _CallScreenState extends State<CallScreen> {
     };
 
     AgoraRtcEngine.onFirstRemoteVideoFrame = (
-      int uid,
-      int width,
-      int height,
-      int elapsed,
-    ) {
+        int uid,
+        int width,
+        int height,
+        int elapsed,
+        ) {
       setState(() {
         final info = 'firstRemoteVideo: $uid ${width}x $height';
         _infoStrings.add(info);
@@ -280,50 +290,52 @@ class _CallScreenState extends State<CallScreen> {
       case 1:
         return Container(
             child: Stack(
-          children: <Widget>[
-            Column(children: [_videoView(views[0])]),
-            SizedBox.expand(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Spacer(flex: 4,),
-
-                    Column(
+              children: <Widget>[
+                Column(children: [_videoView(views[0])]),
+                SizedBox.expand(
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Dialing",style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,color: Colors.blue),),
-                        // Text(time.toString()+":00",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
+                        Spacer(flex: 4,),
+
+                        Column(
+                          children: [
+                            Text("Dialing",style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,color: Colors.blue),),
+                            // Text("00:00",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
+
+                          ],
+                        ),
+                        Spacer(flex: 4,),
+                        Container(child: getImageView(widget.call.receiverPic)??"",margin: EdgeInsets.symmetric(horizontal: 40),),
+                        // Container(child: Image.asset('assets/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
+                        Spacer(flex: 1,),
+                        Text(widget.call.receiverName,style: TextStyle(fontSize: 25,color: Colors.blue),),
+
+                        Spacer(flex: 20,),
+
                       ],
                     ),
-                    Spacer(flex: 4,),
-                    Container(child: getImageView(widget.call.receiverPic??''),margin: EdgeInsets.symmetric(horizontal: 40),),
-                    Spacer(flex: 1,),
-                    Text(widget.call.receiverName,style: TextStyle(fontSize: 25,color: Colors.blue),),
-
-                    Spacer(flex: 20,),
-
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ],
-        ));
+              ],
+            ));
       case 2:
         return Container(
             child: Stack(
-          children: <Widget>[
-            _expandedVideoRow([views[1]]),
-            Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                  padding: EdgeInsets.all(20),
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.width / 2,
-                  child: views[0]),
-            )
-          ],
-        ));
-      /* return Container(
+              children: <Widget>[
+                _expandedVideoRow([views[1]]),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                      padding: EdgeInsets.all(20),
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.width / 2,
+                      child: views[0]),
+                )
+              ],
+            ));
+    /* return Container(
             child: Column(
           children: <Widget>[
             _expandedVideoRow([views[0]]),
@@ -333,19 +345,19 @@ class _CallScreenState extends State<CallScreen> {
       case 3:
         return Container(
             child: Column(
-          children: <Widget>[
-            _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 3))
-          ],
-        ));
+              children: <Widget>[
+                _expandedVideoRow(views.sublist(0, 2)),
+                _expandedVideoRow(views.sublist(2, 3))
+              ],
+            ));
       case 4:
         return Container(
             child: Column(
-          children: <Widget>[
-            _expandedVideoRow(views.sublist(0, 2)),
-            _expandedVideoRow(views.sublist(2, 4))
-          ],
-        ));
+              children: <Widget>[
+                _expandedVideoRow(views.sublist(0, 2)),
+                _expandedVideoRow(views.sublist(2, 4))
+              ],
+            ));
       default:
     }
     return Container();
@@ -424,7 +436,7 @@ class _CallScreenState extends State<CallScreen> {
             onPressed: _onSwitchCamera,
             child: ImageIcon(
 
-              AssetImage('assets/images/reverse_camera.png'),
+              AssetImage('assets/reverse_camera.png'),
               color: Colors.blueAccent,
               size: 35.0,
             ),
@@ -433,18 +445,20 @@ class _CallScreenState extends State<CallScreen> {
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
-            onPressed: () => callMethods.endCall(
-              call: widget.call,
-            ),
+            onPressed: () =>{
+              AgoraRtcEngine.stopEffect(1),
+              callMethods.endCall(
+                call: widget.call,
+              )
+            },
             child: Container(
-
-              child: Image.asset('assets/images/end_call.png',fit: BoxFit.fill,),
-              width: 70.0,
-            height:70.0
+                child: Image.asset('assets/end_call.png',fit: BoxFit.fill,),
+                width: 70.0,
+                height:70.0
             ),
             shape: CircleBorder(),
             elevation: 2.0,
-       //     fillColor: Colors.redAccent,
+            //     fillColor: Colors.redAccent,
             padding: const EdgeInsets.all(15.0),
           ),
           RawMaterialButton(
@@ -456,7 +470,7 @@ class _CallScreenState extends State<CallScreen> {
             ),
             shape: CircleBorder(),
             elevation: 2.0,
-       //     fillColor: muted ? Colors.blueAccent : Colors.white,
+            //     fillColor: muted ? Colors.blueAccent : Colors.white,
             padding: const EdgeInsets.all(12.0),
           )
         ],
@@ -468,8 +482,10 @@ class _CallScreenState extends State<CallScreen> {
   void dispose() {
     // clear users
     //pool.dispose();
+    print('dispose');
     _users.clear();
-    _timer.cancel();
+    if(slotTimer != null) slotTimer.cancel();
+    if(ringTimer != null) ringTimer.cancel();
     // destroy sdk
     AgoraRtcEngine.leaveChannel();
     AgoraRtcEngine.destroy();
@@ -487,13 +503,13 @@ class _CallScreenState extends State<CallScreen> {
             widget.call.isVideo
                 ? _viewRows()
                 : SizedBox.expand(
-                    child: Image.network(
-                      widget.call.hasDialled
-                          ? widget.call.receiverPic
-                          : widget.call.callerPic,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+              child: Image.network(
+                widget.call.hasDialled
+                    ? widget.call.receiverPic
+                    : widget.call.callerPic,
+                fit: BoxFit.cover,
+              ),
+            ),
             // _panel(),
             _toolbar(),
           ],
