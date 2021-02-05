@@ -10,6 +10,8 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:toast/toast.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class ProfilePage extends StatefulWidget {
   static const String RouteName = '/profile';
@@ -104,7 +106,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                               radius: 55,
                                               backgroundColor: HH_Colors.color_F2EEEE,
                                               child: CircleAvatar(
-                                                backgroundImage: NetworkImage(snapshot.data.result.profilePic) ,
+                                                backgroundImage: CachedNetworkImageProvider(snapshot.data.result.profilePic) ,
                                                 radius: 46,
                                               ),
                                             )
@@ -216,39 +218,39 @@ class _CreateAccountState extends State<ProfilePage> {
                                               )
                                             ],)
                                         ),
-                                        Container(
-                                            alignment: Alignment.topLeft,
-                                            margin: const EdgeInsets.all(10.0),
-                                            padding: const EdgeInsets.all(3.0),
-                                            decoration: BoxDecoration(
-                                                border: Border(bottom: BorderSide(
-                                                    color: HH_Colors.borderGrey,
-                                                    width: 0.5
-                                                ))
-                                            ),
-                                            child: Column(children: [
-                                              Container(
-                                                alignment: Alignment.topLeft,
-                                                padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                                child: HHTextView(
-                                                    title: AppLocalizations.of(context).address,
-                                                    size: 18,
-                                                    textweight: FontWeight.w500,
-                                                    color: Color(0xff777CEA)
-                                                ),
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                                alignment: Alignment.topLeft,
-                                                child:  HHTextView(
-                                                  title: snapshot.data.result.address,
-                                                  size: 16,
-                                                  color: HH_Colors.grey_585858,
-                                                  textweight: FontWeight.w400,
-                                                ),
-                                              )
-                                            ],)
-                                        ),
+                                        // Container(
+                                        //     alignment: Alignment.topLeft,
+                                        //     margin: const EdgeInsets.all(10.0),
+                                        //     padding: const EdgeInsets.all(3.0),
+                                        //     decoration: BoxDecoration(
+                                        //         border: Border(bottom: BorderSide(
+                                        //             color: HH_Colors.borderGrey,
+                                        //             width: 0.5
+                                        //         ))
+                                        //     ),
+                                        //     child: Column(children: [
+                                        //       Container(
+                                        //         alignment: Alignment.topLeft,
+                                        //         padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                        //         child: HHTextView(
+                                        //             title: AppLocalizations.of(context).address,
+                                        //             size: 18,
+                                        //             textweight: FontWeight.w500,
+                                        //             color: Color(0xff777CEA)
+                                        //         ),
+                                        //       ),
+                                        //       Container(
+                                        //         padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                        //         alignment: Alignment.topLeft,
+                                        //         child:  HHTextView(
+                                        //           title: snapshot.data.result.address,
+                                        //           size: 16,
+                                        //           color: HH_Colors.grey_585858,
+                                        //           textweight: FontWeight.w400,
+                                        //         ),
+                                        //       )
+                                        //     ],)
+                                        // ),
                                       ],)
                                   ),
                                   Align(
@@ -260,18 +262,12 @@ class _CreateAccountState extends State<ProfilePage> {
                                         title: AppLocalizations.of(context).edit,
                                         type: 4,
                                         onClick: () {
-                                          Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: snapshot.data.result)), );
-                                          //     .then((value){
-                                          //   // setState(() {
-                                          //  setState(() {
+                                          Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: snapshot.data.result)), ).then((value){
+                                           setState(() {
 
-                                          //  });
-                                          //   // });
-                                          // });
-
-
-                                          // Navigator.pushNamed(context, EditProfilePage.RouteName, arguments: ProfileArguments(userData)).whenComplete(getprofile());
-                                        },
+                                           });
+                                          });
+                                          },
                                       ),
                                     ),
                                   )

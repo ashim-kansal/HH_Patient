@@ -41,83 +41,16 @@ class SessionCard extends StatelessWidget {
           },
           child:  Container(
             padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10,),
-                Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                SizedBox(height: 15,),
+                SizedBox(height: 5,),
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    data.therapistId.profilePic == ""?
-                    Image.asset(
-                      'assets/images/ic_avatar.png',
-                      height: 18,
-                      width: 18,
-                    ) : CircleAvatar(
-                      backgroundImage: NetworkImage(data.therapistId.profilePic),
-                      radius: 18,
-                    ),
-                    SizedBox(width: 10,),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname,textAlign:TextAlign.start,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
-                        Text(data.therapistId.role.replaceAll("_", " ")??"" ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
-                        Text("Duration: "+data.slotDuration.toString()+' mins' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ButtonTheme(
-                              height: 40,
-                              minWidth: 40,
-                              child: FlatButton(
-                                color: Colors.white,
-                                child: Icon(Icons.chat
-                                  , color: HH_Colors.accentColor, size: 20,),
-                                onPressed: (){
-                                  print('receiverId  : '+data.therapistId.id);
-                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
-                                },
-                                shape: CircleBorder(                            side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
-                              ),
-                            ),
-                            ButtonTheme(
-                                height: 40,
-                                minWidth: 40,
-                                child: FlatButton(
-                                  color: Colors.white,
-                                  child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 20,),
-                                  onPressed: (){
-                                    onClickVideo();
-                                  },
-                                  shape: CircleBorder( 
-                                    side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
-                                )),
-
-                          ],
-                        )
-
-                      ],
-                    )
-                  ],
-                ),
-
-              ],
-            ),
-                Column(
-                  children: [
+                    Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                    Spacer(),
                     HHOptionButton(onClickCancel: (){
                       showDialog(context: context,
                         builder: (BuildContext dialogContext) {
@@ -144,12 +77,86 @@ class SessionCard extends StatelessWidget {
                         },
                       );
                     }, onClickReSchedule: (){
-                      Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
-                    },),],
+                      Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                    },)
+                  ],
                 ),
+                SizedBox(height: 10,),
+
+                // SizedBox(height: 5,),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(flex: 3, fit: FlexFit.loose,child: data.therapistId.profilePic == ""?
+                    Image.asset(
+                      'assets/images/ic_avatar.png',
+                      height: 18,
+                      width: 18,
+                    ) : CircleAvatar(
+                      backgroundImage: NetworkImage(data.therapistId.profilePic),
+                      radius: 18,
+                    )),
+                    SizedBox(width: 10,),
+                    Flexible(flex:7, fit: FlexFit.loose,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                                children: [
+                                  Text(data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname ,textAlign:TextAlign.start,
+                                      overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
+                                ]),
+
+                            Text(data.therapistId.role.replaceAll("_", " ")??"" ,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                            Text("Duration: "+data.slotDuration.toString()+' mins' ,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
+
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+
+                                ButtonTheme(
+                                  height: 40,
+                                  minWidth: 35,
+                                  child: FlatButton(
+                                    color: Colors.white,
+                                    child: Icon(Icons.chat
+                                      , color: HH_Colors.accentColor, size: 18,),
+                                    onPressed: (){
+                                      Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
+                                    },
+                                    shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                                  ),
+                                ),
+
+                                ButtonTheme(
+                                    height: 40,
+                                    minWidth: 40,
+                                    child: FlatButton(
+                                      color: Colors.white,
+                                      child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                                      onPressed: (){
+                                        onClickVideo();
+                                      },
+                                      shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                                    )),
+
+                              ],
+                            )
+
+                          ],
+                        ))
+                  ],
+                ),
+
               ],
-            )
+            ),
+
           ),
+
         )
         ));
   }
@@ -274,9 +281,11 @@ class UpcomingSessionItem extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(18, 10, 10, 10),
               child:
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
+                  Flexible(flex: 3, fit: FlexFit.loose, child: Row(
                     children: [
                       data.therapistId.profilePic == ""?
                       Image.asset(
@@ -302,9 +311,9 @@ class UpcomingSessionItem extends StatelessWidget {
                               data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname,
                               overflow: TextOverflow.ellipsis,
                               style: new TextStyle(
-                                fontSize: 18.0,
-                                color: HH_Colors.grey_585858,
-                                fontWeight: FontWeight.w600
+                                  fontSize: 18.0,
+                                  color: HH_Colors.grey_585858,
+                                  fontWeight: FontWeight.w600
                               ),
                             )
 
@@ -318,8 +327,9 @@ class UpcomingSessionItem extends StatelessWidget {
                         ],
                       )
                     ],
-                  ),
+                  ),),
 
+              Flexible(flex: 2, fit: FlexFit.loose,child:
                   completed?
                       Row(
                         children: [
@@ -387,6 +397,7 @@ class UpcomingSessionItem extends StatelessWidget {
                       },)
                     ],
                   )
+              )
                 ],
 
               ),
