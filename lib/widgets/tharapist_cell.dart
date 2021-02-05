@@ -23,10 +23,14 @@ class TharapistCell extends StatelessWidget {
         children: [
           Row(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(25.0),
-                child:               Image.network(image, height: 50, width: 50,)
-
+              image == ""?
+              Image.asset(
+                'assets/images/ic_avatar.png',
+                height: 18,
+                width: 18,
+              ) : CircleAvatar(
+                backgroundImage: NetworkImage(image),
+                radius: 25,
               )
               ,
               SizedBox(
