@@ -145,6 +145,7 @@ class _OtpState extends State<OtpPage> {
             thirdinput.requestFocus();
             return;
           }
+          otpVerifyHandler();
           break;
         default:
       }
