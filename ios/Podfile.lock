@@ -104,6 +104,8 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - native_video_view (0.0.1):
+    - Flutter
   - open_file (0.0.1):
     - Flutter
   - path_provider (0.0.1):
@@ -137,6 +139,16 @@ PODS:
     - Stripe (~> 19.4.0)
   - TwilioVideo (3.8.0)
   - TwilioVoice (6.1.0)
+  - url_launcher (0.0.1):
+    - Flutter
+  - url_launcher_linux (0.0.1):
+    - Flutter
+  - url_launcher_macos (0.0.1):
+    - Flutter
+  - url_launcher_web (0.0.1):
+    - Flutter
+  - url_launcher_windows (0.0.1):
+    - Flutter
   - video_player (0.0.1):
     - Flutter
   - video_player_web (0.0.1):
@@ -164,6 +176,7 @@ DEPENDENCIES:
   - google_maps_flutter (from `Pods/.symlinks/plugins/google_maps_flutter-1.1.1/ios`)
   - "image_picker (from `Pods/.symlinks/plugins/image_picker-0.6.7+21/ios`)"
   - import_js_library (from `Pods/.symlinks/plugins/import_js_library-1.0.2/ios`)
+  - native_video_view (from `Pods/.symlinks/plugins/native_video_view-0.3.0/ios`)
   - open_file (from `Pods/.symlinks/plugins/open_file-3.0.3/ios`)
   - path_provider (from `Pods/.symlinks/plugins/path_provider-1.6.27/ios`)
   - "path_provider_linux (from `Pods/.symlinks/plugins/path_provider_linux-0.0.1+2/ios`)"
@@ -179,6 +192,11 @@ DEPENDENCIES:
   - stripe_payment (from `Pods/.symlinks/plugins/stripe_payment-1.0.9/ios`)
   - TwilioVideo (~> 3.7)
   - TwilioVoice (~> 6.1.0)
+  - url_launcher (from `Pods/.symlinks/plugins/url_launcher-5.7.10/ios`)
+  - "url_launcher_linux (from `Pods/.symlinks/plugins/url_launcher_linux-0.0.1+4/ios`)"
+  - "url_launcher_macos (from `Pods/.symlinks/plugins/url_launcher_macos-0.0.1+9/ios`)"
+  - "url_launcher_web (from `Pods/.symlinks/plugins/url_launcher_web-0.1.5+3/ios`)"
+  - "url_launcher_windows (from `Pods/.symlinks/plugins/url_launcher_windows-0.0.1+3/ios`)"
   - video_player (from `Pods/.symlinks/plugins/video_player-1.0.1/ios`)
   - "video_player_web (from `Pods/.symlinks/plugins/video_player_web-0.1.4+1/ios`)"
   - "wakelock (from `Pods/.symlinks/plugins/wakelock-0.2.1+1/ios`)"
@@ -236,6 +254,8 @@ EXTERNAL SOURCES:
     :path: "Pods/.symlinks/plugins/image_picker-0.6.7+21/ios"
   import_js_library:
     :path: Pods/.symlinks/plugins/import_js_library-1.0.2/ios
+  native_video_view:
+    :path: Pods/.symlinks/plugins/native_video_view-0.3.0/ios
   open_file:
     :path: Pods/.symlinks/plugins/open_file-3.0.3/ios
   path_provider:
@@ -262,6 +282,16 @@ EXTERNAL SOURCES:
     :path: "Pods/.symlinks/plugins/sqflite-1.3.2+2/ios"
   stripe_payment:
     :path: Pods/.symlinks/plugins/stripe_payment-1.0.9/ios
+  url_launcher:
+    :path: Pods/.symlinks/plugins/url_launcher-5.7.10/ios
+  url_launcher_linux:
+    :path: "Pods/.symlinks/plugins/url_launcher_linux-0.0.1+4/ios"
+  url_launcher_macos:
+    :path: "Pods/.symlinks/plugins/url_launcher_macos-0.0.1+9/ios"
+  url_launcher_web:
+    :path: "Pods/.symlinks/plugins/url_launcher_web-0.1.5+3/ios"
+  url_launcher_windows:
+    :path: "Pods/.symlinks/plugins/url_launcher_windows-0.0.1+3/ios"
   video_player:
     :path: Pods/.symlinks/plugins/video_player-1.0.1/ios
   video_player_web:
@@ -306,6 +336,7 @@ SPEC CHECKSUMS:
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   import_js_library: 1e36c695286e1efded5c9c07583bf1d06ac44065
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  native_video_view: 02756aebe7ec9d0ab00d039b7aa3756548900bc3
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
@@ -324,6 +355,11 @@ SPEC CHECKSUMS:
   stripe_payment: 1cbe9c339c21b5ecf01035e80eea351067c67c56
   TwilioVideo: c13a51ceca375e91620eb7578d2573c90cf53b46
   TwilioVoice: 1e83d3417edbd6f0487ebe0dcc5d9cd9184a0d64
+  url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
+  url_launcher_linux: ac237cb7a8058736e4aae38bdbcc748a4b394cc0
+  url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
+  url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c
+  url_launcher_windows: 683d7c283894db8d1914d3ab2223b20cc1ad95d5
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   video_player_web: da8cadb8274ed4f8dbee8d7171b420dedd437ce7
   wakelock: bfc7955c418d0db797614075aabbc58a39ab5107

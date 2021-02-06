@@ -16,6 +16,7 @@ import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
+import 'package:toast/toast.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -182,14 +183,56 @@ class HomePageState extends State<HomePage> {
                     }
                   })
             )
-          ],
+          ,]
         )
     );
   }
 
+  // current date and time 
+  getCurrentDateTime(Result result) {
+
+    print("dateee___ "+result.date.toString());
+
+    var flag = false;
+    var currentDate = new DateTime.now();
+    
+    // var d = Moment.parse(result.date.toString());
+    
+    // print(d.compareTo(currentDate));
+
+    var apptDate = result.date.toString().split(" ")[0].split("-");
+    
+    // ignore: unrelated_type_equality_checks
+    if(int.parse(apptDate[2]) == (currentDate.day) && int.parse(apptDate[1]) == currentDate.month){
+      flag = true;
+    }else if(currentDate.hour == (int.parse(result.startTime.split(":")[0]) + 2) || currentDate.minute >= int.parse(result.startTime.split(":")[1])){
+      flag = true;
+    }else if(currentDate.hour >= int.parse(result.endTime.split(":")[0]) && currentDate.minute >= int.parse(result.endTime.split(":")[1])){
+      flag = true;
+    }
+
+    return flag;
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
+  
 
   void callParticipent(
-      String sessionId, String patientId, Result result, BuildContext context) async {
+    String sessionId, String patientId, Result result, BuildContext context) async {
+    
+    // var sessionTimeStatus = getCurrentDateTime(result);
+
+    // if(!sessionTimeStatus){
+    //   showToast("You're now able to call before time.");
+    //   return;
+    // }
+
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
               from: result.patientId,
