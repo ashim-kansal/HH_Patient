@@ -5,6 +5,7 @@ import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/creatAccount.dart';
 import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
@@ -80,7 +81,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => TherapistPage(title: args.title,));
     case BookSessionPage.RouteName:
-      final upcoming.Result args = settings.arguments;
+      final Result args = settings.arguments;
       return MaterialPageRoute(builder: (context) => BookSessionPage(data: args,));
     case MyAssessmentPage.RouteName:
       return MaterialPageRoute(builder: (context) => MyAssessmentPage());

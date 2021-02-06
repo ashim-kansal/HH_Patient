@@ -99,7 +99,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                         width: 40,
                                       ),
                                       Text(
-                                        snapshot.data.result[index].title,
+                                        snapshot.data.result[index].title??"",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: 13,
@@ -138,7 +138,9 @@ class _LibraryPageState extends State<LibraryPage> {
                                                 .data.result[index].document);
                                           } else if (snapshot
                                               .data.result[index].document
-                                              .endsWith('.doc')) {
+                                              .endsWith('.doc') || snapshot
+                                              .data.result[index].document
+                                              .endsWith('.docx')) {
                                             launch('http://docs.google.com/viewer?url='+snapshot
                                                 .data.result[index].document);
                                           } else {

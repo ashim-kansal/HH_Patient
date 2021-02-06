@@ -106,8 +106,14 @@ class HomePageState extends State<HomePage> {
                     fontSize: 22, color: HH_Colors.grey_3d3d3d),),
                 new GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, SessionPage.RouteName);
-                  },
+                    Navigator.pushNamed(context, SessionPage.RouteName).then((
+                        value) {
+                      if (value == 'fab') {
+                        print(value);
+                        widget.onUpdateDashboard("fab");
+                      }
+                    });
+                    },
                   child: Text(AppLocalizations
                       .of(context)
                       .viewall, style: TextStyle(

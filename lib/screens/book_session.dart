@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/api/Therapist_service.dart' as service;
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
-import 'package:flutter_app/model/UpcomingSessionsModel.dart' as Therapist;
+import 'package:flutter_app/model/GetTherapistsResponse.dart' as Therapist;
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/sessions.dart';
@@ -65,8 +65,8 @@ class BookSessionState extends State<BookSessionPage>{
     return MyWidget(title: AppLocalizations.of(context).schedule, child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  TharapistCell(name: widget.data.therapistId.firstName+' '+widget.data.therapistId.lastName, role: widget.data.therapistId.role,
-                    image: widget.data.therapistId.profilePic, showBook: false, onClick: (){},),
+                  TharapistCell(name: widget.data.firstName+' '+widget.data.lastName, role: widget.data.role.replaceAll("_", " ")??"",
+                    image: widget.data.profilePic, showBook: false, onClick: (){},),
                   SizedBox(height: 5,),
                   FutureBuilder<GetBookingSlotsResponse>(
                       future: _listFuture,
@@ -138,7 +138,7 @@ class BookSessionState extends State<BookSessionPage>{
   }
 
   Future<GetBookingSlotsResponse> getBookingSlots() async {
-      var response = await service.getSlotsForBooking(widget.data.therapistId.id);
+      var response = await service.getSlotsForBooking(widget.data.id);
       return response;
   }
 
