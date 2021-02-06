@@ -49,9 +49,15 @@ class SessionCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                    Flexible(
+                      flex: 8,
+                      fit: FlexFit.tight,
+                      child: Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),)),
                     Spacer(),
-                    HHOptionButton(onClickCancel: (){
+                    Flexible(
+                      flex: 2,
+                      fit:  FlexFit.tight,
+                      child:HHOptionButton(onClickCancel: (){
                       showDialog(context: context,
                         builder: (BuildContext dialogContext) {
                           return CancelDialog(
@@ -79,9 +85,10 @@ class SessionCard extends StatelessWidget {
                     }, onClickReSchedule: (){
                       Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
                     },)
+                    ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 8,),
 
                 // SizedBox(height: 5,),
                 Row(
@@ -98,18 +105,21 @@ class SessionCard extends StatelessWidget {
                       backgroundImage: NetworkImage(data.therapistId.profilePic),
                       radius: 18,
                     )),
-                    SizedBox(width: 10,),
-                    // Flexible(flex:11, fit: FlexFit.tight,
-                    //     child:
+                    SizedBox(width: 8,),
+                    Flexible(flex:7, fit: FlexFit.loose,
+                      child:
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                                children: [
-                                  Text(data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname ,textAlign:TextAlign.start,
-                                      overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
-                                ]),
+                              children: [
+                                Flexible(
+                                  flex: 6,
+                                  fit: FlexFit.tight,
+                                  child: Text(data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname ,textAlign:TextAlign.start,
+                                    overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),)
+                              ]),
 
                             Text(data.therapistId.role.replaceAll("_", " ")??"" ,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
                             Text("Duration: "+data.slotDuration.toString()+' mins' ,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 10, color: HH_Colors.grey_707070)),
@@ -150,7 +160,7 @@ class SessionCard extends StatelessWidget {
 
                           ],
                         )
-                    // )
+                    )
                   ],
                 ),
 
@@ -280,78 +290,93 @@ class UpcomingSessionItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Container(
-              padding: EdgeInsets.fromLTRB(18, 10, 10, 10),
-              child:
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
+              padding: EdgeInsets.fromLTRB(10, 10, 1, 10),
+              child: Column(
                 children: [
-                  // Flexible(flex: 4, fit: FlexFit.loose, child:
                   Row(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      data.therapistId.profilePic == ""?
-                      Image.asset(
-                        'assets/images/ic_avatar.png',
-                        height: 18,
-                        width: 18,
-                      ) : CircleAvatar(
-                        backgroundImage: NetworkImage(data.therapistId.profilePic),
-                        radius: 18,
-                      ),
-
-                      SizedBox(width: 10,),
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                         Flexible(
+                      flex: 6,
+                      fit: FlexFit.loose,
+                      child: Row(
                         children: [
-                          // Flexible(child:
-                          Text(
-                            data.therapistId.role.toLowerCase() == "physician" ? 'Dr. '+drname : drname,
-                            style: new TextStyle(
-                                fontSize: 18.0,
-                                color: HH_Colors.grey_585858,
-                                fontWeight: FontWeight.w600
-                            ),
-                          // )
-    ),
-
-                          Row(children: [
-                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
-                          ]),
-                          Row(children: [
-                            Text('Duration: '+data.slotDuration.toString()+' mins', textAlign:TextAlign.start,style: TextStyle(fontSize: 12, color: HH_Colors.grey_707070),),
-                          ]),
-                        ],
-                      ),
-                      Spacer(),
-                      // Flexible(flex: 2, fit: FlexFit.loose,child:
-                      completed?
-                      Row(
-                        children: [
-                          Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
-                          Text(AppLocalizations.of(context).completed, style: TextStyle(color: HH_Colors.color_17AB35),)
-
-                        ],
-                      )
-                          :
-                      Row(
-                        children: [
-                          ButtonTheme(
-                            height: 35,
-                            minWidth: 35,
-                            child: FlatButton(
-                              color: Colors.white,
-                              child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
-                              onPressed: (){
-                                Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
-                              },
-                              shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
-
-                            ),
+                          data.therapistId.profilePic == ""?
+                          Image.asset(
+                            'assets/images/ic_avatar.png',
+                            height: 18,
+                            width: 18,
+                          ) : CircleAvatar(
+                            backgroundImage: NetworkImage(data.therapistId.profilePic),
+                            radius: 18,
                           ),
 
-                          ButtonTheme(
+                          SizedBox(width: 10,),
+
+                          // Flexible(
+                          //     flex: 8,
+                          //     fit: FlexFit.loose,
+                          //     child:
+                         Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                 Text(
+                                  data.therapistId.role.toLowerCase() == "physician" ? 'Dr. ': ""+ (drname.length > 12 ? drname.substring(0, 12)+"..." : drname),
+                                  style: new TextStyle(
+                                      fontSize: 18.0,
+                                      color: HH_Colors.grey_585858,
+                                      fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                                
+                                Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
+                            
+                                Text('Duration: '+data.slotDuration.toString()+' mins', textAlign:TextAlign.start,style: TextStyle(fontSize: 12, color: HH_Colors.grey_707070),),
+                             
+                              ],),
+                          // )
+                        ],
+                      ),
+                    ),
+
+                    completed?
+                      Flexible(flex: 6,
+                        fit: FlexFit.loose,
+                        child: Container(
+                          margin: EdgeInsets.only(right: 10),
+                          child: Column(
+                            children: [
+                              Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
+                              Text(AppLocalizations.of(context).completed, style: TextStyle(color: HH_Colors.color_17AB35),)
+                            ],
+                          ),
+                        )
+                      ):
+                      // Flexible(flex: 4, fit: FlexFit.loose, child:
+                    Flexible(flex: 7,
+                    fit: FlexFit.loose,
+                    child:Row(
+                      children: [
+                        Spacer(),
+                        Row(
+                          children: [
+                            ButtonTheme(
+                              height: 35,
+                              minWidth: 35,
+                              child: FlatButton(
+                                color: Colors.white,
+                                child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
+                                onPressed: (){
+                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
+                                },
+                                shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+
+                              ),
+                            ),
+
+                            ButtonTheme(
                               height: 35,
                               minWidth: 35,
                               child: FlatButton(
@@ -364,44 +389,47 @@ class UpcomingSessionItem extends StatelessWidget {
                                 },
                                 shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                               )),
-                          HHOptionButton(onClickCancel: (){
-                            showDialog(context: context,
-                              builder: (BuildContext dialogContext) {
-                                return CancelDialog(
-                                    onYesPress: ()async {
-                                      cancelSession(data.id).then(
-                                              (value) => {
+                            HHOptionButton(onClickCancel: (){
+                              showDialog(context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return CancelDialog(
+                                      onYesPress: ()async {
+                                        cancelSession(data.id).then(
+                                                (value) => {
 
-                                            print(value.responseCode),
-                                            if (value.responseCode == 200) {
-                                              Navigator.pop(context),
-                                              showToast(context, value.responseMessage),
-                                              onClickCancel()
-                                              // Navigator.pushNamed(context, Dashboard.RouteName)
-                                            }
-                                          });
-                                      // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                                    },
-                                    onDenyPress: (){
-                                      Navigator.pop(context);
-                                    }
-                                );
-                              },
-                            );
-                          }, onClickReSchedule: (){
-                            Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
-                          },)
-                        ],
-                      )
+                                              print(value.responseCode),
+                                              if (value.responseCode == 200) {
+                                                Navigator.pop(context),
+                                                showToast(context, value.responseMessage),
+                                                onClickCancel()
+                                                // Navigator.pushNamed(context, Dashboard.RouteName)
+                                              }
+                                            });
+                                        // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                      },
+                                      onDenyPress: (){
+                                        Navigator.pop(context);
+                                      }
+                                  );
+                                },
+                              );
+                            }, onClickReSchedule: (){
+                              Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
+                            },)
+                          ],
+                        )
+                      ],
+                    ),
+                      ),
+
+
+                  // )
                     ],
+
                   ),
-                  // ),
-
-
-              // )
                 ],
-
-              ),
+              )
+              
             )
           )
         );
