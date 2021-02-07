@@ -60,15 +60,15 @@ class PlanWidgetState extends State<PlanWidget> {
                 // widget.desc.contains("div") ?
                 Html(
                   data:widget.desc,
-                  style: {
-                    "ul": Style(
-                        color: HH_Colors.color_black,
-                        fontSize: FontSize(15.0)
-                    ),"p": Style(
-                        color: HH_Colors.color_black,
-                        fontSize: FontSize(15.0),
-                    )
-                  },
+                  // style: {
+                  //   "ul": Style(
+                  //       color: HH_Colors.color_black,
+                  //       fontSize: FontSize(15.0)
+                  //   ),"p": Style(
+                  //       color: HH_Colors.color_black,
+                  //       fontSize: FontSize(15.0),
+                  //   )
+                  // },
                   // style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),
                 )
                   //     : Text(widget.desc, style: TextStyle(
