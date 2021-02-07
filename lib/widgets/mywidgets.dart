@@ -1105,6 +1105,7 @@ class NotificationList extends StatelessWidget {
                   child: new ListTile(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         HHTextView(
                           title: this.title,
