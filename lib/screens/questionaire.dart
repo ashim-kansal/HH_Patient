@@ -68,9 +68,12 @@ class QuestionairePageState extends State<QuestionairePage> {
                         if(snapshot.hasError){
                           return Center(child: Text(AppLocalizations.of(context).error),);
                         }
-                         if(snapshot.data.result[0].questions.length==0){
-                           return Center(child: Text(AppLocalizations.of(context).not_data_found),);
-                         }
+                        if(snapshot.data.result.length == 0){
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, Dashboard.RouteName);
+                          return Center(child: Text(AppLocalizations.of(context).not_data_found),);
+                        }
+
                         SchedulerBinding.instance.addPostFrameCallback((_){
 
                           setState(() {
