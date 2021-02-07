@@ -83,7 +83,11 @@ class MyPlansState extends State<MyPlans> {
                     ),
                     Expanded(
                       child: PageView.builder(
-                        itemCount: snapshot.data.result.length, // Can be null
+                        itemCount: snapshot.data.result.length,
+                        controller:  PageController(
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                        ),// Can be null
                         itemBuilder: (context, position) {
                           return PlanWidget(
                             title: snapshot.data.result[position].title,
