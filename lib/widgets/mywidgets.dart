@@ -838,7 +838,7 @@ class CancelDialog extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Container(
           constraints: BoxConstraints(
-              minHeight: 150, minWidth: double.infinity, maxHeight: 170),
+              minHeight: 150, minWidth: double.infinity, maxHeight: 220),
           // height: 150,
           // width: 200,
           child: Padding(
@@ -850,6 +850,7 @@ class CancelDialog extends StatelessWidget {
                 Container(
                     child: Column(
                   children: [
+                    Image.asset("assets/images/ic_cancel.png", height: 50, width: 50,),
                     HHTextView(
                         title: AppLocalizations.of(context).cancelSession,
                         size: 22,
@@ -859,6 +860,93 @@ class CancelDialog extends StatelessWidget {
                     HHTextView(
                         title:
                             AppLocalizations.of(context).cancelSessionDesc,
+                        size: 16,
+                        color: HH_Colors.color_707070,
+                        alignment: TextAlign.center,
+                        textweight: FontWeight.w400)
+                  ],
+                )),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(
+                              color: HH_Colors.borderGrey, width: 0.5))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                            onTap: () => {
+                                  onDenyPress(),
+                                },
+                            child: HHTextView(
+                                title: AppLocalizations.of(context).no,
+                                size: 18,
+                                color: HH_Colors.color_707070,
+                                textweight: FontWeight.w400)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                          onTap: () => {onYesPress()},
+                          child: HHTextView(
+                              title: AppLocalizations.of(context).yes,
+                              size: 18,
+                              color: HH_Colors.color_707070,
+                              textweight: FontWeight.w400),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+}
+
+class CancelProgramDialog extends StatelessWidget {
+  final VoidCallback onYesPress;
+  final VoidCallback onDenyPress;
+
+  CancelProgramDialog({
+    this.onYesPress,
+    this.onDenyPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          constraints: BoxConstraints(
+              minHeight: 200, minWidth: double.infinity, maxHeight: 280),
+          // height: 150,
+          // width: 200,
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
+                  children: [
+                    Image.asset("assets/images/ic_cancel.png", height: 60, width: 60,),
+                    HHTextView(
+                        title: 'Cancel Program',
+                        size: 22,
+                        color: HH_Colors.color_3D3D3D,
+                        textweight: FontWeight.w600),
+                    SizedBox(height: 5),
+                    HHTextView(
+                        title: 'Are you sure you want to cancel the program? Your program will be immediately cancelled and you will need to take another plan to use the app.',
                         size: 16,
                         color: HH_Colors.color_707070,
                         alignment: TextAlign.center,

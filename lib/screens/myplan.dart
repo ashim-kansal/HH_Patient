@@ -308,7 +308,20 @@ class CancelPlansPageState extends State<CancelPlansPage> {
                     type: 1,
                     isEnable: true,
                     onClick: () {
-                      cancelProgram();
+                      showDialog(context: context,
+                        builder: (BuildContext dialogContext) {
+                          return CancelProgramDialog(
+                              onYesPress: ()async {
+                                cancelProgram();
+                                // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                              },
+                              onDenyPress: (){
+                                Navigator.pop(context);
+                              }
+                          );
+                        },
+                      );
+
                     },
                   )
                 ],
