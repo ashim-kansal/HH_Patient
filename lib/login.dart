@@ -16,6 +16,7 @@ import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/signup.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -38,16 +39,24 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  @override
-  void initState() {
-    super.initState(); 
-  }
-
   var emailerror = false;
   var pwderror = false;
   bool securepwd = true;
   bool isChecked = false;
   bool isApiCallProcess = false;
+
+  @override
+  void initState() {
+    super.initState(); 
+    
+    DBProvider.db.isChecked().then((value) => {
+      setState((){
+        isChecked = value;
+      })
+    });
+  }
+
+
 
   String token = "";
 
@@ -122,6 +131,8 @@ class _LoginPageState extends State<LoginPage> {
       showToast(AppLocalizations.of(context).acceptTerms);
       return;
     }
+
+    DBProvider.db.setChecked(isChecked);
 
     APIService apiService = new APIService();
 

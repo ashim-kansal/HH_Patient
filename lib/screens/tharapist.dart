@@ -56,7 +56,7 @@ class _TherapistState extends State<TherapistPage> {
                       itemBuilder: (context, index) {
                         return TharapistCell(
                           name: snapshot.data.result[index].firstName + " " + snapshot.data.result[index].lastName,
-                          role: snapshot.data.result[index].role,
+                          role: snapshot.data.result[index].role.replaceAll("_", ' '),
                           image: snapshot.data.result[index].profilePic,
                           showBook: true,
                           onClick: () {

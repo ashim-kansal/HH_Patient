@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
-import 'package:flutter_app/model/GooglePlaceResponse.dart';
+import 'package:flutter_app/model/GooglePlaceResponse.dart' as mLocation;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:location/location.dart' ;
+
 // import 'data/place_reposne';
 
 
@@ -25,12 +27,44 @@ class MapPage extends StatefulWidget {
 class _MapState extends State<MapPage> {
   // GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
   List<Marker> markers = <Marker>[];
+  Location location = new Location();
+
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _locationData;
   @override
-  void initState() {
+  void initState(){
     // TODO: implement initState
     super.initState();
+    getLocation();
+  }
 
-    searchNearby();
+  getLocation() async{
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    location.getLocation().then((value) => {
+      setState((){
+        _locationData = value;
+      }),
+      print(value),
+      searchNearby()
+    });
+
   }
 
   @override
@@ -48,7 +82,7 @@ class _MapState extends State<MapPage> {
   }
 
   final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(43.651070, -79.347015),
+    target: LatLng(_locationData.latitude??0.0, _locationData.longitude??0.0),
     zoom: 12,
   );
 
@@ -78,7 +112,7 @@ class _MapState extends State<MapPage> {
                 children: <Widget>[
                   Container(child: GoogleMap(
                     mapType: MapType.terrain,
-                    initialCameraPosition: _kGooglePlex,
+                    initialCameraPosition: _locationData!=null?_kGooglePlex:null,
                     onMapCreated: _onMapCreated,
                     markers: Set<Marker>.of(markers),
 
@@ -102,14 +136,14 @@ class _MapState extends State<MapPage> {
     });
     // 3
     String url =
-        'https://maps.googleapis.com/maps/api/place/search/json?location=43.6491341,-79.3567846&radius=50000&types=pharmacy&sensor=true&key=AIzaSyAppg0XMlMz-lT1MhLCZGrs56HrGWuTXKI';
+        'https://maps.googleapis.com/maps/api/place/search/json?location='+_locationData.latitude.toString()+','+_locationData.longitude.toString()+'&radius=50000&types=pharmacy&sensor=true&key=AIzaSyAppg0XMlMz-lT1MhLCZGrs56HrGWuTXKI';
     print(url);
     final response = await http.get(url);
     print(response.body);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       print(response.body);
-      GooglePlaceResponse places = googlePlaceResponseFromJson(response.body);
+      mLocation.GooglePlaceResponse places = mLocation.googlePlaceResponseFromJson(response.body);
       if(places == null || places.results.length == 0)
         return;
 

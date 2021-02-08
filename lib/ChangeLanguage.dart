@@ -17,16 +17,8 @@ class SelectLanguage extends StatefulWidget {
   State<StatefulWidget> createState() => SelectLanguageState();
 }
 
-class Call {
-  Call(this.number);
-  String number;
-  bool held = false;
-  bool muted = false;
-}
-
 class SelectLanguageState extends State<StatefulWidget> {
   String dropdownValue = 'English';
-
 
   @override
   void initState() {
