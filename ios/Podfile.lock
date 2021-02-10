@@ -99,6 +99,10 @@ PODS:
     - Flutter
   - import_js_library (1.0.0):
     - Flutter
+  - location (0.0.1):
+    - Flutter
+  - location_web (0.0.1):
+    - Flutter
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -176,6 +180,8 @@ DEPENDENCIES:
   - google_maps_flutter (from `Pods/.symlinks/plugins/google_maps_flutter-1.1.1/ios`)
   - "image_picker (from `Pods/.symlinks/plugins/image_picker-0.6.7+21/ios`)"
   - import_js_library (from `Pods/.symlinks/plugins/import_js_library-1.0.2/ios`)
+  - location (from `Pods/.symlinks/plugins/location-3.2.4/ios`)
+  - location_web (from `Pods/.symlinks/plugins/location_web-1.0.1/ios`)
   - native_video_view (from `Pods/.symlinks/plugins/native_video_view-0.3.0/ios`)
   - open_file (from `Pods/.symlinks/plugins/open_file-3.0.3/ios`)
   - path_provider (from `Pods/.symlinks/plugins/path_provider-1.6.27/ios`)
@@ -254,6 +260,10 @@ EXTERNAL SOURCES:
     :path: "Pods/.symlinks/plugins/image_picker-0.6.7+21/ios"
   import_js_library:
     :path: Pods/.symlinks/plugins/import_js_library-1.0.2/ios
+  location:
+    :path: Pods/.symlinks/plugins/location-3.2.4/ios
+  location_web:
+    :path: Pods/.symlinks/plugins/location_web-1.0.1/ios
   native_video_view:
     :path: Pods/.symlinks/plugins/native_video_view-0.3.0/ios
   open_file:
@@ -335,6 +345,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   import_js_library: 1e36c695286e1efded5c9c07583bf1d06ac44065
+  location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
+  location_web: b94e7433cfe28c0f7c8923c2ee482824b32e55a7
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   native_video_view: 02756aebe7ec9d0ab00d039b7aa3756548900bc3
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d

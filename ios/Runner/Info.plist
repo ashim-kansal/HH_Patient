@@ -46,6 +46,10 @@
 	<string>Your message to user when the microphone is accessed for the first time</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>HHPatient need to access your galary for profile image.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+    <string>HHPatient need to access your location for show pharmacies near by you.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>HHPatient need to access your location for show pharmacies near by you.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

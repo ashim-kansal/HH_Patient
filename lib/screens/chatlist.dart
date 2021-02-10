@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/ChatUsers.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -22,6 +23,24 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
+
+  String userId;
+
+  @override
+  void initState() {
+    super.initState(); 
+    
+    getUserData();
+  }
+
+  void getUserData() async {
+    var userID = await GetStringToSP("userId");
+
+    setState(() {
+      userId = userID;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MyWidget(title: AppLocalizations.of(context).mychat, child: Container(
@@ -44,13 +63,13 @@ class _ChatListPageState extends State<ChatListPage> {
                 var _date = item.message[item.message.length - 1].createdAt;
                 Moment createdDt = Moment.parse('$_date');
                 return ChatUserCell(
-                  name: item.receiverId ==null ?"":item.receiverId.firstName+" "+item.receiverId.lastName,
+                  name: item.receiverId ==null ?"": (item.receiverId.id == userId ? item.senderId.firstName+" "+item.senderId.lastName : item.receiverId.firstName+" "+item.receiverId.lastName),
                   message: item.message[item.message.length - 1].message,
-                  profile: item.receiverId == null ? '':item.receiverId.profilePic,
+                  profile: item.receiverId == null ? '': (item.receiverId.id == userId ? item.senderId.profilePic : item.receiverId.profilePic),
                   time: createdDt.format("hh:mm a"),
                   online: true,
                   onClick: () {
-                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.receiverId.id));
+                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.receiverId.id == userId ? item.senderId.id : item.receiverId.id));
                   },
                 );
               },

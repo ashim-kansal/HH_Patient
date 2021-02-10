@@ -14,7 +14,7 @@ import 'package:toast/toast.dart';
 class EditProfilePage extends StatefulWidget {
   static const String RouteName = '/editProfile';
 
-  UserData data;
+  Result data;
 
   EditProfilePage({Key key, this.title, this.data}) : super(key: key);
 
@@ -285,7 +285,7 @@ class _CreateAccountState extends State<EditProfilePage> {
 }
 
 class ProfileArguments {
-  final UserData data;
+  final Result data;
 
   ProfileArguments(this.data);
 }

@@ -13,31 +13,27 @@ class UserProfile {
         this.responseCode,
         this.responseMessage,
         this.result,
-        this.totalUnreadNotificationList,
     });
 
     int responseCode;
     String responseMessage;
-    UserData result;
-    int totalUnreadNotificationList;
+    Result result;
 
     factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
         responseCode: json["responseCode"],
         responseMessage: json["responseMessage"],
-        result: UserData.fromJson(json["userData"]),
-        totalUnreadNotificationList: json["totalUnreadNotificationList"],
+        result: Result.fromJson(json["result"]),
     );
 
     Map<String, dynamic> toJson() => {
         "responseCode": responseCode,
         "responseMessage": responseMessage,
-        "userData": result.toJson(),
-        "totalUnreadNotificationList": totalUnreadNotificationList,
+        "result": result.toJson(),
     };
 }
 
-class UserData {
-    UserData({
+class Result {
+    Result({
         this.userType,
         this.appLanguage,
         this.deviceToken,
@@ -57,19 +53,16 @@ class UserData {
         this.firstName,
         this.lastName,
         this.email,
-        this.mobileNumber,
-        this.password,
         this.countryCode,
+        this.mobileNumber,
+        this.address,
+        this.password,
         this.otp,
         this.mergeContact,
         this.permissions,
         this.questions,
-        this.createdAt,
-        this.updatedAt,
-        this.v,
         this.programSubscription,
-        this.programId,
-        this.address,
+        this.totalUnreadNotificationList,
     });
 
     String userType;
@@ -78,7 +71,7 @@ class UserData {
     String voipToken;
     String profilePic;
     int otpTime;
-    bool verifyOtp;
+    int verifyOtp;
     bool notificationStatus;
     bool programSubscribed;
     bool isQuestionnaireFilled;
@@ -91,21 +84,18 @@ class UserData {
     String firstName;
     String lastName;
     String email;
-    String mobileNumber;
-    String password;
     String countryCode;
+    String mobileNumber;
+    String address;
+    String password;
     String otp;
     String mergeContact;
     List<dynamic> permissions;
     List<Question> questions;
-    DateTime createdAt;
-    DateTime updatedAt;
-    int v;
     String programSubscription;
-    String programId;
-    String address;
+    int totalUnreadNotificationList;
 
-    factory UserData.fromJson(Map<String, dynamic> json) => UserData(
+    factory Result.fromJson(Map<String, dynamic> json) => Result(
         userType: json["userType"],
         appLanguage: json["appLanguage"],
         deviceToken: json["deviceToken"],
@@ -125,19 +115,16 @@ class UserData {
         firstName: json["firstName"],
         lastName: json["lastName"],
         email: json["email"],
-        mobileNumber: json["mobileNumber"],
-        password: json["password"],
         countryCode: json["countryCode"],
+        mobileNumber: json["mobileNumber"],
+        address: json["address"],
+        password: json["password"],
         otp: json["otp"],
         mergeContact: json["mergeContact"],
         permissions: List<dynamic>.from(json["permissions"].map((x) => x)),
         questions: List<Question>.from(json["Questions"].map((x) => Question.fromJson(x))),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
         programSubscription: json["programSubscription"],
-        programId: json["programId"],
-        address: json["address"],
+        totalUnreadNotificationList: json["totalUnreadNotificationList"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -160,19 +147,16 @@ class UserData {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
-        "mobileNumber": mobileNumber,
-        "password": password,
         "countryCode": countryCode,
+        "mobileNumber": mobileNumber,
+        "address": address,
+        "password": password,
         "otp": otp,
         "mergeContact": mergeContact,
         "permissions": List<dynamic>.from(permissions.map((x) => x)),
         "Questions": List<dynamic>.from(questions.map((x) => x.toJson())),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
         "programSubscription": programSubscription,
-        "programId": programId,
-        "address": address,
+        "totalUnreadNotificationList": totalUnreadNotificationList,
     };
 }
 
