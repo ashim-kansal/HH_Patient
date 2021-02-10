@@ -169,6 +169,10 @@ class HomePageState extends State<HomePage> {
                                 setState(() {
 
                                 });
+                              },onClickReschedule: () {
+                                setState(() {
+
+                                });
                               }
                           );
                         },

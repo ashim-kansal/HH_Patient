@@ -153,6 +153,15 @@ class SessionPageState extends State<SessionPage> {
                   role: '',
                   onClick: () {},
                   completed: !isSwitched,
+                  onClickCancel: (){
+                    setState(() {
+
+                    });
+                  },onClickReSchedule: (){
+                    setState(() {
+
+                    });
+                  },
                 );
               },
               separatorBuilder: (context, index) {

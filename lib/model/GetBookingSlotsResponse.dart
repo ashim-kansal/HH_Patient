@@ -87,20 +87,20 @@ class Schedule {
     this.endTime,
   });
 
-  Status status;
+  String status;
   String id;
   String startTime;
   String endTime;
 
   factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
-    status: statusValues.map[json["status"]],
+    status: json["status"],
     id: json["_id"],
     startTime: json["startTime"],
     endTime:json["endTime"],
   );
 
   Map<String, dynamic> toJson() => {
-    "status": statusValues.reverse[status],
+    "status": status,
     "_id": id,
     "startTime": startTime,
     "endTime": endTime,
@@ -110,12 +110,6 @@ class Schedule {
 
 
 
-
-enum Status { AVAILABLE }
-
-final statusValues = EnumValues({
-  "AVAILABLE": Status.AVAILABLE
-});
 
 enum TherapistId { THE_5_FE19_CDABC79_D4_C1783_B0714 }
 

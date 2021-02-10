@@ -34,6 +34,10 @@ class DBProvider {
           "id INTEGER PRIMARY KEY,"
           "isFirst INTEGER"
           ")");
+      await db.execute("CREATE TABLE Terms ("
+          "id INTEGER PRIMARY KEY,"
+          "isChecked INTEGER"
+          ")");
     });
   }
 

@@ -21,10 +21,11 @@ class SessionCard extends StatelessWidget {
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
   final VoidCallback onClickVideo;
+  final VoidCallback onClickReschedule;
   Result data;
 
   SessionCard(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickVideo, this.onClickCancel, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickVideo, this.onClickReschedule, this.onClickCancel, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,9 @@ class SessionCard extends StatelessWidget {
                         },
                       );
                     }, onClickReSchedule: (){
-                      Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
+                      Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data).then((value) => {
+                        onClickReschedule()
+                      });
                     },)
                     ),
                   ],
@@ -275,10 +278,11 @@ class UpcomingSessionItem extends StatelessWidget {
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
   final VoidCallback onVideoCancel;
+  final VoidCallback onClickReSchedule;
 
 
   UpcomingSessionItem(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onVideoCancel, this.onClick, this.drname, this.sdate, this.onClickCancel});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onVideoCancel, this.onClickReSchedule, this.onClick, this.drname, this.sdate, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +298,6 @@ class UpcomingSessionItem extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
-                    // crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                          Flexible(
@@ -314,10 +317,6 @@ class UpcomingSessionItem extends StatelessWidget {
 
                           SizedBox(width: 10,),
 
-                          // Flexible(
-                          //     flex: 8,
-                          //     fit: FlexFit.loose,
-                          //     child:
                          Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -414,7 +413,7 @@ class UpcomingSessionItem extends StatelessWidget {
                                 },
                               );
                             }, onClickReSchedule: (){
-                              Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data);
+                              Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data).then((value) => {onClickReSchedule()});
                             },)
                           ],
                         )

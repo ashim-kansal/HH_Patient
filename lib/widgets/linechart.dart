@@ -20,7 +20,7 @@ class SimpleLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList, animate: animate,defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: false));
+    return new charts.LineChart(seriesList, animate: animate,defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: true));
   }
 
   /// Create one series with sample hard coded data.

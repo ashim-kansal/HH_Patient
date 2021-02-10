@@ -39,7 +39,7 @@ class _CreateAccountState extends State<ProfilePage> {
   String address = "";
   String profilepic = "";
 
-  Result userData;
+  UserData userData;
 
   @override
   void dispose() {

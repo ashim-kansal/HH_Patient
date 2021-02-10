@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/MyGraphWidget.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_app/widgets/linechart.dart';
@@ -23,16 +25,12 @@ class DrinkingDiaryPage extends StatefulWidget{
 class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
 
   String label = '';
-  List<Result> mDiaryList;
   Future<GetDrinkingDiaryList> dataList;
-  int pos = 0;
-  List<Result> graphData;
 
   @override
   void initState() {
     super.initState();
     dataList = getDrinkingDiaryList();
-    pos??0;
   }
 
   @override
@@ -47,63 +45,35 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
               if (snapshot.hasError) {
                 return Center(child: Text(AppLocalizations.of(context).error),);
               }
-
-              SchedulerBinding.instance.addPostFrameCallback((_){
-                setState(() {
-                  mDiaryList = snapshot.data.result;
-                });
-              });
+              
+              // SchedulerBinding.instance.addPostFrameCallback((_){
+              //   setState(() {
+              //     mDiaryList = snapshot.data.result;
+              //   });
+              // });
+              getWeeks(snapshot.data.result);
               List<Result> weekdayData = getWeekdaysData(snapshot.data.result);
-              graphData = getGraphData(snapshot.data.result, pos);
-              label = getLabel(graphData);
+              List<WeekSlotModal> weekSlotData = getWeeks(snapshot.data.result);
 
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(right: 10, left: 10),
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          color: HH_Colors.primaryColor,
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0))
-                      ),
-                      padding: EdgeInsets.all(5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(width: 10,),
-                          // Icon(Icons.arrow_back_ios_rounded, color: Colors.white,),
-                          Text(label, style: TextStyle(color: Colors.white),),
-                          // Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
-                          SizedBox(width: 10,),
-                        ],
-                      ),
-                    ),
-                    Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
-                        child: DrinkingDiaryDateWidget(list: snapshot.data.result, onClickItem:(position){
-                          setState(() {
-                            pos = position;
-                          });
-                        })),
+
+                    // Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
+                    //     child: DrinkingDiaryDateWidget(list: snapshot.data.result, onClickItem:(position){
+                    //     })),
 
                     SizedBox(height: 10,),
-                    Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Container(
+                    Container(
                           padding: EdgeInsets.all(10),
-                          height: MediaQuery.of(context).size.height/3,
-                          child: mDiaryList != null && mDiaryList.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
+                          child: snapshot.data.result != null && snapshot.data.result.length > 0 ? MyGraphWidget(weekSlotData: weekSlotData,) : HHTextView(
                             title: "No data found.",
                             color: HH_Colors.purpleColor,
                             size: 17,
+                            textweight: FontWeight.w600,
                           ),
-                        )
+                        ),
 
-                    ),
                     SizedBox(height: 20,),
                     DrinkingDiaryCell(day:'Mon', data: weekdayData[0]??Result(), onClickGoal: (){
                       onClickAddGoal();
@@ -170,7 +140,6 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
       builder: (BuildContext dialogContext) {
         return DialogWithField(
           count: (val){
-            print('hjjjj'+pos.toString());
             updateGoal(val);
           },
           onClick: () {
@@ -200,30 +169,55 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
     return mList;
   }
 
-  List<Result> getGraphData(List<Result> result, int pos) {
-    List<Result> mList = new List();
-    if(result.length > pos){
-      if(result.length > pos+7){
-        mList.addAll(result.getRange(pos, pos+7));
-      }else{
-        mList.addAll(result.getRange(pos, result.length));
+  List<WeekSlotModal> getWeeks(List<Result> data){
+    List<WeekSlotModal> slots = List();
+    if(!data.isEmpty && data.length > 0){
+      DateTime firstDate = getFirstWeekDate(data[data.length-1].date);
+      DateTime lastDate = data[0].date.add(Duration(days: DateTime.daysPerWeek - data[0].date.weekday));
+
+      int totalWeeks =(((lastDate.difference(firstDate).inDays)+1)/7).floor() ;
+      print("total weeks : "+totalWeeks.toString());
+      for(int i=0; i<totalWeeks; i++){
+        slots.add(WeekSlotModal(id:i, weekName: "Week "+(i+1).toString(), mData: getWeekDataFromList(firstDate, data) ));
+        firstDate = firstDate.add(Duration(days: 7));
       }
     }
-    return mList;
+    print(slots.toString());
+    return slots;
   }
+}
 
-  String getLabel(List<Result> graphData) {
-    if(graphData.length > 0) {
-      String start = getDateLabel(graphData[0].date);
-      String end = getDateLabel(graphData[graphData.length - 1].date);
-      return end+" to "+start;
+DateTime getFirstWeekDate(DateTime date){
+  return date.subtract(Duration(days: date.weekday - 1));
+}
+
+List<Result> getWeekDataFromList(DateTime weekStartDate, List<Result> data){
+  List<Result> results = List();
+  data.forEach((element) {
+    if(weekStartDate.isSameDate(getFirstWeekDate(element.date))){
+      results.add(element);
     }
+  });
 
-    return  '';
+  return results;
+
+}
+
+class WeekSlotModal{
+  int id;
+  String weekName;
+  List<Result> mData;
+  bool isSelected = false;
+
+  WeekSlotModal({this.id, this.mData, this.weekName});
+
+  setId(int id){
+    this.id = id;
   }
-  String getDateLabel(mdate){
-    Moment date = Moment.parse(mdate.toString());
-    return date.format("dd MMM");
-
+  setWeekName(String weekName){
+    this.weekName = weekName;
+  }
+  setData(List<Result> mData){
+    this.mData = mData;
   }
 }

@@ -17,7 +17,7 @@ class UserAPIServices {
 
     var token = await GetStringToSP("token");
     final url = HHString.baseURL +"/api/v1/user/myProfile";
-    
+    print(token);
     final response = await http.get(url, 
     headers: {
       "Content-Type": "application/json",
