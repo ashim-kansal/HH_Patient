@@ -22,7 +22,7 @@ class UserProfile {
     factory UserProfile.fromJson(Map<String, dynamic> json) => UserProfile(
         responseCode: json["responseCode"],
         responseMessage: json["responseMessage"],
-        result: Result.fromJson(json["result"]),
+        result: json.containsKey("result")? Result.fromJson(json["result"]) : Result.fromJson({}),
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,18 +37,14 @@ class Result {
         this.userType,
         this.appLanguage,
         this.deviceToken,
-        this.voipToken,
         this.profilePic,
         this.otpTime,
         this.verifyOtp,
         this.notificationStatus,
         this.programSubscribed,
-        this.isQuestionnaireFilled,
-        this.totalSession,
         this.status,
         this.myTherapist,
         this.myPatient,
-        this.assignedPrograms,
         this.id,
         this.firstName,
         this.lastName,
@@ -61,6 +57,9 @@ class Result {
         this.mergeContact,
         this.permissions,
         this.questions,
+        this.createdAt,
+        this.updatedAt,
+        this.v,
         this.programSubscription,
         this.totalUnreadNotificationList,
     });
@@ -68,18 +67,15 @@ class Result {
     String userType;
     String appLanguage;
     String deviceToken;
-    String voipToken;
     String profilePic;
     int otpTime;
-    int verifyOtp;
+    int totalUnreadNotificationList;
+    bool verifyOtp;
     bool notificationStatus;
     bool programSubscribed;
-    bool isQuestionnaireFilled;
-    int totalSession;
     String status;
     List<String> myTherapist;
     List<dynamic> myPatient;
-    List<dynamic> assignedPrograms;
     String id;
     String firstName;
     String lastName;
@@ -91,58 +87,55 @@ class Result {
     String otp;
     String mergeContact;
     List<dynamic> permissions;
-    List<Question> questions;
+    List<dynamic> questions;
+    DateTime createdAt;
+    DateTime updatedAt;
+    int v;
     String programSubscription;
-    int totalUnreadNotificationList;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
-        userType: json["userType"],
-        appLanguage: json["appLanguage"],
-        deviceToken: json["deviceToken"],
-        voipToken: json["voipToken"],
-        profilePic: json["profilePic"],
-        otpTime: json["otpTime"],
-        verifyOtp: json["verifyOtp"],
-        notificationStatus: json["notificationStatus"],
-        programSubscribed: json["programSubscribed"],
-        isQuestionnaireFilled: json["isQuestionnaireFilled"],
-        totalSession: json["totalSession"],
-        status: json["status"],
-        myTherapist: List<String>.from(json["myTherapist"].map((x) => x)),
-        myPatient: List<dynamic>.from(json["myPatient"].map((x) => x)),
-        assignedPrograms: List<dynamic>.from(json["assignedPrograms"].map((x) => x)),
-        id: json["_id"],
-        firstName: json["firstName"],
-        lastName: json["lastName"],
-        email: json["email"],
-        countryCode: json["countryCode"],
-        mobileNumber: json["mobileNumber"],
-        address: json["address"],
-        password: json["password"],
-        otp: json["otp"],
-        mergeContact: json["mergeContact"],
+        userType: json["userType"]?? "",
+        appLanguage: json["appLanguage"]?? "",
+        deviceToken: json["deviceToken"]?? "",
+        profilePic: json["profilePic"]?? "",
+        otpTime: json["otpTime"]?? 1,
+        verifyOtp: json["verifyOtp"]?? false,
+        notificationStatus: json["notificationStatus"]?? false,
+        programSubscribed: json["programSubscribed"]?? false,
+        status: json["status"]?? "",
+        myTherapist: json["myTherapist"] != null ?List<String>.from(json["myTherapist"].map((x) => x)): "",
+        myPatient: json["myPatient"]!= null ?List<dynamic>.from(json["myPatient"].map((x) => x)) : "",
+        id: json["_id"]?? "",
+        firstName: json["firstName"]?? "",
+        lastName: json["lastName"]?? "",
+        email: json["email"]?? "",
+        countryCode: json["countryCode"]?? "",
+        mobileNumber: json["mobileNumber"]?? "",
+        address: json["address"]?? "",
+        password: json["password"]?? "",
+        otp: json["otp"]?? "",
+        mergeContact: json["mergeContact"]?? "",
         permissions: List<dynamic>.from(json["permissions"].map((x) => x)),
-        questions: List<Question>.from(json["Questions"].map((x) => Question.fromJson(x))),
-        programSubscription: json["programSubscription"],
-        totalUnreadNotificationList: json["totalUnreadNotificationList"],
+        questions: List<dynamic>.from(json["Questions"].map((x) => x)),
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"]?? 1,
+        programSubscription: json["programSubscription"]?? "",
+        totalUnreadNotificationList: json["totalUnreadNotificationList"]?? 0,
     );
 
     Map<String, dynamic> toJson() => {
         "userType": userType,
         "appLanguage": appLanguage,
         "deviceToken": deviceToken,
-        "voipToken": voipToken,
         "profilePic": profilePic,
         "otpTime": otpTime,
         "verifyOtp": verifyOtp,
         "notificationStatus": notificationStatus,
         "programSubscribed": programSubscribed,
-        "isQuestionnaireFilled": isQuestionnaireFilled,
-        "totalSession": totalSession,
         "status": status,
         "myTherapist": List<dynamic>.from(myTherapist.map((x) => x)),
         "myPatient": List<dynamic>.from(myPatient.map((x) => x)),
-        "assignedPrograms": List<dynamic>.from(assignedPrograms.map((x) => x)),
         "_id": id,
         "firstName": firstName,
         "lastName": lastName,
@@ -154,64 +147,11 @@ class Result {
         "otp": otp,
         "mergeContact": mergeContact,
         "permissions": List<dynamic>.from(permissions.map((x) => x)),
-        "Questions": List<dynamic>.from(questions.map((x) => x.toJson())),
+        "Questions": List<dynamic>.from(questions.map((x) => x)),
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
         "programSubscription": programSubscription,
         "totalUnreadNotificationList": totalUnreadNotificationList,
-    };
-}
-
-class Question {
-    Question({
-        this.id,
-        this.questionText,
-        this.questionType,
-        this.options,
-        this.questionNumber,
-    });
-
-    String id;
-    String questionText;
-    String questionType;
-    List<Option> options;
-    String questionNumber;
-
-    factory Question.fromJson(Map<String, dynamic> json) => Question(
-        id: json["_id"],
-        questionText: json["QuestionText"],
-        questionType: json["QuestionType"],
-        options: List<Option>.from(json["options"].map((x) => Option.fromJson(x))),
-        questionNumber: json["QuestionNumber"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "_id": id,
-        "QuestionText": questionText,
-        "QuestionType": questionType,
-        "options": List<dynamic>.from(options.map((x) => x.toJson())),
-        "QuestionNumber": questionNumber,
-    };
-}
-
-class Option {
-    Option({
-        this.answer,
-        this.id,
-        this.option,
-    });
-
-    String answer;
-    String id;
-    String option;
-
-    factory Option.fromJson(Map<String, dynamic> json) => Option(
-        answer: json["Answer"],
-        id: json["_id"],
-        option: json["option"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "Answer": answer,
-        "_id": id,
-        "option": option,
     };
 }

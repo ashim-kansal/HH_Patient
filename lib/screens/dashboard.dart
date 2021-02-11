@@ -39,18 +39,15 @@ class DashboardState extends State<Dashboard> {
   String email;
   String profileImage = "";
   bool showTherapist = false;
+  int count = 0;
 
   List<Widget> listScreens;
-  List<String> listNames = [
-    'Dashboard',
-    'Library',
-    'My Assessment',
-    ''
-  ];
+  List<String> listNames = ['Dashboard', 'Library', 'My Assessment', ''];
 
   _updateFromHome(String s) {
     showTherapistOptions();
   }
+
   @override
   void initState() {
     super.initState();
@@ -61,6 +58,7 @@ class DashboardState extends State<Dashboard> {
       TherapistOptionsPage()
     ];
 
+    count??0;
     getProfile();
   }
 
@@ -68,30 +66,32 @@ class DashboardState extends State<Dashboard> {
     UserAPIServices userAPIServices = new UserAPIServices();
 
     userAPIServices.getProfile().then((value) => {
-      if (value.responseCode == 200) {
-        setState(() {
-          name = value.result.firstName+" "+value.result.lastName;
-          email = value.result.email;
-          id = value.result.id;
-          profileImage = value.result.profilePic;
-          id = value.result.id;
-        })
-      }
-    });
+          if (value.responseCode == 200)
+            {
+              setState(() {
+                name = value.result.firstName + " " + value.result.lastName;
+                email = value.result.email;
+                id = value.result.id;
+                profileImage = value.result.profilePic;
+                id = value.result.id;
+                count = value.result.totalUnreadNotificationList??0;
+              })
+            }
+        });
   }
 
   @override
-  Widget build(BuildContext context) =>
-      PickupLayout(
-          myId: id,
-          scaffold:      Scaffold(
-        
+  Widget build(BuildContext context) => PickupLayout(
+      myId: id,
+      scaffold: Scaffold(
         appBar: AppBar(
           title: Text(
-              tabIndex == 0 ? AppLocalizations.of(context).dashboard
-              : tabIndex == 1 ? AppLocalizations.of(context).library
-              : AppLocalizations.of(context).assessment
-              , style: TextStyle(color: Colors.white)),
+              tabIndex == 0
+                  ? AppLocalizations.of(context).dashboard
+                  : tabIndex == 1
+                      ? AppLocalizations.of(context).library
+                      : AppLocalizations.of(context).assessment,
+              style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -100,16 +100,22 @@ class DashboardState extends State<Dashboard> {
           elevation: 0,
           actions: [
             Container(
-              margin: EdgeInsets.only(right: 10),
-              child: IconButton( 
-                icon: Icon(
-                    Icons.notifications_on_outlined,
-                    color: Colors.white, ),
-                    onPressed: () => {
-                      Navigator.pushNamed(context, NotificationPage.RouteName)
-                    },
-              )
-            )
+                margin: EdgeInsets.only(right: 10),
+                child: new Stack(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.notifications_on_outlined,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => {
+                        Navigator.pushNamed(context, NotificationPage.RouteName)
+                            .then((value) => {setState(() {})})
+                      },
+                    ),
+                    showBadge()
+                  ],
+                ))
           ],
         ),
         drawer: Container(
@@ -132,70 +138,84 @@ class DashboardState extends State<Dashboard> {
                     ),
                   )),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
-                child: new GestureDetector(
-                  onTap: () => {
-                    Navigator.pop(context),
-                    Navigator.pushNamed(context, ProfilePage.RouteName)
-                  },
-                  child: Row(
-                    children: [
-                      profileImage == ""?
-                      Image.asset(
-                        'assets/images/ic_avatar.png',
-                        height: 50,
-                        width: 50,
-                      ) : CircleAvatar(
-                        backgroundImage: NetworkImage(profileImage),
-                        radius: 30,
-                        // Image.network(profileImage,
-                        // height: 50,
-                        // width: 50,),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Column(
-                      
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(name??"Hi John Doe", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.accentColor),),
-                          FittedBox(
-                            child: Text(email??"john.doe@yahoo.com", textAlign:TextAlign.start, style: TextStyle(color: HH_Colors.grey_35444D, fontSize: 12),),
-                            fit: BoxFit.fill,
+                  padding: EdgeInsets.fromLTRB(0, 0, 10, 20),
+                  child: new GestureDetector(
+                    onTap: () => {
+                      Navigator.pop(context),
+                      Navigator.pushNamed(context, ProfilePage.RouteName)
+                    },
+                    child: Row(
+                      children: [
+                        profileImage == ""
+                            ? Image.asset(
+                                'assets/images/ic_avatar.png',
+                                height: 50,
+                                width: 50,
+                              )
+                            : CircleAvatar(
+                                backgroundImage: NetworkImage(profileImage),
+                                radius: 30,
+                                // Image.network(profileImage,
+                                // height: 50,
+                                // width: 50,),
+                              ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              name ?? "Hi John Doe",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(color: HH_Colors.accentColor),
+                            ),
+                            FittedBox(
+                              child: Text(
+                                email ?? "john.doe@yahoo.com",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: HH_Colors.grey_35444D, fontSize: 12),
+                              ),
+                              fit: BoxFit.fill,
                             )
-                        ],
-                        
-                      )
-                    ],
-                  ),
-                )
-               
-              ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )),
               HHDrawerItem(
-                  title: AppLocalizations.of(context).mychat, icon: 'assets/images/ic_chat.png', onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, ChatListPage.RouteName);
-              },),
+                title: AppLocalizations.of(context).mychat,
+                icon: 'assets/images/ic_chat.png',
+                onClick: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, ChatListPage.RouteName);
+                },
+              ),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
               HHDrawerItem(
-                  title: AppLocalizations.of(context).my_programs, icon: 'assets/images/ic_prgrams.png', onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, CurrentPlansPage.RouteName);
-              }),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: AppLocalizations.of(context).Settings, icon: 'assets/images/ic_settings.png', onClick: (){
+                  title: AppLocalizations.of(context).my_programs,
+                  icon: 'assets/images/ic_prgrams.png',
+                  onClick: () {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, SettingsPage.RouteName);
-              },),
+                    Navigator.pushNamed(context, CurrentPlansPage.RouteName);
+                  }),
+              Container(
+                color: HH_Colors.grey,
+                height: 1,
+              ),
+              HHDrawerItem(
+                title: AppLocalizations.of(context).Settings,
+                icon: 'assets/images/ic_settings.png',
+                onClick: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, SettingsPage.RouteName);
+                },
+              ),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
@@ -210,75 +230,92 @@ class DashboardState extends State<Dashboard> {
               //   height: 1,
               // ),
               HHDrawerItem(
-                  title: AppLocalizations.of(context).Support, icon: 'assets/images/ic_support.png'),
+                  title: AppLocalizations.of(context).Support,
+                  icon: 'assets/images/ic_support.png'),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: AppLocalizations.of(context).Contact_Us, onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, FeedbackPage.RouteName);
-              },),
+              HHDrawerItem2(
+                title: AppLocalizations.of(context).Contact_Us,
+                onClick: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, FeedbackPage.RouteName);
+                },
+              ),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
-              HHDrawerItem2(title: AppLocalizations.of(context).FAQ, onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, FaqPage.RouteName);
-              }),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem(
-                  title: AppLocalizations.of(context).more_info, icon: 'assets/images/ic_info.png'),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: AppLocalizations.of(context).about_us, onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, AboutUs.RouteName, arguments: ScreenArguments('About Us',false ));
-              },),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: AppLocalizations.of(context).tnc, onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, TermsPage.RouteName, arguments: ScreenArguments('Terms & Conditions',false ));
-              }),
-              Container(
-                color: HH_Colors.grey,
-                height: 1,
-              ),
-              HHDrawerItem2(title: AppLocalizations.of(context).privacy, onClick: (){
-                Navigator.pop(context);
-                Navigator.pushNamed(context, PrivacyPolicy.RouteName, arguments: ScreenArguments('Privacy Policy',false ));
-              }),
+              HHDrawerItem2(
+                  title: AppLocalizations.of(context).FAQ,
+                  onClick: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, FaqPage.RouteName);
+                  }),
               Container(
                 color: HH_Colors.grey,
                 height: 1,
               ),
               HHDrawerItem(
-                  title: AppLocalizations.of(context).logout, icon: 'assets/images/ic_logout.png',
-                  onClick: (){
-                    showDialog(context: context,
-                       builder: (BuildContext dialogContext) {
-                        return DialogWithButtons(
-                          onLogoutPress: ()async {
+                  title: AppLocalizations.of(context).more_info,
+                  icon: 'assets/images/ic_info.png'),
+              Container(
+                color: HH_Colors.grey,
+                height: 1,
+              ),
+              HHDrawerItem2(
+                title: AppLocalizations.of(context).about_us,
+                onClick: () {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, AboutUs.RouteName,
+                      arguments: ScreenArguments('About Us', false));
+                },
+              ),
+              Container(
+                color: HH_Colors.grey,
+                height: 1,
+              ),
+              HHDrawerItem2(
+                  title: AppLocalizations.of(context).tnc,
+                  onClick: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, TermsPage.RouteName,
+                        arguments:
+                            ScreenArguments('Terms & Conditions', false));
+                  }),
+              Container(
+                color: HH_Colors.grey,
+                height: 1,
+              ),
+              HHDrawerItem2(
+                  title: AppLocalizations.of(context).privacy,
+                  onClick: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, PrivacyPolicy.RouteName,
+                        arguments: ScreenArguments('Privacy Policy', false));
+                  }),
+              Container(
+                color: HH_Colors.grey,
+                height: 1,
+              ),
+              HHDrawerItem(
+                  title: AppLocalizations.of(context).logout,
+                  icon: 'assets/images/ic_logout.png',
+                  onClick: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContext) {
+                        return DialogWithButtons(onLogoutPress: () async {
+                          SharedPreferences pref =
+                              await SharedPreferences.getInstance();
+                          pref.remove("token");
 
-                            SharedPreferences pref = await SharedPreferences.getInstance();
-                            pref.remove("token");
-
-                            Navigator.pop(context);
-                            Navigator.pushNamed(context, LoginPage.RouteName);
-                          },
-                          onDenyPress: (){
-                            Navigator.pop(context);
-                          }
-                        );
+                          Navigator.pop(context);
+                          Navigator.pushNamed(context, LoginPage.RouteName);
+                        }, onDenyPress: () {
+                          Navigator.pop(context);
+                        });
                       },
                     );
                   }),
@@ -293,60 +330,79 @@ class DashboardState extends State<Dashboard> {
             currentIndex: tabIndex,
             onTap: (int index) {
               setState(() {
-               if(index< 3){
-                 tabIndex = index;
-               }else{
-                 showTherapistOptions();
-               }
+                if (index < 3) {
+                  tabIndex = index;
+                } else {
+                  showTherapistOptions();
+                }
               });
             },
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
+                icon: Image.asset(
+                  tabIndex == 0
+                      ? 'assets/images/ic_home_select.png'
+                      : 'assets/images/ic_home.png',
+                  height: 25,
+                  width: 25,
+                ),
                 title: Text(AppLocalizations.of(context).home),
-
-  ),
-              BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 25, width: 25,),
-                title: Text(AppLocalizations.of(context).library),
-
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 25, width: 25,),
+                icon: Image.asset(
+                  tabIndex == 1
+                      ? 'assets/images/ic_library_select.png'
+                      : 'assets/images/ic_library.png',
+                  height: 25,
+                  width: 25,
+                ),
+                title: Text(AppLocalizations.of(context).library),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  tabIndex == 2
+                      ? 'assets/images/ic_tab_assessment_select.png'
+                      : 'assets/images/ic_tab_assessment.png',
+                  height: 25,
+                  width: 25,
+                ),
                 title: Text(AppLocalizations.of(context).assessment),
-              ),BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 3?'assets/images/ic_therapists_select.png':'assets/images/ic_therapists.png' , height: 25, width: 25,),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  tabIndex == 3
+                      ? 'assets/images/ic_therapists_select.png'
+                      : 'assets/images/ic_therapists.png',
+                  height: 25,
+                  width: 25,
+                ),
                 title: Text(AppLocalizations.of(context).therapists),
               ),
-            ]
-        ),
-
+            ]),
         body: Material(
-          color: Theme.of(context).accentColor,
+            color: Theme.of(context).accentColor,
             child: Container(
-              padding: EdgeInsets.all(20),
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
-                    topLeft: Radius.circular(30.0),
-                  ),
-                  color: Colors.white),
-              child: tabIndex<3 ? listScreens[tabIndex] : showDialog(context: context,
-              builder: (BuildContext dialogContext){
-                return  DialogWithButtons(
-                    onLogoutPress: (){
-                      Navigator.pop(context);
-                      Navigator.pushNamed(context, LoginPage.RouteName);
-                    },
-                    onDenyPress: (){
-                      Navigator.pop(context);
-                    }
-                );
-              })
-            )
-          ),
+                padding: EdgeInsets.all(20),
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30.0),
+                      topLeft: Radius.circular(30.0),
+                    ),
+                    color: Colors.white),
+                child: tabIndex < 3
+                    ? listScreens[tabIndex]
+                    : showDialog(
+                        context: context,
+                        builder: (BuildContext dialogContext) {
+                          return DialogWithButtons(onLogoutPress: () {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, LoginPage.RouteName);
+                          }, onDenyPress: () {
+                            Navigator.pop(context);
+                          });
+                        }))),
       ));
 
   showTherapistOptions() {
@@ -356,9 +412,28 @@ class DashboardState extends State<Dashboard> {
       barrierDismissible: true,
       barrierColor: Color(0x90000000),
       builder: (BuildContext dialogContext) {
-        return  TherapistOptionsPage();
-
+        return TherapistOptionsPage();
       },
     );
+  }
+
+  Widget showBadge() {
+    return (count??0) > 0
+        ? new Positioned(
+            right: 0,
+            child: new Container(
+              padding: EdgeInsets.all(1),
+              margin: EdgeInsets.all(10),
+              decoration: new BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              constraints: BoxConstraints(
+                minWidth: 12,
+                minHeight: 12,
+              ),
+            ),
+          )
+        : Container();
   }
 }

@@ -56,7 +56,7 @@ class _NotificationState extends State<NotificationPage> {
                     Moment createdDt = Moment.parse('$_date');
                     return NotificationList(
                       title: snapshot.data.result[index].body,
-                      subtitle: createdDt.format("HH:MM"),
+                      subtitle: createdDt.format("dd MMM, yyyy"),
                       id: snapshot.data.result[index].id,
                       onDeleteClick: (){
                           deleteNotification(snapshot.data.result[index].id).then((value) => {

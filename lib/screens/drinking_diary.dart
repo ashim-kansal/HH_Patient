@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter_app/api/DrinkingDiaryApi.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
-import 'package:flutter_app/utils/DBHelper.dart';
-import 'package:flutter_app/utils/allstrings.dart';
+import 'package:flutter_app/utils/DateTimeUtils.dart';
+import 'package:flutter_app/utils/Utils.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyGraphWidget.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter_app/widgets/linechart.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/widgets/schedule_widgets.dart';
-import 'package:flutter_app/api/DrinkingDiaryApi.dart';
-import 'package:flutter_app/utils/Utils.dart';
-import 'package:flutter_app/utils/DateTimeUtils.dart';
-import 'package:simple_moment/simple_moment.dart';
 
 class DrinkingDiaryPage extends StatefulWidget{
   static const String RouteName = '/drinking_diary';
@@ -51,7 +44,6 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
               //     mDiaryList = snapshot.data.result;
               //   });
               // });
-              getWeeks(snapshot.data.result);
               List<Result> weekdayData = getWeekdaysData(snapshot.data.result);
               List<WeekSlotModal> weekSlotData = getWeeks(snapshot.data.result);
 

@@ -99,17 +99,20 @@ class ReScheduleSessionState extends State<ReScheduleSessionPage>{
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                                color: index == selectedSlotPos?HH_Colors.primaryColor:HH_Colors.grey_F2F2F2,
+                                color: snapshot.data.result[selectedDatePos].schedule[index].status == 'BOOKED' ? HH_Colors.grey_585858 : index == selectedSlotPos?HH_Colors.primaryColor:HH_Colors.grey_F2F2F2,
                               ),
                               padding: EdgeInsets.all(10),
                               child: Center(child: Text(
                                 snapshot.data.result[selectedDatePos].schedule[index].startTime.toString(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: index == selectedSlotPos?Colors.white:HH_Colors.grey_707070),
+                                style: TextStyle(color: snapshot.data.result[selectedDatePos].schedule[index].status == 'BOOKED' ? HH_Colors.color_white :index == selectedSlotPos?Colors.white:HH_Colors.grey_707070),
                               ),),
                             ),
                             onTap: (){
-                              selectedSlotPos = index;
+                              if(snapshot.data.result[selectedDatePos].schedule[index].status.toString() != 'BOOKED') {
+                                selectedSlotPos = index;
+                              }
+                              // selectedSlotPos = index;
                             },
                           );
                         })
