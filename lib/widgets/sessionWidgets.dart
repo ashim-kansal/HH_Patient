@@ -140,7 +140,7 @@ class SessionCard extends StatelessWidget {
                                     child: Icon(Icons.chat
                                       , color: HH_Colors.accentColor, size: 18,),
                                     onPressed: (){
-                                      Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
+                                      Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.therapistId.profilePic));
                                     },
                                     shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                                   ),
@@ -368,7 +368,7 @@ class UpcomingSessionItem extends StatelessWidget {
                                 color: Colors.white,
                                 child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
                                 onPressed: (){
-                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id));
+                                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.therapistId.id, data.therapistId.profilePic));
                                 },
                                 shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
 

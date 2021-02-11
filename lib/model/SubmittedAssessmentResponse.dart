@@ -46,6 +46,7 @@ class Result {
     this.totalMarks,
     this.correctMarks,
     this.patientId,
+    this.remarks
   });
 
   String status;
@@ -60,6 +61,7 @@ class Result {
   int totalMarks;
   int correctMarks;
   String patientId;
+  String remarks;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     status: json["status"],
@@ -74,6 +76,7 @@ class Result {
     totalMarks: json["totalMarks"],
     correctMarks: json["correctMarks"],
     patientId: json["patientId"],
+    remarks: json["remarks"]??""
   );
 
   Map<String, dynamic> toJson() => {
@@ -89,6 +92,7 @@ class Result {
     "totalMarks": totalMarks,
     "correctMarks": correctMarks,
     "patientId": patientId,
+    "remarks": remarks
   };
 }
 
@@ -114,7 +118,7 @@ class Question {
     id: json["_id"],
     questionNumber: json["QuestionNumber"],
     questionType: json["QuestionType"],
-    questionText: json["QuestionText"],
+    questionText: json["QuestionText"]??"",
     answer: json["Answer"],
   );
 

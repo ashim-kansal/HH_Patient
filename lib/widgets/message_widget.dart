@@ -6,8 +6,9 @@ class MessageWidget extends StatefulWidget {
   var msg;
   var direction;
   var dateTime;
+  var receiverImg;
 
-  MessageWidget({this.msg, this.direction, this.dateTime});
+  MessageWidget({this.msg, this.direction, this.dateTime, this.receiverImg});
 
   @override
   _MessageWidgetState createState() => _MessageWidgetState();
@@ -23,12 +24,26 @@ class _MessageWidgetState extends State<MessageWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              new Image.asset(
-                'assets/images/in.png',
-                fit: BoxFit.scaleDown,
-                width: 30.0,
-                height: 30.0,
-              ),
+              widget.receiverImg == null ?
+                new Image.asset(
+                  'assets/images/in.png',
+                  fit: BoxFit.scaleDown,
+                  width: 30.0,
+                  height: 30.0,
+                )
+              :
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(30.0),
+                    child:  new Image.network(
+                    widget.receiverImg,
+                    width: 30.0,
+                    height: 30.0,
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+              
+              
+             
               new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

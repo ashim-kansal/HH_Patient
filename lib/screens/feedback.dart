@@ -47,6 +47,7 @@ class FeedbackPageState extends State<FeedbackPage> {
       showToast(value.responseMsg),
       if (value.responseCode == 200) {
         feedback = "",
+        feedbackController.text = "",
         showDialog(
           context: context,
           builder: (BuildContext dialogContext) {

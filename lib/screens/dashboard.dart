@@ -58,7 +58,7 @@ class DashboardState extends State<Dashboard> {
       TherapistOptionsPage()
     ];
 
-    count??0;
+    // count??0;
     getProfile();
   }
 

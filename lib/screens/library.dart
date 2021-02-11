@@ -252,8 +252,14 @@ class _LibraryPageState extends State<LibraryPage> {
   }
 
   Widget videoView(String document) {
-    return NativeVideoView(
-      keepAspectRatio: false,
+    return Scaffold(
+    appBar: AppBar(
+    // title: const Text('Plugin example app'),
+    ),
+    body: Container(
+    alignment: Alignment.center,
+    child:  NativeVideoView(
+      keepAspectRatio: true,
       showMediaController: true,
       onCreated: (controller) {
         controller.setVideoSource(
@@ -273,6 +279,11 @@ class _LibraryPageState extends State<LibraryPage> {
       onProgress: (progress, duration) {
         print('$progress | $duration');
       },
-    );
+    )
+    ),
+  );
+    
+    
+  
   }
 }

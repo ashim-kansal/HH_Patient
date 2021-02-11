@@ -66,15 +66,18 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                     children: [
 
                       widget.data.isSubmit ?
-                        Row(
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("Score", style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w800)),
+                            Text("REMARK:", style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w800)),
+                            // Text("Score", style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w800)),
                             Spacer(),
-                            Text(snapshot.data.result.correctMarks.toString()+ "/"+ snapshot.data.result.totalMarks.toString(), style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
+                            SizedBox(height: 10,),
+                            Text(snapshot.data.result.remarks, style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
+                            // Text(snapshot.data.result.correctMarks.toString()+ "/"+ snapshot.data.result.totalMarks.toString(), style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
                           ],
                         ): Container(),
-                        SizedBox(height: 15,),
+                        SizedBox(height: 25,),
                       
                       Text(
                         snapshot.data.result.title,
@@ -149,7 +152,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
       num: index,
       completed: widget.data.isSubmit,
       onSelectAnswer: (answer){
-        widget.data.questions[index].answer = answer;
+        widget.data.questions[widget.data.questions.length - 1].answer = answer;
       }
     );
   }

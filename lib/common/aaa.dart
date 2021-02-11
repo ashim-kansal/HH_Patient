@@ -34,6 +34,7 @@ List<Widget> _buildExpandableContent(Result result,String _date, BuildContext co
                 fontSize: 14,
                 fontWeight: FontWeight.bold),
           ),
+          SizedBox(height: 2),
           Text(
             ques.answer,
             style: TextStyle(
@@ -49,6 +50,7 @@ List<Widget> _buildExpandableContent(Result result,String _date, BuildContext co
   ));
   columnContent.add(
       Container(
+        margin: EdgeInsets.only(top: 2),
         width: MediaQuery.of(context).size.width,
         child: Text(
           _date,

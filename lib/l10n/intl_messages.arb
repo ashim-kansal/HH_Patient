@@ -256,7 +256,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "save": "save",
+  "save": "Save",
   "@save": {
     "type": "text",
     "placeholders": {}

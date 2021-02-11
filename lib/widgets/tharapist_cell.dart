@@ -87,7 +87,7 @@ class ChatUserCell extends StatelessWidget {
           onTap: (){
             onClick();
           },
-          child:       Container(
+          child:Container(
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               border: Border.all(color: HH_Colors.color_D9D9D9),
@@ -102,11 +102,11 @@ class ChatUserCell extends StatelessWidget {
                 Row(
                   children: [
                      ClipRRect(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(40.0),
                       child: Image.network(
                         profile,
-                        height: 50,
-                        width: 50,
+                        height: 45,
+                        width: 45,
                       ),
                     ),
                     // Image.asset(
@@ -123,10 +123,10 @@ class ChatUserCell extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(children: [
-                          Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:20,color: HH_Colors.grey_585858),),
+                          Text(name.length > 15 ? name.substring(0, 15)+ "..." : name, textAlign:TextAlign.start,style: TextStyle(fontSize:20,color: HH_Colors.grey_585858),),
                         ]),
                         Row(children: [
-                          Text(message, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
+                          Text(message.length > 15 ? message.substring(0, 15)+"...": message, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
                         ]),
                       ],
                     ) ,

@@ -32,9 +32,9 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
 
-    return MyWidget( title: AppLocalizations.of(context).Notification,
+    return MyWidget( title: AppLocalizations.of(context).Notifications,
         child:FutureBuilder<NotificationListRepsonse>(
-            future: getNotifications() ,
+            future: getNotifications(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {

@@ -136,6 +136,7 @@ class JournalPageState extends State<JournalPage> {
 
 
   Widget getNewJournal() {
+    FocusNode myFocusNode;
 
     return Container(
         padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
@@ -153,13 +154,11 @@ class JournalPageState extends State<JournalPage> {
                       }
 
                       SchedulerBinding.instance.addPostFrameCallback((_){
-
                         setState(() {
                           widget.result = snapshot.data.result;
                         });
-
                       });
-                      return  ListView.separated(
+                      return ListView.separated(
                           scrollDirection: Axis.vertical,
                           separatorBuilder: (context, index) {
                             return SizedBox(height: 20);
