@@ -414,7 +414,8 @@ class UpcomingSessionItem extends StatelessWidget {
                               );
                             }, onClickReSchedule: (){
                               Navigator.pushNamed(context, ReScheduleSessionPage.RouteName, arguments: data).then((value) => {onClickReSchedule()});
-                            },)
+                            },),
+                            SizedBox(width: 10,)
                           ],
                         )
                       ],

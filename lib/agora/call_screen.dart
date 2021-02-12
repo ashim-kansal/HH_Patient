@@ -87,6 +87,8 @@ class _CallScreenState extends State<CallScreen> {
       callMethods.endCall(
         call: widget.call,
       );
+      Navigator.pop(context);
+
     });
 
   }
@@ -526,7 +528,7 @@ class _CallScreenState extends State<CallScreen> {
         radius: 55,
         backgroundColor: HH_Colors.color_F2EEEE,
         child: CircleAvatar(
-          backgroundImage: NetworkImage(widget.call.callerPic) ,
+          backgroundImage: NetworkImage(widget.call.receiverPic) ,
           radius: 52,
         ),
       );

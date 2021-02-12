@@ -66,14 +66,15 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                     children: [
 
                       widget.data.isSubmit ?
-                        Column(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("REMARK:", style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w800)),
                             // Text("Score", style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w800)),
-                            Spacer(),
-                            SizedBox(height: 10,),
-                            Text(snapshot.data.result.remarks, style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
+                            // Spacer(),
+                            SizedBox(height: 20,),
+                            Flexible(child: Text('  '+snapshot.data.result.remarks, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontWeight: FontWeight.w300)))
                             // Text(snapshot.data.result.correctMarks.toString()+ "/"+ snapshot.data.result.totalMarks.toString(), style: TextStyle(fontSize: 18, color: HH_Colors.accentColor, fontWeight: FontWeight.w500))
                           ],
                         ): Container(),
@@ -152,7 +153,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
       num: index,
       completed: widget.data.isSubmit,
       onSelectAnswer: (answer){
-        widget.data.questions[widget.data.questions.length - 1].answer = answer;
+        widget.data.questions[index - 1].answer = answer;
       }
     );
   }

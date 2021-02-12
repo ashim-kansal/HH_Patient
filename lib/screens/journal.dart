@@ -158,7 +158,7 @@ class JournalPageState extends State<JournalPage> {
                           widget.result = snapshot.data.result;
                         });
                       });
-                      return ListView.separated(
+                      return Form(child: ListView.separated(
                           scrollDirection: Axis.vertical,
                           separatorBuilder: (context, index) {
                             return SizedBox(height: 20);
@@ -195,11 +195,11 @@ class JournalPageState extends State<JournalPage> {
                                   widget.result[index].answer = text;
                                 },
                                 onFieldSubmit: () {
-                                  if(snapshot.data.result.length - 1 == index){
+                                  if(snapshot.data.result.length == index){
                                     submitJournal();
                                   }
                                 },
-                                textInputAction: snapshot.data.result.length - 1 == index ? TextInputAction.done : TextInputAction.next,
+                                textInputAction: TextInputAction.next,
                               ),
                               SizedBox(
                                 height: 10,
@@ -207,7 +207,7 @@ class JournalPageState extends State<JournalPage> {
                             ],
                           );
                         }
-                      );
+                      ));
                     }else {
                       return Container(
                         child: Center(child: CircularProgressIndicator(),),

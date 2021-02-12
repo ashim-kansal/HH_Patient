@@ -221,7 +221,7 @@ class _LibraryPageState extends State<LibraryPage> {
         builder: (BuildContext context) {
           return Center(
             child: Container(
-              height: MediaQuery.of(context).size.height / 3,
+              // height: MediaQuery.of(context).size.height / 3,
               color: Colors.transparent,
               child: Column(
                 children: [
@@ -252,10 +252,8 @@ class _LibraryPageState extends State<LibraryPage> {
   }
 
   Widget videoView(String document) {
+    print(document);
     return Scaffold(
-    appBar: AppBar(
-    // title: const Text('Plugin example app'),
-    ),
     body: Container(
     alignment: Alignment.center,
     child:  NativeVideoView(

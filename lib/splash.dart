@@ -15,15 +15,18 @@ import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+  print(message);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 }
-
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 
 class Splash extends StatefulWidget{
 
@@ -81,6 +84,10 @@ class SplashState extends State<Splash>{
     Permissions.cameraAndMicrophonePermissionsGranted();
     Firebase.initializeApp();
 
+    var initializationSettingsAndroid = AndroidInitializationSettings('mipmap/ic_launcher'); // <- default icon name is @mipmap/ic_launcher
+    var initializationSettingsIOS = IOSInitializationSettings(onDidReceiveLocalNotification: null);
+    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: null);
     SharedPreferences.setMockInitialValues({});
     //
     const MethodChannel('plugins.flutter.io/shared_preferences')
@@ -119,6 +126,23 @@ class SplashState extends State<Splash>{
   Future getMessage() async {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
+        print('on receive N message $message');
+          AndroidNotificationDetails notificationAndroidSpecifics =
+          AndroidNotificationDetails(
+              '10', "HH Patient", " ",
+              importance: Importance.max,
+              priority: Priority.high,
+              groupKey: "aa");
+
+          NotificationDetails notificationPlatformSpecifics =
+          NotificationDetails(android: notificationAndroidSpecifics, iOS: null);
+
+          await flutterLocalNotificationsPlugin.show(
+              1,
+              message["notification"]["title"],
+              message["notification"]["body"],
+              notificationPlatformSpecifics);
+
       },
       onBackgroundMessage: myBackgroundMessageHandler,
       onResume: (Map<String, dynamic> message) async {

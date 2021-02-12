@@ -70,7 +70,7 @@ class DBProvider {
 
   Future<bool> isChecked() async {
     final db = await database;
-    var res = await db.query("Client");
+    var res = await db.query("Terms");
     if(res.isNotEmpty)
       return true;
     else

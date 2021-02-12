@@ -60,6 +60,7 @@ class _MapState extends State<MapPage> {
     location.getLocation().then((value) => {
       setState((){
         _locationData = value;
+
       }),
       print(value),
       searchNearby()
@@ -148,6 +149,14 @@ class _MapState extends State<MapPage> {
         return;
 
       setState(() {
+        markers.add(Marker(
+            markerId: MarkerId("aa"),
+            position: LatLng(_locationData.latitude,
+                _locationData.longitude),
+            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
+          infoWindow: InfoWindow(title: "Mu Location")
+        )
+        );
         for (int i = 0; i < places.results.length; i++) {
           markers.add(
             Marker(
