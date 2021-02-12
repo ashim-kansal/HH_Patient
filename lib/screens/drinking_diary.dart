@@ -23,7 +23,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
   @override
   void initState() {
     super.initState();
-    dataList = getDrinkingDiaryList();
+    // dataList = getDrinkingDiaryList();
   }
 
   @override
@@ -32,7 +32,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
         child: Container(
           height: MediaQuery.of(context).size.height,
           child:  FutureBuilder<GetDrinkingDiaryList>(
-          future: dataList,
+          future: getDrinkingDiaryList(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
@@ -50,15 +50,10 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
               return SingleChildScrollView(
                 child: Column(
                   children: [
-
-                    // Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
-                    //     child: DrinkingDiaryDateWidget(list: snapshot.data.result, onClickItem:(position){
-                    //     })),
-
                     SizedBox(height: 10,),
                     Container(
                           padding: EdgeInsets.all(10),
-                          child: snapshot.data.result != null && snapshot.data.result.length > 0 ? MyGraphWidget(weekSlotData: weekSlotData,) : HHTextView(
+                          child: snapshot.data.result != null && snapshot.data.result.length > 0 ? MyGraphWidget(weekSlotData: weekSlotData.reversed.toList(),) : HHTextView(
                             title: "No data found.",
                             color: HH_Colors.purpleColor,
                             size: 17,
@@ -147,7 +142,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
       if(value.responseCode == 200){
         showToast(context, value.responseMessage),
         setState((){
-          dataList = getDrinkingDiaryList();
+          // dataList = getDrinkingDiaryList();
         })
       }
     });
@@ -170,7 +165,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
       int totalWeeks =(((lastDate.difference(firstDate).inDays)+1)/7).floor() ;
       print("total weeks : "+totalWeeks.toString());
       for(int i=0; i<totalWeeks; i++){
-        slots.add(WeekSlotModal(id:i, weekName: "Week "+(i+1).toString(), mData: getWeekDataFromList(firstDate, data) ));
+        slots.add(WeekSlotModal(id:firstDate, weekName: "Week "+(i+1).toString(), mData: getWeekDataFromList(firstDate, data) ));
         firstDate = firstDate.add(Duration(days: 7));
       }
     }
@@ -181,6 +176,10 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
 
 DateTime getFirstWeekDate(DateTime date){
   return date.subtract(Duration(days: date.weekday - 1));
+}
+
+DateTime getFirstDateOfWeek(DateTime date){
+  return date.add(Duration(days: DateTime.daysPerWeek - date.weekday));
 }
 
 List<Result> getWeekDataFromList(DateTime weekStartDate, List<Result> data){
@@ -196,14 +195,14 @@ List<Result> getWeekDataFromList(DateTime weekStartDate, List<Result> data){
 }
 
 class WeekSlotModal{
-  int id;
+  DateTime id;
   String weekName;
   List<Result> mData;
   bool isSelected = false;
 
   WeekSlotModal({this.id, this.mData, this.weekName});
 
-  setId(int id){
+  setId(DateTime id){
     this.id = id;
   }
   setWeekName(String weekName){
