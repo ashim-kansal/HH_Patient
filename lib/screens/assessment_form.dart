@@ -152,7 +152,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
       quesType: question.questionType,
       num: index,
       completed: widget.data.isSubmit,
-      answer: question.answer
+      answer: question.answer,
       onSelectAnswer: (answer){
         widget.data.questions[index - 1].answer = answer;
       }
