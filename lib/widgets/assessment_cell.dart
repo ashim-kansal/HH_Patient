@@ -81,6 +81,7 @@ class AssessmentCell extends StatelessWidget {
 class AssessmentQuestionCell extends StatelessWidget {
   var title = "";
   String quesType;
+  String answer;
   var completed = false;
   int num;
   final VoidCallback onClick;
@@ -92,6 +93,7 @@ class AssessmentQuestionCell extends StatelessWidget {
       {@required this.title,
       @required this.quesType,
       this.completed,
+      this.answer,
       this.num,
         this.onSelectAnswer,
       this.onClick});
@@ -106,7 +108,7 @@ class AssessmentQuestionCell extends StatelessWidget {
           quesType == 'text'
               ? InputBoxQuestion(num: num??1, ques:title, onSelectAnswer: onSelectAnswer)
               : quesType == 'YESNO'
-                  ? getSingleChoiceQuest(num??1,title)
+                  ? getSingleChoiceQuest(num??1,title, answer)
                   : getMultiChoiceQuest(num??1,title),
         ],
       ),
@@ -114,10 +116,11 @@ class AssessmentQuestionCell extends StatelessWidget {
   }
 
 
-  Widget getSingleChoiceQuest(int num, String question) {
+  Widget getSingleChoiceQuest(int num, String question, String answer) {
     return MySingleChoiceQuesWidget(
       num: num,
       ques: question??"",
+        answer: answer,
       onPressYes: () {
         print("yes");
         onSelectAnswer("YES");
@@ -136,11 +139,12 @@ class AssessmentQuestionCell extends StatelessWidget {
 class MySingleChoiceQuesWidget extends StatefulWidget {
 
   var ques;
+  String answer;
   int num;
   VoidCallback onPressNo;
   VoidCallback onPressYes;
 
-  MySingleChoiceQuesWidget({@required this.ques, this.onPressNo, this.num, this.onPressYes});
+  MySingleChoiceQuesWidget({@required this.ques, this.onPressNo, this.num, this.onPressYes, this.answer});
 
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();

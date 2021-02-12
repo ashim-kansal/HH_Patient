@@ -91,6 +91,9 @@ class HomePageState extends State<HomePage> {
                           print(value);
                           widget.onUpdateDashboard("fab");
                         }
+                        setState(() {
+
+                        });
                       });
                     },),
                   ],

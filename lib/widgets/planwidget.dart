@@ -86,7 +86,7 @@ class PlanWidgetState extends State<PlanWidget> {
                     widget.onClick();
                   },
                   color: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.fromLTRB(80, 20,80,20),
+                  padding: EdgeInsets.fromLTRB(60, 20,60,20),
                   shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0))
               ): Container()
 
