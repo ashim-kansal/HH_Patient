@@ -179,6 +179,28 @@ class SessionPageState extends State<SessionPage> {
   }
 
   Widget getUpcomingList() {
+
+    compareDateTime(Result result) {
+
+      var flag = false;
+      var currentDate = new DateTime.now();
+
+      currentDate = currentDate.subtract(Duration(hours: 24));
+      print("currrD"+currentDate.toString());
+
+      var apptDate = result.date.toString().split(" ")[0].split("-");
+
+      // ignore: unrelated_type_equality_checks
+      if(int.parse(apptDate[2]) - 1 != (currentDate.day)){
+        flag = true;
+      }
+      // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
+      //   flag = true;
+      // }
+
+      return flag;
+    }
+
     return FutureBuilder<UpcomingSession>(
         future: upcomingSessions(),
         builder: (context, snapshot) {

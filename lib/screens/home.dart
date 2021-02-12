@@ -233,12 +233,12 @@ class HomePageState extends State<HomePage> {
   void callParticipent(
     String sessionId, String patientId, Result result, BuildContext context) async {
     
-    // var sessionTimeStatus = getCurrentDateTime(result);
+    var sessionTimeStatus = getCurrentDateTime(result);
 
-    // if(!sessionTimeStatus){
-    //   showToast("You're now able to call before time.");
-    //   return;
-    // }
+    if(!sessionTimeStatus){
+      showToast("You're now able to call before time.");
+      return;
+    }
 
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
           CallUtils.dial(
