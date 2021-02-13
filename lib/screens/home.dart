@@ -202,20 +202,17 @@ class HomePageState extends State<HomePage> {
 
     var flag = false;
     var currentDate = new DateTime.now();
-    
-    // var d = Moment.parse(result.date.toString());
-    
-    // print(d.compareTo(currentDate));
 
     var apptDate = result.date.toString().split(" ")[0].split("-");
     
     // ignore: unrelated_type_equality_checks
     if(int.parse(apptDate[2]) == (currentDate.day) && int.parse(apptDate[1]) == currentDate.month){
-      flag = true;
-    }else if(currentDate.hour == (int.parse(result.startTime.split(":")[0]) + 2) || currentDate.minute >= int.parse(result.startTime.split(":")[1])){
-      flag = true;
-    }else if(currentDate.hour >= int.parse(result.endTime.split(":")[0]) && currentDate.minute >= int.parse(result.endTime.split(":")[1])){
-      flag = true;
+      // flag = true;
+      if(currentDate.hour == (int.parse(result.startTime.split(":")[0]) + 2) || currentDate.minute >= int.parse(result.startTime.split(":")[1])){
+        flag = true;
+      }else if(currentDate.hour >= int.parse(result.endTime.split(":")[0]) && currentDate.minute >= int.parse(result.endTime.split(":")[1])){
+        flag = true;
+      }
     }
 
     return flag;
