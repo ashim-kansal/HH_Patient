@@ -11,6 +11,7 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
+import 'package:toast/toast.dart';
 
 class SessionPage extends StatefulWidget {
   static const String RouteName = '/mysessions';
@@ -285,8 +286,46 @@ class SessionPageState extends State<SessionPage> {
         });
   }
 
+  getCurrentDateTime(Result result) {
+
+    var currentDate = new DateTime.now();
+
+    print("currrD"+currentDate.toString());
+    DateTime sessionDate = result.date;
+
+    print('session date before 24 hours  : '+sessionDate.toString());
+    var time = result.startTime.split(":");
+    var endtime = result.endTime.split(":");
+    if(currentDate.day == sessionDate.day && currentDate.month == sessionDate.month && currentDate.year == sessionDate.year ){
+
+      if(currentDate.hour>=int.parse(time[0]) && currentDate.minute>=int.parse(time[1]) &&
+          currentDate.hour<=int.parse(endtime[0]) && currentDate.minute<=int.parse(endtime[1]) ){
+        return true;
+      }
+    }
+    return false;
+
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
+  
+
   void callParticipent(
-      String sessionId, String patientId, Result result) async {
+    String sessionId, String patientId, Result result) async {
+
+    var sessionTimeStatus = getCurrentDateTime(result);
+
+    if(!sessionTimeStatus){
+      showToast("You're now able to call before time.");
+      return;
+    }
+
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
       CallUtils.dial(
           from: result.patientId,

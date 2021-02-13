@@ -34,25 +34,30 @@ class SessionCard extends StatelessWidget {
   // ignore: unused_element
   compareDateTime(Result result) {
 
-    print("dateee___ "+result.date.toString());
 
-    var flag = true;
     var currentDate = new DateTime.now();
 
-    currentDate = currentDate.add(Duration(hours: 24));
     print("currrD"+currentDate.toString());
+    DateTime sessionDate = result.date.subtract(Duration(hours: 24));
 
-    var apptDate = result.date.toString().split(" ")[0].split("-");
+    print('session date before 24 hours  : '+sessionDate.toString());
 
-    // ignore: unrelated_type_equality_checks
-    if(int.parse(apptDate[2]) <= (currentDate.day)){
-      flag = false;
+    // print(currentDate.isAfter(sessionDate));
+    // print(currentDate.hour);
+    
+    var time = result.startTime.split(":");
+    print(int.parse(time[0]).toString());
+    if(currentDate.isAfter(sessionDate)){
+      if(currentDate.hour>int.parse(time[0]) ){
+        // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+          return false;
+        // }
+        // return true;
+      }
     }
-    // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
-    //   flag = true;
-    // }
 
-    return flag;
+    return true;
+
   }
 
     return Container(
@@ -342,25 +347,33 @@ class UpcomingSessionItem extends StatelessWidget {
     // ignore: unused_element
     compareDateTime(Result result) {
 
-      print("dateee___ "+result.date.toString());
 
-      var flag = true;
       var currentDate = new DateTime.now();
 
-      currentDate = currentDate.add(Duration(hours: 24));
       print("currrD"+currentDate.toString());
+      DateTime sessionDate = result.date.subtract(Duration(hours: 24));
 
-      var apptDate = result.date.toString().split(" ")[0].split("-");
-
-      // ignore: unrelated_type_equality_checks
-      if(int.parse(apptDate[2]) <= (currentDate.day)){
-        flag = false;
+      print('session date before 24 hours  : '+sessionDate.toString());
+      var time = result.startTime.split(":");
+      if(currentDate.isAfter(sessionDate)){
+        if(currentDate.hour>int.parse(time[0]) ){
+          // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+            return false;
+          // }
+          // return true;
+        }
       }
-      // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
-      //   flag = true;
+      // if(!currentDate.isAfter(sessionDate)){
+      //   if(currentDate.hour<int.parse(time[0]) ){
+      //     return true;
+      //   }
+      //   if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+      //     return true;
+      //   }
       // }
 
-      return flag;
+      return true;
+
     }
 
     return Container(
