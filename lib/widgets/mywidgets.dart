@@ -1234,12 +1234,14 @@ class NotificationList extends StatelessWidget {
   final String subtitle;
   final String id;
   VoidCallback onDeleteClick;
+  bool highlight;
 
   NotificationList(
       {@required this.id,
       @required this.title,
       @required this.subtitle,
-      this.onDeleteClick});
+      this.onDeleteClick,
+      this.highlight});
 
   @override
   Widget build(BuildContext context) {
@@ -1258,7 +1260,7 @@ class NotificationList extends StatelessWidget {
             children: [
               Container(
                   padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                  color: HH_Colors.color_F3F3F3,
+                  color: highlight?HH_Colors.color_5017AB35 : HH_Colors.color_F3F3F3,
                   child: new ListTile(
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

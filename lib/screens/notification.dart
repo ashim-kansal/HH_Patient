@@ -16,8 +16,9 @@ import 'package:simple_moment/simple_moment.dart';
 class NotificationPage extends StatefulWidget {
   static const String RouteName = '/notification';
 
-  NotificationPage({Key key, this.title}) : super(key: key);
+  NotificationPage({Key key, this.title, this.count}) : super(key: key);
   String title;
+  int count = 0;
 
   @override
   _NotificationState createState() => new _NotificationState();
@@ -58,6 +59,7 @@ class _NotificationState extends State<NotificationPage> {
                       title: snapshot.data.result[index].body,
                       subtitle: createdDt.format("dd MMM, yyyy"),
                       id: snapshot.data.result[index].id,
+                      highlight: index<(widget.count??0),
                       onDeleteClick: (){
                           deleteNotification(snapshot.data.result[index].id).then((value) => {
                             if(value.responseCode == 200){
@@ -95,4 +97,9 @@ class _NotificationState extends State<NotificationPage> {
     _textController.dispose();
     super.dispose();
   }
+}
+
+class NotificationArgument{
+  int count;
+  NotificationArgument(this.count);
 }

@@ -121,7 +121,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case FeedbackPage.RouteName:
       return MaterialPageRoute(builder: (context) => FeedbackPage());
     case NotificationPage.RouteName:
-      return MaterialPageRoute(builder: (context) => NotificationPage());
+      NotificationArgument argument = settings.arguments;
+      return MaterialPageRoute(builder: (context) => NotificationPage(count: argument.count));
     case TermsPage.RouteName:
       return MaterialPageRoute(builder: (context) => TermsPage());
     case PrivacyPolicy.RouteName:

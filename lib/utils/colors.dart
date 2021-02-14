@@ -25,6 +25,7 @@ class HH_Colors{
   static const color_949494 = Color(0xff949494);
   static const color_white = Color(0xffFFFFFF);
   static const color_17AB35 = Color(0xff17AB35);
+  static const color_5017AB35 = Color(0x5017AB35);
   static const color_D9D9D9 = Color(0xffD9D9D9);
   static const color_9ca031 = Color(0xff9ca0e1);
   static const color_EDEDF8 = Color(0xffEDEDF8);
