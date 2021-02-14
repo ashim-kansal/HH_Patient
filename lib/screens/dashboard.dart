@@ -40,12 +40,17 @@ class DashboardState extends State<Dashboard> {
   String profileImage = "";
   bool showTherapist = false;
   int count = 0;
+  bool isFirst_SessionBooked = false;
 
   List<Widget> listScreens;
   List<String> listNames = ['Dashboard', 'Library', 'My Assessment', ''];
 
   _updateFromHome(String s) {
-    showTherapistOptions();
+    if(isFirst_SessionBooked) {
+      showTherapistOptions();
+    }else{
+      Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
+    }
   }
 
   @override
@@ -74,6 +79,7 @@ class DashboardState extends State<Dashboard> {
                 id = value.result.id;
                 profileImage = value.result.profilePic;
                 id = value.result.id;
+                isFirst_SessionBooked = value.result.isFirst_SessionBooked;
                 count = value.result.totalUnreadNotificationList??0;
               })
             }
@@ -336,7 +342,11 @@ class DashboardState extends State<Dashboard> {
                 if (index < 3) {
                   tabIndex = index;
                 } else {
-                  showTherapistOptions();
+                  if(isFirst_SessionBooked) {
+                    showTherapistOptions();
+                  }else{
+                    Navigator.pushNamed(context, TherapistPage.RouteName, arguments: ScreenArguments('Therapist',false));
+                  }
                 }
               });
             },

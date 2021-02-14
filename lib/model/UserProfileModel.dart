@@ -59,6 +59,7 @@ class Result {
         this.questions,
         this.createdAt,
         this.updatedAt,
+        this.isFirst_SessionBooked,
         this.v,
         this.programSubscription,
         this.totalUnreadNotificationList,
@@ -71,6 +72,7 @@ class Result {
     int otpTime;
     int totalUnreadNotificationList;
     bool verifyOtp;
+    bool isFirst_SessionBooked;
     bool notificationStatus;
     bool programSubscribed;
     String status;
@@ -100,6 +102,7 @@ class Result {
         profilePic: json["profilePic"]?? "",
         otpTime: json["otpTime"]?? 1,
         verifyOtp: json["verifyOtp"]?? false,
+        isFirst_SessionBooked: json["isFirst_SessionBooked"]?? false,
         notificationStatus: json["notificationStatus"]?? false,
         programSubscribed: json["programSubscribed"]?? false,
         status: json["status"]?? "",
@@ -131,6 +134,7 @@ class Result {
         "profilePic": profilePic,
         "otpTime": otpTime,
         "verifyOtp": verifyOtp,
+        "isFirst_SessionBooked": isFirst_SessionBooked,
         "notificationStatus": notificationStatus,
         "programSubscribed": programSubscribed,
         "status": status,

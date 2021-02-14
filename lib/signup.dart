@@ -47,7 +47,7 @@ class _SignupPageState extends State<SignUpPage> {
   List<CountryList> listProvinces;
 
   String stateDropdown = 'Select Province';
-  String countryDropdown = "Albania";
+  String countryDropdown = "Canada";
   String pwdValidation = "Please enter a valid password";
   bool securepwd = true;
   bool isChecked = false;
