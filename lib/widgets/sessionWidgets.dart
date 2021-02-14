@@ -41,17 +41,22 @@ class SessionCard extends StatelessWidget {
     DateTime sessionDate = result.date.subtract(Duration(hours: 24));
 
     print('session date before 24 hours  : '+sessionDate.toString());
+
+    // print(currentDate.isAfter(sessionDate));
+    // print(currentDate.hour);
+    
     var time = result.startTime.split(":");
-    if(!currentDate.isAfter(sessionDate)){
-      if(currentDate.hour<int.parse(time[0]) ){
-        return true;
-      }
-      if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
-        return true;
+    print(int.parse(time[0]).toString());
+    if(currentDate.isAfter(sessionDate)){
+      if(currentDate.hour>int.parse(time[0]) ){
+        // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+          return false;
+        // }
+        // return true;
       }
     }
 
-    return false;
+    return true;
 
   }
 
@@ -350,16 +355,24 @@ class UpcomingSessionItem extends StatelessWidget {
 
       print('session date before 24 hours  : '+sessionDate.toString());
       var time = result.startTime.split(":");
-      if(!currentDate.isAfter(sessionDate)){
-        if(currentDate.hour<int.parse(time[0]) ){
-          return true;
-        }
-        if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
-          return true;
+      if(currentDate.isAfter(sessionDate)){
+        if(currentDate.hour>int.parse(time[0]) ){
+          // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+            return false;
+          // }
+          // return true;
         }
       }
+      // if(!currentDate.isAfter(sessionDate)){
+      //   if(currentDate.hour<int.parse(time[0]) ){
+      //     return true;
+      //   }
+      //   if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+      //     return true;
+      //   }
+      // }
 
-      return false;
+      return true;
 
     }
 

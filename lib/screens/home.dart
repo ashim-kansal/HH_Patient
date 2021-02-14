@@ -196,30 +196,49 @@ class HomePageState extends State<HomePage> {
   }
 
   // current date and time 
+
   getCurrentDateTime(Result result) {
 
-    print("dateee___ "+result.date.toString());
-
-    var flag = false;
     var currentDate = new DateTime.now();
-    
-    // var d = Moment.parse(result.date.toString());
-    
-    // print(d.compareTo(currentDate));
 
-    var apptDate = result.date.toString().split(" ")[0].split("-");
-    
-    // ignore: unrelated_type_equality_checks
-    if(int.parse(apptDate[2]) == (currentDate.day) && int.parse(apptDate[1]) == currentDate.month){
-      flag = true;
-    }else if(currentDate.hour == (int.parse(result.startTime.split(":")[0]) + 2) || currentDate.minute >= int.parse(result.startTime.split(":")[1])){
-      flag = true;
-    }else if(currentDate.hour >= int.parse(result.endTime.split(":")[0]) && currentDate.minute >= int.parse(result.endTime.split(":")[1])){
-      flag = true;
+    print("currrD"+currentDate.toString());
+    DateTime sessionDate = result.date;
+
+    print('session date before 24 hours  : '+sessionDate.toString());
+    var time = result.startTime.split(":");
+    var endtime = result.endTime.split(":");
+    if(currentDate.day == sessionDate.day && currentDate.month == sessionDate.month && currentDate.year == sessionDate.year ){
+
+      if(currentDate.hour>=int.parse(time[0]) && currentDate.minute>=int.parse(time[1]) &&
+          currentDate.hour<=int.parse(endtime[0]) && currentDate.minute<=int.parse(endtime[1]) ){
+        return true;
+      }
     }
+    return false;
 
-    return flag;
   }
+
+  // getCurrentDateTime(Result result) {
+
+  //   print("dateee___ "+result.date.toString());
+
+  //   var flag = false;
+  //   var currentDate = new DateTime.now();
+
+  //   var apptDate = result.date.toString().split(" ")[0].split("-");
+    
+  //   // ignore: unrelated_type_equality_checks
+  //   if(int.parse(apptDate[2]) == (currentDate.day) && int.parse(apptDate[1]) == currentDate.month){
+  //     // flag = true;
+  //     if(currentDate.hour == (int.parse(result.startTime.split(":")[0]) + 2) || currentDate.minute >= int.parse(result.startTime.split(":")[1])){
+  //       flag = true;
+  //     }else if(currentDate.hour >= int.parse(result.endTime.split(":")[0]) && currentDate.minute >= int.parse(result.endTime.split(":")[1])){
+  //       flag = true;
+  //     }
+  //   }
+
+  //   return flag;
+  // }
 
   //show Toast
   showToast(String message){
