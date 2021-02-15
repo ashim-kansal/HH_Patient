@@ -255,7 +255,7 @@ class HomePageState extends State<HomePage> {
     var sessionTimeStatus = getCurrentDateTime(result);
 
     if(!sessionTimeStatus){
-      showToast("You're now able to call before time.");
+      showToast("You're not able to call before time.");
       return;
     }
 

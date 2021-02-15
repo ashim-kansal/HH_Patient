@@ -42,9 +42,6 @@ class SessionCard extends StatelessWidget {
 
     print('session date before 24 hours  : '+sessionDate.toString());
 
-    // print(currentDate.isAfter(sessionDate));
-    // print(currentDate.hour);
-    
     var time = result.startTime.split(":");
     print(int.parse(time[0]).toString());
     if(currentDate.isAfter(sessionDate)){
@@ -53,6 +50,10 @@ class SessionCard extends StatelessWidget {
           return false;
         // }
         // return true;
+      }
+    }else if((sessionDate.day + 1) == currentDate.day){
+      if(currentDate.hour>int.parse(time[0]) ){
+        return false;
       }
     }
 
@@ -361,6 +362,10 @@ class UpcomingSessionItem extends StatelessWidget {
             return false;
           // }
           // return true;
+        }
+      }else if((sessionDate.day + 1) == currentDate.day){
+        if(currentDate.hour>int.parse(time[0]) ){
+          return false;
         }
       }
       // if(!currentDate.isAfter(sessionDate)){
