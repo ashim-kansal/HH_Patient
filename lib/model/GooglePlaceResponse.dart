@@ -31,6 +31,7 @@ class Result {
     this.name,
     this.vicinity,
     this.placeId,
+    this.formattedPhoneNumber,
   });
 
   Geometry geometry;
@@ -38,12 +39,14 @@ class Result {
   String name;
   String vicinity;
   String placeId;
+  String formattedPhoneNumber;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     geometry: Geometry.fromJson(json["geometry"]),
     icon: json["icon"],
     name: json["name"],
     placeId: json["place_id"],
+    formattedPhoneNumber: json["formatted_phone_number"],
     vicinity: json["vicinity"],
   );
 
@@ -52,6 +55,7 @@ class Result {
     "icon": icon,
     "name": name,
     "place_id": placeId,
+    "formatted_phone_number": formattedPhoneNumber,
     "vicinity": vicinity,
   };
 }
