@@ -109,7 +109,7 @@ class MyGraphWidgetState extends State<MyGraphWidget>{
           height: MediaQuery.of(context).size.height/3,
 
 
-          child: widget.weekSlotData[val].mData != null && widget.weekSlotData[val].mData.length > 0 ? SimpleLineChart.withData(widget.weekSlotData[val].mData)
+          child: widget.weekSlotData[val].mData != null && widget.weekSlotData[val].mData.length > 1 ? SimpleLineChart.withData(widget.weekSlotData[val].mData)
               :Center(child:HHTextView(
             title: "No data found.",
             color: HH_Colors.purpleColor,
