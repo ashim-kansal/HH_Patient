@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GooglePlaceResponse.dart' as mLocation;
+import 'package:flutter_app/model/GooglePlaceIdResponse.dart' as mLocationDetail;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:http/http.dart' as http;
@@ -163,13 +164,50 @@ class _MapState extends State<MapPage> {
               markerId: MarkerId(places.results[i].placeId),
               position: LatLng(places.results[i].geometry.location.lat,
                   places.results[i].geometry.location.lng),
-              infoWindow: InfoWindow(
-                  title: places.results[i].name, snippet: places.results[i].vicinity),
-              onTap: () {},
+              // infoWindow: InfoWindow(
+              //     title: places.results[i].name, snippet: places.results[i].vicinity),
+              onTap: () {
+                getPlaceDetail(places.results[i].placeId);
+              },
             ),
           );
         }
       });
+    } else {
+      throw Exception('An error occurred getting places nearby');
+    }
+    // setState(() {
+    //   searching = false; // 6
+    // });
+  }
+
+  void getPlaceDetail(String placeId) async {
+
+    String url =
+        'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&key=AIzaSyAppg0XMlMz-lT1MhLCZGrs56HrGWuTXKI';
+    print(url);
+    final response = await http.get(url);
+    print(response.body);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print(response.body);
+      mLocationDetail.GooglePlaceIdResponse placeDetail = mLocationDetail.googlePlaceIdResponseFromJson(response.body);
+      if(placeDetail.status=='OK'){
+        print(placeDetail.result.formattedPhoneNumber);
+        markers.forEach((element) {
+          if(element.markerId.value==placeDetail.result.placeId){
+            print('abc');
+
+            // element.infoWindow= InfoWindow(
+            //     title: placeDetail.result.name, snippet: placeDetail.result.vicinity);
+          }
+        });
+      }
+      // if(places == null || places.results.length == 0)
+      //   return;
+
+
+
     } else {
       throw Exception('An error occurred getting places nearby');
     }
