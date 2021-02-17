@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GooglePlaceResponse.dart' as mLocation;
 import 'package:flutter_app/model/GooglePlaceIdResponse.dart' as mLocationDetail;
+import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:location/location.dart' ;
+import 'package:clipboard/clipboard.dart';
+import 'package:toast/toast.dart';
+
 
 // import 'data/place_reposne';
 
@@ -38,6 +42,13 @@ class _MapState extends State<MapPage> {
     // TODO: implement initState
     super.initState();
     getLocation();
+  }
+
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   getLocation() async{
@@ -187,18 +198,23 @@ class _MapState extends State<MapPage> {
         'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&key=AIzaSyAppg0XMlMz-lT1MhLCZGrs56HrGWuTXKI';
     print(url);
     final response = await http.get(url);
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(response.body);
+      // print(response.body);
       mLocationDetail.GooglePlaceIdResponse placeDetail = mLocationDetail.googlePlaceIdResponseFromJson(response.body);
       if(placeDetail.status=='OK'){
-        print(placeDetail.result.formattedPhoneNumber);
+        // print(placeDetail.result.formattedPhoneNumber);
         markers.forEach((element) {
           if(element.markerId.value==placeDetail.result.placeId){
             print('abc');
+            print(placeDetail.result.name+"\n "+placeDetail.result.vicinity+"\n "+placeDetail.result.formattedPhoneNumber.toString());
+        
+            openDialog(placeDetail);
+            
 
-            // element.infoWindow= InfoWindow(
+            // element.infoWindow = 
+            // InfoWindow(
             //     title: placeDetail.result.name, snippet: placeDetail.result.vicinity);
           }
         });
@@ -214,6 +230,24 @@ class _MapState extends State<MapPage> {
     // setState(() {
     //   searching = false; // 6
     // });
+  }
+
+  openDialog(placeDetail) {
+     showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return LocationDialog(
+            title: "Pharmacy", 
+            content: placeDetail.result.name+"\n "+placeDetail.result.vicinity+"\n "+placeDetail.result.formattedPhoneNumber.toString(),
+            onPressOk: () {
+              FlutterClipboard.copy(placeDetail.result.name+", "+placeDetail.result.vicinity+", "+placeDetail.result.formattedPhoneNumber).then(( value ) => {
+              showToast("Text copied."),
+              Navigator.pop(context)}
+            );
+          }
+          );
+        },
+      );
   }
 
 }

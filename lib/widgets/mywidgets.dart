@@ -1451,6 +1451,80 @@ class ScoreDialog extends StatelessWidget {
   }
 }
 
+class LocationDialog extends StatelessWidget {
+  final String title;
+  final String content;
+
+  final VoidCallback onPressOk;
+
+  LocationDialog({
+    this.title,
+    this.content,
+    this.onPressOk,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape:
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          height: 220,
+          width: 170,
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
+                      children: [
+                        HHTextView(
+                            title: title??'',
+                            size: 22,
+                            color: HH_Colors.color_3D3D3D,
+                            textweight: FontWeight.w600),
+                        SizedBox(height: 20),
+                        HHTextView(
+                            title: content??'',
+                            size: 16,
+                            color: HH_Colors.color_707070,
+                            alignment: TextAlign.center,
+                            textweight: FontWeight.w400)
+                      ],
+                    )),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(
+                              color: HH_Colors.borderGrey, width: 0.5))),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: InkWell(
+                          onTap: () => {
+                            // Navigator.pop(context)
+                            onPressOk()
+                          },
+                          child: HHTextView(
+                              title: "Copy",
+                              size: 18,
+                              color: HH_Colors.color_707070,
+                              textweight: FontWeight.w600)),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
+  }
+}
+
 
 class ToastMessage extends StatelessWidget {
   String message = "";
