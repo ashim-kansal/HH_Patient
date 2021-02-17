@@ -46,7 +46,6 @@
 #-dontwarn retrofit2.**
 #
 #
-#-keep class za.co.nedbank.nid_sdk.main.core.controls.** { *; }
 #
 ## crashlytics
 #-keepattributes *Annotation*
@@ -196,7 +195,12 @@
 #-dontwarn retrofit2.KotlinExtensions
 #-dontwarn retrofit2.KotlinExtensions$*
 #
-
+-keep class io.flutter.app.** { *; }
+-keep class io.flutter.plugin.**  { *; }
+-keep class io.flutter.util.**  { *; }
+-keep class io.flutter.view.**  { *; }
+-keep class io.flutter.**  { *; }
+-keep class io.flutter.plugins.**  { *; }
 -keep class io.agora.**{*;}
 ## With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
 ## and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
