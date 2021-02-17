@@ -11,6 +11,8 @@ class SimpleLineChart extends StatelessWidget {
 
   /// Creates a [LineChart] with sample data and no transition.
   factory SimpleLineChart.withData(List<Result> data) {
+    print(data[0].date.toString());
+    print( Moment.parse(data[0].date.toString()).format('dd MMM').toString());
     return new SimpleLineChart(
       _createSampleData(data),
       // Disable animations for image tests.
@@ -36,8 +38,8 @@ class SimpleLineChart extends StatelessWidget {
         domainAxis: charts.DateTimeAxisSpec(
           tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
             day: charts.TimeFormatterSpec(
-              format: 'EEE',
-              transitionFormat: 'EEE',
+              format: 'dd MMM',
+              transitionFormat: 'dd MMM',
             ),
           ),
         ),
