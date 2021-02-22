@@ -596,13 +596,13 @@ class DrinkingDiaryCell extends StatelessWidget {
                   ? Container(
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: HH_Colors.green_3DDB8C,
+                          color: HH_Colors.accentColor,
                           borderRadius: BorderRadius.all(Radius.circular(5.0))),
                       child: Row(
                         children: [
                           Icon(
                             Icons.library_add_check_outlined,
-                            color: HH_Colors.color_949494,
+                            color: HH_Colors.color_white,
                             size: 15,
                           ),
                           SizedBox(
@@ -610,7 +610,7 @@ class DrinkingDiaryCell extends StatelessWidget {
                           ),
                           Text(((data.achivedGoal ?? 0) <10?'0'+(data.achivedGoal ?? 0).toString() :(data.achivedGoal ?? 0).toString()) + ' units',
                               style: TextStyle(
-                                  color: HH_Colors.color_949494, fontSize: 14))
+                                  color: HH_Colors.color_white, fontSize: 14))
                         ],
                       ))
                   : Container(),

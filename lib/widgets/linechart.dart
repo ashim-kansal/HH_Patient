@@ -11,8 +11,10 @@ class SimpleLineChart extends StatelessWidget {
 
   /// Creates a [LineChart] with sample data and no transition.
   factory SimpleLineChart.withData(List<Result> data) {
-    print(data[0].date.toString());
-    print( Moment.parse(data[0].date.toString()).format('dd MMM').toString());
+
+
+    // print(data[0].date.weekday.toString());
+    // print( Moment.parse(data[0].date.toString()).format('dd MMM').toString());
     return new SimpleLineChart(
       _createSampleData(data),
       // Disable animations for image tests.
@@ -25,7 +27,7 @@ class SimpleLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return new charts.TimeSeriesChart(seriesList,
         animate: animate,
-        defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: true),
+        defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: false,includeArea: true, roundEndCaps: true, ),
         dateTimeFactory: const charts.LocalDateTimeFactory(),
         behaviors: [
           charts.SlidingViewport(),
@@ -36,6 +38,7 @@ class SimpleLineChart extends StatelessWidget {
           ),
         ],
         domainAxis: charts.DateTimeAxisSpec(
+          renderSpec: new charts.NoneRenderSpec(),
           tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
             day: charts.TimeFormatterSpec(
               format: 'dd MMM',

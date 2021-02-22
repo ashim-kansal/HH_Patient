@@ -189,8 +189,28 @@ List<Result> getWeekDataFromList(DateTime weekStartDate, List<Result> data){
       results.add(element);
     }
   });
+  List<Result> results1 = List();
+  Result firstday = new Result();
+  firstday.achivedGoal = 0;
+  firstday.date = weekStartDate;
 
-  return results;
+  results1.add(firstday);
+
+  for(int i=2; i<8; i++){
+    Result newDay = new Result();
+    newDay.achivedGoal = 0;
+    newDay.date = weekStartDate.add(Duration(days: i-1));
+    results1.add(newDay);
+  }
+
+  results.forEach((element) {
+    List<Result> list = List();
+    list.add(element);
+    results1[element.date.weekday-1] = element;
+    // results1.sereplaceRange(element.date.weekday-1, element.date.weekday-1, list);
+  });
+
+  return results1;
 
 }
 

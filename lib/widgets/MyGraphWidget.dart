@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -105,18 +106,35 @@ class MyGraphWidgetState extends State<MyGraphWidget>{
               borderRadius: BorderRadius.circular(15.0),
             ),
             child:
-            Container(
-          height: MediaQuery.of(context).size.height/3,
+            Column(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height/3,
 
 
-          child: widget.weekSlotData[val].mData != null && widget.weekSlotData[val].mData.length > 1 ? SimpleLineChart.withData(widget.weekSlotData[val].mData)
-              :Center(child:HHTextView(
-            title: "No data found.",
-            color: HH_Colors.purpleColor,
-            size: 17,
-            textweight: FontWeight.w600,
-          )),
-        ),
+                  child: widget.weekSlotData[val].mData != null && widget.weekSlotData[val].mData.length > 1 ? SimpleLineChart.withData(widget.weekSlotData[val].mData)
+                      :Center(child:HHTextView(
+                    title: "No data found.",
+                    color: HH_Colors.purpleColor,
+                    size: 17,
+                    textweight: FontWeight.w600,
+                  )),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('Mon'),
+                    Text('Tue'),
+                    Text('Wed'),
+                    Text('Thu'),
+                    Text('Fri'),
+                    Text('Sat'),
+                    Text('Sun'),
+                  ],
+                ),
+                SizedBox(height: 10,)
+              ],
+            )
           )
 
         ],
