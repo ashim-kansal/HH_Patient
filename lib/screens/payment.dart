@@ -49,10 +49,12 @@ class _PaymentState extends State<Payment> {
     StripePayment.setOptions(
         StripeOptions(
             // publishableKey:"pk_test_51HpT2LCqtD4cxQPsFF7QxxGBIrDz3Y9e8Obc1zfdtuZLn3AePI5hbHUKS6zqYxalohLN3TSgrUvUe2tolkH8fuEf00p9PQAOi3",
-            publishableKey:"pk_test_51HhEk0C7sEeqzqBbdfjgVA5MKi0cmkak1D5VeGpYLTNNlCMc9CQBOfMnYgotIxs5KiX7SL5CG2GeEU9xf80jrT7S00e7vwZuxP",
+            // publishableKey:"pk_test_51HhEk0C7sEeqzqBbdfjgVA5MKi0cmkak1D5VeGpYLTNNlCMc9CQBOfMnYgotIxs5KiX7SL5CG2GeEU9xf80jrT7S00e7vwZuxP",
+            publishableKey:"pk_live_51HhEk0C7sEeqzqBb2cscuJJqLBfkWtzvbdHoeM5yizV75W1woQPj1L1ItgEckwcsP3eCUGW4JDa9UiqyRHkj9xak00prBmkl0r",
             //YOUR_PUBLISHABLE_KEY
-            merchantId: "Test",//YOUR_MERCHANT_ID
-            androidPayMode: 'test'
+            merchantId: "",//YOUR_MERCHANT_ID
+            // androidPayMode: 'test'
+            androidPayMode: 'live'
         ));
     super.initState();
   }
