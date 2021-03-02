@@ -48,12 +48,10 @@ class _PaymentState extends State<Payment> {
   void initState() {
     StripePayment.setOptions(
         StripeOptions(
-            // publishableKey:"pk_test_51HpT2LCqtD4cxQPsFF7QxxGBIrDz3Y9e8Obc1zfdtuZLn3AePI5hbHUKS6zqYxalohLN3TSgrUvUe2tolkH8fuEf00p9PQAOi3",
             // publishableKey:"pk_test_51HhEk0C7sEeqzqBbdfjgVA5MKi0cmkak1D5VeGpYLTNNlCMc9CQBOfMnYgotIxs5KiX7SL5CG2GeEU9xf80jrT7S00e7vwZuxP",
             publishableKey:"pk_live_51HhEk0C7sEeqzqBb2cscuJJqLBfkWtzvbdHoeM5yizV75W1woQPj1L1ItgEckwcsP3eCUGW4JDa9UiqyRHkj9xak00prBmkl0r",
             //YOUR_PUBLISHABLE_KEY
             merchantId: "",//YOUR_MERCHANT_ID
-            // androidPayMode: 'test'
             androidPayMode: 'live'
         ));
     super.initState();
@@ -309,42 +307,6 @@ class _PaymentState extends State<Payment> {
           )
           )
         );
-    
-    // Scaffold(
-    //     appBar: AppBar(
-    //       title: Text(AppLocalizations.of(context).paymentTitle, style: TextStyle(color: Colors.white)),
-    //       centerTitle: true,
-    //       iconTheme: IconThemeData(
-    //         color: Colors.white, //change your color here
-    //       ),
-    //       backgroundColor: Theme.of(context).accentColor,
-    //       elevation: 0,
-
-    //     ),
-
-    //     body: Material(
-    //       color: Theme.of(context).accentColor,
-    //       child: Container(
-    //           padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-    //           decoration: BoxDecoration(
-    //               borderRadius: BorderRadius.only(
-    //                 topRight: Radius.circular(30.0),
-    //                 topLeft: Radius.circular(30.0),
-    //               ),
-    //               color: Colors.white),
-    //           child: Column(
-    //             children: [
-    //               Material(
-    //                  child: Container(
-    //                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-    //                     color: Colors.white,
-    //                     child: 
-    //                   ),
-    //               ),
-                  
-    //             ],
-    //           )),
-    //     ));
   }
 }
 
