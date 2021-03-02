@@ -142,7 +142,7 @@ class SessionPageState extends State<SessionPage> {
             return ListView.separated(
               itemCount: searchList.length,
               itemBuilder: (context, index) {
-                var _date = searchList[index].createdAt;
+                var _date = searchList[index].date;
                 Moment createdDt = Moment.parse('$_date');
                 return UpcomingSessionItem(
                   name: searchList[index].programName,
@@ -150,7 +150,7 @@ class SessionPageState extends State<SessionPage> {
                   drname: searchList[index].therapistId.firstName +
                       " " +
                       searchList[index].therapistId.lastName,
-                  sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
+                  sdate: createdDt.format("dd MMM, yyyy").toString() + " "+searchList[index].startTime ,
                   role: '',
                   onClick: () {},
                   completed: !isSwitched,
