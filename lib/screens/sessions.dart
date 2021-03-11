@@ -115,6 +115,7 @@ class SessionPageState extends State<SessionPage> {
     return FutureBuilder<UpcomingSession>(
         future: completedSessoins(),
         builder: (context, snapshot) {
+          print("snapshot...." + snapshot.toString());
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
               return HHTextView(

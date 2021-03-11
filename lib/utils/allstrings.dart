@@ -3,11 +3,7 @@ import 'package:intl/intl.dart';
 
 class HHString{ 
   static const String baseURL = "http://3.239.96.206:4000";
-<<<<<<< HEAD
-
-=======
   //
->>>>>>> 8638d108aae83a3934cb317bebccdee691f12183
   // static const String baseURL = "http://ec2-65-0-102-116.ap-south-1.compute.amazonaws.com:4000";
 
   static const String desc = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
