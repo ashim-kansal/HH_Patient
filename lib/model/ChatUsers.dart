@@ -61,7 +61,12 @@ class Result {
     receiverId: json["receiverId"] == null ? null : ErId.fromJson(json["receiverId"]),
     message: List<Message>.from(json["message"].map((x) => Message.fromJson(x))),
     userName: json["userName"],
-    senderId: ErId.fromJson(json["senderId"]),
+    senderId: json["senderId"]  == null ? ErId.fromJson({
+      "profilePic": "",
+      "_id": "",
+      "firstName": "",
+      "lastName": ""
+      }) : ErId.fromJson(json["senderId"]),
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
