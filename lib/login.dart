@@ -14,6 +14,7 @@ import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/myplan.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/privacy.dart';
+import 'package:flutter_app/screens/questionaire.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/signup.dart';
 import 'package:flutter_app/utils/DBHelper.dart';
@@ -140,8 +141,6 @@ class _LoginPageState extends State<LoginPage> {
     _firebaseMessaging.getToken().then((fcmtoken) => {
       apiService.loginAPIHandler(email, password, fcmtoken, voipToken).then(
         (value) => {
-
-
           Navigator.of(context).pop(),
           Timer(Duration(seconds: 1),
           ()=> {
@@ -164,10 +163,13 @@ class _LoginPageState extends State<LoginPage> {
               ()=>{
                 Navigator.pop(context),
                 print(value.programSubscribed.toString() + " progrm"),
-                if(value.programSubscribed)
-                    Navigator.pushNamed(context, Dashboard.RouteName)
-                else
+                if(value.programSubscribed){
+                  Navigator.pushNamed(context, Dashboard.RouteName)
+                } else if(!value.isQuestionnaireFilled) {
+                  Navigator.pushNamed(context, QuestionairePage.RouteName, arguments: QuestionaireArguments(value.programId))
+                }else {
                   Navigator.pushNamed(context, MyPlans.RouteName, arguments: MyPlansArguments(false)),
+                }
               }
             ),
           }

@@ -9,8 +9,10 @@ class LoginResponseModel {
   final String id;
   final String responseMsg;
   final int responseCode;
+  final bool isQuestionnaireFilled;
+  final String programId;
 
-  LoginResponseModel({this.token, this.deviceToken, this.appLanguage, this.notificationStatus, this.programSubscribed, this.id, this.responseMsg, this.responseCode});
+  LoginResponseModel({this.token, this.deviceToken, this.appLanguage, this.notificationStatus, this.programSubscribed, this.isQuestionnaireFilled, this.programId, this.id, this.responseMsg, this.responseCode});
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     print(json["responseMessage"]);
@@ -26,6 +28,8 @@ class LoginResponseModel {
       appLanguage: json.containsKey("result") ? json["result"]["appLanguage"]?? "" : "",
       notificationStatus: json.containsKey("result") ? json["result"]["notificationStatus"]?? false : false,
       programSubscribed: json.containsKey("result")? json["result"]["programSubscribed"] : false,
+      isQuestionnaireFilled: json.containsKey("result") ? json["result"]["isQuestionnaireFilled"]?? true : true,
+      programId: json.containsKey("result") ? json["result"]["programId"]?? "" : "",
       responseMsg: json["responseMessage"]?? "Some error occured. Please try again.",
       responseCode: json["responseCode"]?? 404
     );
